@@ -1,0 +1,71 @@
+@import "./sass/_variables.scss";
+
+.navbar_content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 0;
+  border-bottom: 1px solid #eeeeee;
+  align-items: center;
+  h1 {
+    font-size: 24px;
+    a {
+      color: $theme2;
+    }
+  }
+  .logo_content {
+    // width: 25%;
+  }
+  .search_content {
+    // width: 55.56%;
+    width: 600px;
+    position: relative;
+    input {
+      border: 1px solid #e4c1b1;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 18px;
+      &:focus {
+        border-color: $theme2;
+      }
+    }
+    svg {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      z-index: 1;
+    }
+  }
+  .icon_content {
+    // width: 25%;
+    ul {
+      display: block;
+      li {
+        padding: 0 20px;
+        display: inline-block;
+        position: relative;
+        .main_icon {
+          font-size: 16px;
+          cursor: pointer;
+          position: relative;
+        }
+        .bag_count {
+            position: absolute;
+            background: $theme2;
+            text-align: center;
+            border-radius: 50%;
+            color: white;
+            top: -12px;
+            right: 8px;
+            padding: 2px;
+            min-height: 18px;
+            min-width: 18px;
+            font-size:10px;
+          
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 //== Color Variables
 $theme1: #1b1b1b;
-$theme2: #ff5ba2;
+$theme2: #FF1A58;
 $base1: #1b1b1b;
 $base2: #ff5ba2;
 $white: #fff;
@@ -13,7 +13,8 @@ $shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
 $p: #696969;
 
 //== Typography
-@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Belleza&display=swap');
+$belleza: "Belleza", sans-serif;
 $karla: "Karla", sans-serif;
 $roboto: "Roboto", sans-serif;
 
