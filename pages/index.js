@@ -1,13 +1,51 @@
-import Head from "next/head";
+import dynamic from "next/dynamic";
+import { connect } from "react-redux";
+import Link from "next/link";
+import { isMobile } from "react-device-detect";
 import Image from "next/image";
+import { useEffect } from "react";
+import Axios from "axios";
+// css must the the last normal import
 import styles from "../styles/HomePage.module.scss";
+//dynamic imports should be in bottom
+const Title = dynamic(() => import('../components/layout/partials/Title'));
+const Slider = dynamic(() => import('../components/homepage/Slider'));
 
-export default function Home() {
+const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
+  useEffect(() => {
+    let locale = lang || "en";
+    if (!isMobile) {
+      let url = "/api/menu?locale=" + locale;
+      Axios.get(url).then((res) => {
+        store.dispatch({
+          type: "GET_LAYOUT_DATA",
+          payload: res.data,
+        });
+        // setCategoryMenu(createMenu(res.data.menu));
+      });
+    } else {
+      Axios.get("https://dashboard.beautybooth.shop/website-settings/get-mobile-banner")
+        .then((res) => {
+          store.dispatch({
+            type: "GET_MOBILE_BANNER",
+            payload: res.data,
+          });
+        }).catch(err => {
+          console.log(err);
+        });
+    }
+  }, [lang, isMobile]);
   return (
-    <div className="container">
-      <div className="row">
-        <h1 className={styles.test}>Home Page</h1>
-      </div>
-    </div>
+    <>
+      <Title title="Home | BeautyboothQA"></Title>
+      <Slider FontAwesomeIcon={FontAwesomeIcon} styles={styles} lang={lang} slides={slider} isMobile={isMobile} Link={Link}></Slider>
+    </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  slider: state.layout.slider,
+});
+
+
+export default connect(mapStateToProps, null)(Home);

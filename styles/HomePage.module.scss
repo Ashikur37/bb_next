@@ -1,4 +1,7 @@
-@import "./sass/_variables.scss";
-.test {
-  color: $theme2;
+@import "./sass/variables";
+.sliderContainer {
+  background-color: #e3212a;
+  height: 400px;
+  align-items: center;
+  justify-content: center;
 }
