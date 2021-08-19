@@ -1,8 +1,7 @@
-
 import { Provider } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
 import store from "../redux/store";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import Cookies from "universal-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { appWithTranslation } from "../i18n";
@@ -11,8 +10,8 @@ import Navbar from "../components/layout/Navbar";
 import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-const Divider = dynamic(()=>import("../components/layout/partials/Divider"));
-const Footer = dynamic(()=>import("../components/layout/Footer"));
+const Divider = dynamic(() => import("../components/layout/partials/Divider"));
+const Footer = dynamic(() => import("../components/layout/Footer"));
 const cookies = new Cookies();
 
 function MyApp({ Component, pageProps }) {
@@ -40,8 +39,13 @@ function MyApp({ Component, pageProps }) {
       <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={cookies.get("lang")} />
       <Divider />
 
-      <Component {...pageProps} FontAwesomeIcon={FontAwesomeIcon} lang={cookies.get("lang")} store={store}/>
-      <Footer lang={cookies.get("lang")}  />
+      <Component
+        {...pageProps}
+        FontAwesomeIcon={FontAwesomeIcon}
+        lang={cookies.get("lang")}
+        store={store}
+      />
+      <Footer lang={cookies.get("lang")} FontAwesomeIcon={FontAwesomeIcon} />
     </Provider>
   );
 }
