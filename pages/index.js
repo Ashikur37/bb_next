@@ -2,20 +2,26 @@ import dynamic from "next/dynamic";
 import { connect } from "react-redux";
 import Link from "next/link";
 import { isMobile } from "react-device-detect";
-import Image from "next/image";
+import { trending, concern } from "../components/utils/static";
 import { useEffect } from "react";
 import Axios from "axios";
+import {
+  faArrowLeft,
+  faArrowRight
+} from "@fortawesome/free-solid-svg-icons";
 // css must the the last normal import
 import styles from "../styles/HomePage.module.scss";
 //dynamic imports should be in bottom
 const Title = dynamic(() => import('../components/layout/partials/Title'));
+const Header = dynamic(() => import('../components/layout/partials/Header'));
 const Slider = dynamic(() => import('../components/homepage/Slider'));
+const Trending = dynamic(() => import('../components/homepage/Trending'));
+
 
 const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
   useEffect(() => {
-    let locale = lang || "en";
     if (!isMobile) {
-      let url = "/api/menu?locale=" + locale;
+      let url = "/api/menu?locale=" + lang;
       Axios.get(url).then((res) => {
         store.dispatch({
           type: "GET_LAYOUT_DATA",
@@ -34,11 +40,13 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
           console.log(err);
         });
     }
-  }, [lang, isMobile]);
+  }, [lang, store]);
   return (
     <>
       <Title title="Home | BeautyboothQA"></Title>
       <Slider FontAwesomeIcon={FontAwesomeIcon} styles={styles} lang={lang} slides={slider} isMobile={isMobile} Link={Link}></Slider>
+      <Trending trendings={trending} FontAwesomeIcon={FontAwesomeIcon} faArrowLeft={faArrowLeft}
+        faArrowRight={faArrowRight} lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Trending>
     </>
   );
 }
