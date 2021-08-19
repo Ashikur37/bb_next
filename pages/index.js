@@ -5,10 +5,8 @@ import { isMobile } from "react-device-detect";
 import { trending, concern } from "../components/utils/static";
 import { useEffect } from "react";
 import Axios from "axios";
-import {
-  faArrowLeft,
-  faArrowRight
-} from "@fortawesome/free-solid-svg-icons";
+import LazyLoad from "react-lazyload";
+
 // css must the the last normal import
 import styles from "../styles/HomePage.module.scss";
 //dynamic imports should be in bottom
@@ -16,6 +14,7 @@ const Title = dynamic(() => import('../components/layout/partials/Title'));
 const Header = dynamic(() => import('../components/layout/partials/Header'));
 const Slider = dynamic(() => import('../components/homepage/Slider'));
 const Trending = dynamic(() => import('../components/homepage/Trending'));
+const Concern = dynamic(() => import('../components/homepage/Concern'));
 
 
 const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
@@ -44,9 +43,18 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
   return (
     <>
       <Title title="Home | BeautyboothQA"></Title>
-      <Slider FontAwesomeIcon={FontAwesomeIcon} styles={styles} lang={lang} slides={slider} isMobile={isMobile} Link={Link}></Slider>
-      <Trending trendings={trending} FontAwesomeIcon={FontAwesomeIcon} 
-      lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Trending>
+      <Slider styles={styles} lang={lang} slides={slider} isMobile={isMobile} Link={Link}></Slider>
+      <Trending trendings={trending} FontAwesomeIcon={FontAwesomeIcon}
+        lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Trending>
+      <LazyLoad
+        offset={[-200, 0]}
+        placeholder={<Header text="SHOP BY CONCERN" h="h2"></Header>}
+        debounce={200}
+        once
+      >
+        <Concern concerns={concern} FontAwesomeIcon={FontAwesomeIcon}
+          lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Concern>
+      </LazyLoad>
     </>
   );
 }

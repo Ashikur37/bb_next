@@ -1,9 +1,16 @@
 @import "./sass/variables";
+@import "./sass/mixins";
 .sliderContainer {
   background-color: #e3212a;
-  height: 400px;
+  // height: 400px;
+  // @include breakpoint(tablet) {
+  //   height: 330px;
+  // }
   .slider_wrapper {
-    height: 400px;
+    // height: 400px;
+    // @include breakpoint(tablet) {
+    //   height: 330px;
+    // }
     align-items: center;
   }
 }

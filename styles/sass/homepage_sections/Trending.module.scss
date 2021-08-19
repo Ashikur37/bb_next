@@ -6,8 +6,9 @@
     margin-right: -15px;
   
     .trending_swiper {
+      margin-bottom: 15px;
       .slide {
-        margin: 2px;
+        border-radius: 14px;
         box-sizing: border-box;
         padding: 4px;
         transition: none;
@@ -29,20 +30,17 @@
             font-size: 14px;
           }
         }
-        -webkit-box-shadow: 0px 2px 4px 1px #8181811f;
-        -moz-box-shadow: 0px 2px 4px 1px #8181811f;
-        box-shadow: 0px 2px 4px 1px #8181811f;
+        -webkit-box-shadow: 0px 12px 24px #AFAFAF1F;
+        -moz-box-shadow: 0px 12px 24px #AFAFAF1F;
+        box-shadow: 0px 12px 24px #AFAFAF1F;
         &:hover{
-          -webkit-box-shadow: 0px 2px 6px 1px #D1A333;
-          -moz-box-shadow: 0px 2px 6px 1px #D1A333;
-          box-shadow: 0px 2px 6px 1px #D1A333;
+          -webkit-box-shadow: 0px 1px 5px 1px $theme2;
+        -moz-box-shadow: 0px 1px 5px 1px $theme2;
+        box-shadow: 0px 1px 5px 1px $theme2;
         }
       }
       .slide_one {
-        margin-bottom: 30px;
-      }
-      .swiper-pagination{
-        display: none;
+        margin: 5px 5px 30px;
       }
     }
   }

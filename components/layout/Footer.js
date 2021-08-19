@@ -25,7 +25,7 @@ function Footer({ FontAwesomeIcon, t }) {
   };
   return (
     <div className={styles.footer_container}>
-      <div className="container">
+      <div className="container mt-4">
         <div className={`row ${styles.footer_wrap}`}>
           <div className={styles.first}>
             <h2 className={styles.footer_logo}>Beauty Booth.</h2>

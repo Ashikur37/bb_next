@@ -4,7 +4,7 @@ import { withTranslation } from "../../i18n";
 // styles
 import styles from "../../styles/sass/homepage_sections/Trending.module.scss";
 
-const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header }) => {
+const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header, t }) => {
 
     const [trending, setTrending] = useState(null);
     useEffect(() => {
@@ -42,16 +42,16 @@ const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header }) 
     }, [trendings, lang]);
 
     const [swiper, updateSwiper] = useState(null);
-    const goNext = () => {
-        if (swiper !== null) {
-            swiper.slideNext();
-        }
-    };
-    const goPrev = () => {
-        if (swiper !== null) {
-            swiper.slidePrev();
-        }
-    };
+    // const goNext = () => {
+    //     if (swiper !== null) {
+    //         swiper.slideNext();
+    //     }
+    // };
+    // const goPrev = () => {
+    //     if (swiper !== null) {
+    //         swiper.slidePrev();
+    //     }
+    // };
     const params = {
         lazy: true,
         pagination: {
@@ -87,12 +87,12 @@ const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header }) 
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-4">
             <div className="row">
-                <Header h="h2" text="Trending" Link={Link} FontAwesomeIcon={FontAwesomeIcon}></Header>
+                <Header h="h2" text={t("trending")} Link={Link} FontAwesomeIcon={FontAwesomeIcon}></Header>
             </div>
             {/* <div className="row"> */}
-                <div className={`${styles.trending}`}>
+                <div className={`trending_global ${styles.trending}`}>
                     {trending && lang == "en" ? (
                         <div className={`${styles.trending_swiper}`}>
                             <Swiper

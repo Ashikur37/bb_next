@@ -1,6 +1,5 @@
-
-@import '../../node_modules/swiper/swiper.scss';
-@import '../../node_modules/swiper/components/pagination/pagination.scss';
+@import "../../node_modules/swiper/swiper.scss";
+@import "../../node_modules/swiper/components/pagination/pagination.scss";
 .devider {
   border-bottom: 1px solid #eeeeee;
 }
@@ -11,6 +10,7 @@
   font-weight: 400;
   margin-bottom: 20px;
   color: #444444;
+  text-transform: uppercase;
   @include breakpoint(tablet) {
     margin: 4px 0;
     &.center {
@@ -27,7 +27,44 @@
     }
   }
 }
-
-.swiper-pagination{
-  // display: none;
+.slider_global{
+  position: relative;
+  .swiper-slide{
+    padding: 25px 0;
+  }
+  .swiper-pagination{
+    width: 60px;
+    margin-left: auto;
+    right: 0;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+  }
+  .swiper-pagination-bullets{
+    bottom: 40px;
+  }
+  .swiper-pagination-bullet {
+    background-color: $theme2;
+    opacity: 0.2;
+    &.swiper-pagination-bullet-active {
+      background-color: $theme2;
+      opacity: 1;
+    }
+  }
+}
+.trending_global,
+.concern_global {
+  .swiper-pagination{
+    position: relative;
+  }
+  .swiper-pagination-bullets{
+    bottom: 0px;
+  }
+  .swiper-pagination-bullet {
+    background-color: $theme2;
+    opacity: 0.2;
+    &.swiper-pagination-bullet-active {
+      background-color: $theme2;
+      opacity: 1;
+    }
+  }
 }

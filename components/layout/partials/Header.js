@@ -1,5 +1,4 @@
 /**
- * 
  * @param {h} preferred header tags h1-h6
  * @param {text} headter text
  * @param {cssClass} additional css class
