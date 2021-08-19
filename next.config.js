@@ -18,6 +18,10 @@ module.exports = {
     //   appKey: "b7e52f6f6ad165b30cfdc3d0e2e3e67d",
     // },
   },
+  // images: {
+  //   loader: 'imgix',
+  //   domains: ['admin.beautyboothqa.com','beautyboothqa.sgp1.digitaloceanspaces.com'],
+  // },
   distDir: "build",
   reactStrictMode: true,
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
