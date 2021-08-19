@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import Axios from "../../redux/actions/axios";
 import styles from "../../styles/Navbar.module.scss";
 import {
   faSearch,
@@ -7,7 +9,58 @@ import {
   faShoppingCart,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-function Navbar({ FontAwesomeIcon }) {
+var timeout = 0;
+function Navbar({ FontAwesomeIcon, lang }) {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showResult, setShowResult] = useState(false);
+  const [searchResult, setSeearchResult] = useState([]);
+  const searchHandler = (event) => {
+    if (searchQuery.length > 3) {
+      setShowResult(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        /*
+          `http://localhost:8000/en/products?query=${searchQuery}`
+          `https://admin.beautyboothqa.com/en/products?query=${searchQuery}`
+        
+        */
+        let locale = lang == "ar" ? "ar_QA" : "en";
+        Axios.get(`${locale}/products?query=${searchQuery}`)
+          .then((res) => {
+            setSeearchResult(res.data);
+          })
+          .catch();
+      }, 800);
+    } else {
+      setShowResult(false);
+    }
+  };
+  const keyHandler = (event) => {
+    if (searchQuery.length > 0) {
+      if (event.key === "Enter") {
+        router.push(`/search/${searchQuery}`);
+        setShowResult(false);
+        setSearchQuery("");
+      }
+    }
+  };
+  const searchTermClick = (term = null) => {
+    if (term !== null) {
+      router.push(`/search/${term}`);
+      setSearchQuery("");
+      setShowResult(false);
+    }
+  };
+  const resultClick = (slug, brand = false) => {
+    if (brand) {
+      router.push(slug);
+    } else {
+      router.push(`/product/${slug}`);
+    }
+    setSearchQuery("");
+    setShowResult(false);
+  };
   return (
     <div className="container">
       <div className="row">
@@ -20,8 +73,99 @@ function Navbar({ FontAwesomeIcon }) {
             </h1>
           </div>
           <div className={styles.search_content}>
-            <input type="text" name="search" placeholder="Search For.." />
+            <input
+              type="text"
+              name="search"
+              placeholder="Search For.."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyUp={searchHandler}
+              onKeyPress={keyHandler}
+            />
             <FontAwesomeIcon icon={faSearch} />
+            <div
+              className={
+                showResult
+                  ? `${styles.search_result} ${styles.active}`
+                  : `${styles.search_result}`
+              }
+            >
+              {searchResult.brand && searchResult.brand.length > 0 && (
+                <ul>
+                  <li
+                    style={{
+                      color: "black",
+                      marginLeft: "10px",
+                      border: "none",
+                    }}
+                  >
+                    Brand
+                  </li>
+                  {searchResult.brand.map((rs, index) => (
+                    <li key={index}>
+                      <div
+                        className={styles.search_result_li}
+                        onClick={() => {
+                          resultClick(rs.url, true);
+                        }}
+                      >
+                        {rs.image && <img src={rs.image} alt={rs.slug} />}
+                        <span>{rs.name}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {searchResult.searchTerms && searchResult.searchTerms.length > 0 && (
+                <ul>
+                  <li
+                    style={{
+                      color: "black",
+                      marginLeft: "10px",
+                      border: "none",
+                    }}
+                  >
+                    Popular searches
+                  </li>
+                  {searchResult.searchTerms.map((rs, index) => (
+                    <li key={index}>
+                      <div
+                        className={styles.search_result_li}
+                        onClick={() => searchTermClick(encodeURI(rs.term))}
+                      >
+                        <span>{rs.term}</span>{" "}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {searchResult.products && (
+                <ul>
+                  <li
+                    style={{
+                      color: "black",
+                      marginLeft: "10px",
+                      border: "none",
+                    }}
+                  >
+                    Products
+                  </li>
+                  {searchResult.products.map((rs, index) => (
+                    <li key={index}>
+                      <div
+                        className={styles.search_result_li}
+                        onClick={() => {
+                          resultClick(rs.slug);
+                        }}
+                      >
+                        <img src={rs.files[0].thumbnail_image} alt="" />
+                        <span>{rs.name}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
           <div className={styles.icon_content}>
             <ul>
