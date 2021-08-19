@@ -6,7 +6,6 @@
     margin-right: -15px;
   
     .trending_swiper {
-      // margin: 0px 0 30px;
       .slide {
         margin: 2px;
         box-sizing: border-box;
@@ -41,6 +40,9 @@
       }
       .slide_one {
         margin-bottom: 30px;
+      }
+      .swiper-pagination{
+        display: none;
       }
     }
   }

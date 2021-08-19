@@ -1,4 +1,6 @@
 
+@import '../../node_modules/swiper/swiper.scss';
+@import '../../node_modules/swiper/components/pagination/pagination.scss';
 .devider {
   border-bottom: 1px solid #eeeeee;
 }
@@ -24,4 +26,8 @@
       right: 1%;
     }
   }
+}
+
+.swiper-pagination{
+  // display: none;
 }

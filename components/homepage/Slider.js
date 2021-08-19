@@ -139,7 +139,7 @@ const Slider = ({ FontAwesomeIcon, styles, lang, slides, isMobile, Link }) => {
             ],
           }), [lang]);
     const params = useMemo(() => ({
-        rtl: lang == "en" ? false : true,
+        rtl: lang == "en" ? false : true || false,
         // loop: true,
         autoplay: {
             delay: 4500,

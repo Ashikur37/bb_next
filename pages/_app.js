@@ -9,7 +9,6 @@ import { appWithTranslation } from "../i18n";
 import Navbar from "../components/layout/Navbar";
 // Import the CSS
 import "../styles/sass/main.scss";
-import '../node_modules/swiper/swiper.scss';
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 const Divider = dynamic(()=>import("../components/layout/partials/Divider"));

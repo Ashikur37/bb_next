@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
 import { withTranslation } from "../../i18n";
 // styles
 import styles from "../../styles/sass/homepage_sections/Trending.module.scss";
 
-const Trending = ({ trendings, FontAwesomeIcon, faArrowLeft, faArrowRight, lang, isMobile, Link, Header }) => {
+const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header }) => {
 
-    const swiperRef = useRef(null);
     const [trending, setTrending] = useState(null);
     useEffect(() => {
         const t = trendings
@@ -97,7 +96,6 @@ const Trending = ({ trendings, FontAwesomeIcon, faArrowLeft, faArrowRight, lang,
                     {trending && lang == "en" ? (
                         <div className={`${styles.trending_swiper}`}>
                             <Swiper
-                                ref={swiperRef}
                                 getSwiper={updateSwiper}
                                 {...params}
                                 shouldSwiperUpdate

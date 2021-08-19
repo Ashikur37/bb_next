@@ -45,8 +45,8 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
     <>
       <Title title="Home | BeautyboothQA"></Title>
       <Slider FontAwesomeIcon={FontAwesomeIcon} styles={styles} lang={lang} slides={slider} isMobile={isMobile} Link={Link}></Slider>
-      <Trending trendings={trending} FontAwesomeIcon={FontAwesomeIcon} faArrowLeft={faArrowLeft}
-        faArrowRight={faArrowRight} lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Trending>
+      <Trending trendings={trending} FontAwesomeIcon={FontAwesomeIcon} 
+      lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Trending>
     </>
   );
 }
