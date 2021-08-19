@@ -9,7 +9,10 @@ import Axios from "axios";
 import styles from "../styles/HomePage.module.scss";
 //dynamic imports should be in bottom
 const Title = dynamic(() => import('../components/layout/partials/Title'));
+const Header = dynamic(() => import('../components/layout/partials/Header'));
 const Slider = dynamic(() => import('../components/homepage/Slider'));
+const Trending = dynamic(() => import('../components/homepage/Trending'));
+
 
 const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
   useEffect(() => {
@@ -39,6 +42,7 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
     <>
       <Title title="Home | BeautyboothQA"></Title>
       <Slider FontAwesomeIcon={FontAwesomeIcon} styles={styles} lang={lang} slides={slider} isMobile={isMobile} Link={Link}></Slider>
+      <Trending FontAwesomeIcon={FontAwesomeIcon} lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Trending>
     </>
   );
 }
