@@ -10,12 +10,12 @@ import LazyLoad from "react-lazyload";
 // css must the the last normal import
 import styles from "../styles/HomePage.module.scss";
 //dynamic imports should be in bottom
-const Title = dynamic(() => import('../components/layout/partials/Title'));
-const Header = dynamic(() => import('../components/layout/partials/Header'));
-const Slider = dynamic(() => import('../components/homepage/Slider'));
-const Trending = dynamic(() => import('../components/homepage/Trending'));
-const Concern = dynamic(() => import('../components/homepage/Concern'));
-
+const Title = dynamic(() => import("../components/layout/partials/Title"));
+const Header = dynamic(() => import("../components/layout/partials/Header"));
+const Slider = dynamic(() => import("../components/homepage/Slider"));
+const Trending = dynamic(() => import("../components/homepage/Trending"));
+const Concern = dynamic(() => import("../components/homepage/Concern"));
+const TopSellers = dynamic(() => import("../components/homepage/TopSellers"));
 
 const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
   useEffect(() => {
@@ -29,13 +29,16 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
         // setCategoryMenu(createMenu(res.data.menu));
       });
     } else {
-      Axios.get("https://dashboard.beautybooth.shop/website-settings/get-mobile-banner")
+      Axios.get(
+        "https://dashboard.beautybooth.shop/website-settings/get-mobile-banner"
+      )
         .then((res) => {
           store.dispatch({
             type: "GET_MOBILE_BANNER",
             payload: res.data,
           });
-        }).catch(err => {
+        })
+        .catch((err) => {
           console.log(err);
         });
     }
@@ -43,25 +46,55 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
   return (
     <>
       <Title title="Home | BeautyboothQA"></Title>
-      <Slider styles={styles} lang={lang} slides={slider} isMobile={isMobile} Link={Link}></Slider>
-      <Trending trendings={trending} FontAwesomeIcon={FontAwesomeIcon}
-        lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Trending>
+      <Slider
+        styles={styles}
+        lang={lang}
+        slides={slider}
+        isMobile={isMobile}
+        Link={Link}
+      ></Slider>
+      <Trending
+        trendings={trending}
+        FontAwesomeIcon={FontAwesomeIcon}
+        lang={lang}
+        isMobile={isMobile}
+        Link={Link}
+        Header={Header}
+      ></Trending>
       <LazyLoad
         offset={[-200, 0]}
         placeholder={<Header text="SHOP BY CONCERN" h="h2"></Header>}
         debounce={200}
         once
       >
-        <Concern concerns={concern} FontAwesomeIcon={FontAwesomeIcon}
-          lang={lang} isMobile={isMobile} Link={Link} Header={Header}></Concern>
+        <Concern
+          concerns={concern}
+          FontAwesomeIcon={FontAwesomeIcon}
+          lang={lang}
+          isMobile={isMobile}
+          Link={Link}
+          Header={Header}
+        ></Concern>
+      </LazyLoad>
+      <LazyLoad
+        offset={[-200, 0]}
+        placeholder={<Header text="Best Selling" h="h2"></Header>}
+        debounce={200}
+        once
+      >
+        <TopSellers
+          FontAwesomeIcon={FontAwesomeIcon}
+          Link={Link}
+          Header={Header}
+          lang={lang}
+        />
       </LazyLoad>
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   slider: state.layout.slider,
 });
-
 
 export default connect(mapStateToProps, null)(Home);
