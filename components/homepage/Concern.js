@@ -74,8 +74,8 @@ const Concern = ({ concerns, FontAwesomeIcon, lang, isMobile, Link, Header, t })
                         </div>
                     ))}
                 </Swiper> :
-                <Swiper ref={swiperRef} getSwiper={updateSwiper} {...params2}>
-                    {props.concern["ar"].map((concern, index) => (
+                <Swiper  getSwiper={updateSwiper} {...params2}>
+                    {concerns["ar"].map((concern, index) => (
                         <div key={index}>
                             <Link
                                 href={{

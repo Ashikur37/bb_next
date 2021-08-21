@@ -1,17 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
+import Cookies from "universal-cookie";
+import { i18n, withTranslation } from "../../i18n";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Axios from "../../redux/actions/axios";
 import styles from "../../styles/Navbar.module.scss";
+import { Dropdown } from "react-bootstrap";
+import "flag-icon-css/css/flag-icon.min.css";
 import {
   faSearch,
   faShoppingBag,
   faShoppingCart,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+const cookies = new Cookies();
 var timeout = 0;
+const languages = [
+  {
+    code: "en",
+    name: "English",
+    country_code: "gb",
+  },
+  {
+    code: "ar_QA",
+    name: "Arabic",
+    country_code: "ar",
+  },
+];
 function Navbar({ FontAwesomeIcon, lang }) {
   const router = useRouter();
+  const [language, setLanguage] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [searchResult, setSeearchResult] = useState([]);
@@ -61,6 +79,21 @@ function Navbar({ FontAwesomeIcon, lang }) {
     setSearchQuery("");
     setShowResult(false);
   };
+  const LanguageHandler = (value) => {
+    i18n.changeLanguage(value);
+    if (value == "en") {
+      document.body.classList.remove("rtl");
+      cookies.set("lang", "en");
+      setLanguage("en");
+    } else {
+      document.body.classList.add("rtl");
+      cookies.set("lang", "ar");
+      setLanguage("ar");
+    }
+  };
+  useEffect(() => {
+    setLanguage(cookies.get("lang"));
+  }, [language]);
   return (
     <div className="container">
       <div className="row">
@@ -169,6 +202,30 @@ function Navbar({ FontAwesomeIcon, lang }) {
           </div>
           <div className={styles.icon_content}>
             <ul>
+              <li>
+                <Dropdown id="language_dropdown">
+                  <Dropdown.Toggle id="language_dropdown_button">
+                    <span
+                      className={` select-flag flag-icon flag-icon-${languages[0].country_code}`}
+                    ></span>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu alignRight>
+                    {languages.map(({ code, name, country_code }) => (
+                      <Dropdown.Item
+                        onClick={() => {
+                          LanguageHandler(code);
+                        }}
+                      >
+                        <span
+                          className={` mr-2 flag-icon flag-icon-${country_code}`}
+                        ></span>
+                        {name}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </li>
               <li>
                 <FontAwesomeIcon
                   icon={faUser}
