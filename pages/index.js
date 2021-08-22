@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { connect } from "react-redux";
 import Link from "next/link";
+import { withTranslation } from "../i18n";
 import { isMobile } from "react-device-detect";
 import { trending, concern } from "../components/utils/static";
 import { useEffect } from "react";
@@ -16,8 +17,9 @@ const Slider = dynamic(() => import("../components/homepage/Slider"));
 const Trending = dynamic(() => import("../components/homepage/Trending"));
 const Concern = dynamic(() => import("../components/homepage/Concern"));
 const TopSellers = dynamic(() => import("../components/homepage/TopSellers"));
+const NewArrival = dynamic(() => import("../components/homepage/NewArrival"));
 
-const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
+const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
   useEffect(() => {
     if (!isMobile) {
       let url = "/api/menu?locale=" + lang;
@@ -60,6 +62,7 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
         isMobile={isMobile}
         Link={Link}
         Header={Header}
+        t={t}
       ></Trending>
       <LazyLoad
         offset={[-200, 0]}
@@ -74,6 +77,8 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
           isMobile={isMobile}
           Link={Link}
           Header={Header}
+
+          t={t}
         ></Concern>
       </LazyLoad>
       <LazyLoad
@@ -86,7 +91,24 @@ const Home = ({ FontAwesomeIcon, lang, store, slider }) => {
           FontAwesomeIcon={FontAwesomeIcon}
           Link={Link}
           Header={Header}
+          styles={styles}
           lang={lang}
+          t={t}
+        />
+      </LazyLoad>
+      <LazyLoad
+        offset={[-200, 0]}
+        placeholder={<Header text="Best Selling" h="h2"></Header>}
+        debounce={200}
+        once
+      >
+        <NewArrival
+          FontAwesomeIcon={FontAwesomeIcon}
+          Link={Link}
+          Header={Header}
+          styles={styles}
+          lang={lang}
+          t={t}
         />
       </LazyLoad>
     </>
@@ -97,4 +119,4 @@ const mapStateToProps = (state) => ({
   slider: state.layout.slider,
 });
 
-export default connect(mapStateToProps, null)(Home);
+export default withTranslation("common")(connect(mapStateToProps, null)(Home));

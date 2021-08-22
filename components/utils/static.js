@@ -617,7 +617,7 @@ export const trending = {
       },
     ],
   ],
-  ar: [
+  ar_QA: [
     [
       {
         id: 49,

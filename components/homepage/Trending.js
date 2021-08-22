@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
-import { withTranslation } from "../../i18n";
 // styles
 import styles from "../../styles/sass/homepage_sections/Trending.module.scss";
 
@@ -9,7 +8,7 @@ const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header, t 
     const [trending, setTrending] = useState(null);
     useEffect(() => {
         const t = trendings
-            ? trendings[lang]
+            && trendings[lang]
                 .filter((tr) => tr.length === 2)
                 .map((trending, index) => (
                     <div key={index}>
@@ -36,8 +35,7 @@ const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header, t 
                             </Link>
                         ))}
                     </div>
-                ))
-            : null;
+                ));
         setTrending(t);
     }, [trendings, lang]);
 
@@ -107,7 +105,6 @@ const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header, t 
                     {trending && lang == "ar_QA" ? (
                         <div className={`${styles.trending_swiper}`}>
                             <Swiper
-                                ref={swiperRef}
                                 getSwiper={updateSwiper}
                                 {...params2}
                                 shouldSwiperUpdate
@@ -122,4 +119,4 @@ const Trending = ({ trendings, FontAwesomeIcon, lang, isMobile, Link, Header, t 
     );
 }
 
-export default withTranslation("common")(Trending);
+export default (Trending);

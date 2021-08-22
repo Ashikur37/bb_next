@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
       document.body.dir = "ltr";
     }
   }
-  if (cookies.get("lang") == "ar") {
+  if (cookies.get("lang") == "ar_QA") {
     cookies.set("next-i18next", "ar_QA");
     if (document) {
       document.body.classList.add("rtl");

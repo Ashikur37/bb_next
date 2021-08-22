@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Swiper from "react-id-swiper";
-import { withTranslation } from "../../i18n";
 // styles
 import styles from "../../styles/sass/homepage_sections/Concern.module.scss";
 
@@ -49,7 +48,7 @@ const Concern = ({ concerns, FontAwesomeIcon, lang, isMobile, Link, Header, t })
             </div>
             <div className={`concern_global ${styles.concern_swiper}`}>
             {lang == "en" ?
-                <Swiper getSwiper={updateSwiper} {...params}>
+                <Swiper getSwiper={updateSwiper} {...params} shouldSwiperUpdate>
                     {concerns["en"].map((concern, index) => (
                         <div key={index}>
                             <Link
@@ -62,9 +61,9 @@ const Concern = ({ concerns, FontAwesomeIcon, lang, isMobile, Link, Header, t })
                                     {" "}
                                     {concern.image ? (
                                         <img
-                                            className="swiper-lazy"
-                                            data-src={concern.image.image}
-                                            src="/circular.svg"
+                                            // className="swiper-lazy"
+                                            src={concern.image.image}
+                                            // src="/circular.svg"
                                             alt={concern.value}
                                         />
                                     ) : null}
@@ -74,7 +73,7 @@ const Concern = ({ concerns, FontAwesomeIcon, lang, isMobile, Link, Header, t })
                         </div>
                     ))}
                 </Swiper> :
-                <Swiper  getSwiper={updateSwiper} {...params2}>
+                <Swiper  getSwiper={updateSwiper} {...params2} shouldSwiperUpdate>
                     {concerns["ar"].map((concern, index) => (
                         <div key={index}>
                             <Link
@@ -103,4 +102,4 @@ const Concern = ({ concerns, FontAwesomeIcon, lang, isMobile, Link, Header, t })
     );
 }
 
-export default withTranslation("common")(Concern);
+export default Concern;

@@ -28,6 +28,7 @@
     "Delivery": "Delivery",
     "When is the delivery ?": "When Is The Delivery ?",
     "trending_on_site": "Trending on site",
+    "trending": "Trending",
     "shop_by_concern": "Shop by concern",
     "best_selling": "Best Selling",
     "new_arrival": "New Arrival",
@@ -164,6 +165,5 @@
     "Regular Delivery":"Regular Delivery",
     "d_info":"Delivery is within 24 to 72 hours after order confirmation",
     "cart_warning":"Cart items are not in stock. Edit your cart Item quantity."
-
 
 }

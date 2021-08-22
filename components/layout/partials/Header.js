@@ -6,7 +6,7 @@
  * @returns component
  */
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-const Header = ({ h: Tag, text, cssClass = "", url = null, urlText = "see more", Link, FontAwesomeIcon }) => {
+const Header = ({ h: Tag, text, cssClass = "", lang="en", url = null, urlText = { en: "see all", ar_QA: "اظهار الكل" }, Link, FontAwesomeIcon }) => {
     return (
         <div className="header_component">
             <Tag className={`${cssClass}`}>
@@ -15,7 +15,7 @@ const Header = ({ h: Tag, text, cssClass = "", url = null, urlText = "see more",
             {url && (
                 <Link href={url}>
                     <a className="header_see_all">
-                        <span>{urlText}</span>{" "}
+                        <span>{urlText[lang]}</span>{" "}
                         <FontAwesomeIcon className="fa-xs" icon={faArrowRight}></FontAwesomeIcon>
                     </a>
                 </Link>

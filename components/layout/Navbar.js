@@ -19,12 +19,12 @@ const languages = [
   {
     code: "en",
     name: "English",
-    country_code: "gb",
+    country_code: "us",
   },
   {
     code: "ar_QA",
     name: "Arabic",
-    country_code: "ar",
+    country_code: "qa",
   },
 ];
 function Navbar({ FontAwesomeIcon, lang }) {
@@ -43,8 +43,8 @@ function Navbar({ FontAwesomeIcon, lang }) {
           `https://admin.beautyboothqa.com/en/products?query=${searchQuery}`
         
         */
-        let locale = lang == "ar" ? "ar_QA" : "en";
-        Axios.get(`${locale}/products?query=${searchQuery}`)
+       
+        Axios.get(`${lang}/products?query=${searchQuery}`)
           .then((res) => {
             setSeearchResult(res.data);
           })
@@ -87,8 +87,8 @@ function Navbar({ FontAwesomeIcon, lang }) {
       setLanguage("en");
     } else {
       document.body.classList.add("rtl");
-      cookies.set("lang", "ar");
-      setLanguage("ar");
+      cookies.set("lang", "ar_QA");
+      setLanguage("ar_QA");
     }
   };
   useEffect(() => {
@@ -206,13 +206,14 @@ function Navbar({ FontAwesomeIcon, lang }) {
                 <Dropdown id="language_dropdown">
                   <Dropdown.Toggle id="language_dropdown_button">
                     <span
-                      className={` select-flag flag-icon flag-icon-${languages[0].country_code}`}
+                      className={`select-flag flag-icon flag-icon-${language == 'en' ? 'us' : 'qa'}`}
                     ></span>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu alignRight>
                     {languages.map(({ code, name, country_code }) => (
                       <Dropdown.Item
+                      key={country_code}
                         onClick={() => {
                           LanguageHandler(code);
                         }}
