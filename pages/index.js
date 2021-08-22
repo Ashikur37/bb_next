@@ -18,6 +18,7 @@ const Trending = dynamic(() => import("../components/homepage/Trending"));
 const Concern = dynamic(() => import("../components/homepage/Concern"));
 const TopSellers = dynamic(() => import("../components/homepage/TopSellers"));
 const NewArrival = dynamic(() => import("../components/homepage/NewArrival"));
+const Brands = dynamic(() => import("../components/homepage/Brands"));
 
 const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
   useEffect(() => {
@@ -111,6 +112,22 @@ const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
           t={t}
         />
       </LazyLoad>
+      <LazyLoad
+        offset={[-200, 0]}
+        placeholder={<Header text="Brands.." h="h2"></Header>}
+        debounce={200}
+        once
+      >
+        <Brands
+          FontAwesomeIcon={FontAwesomeIcon}
+          Link={Link}
+          Header={Header}
+          styles={styles}
+          lang={lang}
+          t={t}
+        />
+      </LazyLoad>
+      
     </>
   );
 };

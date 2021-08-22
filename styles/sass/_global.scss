@@ -5,6 +5,7 @@
 }
 
 .header_component {
+
   position: relative;
   width: 100%;
   font-weight: 400;
@@ -18,12 +19,18 @@
     }
   }
   .header_see_all {
+    font-family: $sulphar;
     position: absolute;
+    text-transform: lowercase;
+    color: #444444;
+    font-size: 18px;
     right: 5%;
     top: 50%;
     transform: translateY(-50%);
     @include breakpoint(tablet) {
       right: 1%;
+    font-size: 16px;
+
     }
   }
 }
@@ -105,4 +112,9 @@
   @include breakpoint(tablet) {
     height: 140px;
   }
+}
+
+
+.best_brands .swiper-container {
+  padding: 1px;
 }
