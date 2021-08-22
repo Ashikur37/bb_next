@@ -1,0 +1,29 @@
+@import "./sass/variables";
+@import "./sass/mixins";
+
+.my_bag {
+    min-height: 30vh;
+    button.brand__offer__card {
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+      background: transparent;
+      border: none;
+      img {
+        max-height: 160px;
+        min-height: 160px;
+      }
+      .brand__name {
+        font-size: 16px;
+        line-height: 16px;
+        min-height: 32px;
+      }
+      .rangePrice {
+        font-size: 14px;
+      }
+      @include breakpoint (mobile_md){
+        width: 46%;
+      }
+    }
+  }
+  

@@ -1,6 +1,6 @@
 // import React from "react";
 
-function Devider() {
+function Divider() {
   return (
     <div className="container-fluid">
       <div className="devider"></div>
@@ -8,4 +8,4 @@ function Devider() {
   );
 }
 
-export default Devider;
+export default Divider;

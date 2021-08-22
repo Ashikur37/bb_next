@@ -5,7 +5,6 @@
 }
 
 .header_component {
-
   position: relative;
   width: 100%;
   font-weight: 400;
@@ -29,8 +28,7 @@
     transform: translateY(-50%);
     @include breakpoint(tablet) {
       right: 1%;
-    font-size: 16px;
-
+      font-size: 16px;
     }
   }
 }
@@ -92,13 +90,21 @@
     border: none;
   }
 }
+
 #language_dropdown {
+  .dropdown-menu {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
   .btn-primary:focus,
   .btn-primary.focus {
     box-shadow: none !important;
   }
   .select-flag {
     font-size: 20px;
+  }
+  .flag-text{
+    padding: 0 0.5rem;
   }
 }
 .card_image {
@@ -114,7 +120,302 @@
   }
 }
 
-
 .best_brands .swiper-container {
   padding: 1px;
+}
+
+// Loader
+
+.loader_container {
+  text-align: center;
+  // margin-top: 200px;
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}
+// rtl css
+.rtl {
+  direction: rtl;
+  .nav_container .nav_wrapper .search_container {
+    margin-right: 0;
+    margin-left: 15%;
+  }
+  .nav_container .nav_wrapper .search_container .search_wrap .search_btn {
+    right: initial;
+    left: 15px;
+  }
+  .nav_container
+    .nav_wrapper
+    .search_container
+    .search_wrap
+    .search_box_input
+    .search_result
+    ul
+    li
+    .search_result_li
+    span {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+  .nav_container
+    .nav_wrapper
+    .search_container
+    .search_wrap
+    .search_box_input
+    .search_result
+    ul
+    li
+    .search_result_li2
+    span {
+    position: absolute;
+    left: 0;
+    right: unset;
+    font-size: 16px;
+  }
+  .bag_icon .bag_popup {
+    left: initial;
+    right: -500%;
+  }
+  .popup .sign_up_registration {
+    right: initial;
+    left: 60px;
+  }
+  .popup .sign_up_registration::after {
+    right: initial;
+    left: 32px;
+  }
+  .popup .sign_up_registration {
+    text-align: right;
+  }
+  .category_wrap nav ul.menu li ul li {
+    float: right;
+  }
+  .category_wrap nav ul.menu li ul li a {
+    text-align: right;
+  }
+  .category_wrap nav ul.menu li ul li ul {
+    left: -150%;
+    right: unset;
+  }
+  .swiper_button_container {
+    span.prev {
+      position: absolute;
+      left: 0;
+    }
+    img {
+      height: 24px;
+      width: 24px;
+    }
+  }
+  .trending .trending_swiper .slide span.text {
+    margin-right: 10px;
+    margin-left: 0px;
+  }
+  .footer_container .footer_wrap {
+    text-align: right;
+  }
+  .footer_container .footer_wrap .phone span {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+  .footer_container .footer_wrap .email span {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  .faq_page .faq_container .faq_navigations {
+    margin-left: 20px;
+    margin-right: initial;
+  }
+  .faq_page .faq_container .faq_content {
+    width: 100%;
+    border-right: 1px solid #eeeeee;
+    border-left: none;
+    padding-right: 20px;
+    padding-left: 0px;
+  }
+  .faq_page .faq_container .faq_content .section_title {
+    text-align: right;
+  }
+  .custom__accordion .accordion__label .accordion__label__span {
+    text-align: right;
+  }
+  .custom__accordion .accordion__label::after {
+    left: 10px;
+    right: initial;
+  }
+  .custom__accordion .accordion__content p {
+    text-align: right;
+  }
+
+  // algolia page
+  [class^="ais-"] {
+    text-align: right;
+  }
+  .new .custom__accordion .accordion__label {
+    text-align: right;
+  }
+  span.refinment_title {
+    text-align: right;
+    margin-bottom: 5px;
+  }
+  input.ais-RefinementList-checkbox {
+    margin-left: 5px;
+  }
+  // brands page
+  .brands_page .brands_navigations .title {
+    text-align: right;
+  }
+  .brands_page .brand_list_details .brand_lists .brandlist_group .lists ul li {
+    float: right;
+  }
+  // product page
+  .product_details_container span.product_name {
+    text-align: right;
+  }
+  .mt-2.mb-2 {
+    text-align: right;
+  }
+  span.brand {
+    display: block;
+    text-align: right;
+  }
+  .product_message span {
+    text-align: right;
+  }
+  .price_net_weight .price_sapn {
+    margin-left: 15px;
+  }
+  .qnt_bag_fav .fav_container span.fav {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  .review_rating_container .progress_container .single_progress .left {
+    text-align: center;
+  }
+  // checkout page
+  .step_zero .method_one {
+    padding-left: 30px;
+    padding-right: 0;
+  }
+  .step_zero .method_one:first-child::before {
+    left: 0;
+    right: unset;
+  }
+  .place_order_container button:first-child {
+    margin-left: 10px;
+  }
+  .pregress_bar ul li:not(:last-child)::after {
+    left: unset;
+    right: 35%;
+  }
+  .step_one .delivery_form label span {
+    margin: 0;
+    margin-left: 5px;
+  }
+  .step_two .details .next_btn_wrap button:first-child {
+    margin-left: 10px;
+    margin-right: unset;
+  }
+  .input_label {
+    display: block;
+    text-align: right;
+  }
+  .methods {
+    text-align: right;
+  }
+  .step_one .delivery_form .checkbox_label {
+    text-align: right;
+    display: block;
+  }
+  .step_one .delivery_form .deleviry_schedule .form-group {
+    margin-left: 1.5rem;
+    margin-right: unset;
+  }
+  .customer_info {
+    text-align: right;
+    margin-bottom: 15px;
+  }
+  .table-bordered {
+    text-align: right;
+  }
+  // bag page
+  .inbag_products .bag_product .details_container {
+    text-align: right;
+  }
+  // mobile version
+  .mobile_sub_category .sub_category_inner .sub_category img {
+    margin-left: 7px;
+    margin-right: unset;
+  }
+  .mobile_sub_category .sub_category_inner .sub_category .sub_link .view__svg {
+    margin-right: unset;
+    margin-left: 10px;
+  }
+
+  // product page
+  .option_wrapper .menu .menuitem > img {
+    padding-right: unset;
+    padding-left: 6px;
+  }
+  .option_wrapper .menu .menuitem > span {
+    float: left;
+  }
+  .option_wrapper .menu {
+    right: 0;
+    left: unset;
+  }
+  // brands page
+  .brand_page .brand_details_container p {
+    text-align: right;
+  }
+  // profile page
+  .user__module .user__details .user__card .thumb__wrapper .thumb::after {
+    right: unset;
+    left: 20px;
+  }
+  // faq
+  .custom__accordion .accordion__input:checked ~ .accordion__content {
+    text-align: right;
+  }
+  // mobile footer
+  .mobile_footer_menu ul.mobile_footer li .menu_item_wrap span {
+    font-size: 11px;
+  }
+  // cart popup
+  .bag_icon .bag_popup .bag_footer .special__code__container svg {
+    margin-left: 8px;
+    margin-right: unset;
+  }
+  .tr.info {
+    text-align: right;
+  }
+  .influncer__page .profile__summery .summery__row .label {
+    text-align: right;
+  }
+  .sidebar {
+    text-align: right;
+  }
+  .sidebarContent {
+    text-align: right;
+  }
+  .s_title {
+    display: block;
+    text-align: right;
+  }
+  .step_three .invoice .table_footer .left {
+    text-align: right;
+  }
+  input#express_delivery {
+    margin-left: 10px;
+  }
+  .dump_details {
+    color: black; 
+    text-align: right;
+  }
+  .step_one .store_pickup .form-check {
+    text-align: right;
+  }
+  .step_one .store_pickup .form-check .form-check-label {
+    margin-right: 25px;
+  }
 }

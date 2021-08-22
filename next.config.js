@@ -1,7 +1,12 @@
 const { nextI18NextRewrites } = require("next-i18next/rewrites");
-
+const path = require('path');
 const localeSubpaths = {};
 module.exports = {
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ar_QA'],
+  },
+  localePath: path.resolve('./public/locales'),
   env: {
 
     // mongodburl: "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa_test?retryWrites=true&w=majority",

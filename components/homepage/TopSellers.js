@@ -57,7 +57,7 @@ function TopSellers(props) {
             <Header
               h="h2"
               text={t("best_selling")}
-              url="/best_seling"
+              url="/best_selling"
               lang="en"
               Link={Link}
               FontAwesomeIcon={FontAwesomeIcon}

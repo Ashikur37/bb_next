@@ -47,11 +47,11 @@ function Brands(props) {
       // when window width is >= 640px
       640: {
         slidesPerView: 4,
-        spaceBetween:10,
+        spaceBetween: 10,
       },
       991: {
         slidesPerView: 6,
-        spaceBetween:30,
+        spaceBetween: 30,
       },
     },
   };
@@ -60,17 +60,16 @@ function Brands(props) {
     <div className="container mt-4">
       {props.bestBrands ? (
         <>
-          <Header
-            text={t("best_brands")}
-            url="brands"
-            lang={lang}
-            Link={Link}
-            h="h2"
-            FontAwesomeIcon={FontAwesomeIcon}
-          />
-          {/* <div className="brands_container">
-        {elem}
-      </div> */}
+          <div className="row">
+            <Header
+              text={t("best_brands")}
+              url="brands"
+              lang={lang}
+              Link={Link}
+              h="h2"
+              FontAwesomeIcon={FontAwesomeIcon}
+            />
+          </div>
           <div className={`best_brands ${styles.brands_container}`}>
             {props.bestBrands ? (
               <Swiper
@@ -95,7 +94,7 @@ function Brands(props) {
                 })}
               </Swiper>
             ) : null}
-            
+
           </div>
         </>
       ) : null}

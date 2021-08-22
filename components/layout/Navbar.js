@@ -219,9 +219,9 @@ function Navbar({ FontAwesomeIcon, lang }) {
                         }}
                       >
                         <span
-                          className={` mr-2 flag-icon flag-icon-${country_code}`}
+                          className={`flag-icon flag-icon-${country_code}`}
                         ></span>
-                        {name}
+                        <span className="flag-text">{name}</span>
                       </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>

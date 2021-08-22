@@ -42,8 +42,7 @@ function Footer({ FontAwesomeIcon, t }) {
               <span>info@beautyboothqa.com</span>
             </div>
             <div className="mt-3">
-              <a
-                rel="preload"
+              <a rel="noreferrer"
                 target="_blank"
                 href="https://theqa.qa/certificates/details/5ea9cfa1-35a2-408b-9fdb-e76369dd5255"
               >
@@ -158,7 +157,7 @@ function Footer({ FontAwesomeIcon, t }) {
           <div className={styles.social_icons_wrapper}>
             <span>{t("follow_us")}</span>
             <div className={styles.social_icons}>
-              <a target="_blank" href="https://www.facebook.com/beautyboothqa">
+              <a target="_blank" href="https://www.facebook.com/beautyboothqa" rel="noreferrer">
                 <FontAwesomeIcon
                   className={styles.social_icon_logo}
                   icon={faFacebookSquare}
@@ -173,6 +172,7 @@ function Footer({ FontAwesomeIcon, t }) {
               <a
                 target="_blank"
                 href="https://www.instagram.com/beautyboothqtr"
+                rel="noreferrer"
               >
                 <FontAwesomeIcon
                   className={styles.social_icon_logo}
@@ -182,6 +182,7 @@ function Footer({ FontAwesomeIcon, t }) {
               <a
                 target="_blank"
                 href="https://www.youtube.com/c/BeautyBoothQATAR"
+                rel="noreferrer"
               >
                 <FontAwesomeIcon
                   className={styles.social_icon_logo}

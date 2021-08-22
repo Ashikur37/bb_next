@@ -2,34 +2,29 @@ import { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
 
 const Slider = ({ styles, lang, slides, isMobile, Link }) => {
-      const [slider, setSlider] = useState(slides);
-      const [params, setParams] = useState({
-        rtl: false,
+    const [slider, setSlider] = useState(slides);
+    const [swiper, updateSwiper] = useState(null);
+    const [params, setParams] = useState({
         // loop: true,
         autoplay: {
-          delay: 4500,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
-      useEffect(() => {
-        setSlider(slides);
-        setParams({
-          rtl: lang == "ar_QA",
-          // loop: true,
-          autoplay: {
             delay: 4500,
             disableOnInteraction: false,
-          },
-          pagination: {
+        },
+        pagination: {
             el: ".swiper-pagination",
             clickable: true,
-          },
-        });
-      }, [lang, slides]);
+        },
+    });
+    useEffect(() => {
+        setSlider(slides);
+        if (lang == "ar_QA") {
+            setParams({
+                rtl: 'rtl',
+                inverse: true,
+                ...params
+            });
+        }
+    }, [lang, slides]);
 
     return (
         <div className={`container-fluid ${styles.sliderContainer} `}>
@@ -38,7 +33,11 @@ const Slider = ({ styles, lang, slides, isMobile, Link }) => {
                     {isMobile ? (
                         <>
                             {slider ? (
-                                <Swiper {...params}>
+                                <Swiper
+                                    {...params}
+                                    getSwiper={updateSwiper}
+                                    shouldSwiperUpdate
+                                >
                                     {slider.map((slide, index) => (
                                         <div className="swiper_banner_container" key={index}>
                                             {index == 0 && (
@@ -59,7 +58,11 @@ const Slider = ({ styles, lang, slides, isMobile, Link }) => {
                     ) : (
                         <>
                             {slider ? (
-                                <Swiper {...params}>
+                                <Swiper
+                                    {...params}
+                                    getSwiper={updateSwiper}
+                                    shouldSwiperUpdate
+                                >
                                     {slider.slides.map((slide, index) => (
                                         <div className="swiper_banner_container" key={index}>
                                             {index == 0 && (

@@ -38,7 +38,7 @@ const Concern = ({ concerns, FontAwesomeIcon, lang, isMobile, Link, Header, t })
     };
     const params2 = {
         ...params,
-        rtl: true,
+        rtl: 'rtl',
     };
 
     return (
