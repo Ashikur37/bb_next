@@ -11,6 +11,7 @@ import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 const Divider = dynamic(() => import("../components/layout/partials/Divider"));
+const Menu = dynamic(() => import("../components/layout/Menu"));
 const Footer = dynamic(() => import("../components/layout/Footer"));
 const cookies = new Cookies();
 
@@ -37,6 +38,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={cookies.get("lang")} />
+      <Divider />
+      <Menu />
       <Divider />
 
       <Component

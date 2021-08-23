@@ -1,0 +1,68 @@
+@import "./sass/_variables.scss";
+
+.nav {
+  width: 100%;
+  font-family: $sulphar;
+  .nav_main_ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    .nav_main_li {
+      color: #7a7a7a;
+      font-size: 16px;
+      text-transform: capitalize;
+      font-family: $sulphar;
+      .nav_main_a {
+        padding: 5px 0;
+        display: inline-block;
+      }
+      .sub_menu {
+        display: none;
+        transition: 0.4s all ease-in-out;
+        position: absolute;
+        width: 100%;
+        background: white;
+        left: 0;
+        top: 100%;
+        min-height: 401px;
+        z-index: 5;
+        box-shadow: 0px 0px 24px #afafaf3d;
+        padding: 15px;
+        .sub_menu_li {
+          width: 25%;
+          .sub_menu_li_ul {
+            width: 100%;
+            font-size: 18px;
+            li {
+              padding: 0 5px;
+              a {
+                color: #000000;
+                padding: 2px 5px;
+                display: inline-block;
+                width: 100%;
+                &:hover {
+                  background-color: $theme2;
+                  color: white;
+                }
+              }
+            }
+          }
+        }
+      }
+      &:hover {
+        .sub_menu {
+          display: flex;
+        }
+      }
+    }
+  }
+  .main {
+    font-weight: 600;
+  }
+  .childs {
+    color: black;
+    display: block;
+    margin-left: 20px;
+  }
+}
