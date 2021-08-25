@@ -1,16 +1,25 @@
 import Link from "next/link";
 import React from "react";
-
-function SubMenuLi({ url, main = false, styles, name, childs }) {
+import Image from "next/image";
+function SubMenuLi({ url, main = false, styles, name, img, childs }) {
   return (
     <li>
       <Link href={url}>
-        <a className={main ? styles.main : null}>{name}</a>
+        <a className={main ? styles.main : null}>
+          {" "}
+          <Image
+            src={`/images/${img}`}
+            alt="logo"
+            width="30"
+            height="30"
+          />{" "}
+          {name}
+        </a>
       </Link>
       {childs && (
         <ul className={styles.childs}>
-          {childs.map((child) => (
-            <li>
+          {childs.map((child, index) => (
+            <li key={index}>
               <Link href={child.url}>
                 <a>{child.name}</a>
               </Link>

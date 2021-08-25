@@ -61,40 +61,43 @@ function Brands(props) {
       {props.bestBrands ? (
         <>
           <div className="row">
-            <Header
-              text={t("best_brands")}
-              url="brands"
-              lang={lang}
-              Link={Link}
-              h="h2"
-              FontAwesomeIcon={FontAwesomeIcon}
-            />
-          </div>
-          <div className={`best_brands ${styles.brands_container}`}>
-            {props.bestBrands ? (
-              <Swiper
-                getSwiper={updateSwiper}
-                {...params}
-                shouldSwiperUpdate
-              >
-                {props.bestBrands.map((brand, index) => {
-                  return (
-                    <div className={styles.brand_slide} key={index}>
-                      <Link href={`brand/${brand.value.split(" ").join("-")}`}>
-                        <a>
-                          {brand.image ? (
-                            <img src={brand.image.image} alt={brand.slug} />
-                          ) : (
-                            <div className="no-img">{brand.value}</div>
-                          )}
-                        </a>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </Swiper>
-            ) : null}
-
+            <div className="col">
+              <Header
+                text={t("best_brands")}
+                url="brands"
+                lang={lang}
+                Link={Link}
+                h="h2"
+                FontAwesomeIcon={FontAwesomeIcon}
+              />
+              <div className={`best_brands ${styles.brands_container}`}>
+                {props.bestBrands ? (
+                  <Swiper
+                    getSwiper={updateSwiper}
+                    {...params}
+                    shouldSwiperUpdate
+                  >
+                    {props.bestBrands.map((brand, index) => {
+                      return (
+                        <div className={styles.brand_slide} key={index}>
+                          <Link
+                            href={`brand/${brand.value.split(" ").join("-")}`}
+                          >
+                            <a>
+                              {brand.image ? (
+                                <img src={brand.image.image} alt={brand.slug} />
+                              ) : (
+                                <div className="no-img">{brand.value}</div>
+                              )}
+                            </a>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </Swiper>
+                ) : null}
+              </div>
+            </div>
           </div>
         </>
       ) : null}

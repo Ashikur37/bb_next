@@ -1,16 +1,16 @@
 const { nextI18NextRewrites } = require("next-i18next/rewrites");
-const path = require('path');
+const path = require("path");
 const localeSubpaths = {};
 module.exports = {
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'ar_QA'],
+    defaultLocale: "en",
+    locales: ["en", "ar_QA"],
   },
-  localePath: path.resolve('./public/locales'),
+  localePath: path.resolve("./public/locales"),
   env: {
-
     // mongodburl: "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa_test?retryWrites=true&w=majority",
-    mongodburl: "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa?retryWrites=true&w=majority",
+    mongodburl:
+      "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa?retryWrites=true&w=majority",
 
     // test
     algolia: {
@@ -28,9 +28,9 @@ module.exports = {
   //   domains: ['admin.beautyboothqa.com','beautyboothqa.sgp1.digitaloceanspaces.com'],
   // },
   distDir: "build",
-  reactStrictMode: true,
+  reactStrictMode: false,
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
   publicRuntimeConfig: {
     localeSubpaths,
   },
-}
+};

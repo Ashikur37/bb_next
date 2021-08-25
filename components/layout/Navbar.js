@@ -8,9 +8,11 @@ import styles from "../../styles/Navbar.module.scss";
 import { Dropdown } from "react-bootstrap";
 import "flag-icon-css/css/flag-icon.min.css";
 import {
+  faCross,
   faSearch,
   faShoppingBag,
   faShoppingCart,
+  faTimesCircle,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 const cookies = new Cookies();
@@ -32,7 +34,8 @@ function Navbar({ FontAwesomeIcon, lang }) {
   const [language, setLanguage] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [showResult, setShowResult] = useState(false);
-  const [searchResult, setSeearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const searchHandler = (event) => {
     if (searchQuery.length > 3) {
       setShowResult(true);
@@ -43,10 +46,10 @@ function Navbar({ FontAwesomeIcon, lang }) {
           `https://admin.beautyboothqa.com/en/products?query=${searchQuery}`
         
         */
-       
+
         Axios.get(`${lang}/products?query=${searchQuery}`)
           .then((res) => {
-            setSeearchResult(res.data);
+            setSearchResult(res.data);
           })
           .catch();
       }, 800);
@@ -94,153 +97,286 @@ function Navbar({ FontAwesomeIcon, lang }) {
   useEffect(() => {
     setLanguage(cookies.get("lang"));
   }, [language]);
+  const mobileSearchHandler = () => {
+    setIsOpen(!isOpen);
+    setSearchQuery("");
+    setSearchResult([]);
+  };
   return (
     <div className="container">
       <div className="row">
-        <div className={styles.navbar_content}>
-          <div className={styles.logo_content}>
-            <h1>
-              <Link href="/">
-                <a>Beauty Booth.</a>
-              </Link>
-            </h1>
-          </div>
-          <div className={styles.search_content}>
-            <input
-              type="text"
-              name="search"
-              placeholder="Search For.."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyUp={searchHandler}
-              onKeyPress={keyHandler}
-            />
-            <FontAwesomeIcon icon={faSearch} />
+        <div className="col">
+          <div className={styles.navbar_content}>
+            <div className={styles.logo_content}>
+              <h1>
+                <Link href="/">
+                  <a>Beauty Booth.</a>
+                </Link>
+              </h1>
+            </div>
+            <div className={styles.search_container}>
+              <div className={styles.search_content}>
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Search For.."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyUp={searchHandler}
+                  onKeyPress={keyHandler}
+                />
+                <FontAwesomeIcon icon={faSearch} />
+                <div
+                  className={
+                    showResult
+                      ? `${styles.search_result} ${styles.active}`
+                      : `${styles.search_result}`
+                  }
+                >
+                  {searchResult.brand && searchResult.brand.length > 0 && (
+                    <ul>
+                      <li
+                        style={{
+                          color: "black",
+                          marginLeft: "10px",
+                          border: "none",
+                        }}
+                      >
+                        Brand
+                      </li>
+                      {searchResult.brand.map((rs, index) => (
+                        <li key={index}>
+                          <div
+                            className={styles.search_result_li}
+                            onClick={() => {
+                              resultClick(rs.url, true);
+                            }}
+                          >
+                            {rs.image && <img src={rs.image} alt={rs.slug} />}
+                            <span>{rs.name}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {searchResult.searchTerms &&
+                    searchResult.searchTerms.length > 0 && (
+                      <ul>
+                        <li
+                          style={{
+                            color: "black",
+                            marginLeft: "10px",
+                            border: "none",
+                          }}
+                        >
+                          Popular searches
+                        </li>
+                        {searchResult.searchTerms.map((rs, index) => (
+                          <li key={index}>
+                            <div
+                              className={styles.search_result_li}
+                              onClick={() =>
+                                searchTermClick(encodeURI(rs.term))
+                              }
+                            >
+                              <span>{rs.term}</span>{" "}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  {searchResult.products && (
+                    <ul>
+                      <li
+                        style={{
+                          color: "black",
+                          marginLeft: "10px",
+                          border: "none",
+                        }}
+                      >
+                        Products
+                      </li>
+                      {searchResult.products.map((rs, index) => (
+                        <li key={index}>
+                          <div
+                            className={styles.search_result_li}
+                            onClick={() => {
+                              resultClick(rs.slug);
+                            }}
+                          >
+                            <img src={rs.files[0].thumbnail_image} alt="" />
+                            <span>{rs.name}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+              <div className={styles.mb_search_content}>
+                <div className={styles.mobile_search_icon}>
+                  <FontAwesomeIcon
+                    onClick={mobileSearchHandler}
+                    icon={faSearch}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={styles.icon_content}>
+              <ul>
+                <li>
+                  <Dropdown id="language_dropdown">
+                    <Dropdown.Toggle id="language_dropdown_button">
+                      <span
+                        className={`select-flag flag-icon flag-icon-${
+                          language == "en" ? "us" : "qa"
+                        }`}
+                      ></span>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu alignRight>
+                      {languages.map(({ code, name, country_code }) => (
+                        <Dropdown.Item
+                          key={country_code}
+                          onClick={() => {
+                            LanguageHandler(code);
+                          }}
+                        >
+                          <span
+                            className={`flag-icon flag-icon-${country_code}`}
+                          ></span>
+                          <span className="flag-text">{name}</span>
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
+                <li>
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className={`${styles.main_icon}`}
+                  />
+                </li>
+                <li>
+                  <FontAwesomeIcon
+                    icon={faShoppingBag}
+                    className={styles.main_icon}
+                  />
+                  <span className={`${styles.bag_count}`}>2</span>
+                </li>
+              </ul>
+            </div>
             <div
               className={
-                showResult
-                  ? `${styles.search_result} ${styles.active}`
-                  : `${styles.search_result}`
+                isOpen
+                  ? `${styles.mb_search_input}`
+                  : `${styles.mb_search_input} ${styles.closed}`
               }
             >
-              {searchResult.brand && searchResult.brand.length > 0 && (
-                <ul>
-                  <li
-                    style={{
-                      color: "black",
-                      marginLeft: "10px",
-                      border: "none",
-                    }}
-                  >
-                    Brand
-                  </li>
-                  {searchResult.brand.map((rs, index) => (
-                    <li key={index}>
-                      <div
-                        className={styles.search_result_li}
-                        onClick={() => {
-                          resultClick(rs.url, true);
+              <div className={styles.mb_search_input_wrapper}>
+                <input
+                  placeholder="search for.."
+                  type="text"
+                  name=""
+                  id="searchBox"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyUp={searchHandler}
+                  onKeyPress={keyHandler}
+                />
+                <FontAwesomeIcon
+                  onClick={mobileSearchHandler}
+                  className={styles.search_icon}
+                  icon={faTimesCircle}
+                />
+                <div
+                  className={
+                    showResult
+                      ? `${styles.search_result} ${styles.active}`
+                      : `${styles.search_result}`
+                  }
+                >
+                  {searchResult.brand && searchResult.brand.length > 0 && (
+                    <ul>
+                      <li
+                        style={{
+                          color: "black",
+                          marginLeft: "10px",
+                          border: "none",
                         }}
                       >
-                        {rs.image && <img src={rs.image} alt={rs.slug} />}
-                        <span>{rs.name}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {searchResult.searchTerms && searchResult.searchTerms.length > 0 && (
-                <ul>
-                  <li
-                    style={{
-                      color: "black",
-                      marginLeft: "10px",
-                      border: "none",
-                    }}
-                  >
-                    Popular searches
-                  </li>
-                  {searchResult.searchTerms.map((rs, index) => (
-                    <li key={index}>
-                      <div
-                        className={styles.search_result_li}
-                        onClick={() => searchTermClick(encodeURI(rs.term))}
-                      >
-                        <span>{rs.term}</span>{" "}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {searchResult.products && (
-                <ul>
-                  <li
-                    style={{
-                      color: "black",
-                      marginLeft: "10px",
-                      border: "none",
-                    }}
-                  >
-                    Products
-                  </li>
-                  {searchResult.products.map((rs, index) => (
-                    <li key={index}>
-                      <div
-                        className={styles.search_result_li}
-                        onClick={() => {
-                          resultClick(rs.slug);
+                        Brand
+                      </li>
+                      {searchResult.brand.map((rs, index) => (
+                        <li key={index}>
+                          <div
+                            className={styles.search_result_li}
+                            onClick={() => {
+                              resultClick(rs.url, true);
+                            }}
+                          >
+                            {rs.image && <img src={rs.image} alt={rs.slug} />}
+                            <span>{rs.name}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {searchResult.searchTerms &&
+                    searchResult.searchTerms.length > 0 && (
+                      <ul>
+                        <li
+                          style={{
+                            color: "black",
+                            marginLeft: "10px",
+                            border: "none",
+                          }}
+                        >
+                          Popular searches
+                        </li>
+                        {searchResult.searchTerms.map((rs, index) => (
+                          <li key={index}>
+                            <div
+                              className={styles.search_result_li}
+                              onClick={() =>
+                                searchTermClick(encodeURI(rs.term))
+                              }
+                            >
+                              <span>{rs.term}</span>{" "}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  {searchResult.products && (
+                    <ul>
+                      <li
+                        style={{
+                          color: "black",
+                          marginLeft: "10px",
+                          border: "none",
                         }}
                       >
-                        <img src={rs.files[0].thumbnail_image} alt="" />
-                        <span>{rs.name}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
+                        Products
+                      </li>
+                      {searchResult.products.map((rs, index) => (
+                        <li key={index}>
+                          <div
+                            className={styles.search_result_li}
+                            onClick={() => {
+                              resultClick(rs.slug);
+                            }}
+                          >
+                            <img src={rs.files[0].thumbnail_image} alt="" />
+                            <span>{rs.name}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-          <div className={styles.icon_content}>
-            <ul>
-              <li>
-                <Dropdown id="language_dropdown">
-                  <Dropdown.Toggle id="language_dropdown_button">
-                    <span
-                      className={`select-flag flag-icon flag-icon-${language == 'en' ? 'us' : 'qa'}`}
-                    ></span>
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu alignRight>
-                    {languages.map(({ code, name, country_code }) => (
-                      <Dropdown.Item
-                      key={country_code}
-                        onClick={() => {
-                          LanguageHandler(code);
-                        }}
-                      >
-                        <span
-                          className={`flag-icon flag-icon-${country_code}`}
-                        ></span>
-                        <span className="flag-text">{name}</span>
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown>
-              </li>
-              <li>
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className={`${styles.main_icon}`}
-                />
-              </li>
-              <li>
-                <FontAwesomeIcon
-                  icon={faShoppingBag}
-                  className={styles.main_icon}
-                />
-                <span className={`${styles.bag_count}`}>2</span>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

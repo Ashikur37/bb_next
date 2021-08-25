@@ -47,32 +47,31 @@ function TopSellers(props) {
     },
   };
   const params2 = {
-    rtl: true, ...params
+    rtl: true,
+    ...params,
   };
   return (
     <>
       {props.bestSelling.length !== 0 && props.lang == "en" ? (
         <div className="container mt-4">
           <div className="row">
-            <Header
-              h="h2"
-              text={t("best_selling")}
-              url="/best_selling"
-              lang="en"
-              Link={Link}
-              FontAwesomeIcon={FontAwesomeIcon}
-            ></Header>
+            <div className="col">
+              <Header
+                h="h2"
+                text={t("best_selling")}
+                url="/best_selling"
+                lang="en"
+                Link={Link}
+                FontAwesomeIcon={FontAwesomeIcon}
+              ></Header>
+            </div>
           </div>
 
           <div className="selling_swiper_wrapper">
-            <Swiper
-              getSwiper={updateSwiper}
-              {...params}
-              shouldSwiperUpdate
-            >
+            <Swiper getSwiper={updateSwiper} {...params} shouldSwiperUpdate>
               {props.bestSelling.map((product, index) => (
                 <div key={index}>
-                  <Product product={product} lazy={true}  styles={styles}/>
+                  <Product product={product} lazy={true} styles={styles} />
                 </div>
               ))}
             </Swiper>
@@ -82,25 +81,23 @@ function TopSellers(props) {
       {props.bestSelling.length !== 0 && props.lang == "ar_QA" ? (
         <div className="container mt-4">
           <div className="row">
-            <Header
-              h="h2"
-              text={t("best_selling")}
-              url="/best_seling"
-              lang="en"
-              Link={Link}
-              FontAwesomeIcon={FontAwesomeIcon}
-            ></Header>
+            <div className="col">
+              <Header
+                h="h2"
+                text={t("best_selling")}
+                url="/best_seling"
+                lang="en"
+                Link={Link}
+                FontAwesomeIcon={FontAwesomeIcon}
+              ></Header>
+            </div>
           </div>
 
           <div className="selling_swiper_wrapper">
-            <Swiper
-              getSwiper={updateSwiper}
-              {...params2}
-              shouldSwiperUpdate
-            >
+            <Swiper getSwiper={updateSwiper} {...params2} shouldSwiperUpdate>
               {props.bestSelling.map((product, index) => (
                 <div key={index}>
-                  <Product product={product} lazy={true}  styles={styles}/>
+                  <Product product={product} lazy={true} styles={styles} />
                 </div>
               ))}
             </Swiper>
@@ -119,7 +116,4 @@ const mapDispatchToProps = (dispatch, lang) => {
     getBestSellingProducts: () => getBestSellingProducts(dispatch, lang.lang),
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TopSellers);
+export default connect(mapStateToProps, mapDispatchToProps)(TopSellers);

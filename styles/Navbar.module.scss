@@ -1,4 +1,5 @@
 @import "./sass/_variables.scss";
+@import "./sass/mixins";
 
 .navbar_content {
   display: flex;
@@ -14,28 +15,188 @@
     }
   }
   .logo_content {
-    // width: 25%;
+    @include breakpoint(tablet) {
+      order: 2;
+    }
   }
-  .search_content {
-    // width: 55.56%;
-    width: 600px;
-    position: relative;
-    input {
-      border: 1px solid #e4c1b1;
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 18px;
-      &:focus {
-        border-color: $theme2;
+  .search_container {
+    .search_content {
+      // width: 55.56%;
+      width: 600px;
+      position: relative;
+      input {
+        border: 1px solid #e4c1b1;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 18px;
+        &:focus {
+          border-color: $theme2;
+        }
+      }
+      svg {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        z-index: 1;
+      }
+      .search_result {
+        visibility: hidden;
+        z-index: 99999;
+        &.active {
+          visibility: visible;
+        }
+        position: absolute;
+        top: 45px;
+        max-height: 70vh;
+        overflow-y: auto;
+        width: 100%;
+        background: white;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0px 12px 12px #F6D3D54D;
+        ul {
+          display: block;
+          li {
+            border-bottom: 1px solid $theme2;
+            position: relative;
+            color: white;
+            .search_result_li {
+              display: flex;
+              margin: 4px 5px;
+              color: $theme2;
+              cursor: pointer;
+              &:hover {
+                color: $theme1;
+              }
+              img {
+                width: 50px;
+                height: 50px;
+              }
+              span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 16px;
+                margin-left: 20px;
+              }
+            }
+
+            .search_result_li2 {
+              display: flex;
+              margin: 3px 5px;
+
+              color: $theme2;
+              cursor: pointer;
+              &:hover {
+                color: $theme1;
+              }
+              position: relative;
+              > div {
+                max-width: 83%;
+              }
+              span {
+                position: absolute;
+                right: 0;
+                font-size: 16px;
+              }
+            }
+          }
+        }
       }
     }
-    svg {
+    .mb_search_content {
+      display: none;
+    }
+    @include breakpoint(tablet) {
+      order: 3;
+      .search_content {
+        display: none;
+      }
+      .mb_search_content {
+        display: block;
+        .mobile_search_icon {
+          color: black;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+
+  .icon_content {
+    // width: 25%;
+    ul {
+      display: block;
+      li {
+        padding: 0 20px;
+        display: inline-block;
+        position: relative;
+        .main_icon {
+          font-size: 16px;
+          cursor: pointer;
+          position: relative;
+        }
+        .bag_count {
+          position: absolute;
+          background: $theme2;
+          text-align: center;
+          border-radius: 50%;
+          color: white;
+          top: -12px;
+          right: 8px;
+          padding: 2px;
+          min-height: 18px;
+          min-width: 18px;
+          font-size: 10px;
+        }
+      }
+    }
+    @include breakpoint(tablet) {
+      order: 1;
+
+      li:nth-child(1) {
+        padding-left: 0;
+      }
+      li:nth-child(2) {
+        display: none;
+      }
+      li:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+  .mb_search_input {
+    transition: all 0.4s ease-in-out;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    .mb_search_input_wrapper {
+      position: relative;
+      width: 100%;
+    }
+    input {
+      border-radius: 8px;
+      border-color: $theme2;
+      font-size: 18px;
+      padding-left: 15px;
+    }
+    .search_icon {
       position: absolute;
-      right: 20px;
+      right: 15px;
+      font-size: 24px;
+      color: #d3c9c9;
       top: 50%;
       transform: translateY(-50%);
-      background: transparent;
-      z-index: 1;
+    }
+    &.closed {
+      margin-top: -60px;
+      opacity: 0;
     }
     .search_result {
       visibility: hidden;
@@ -51,6 +212,7 @@
       background: white;
       left: 50%;
       transform: translateX(-50%);
+      box-shadow: 0px 12px 12px #f6d3d54d;
       ul {
         display: block;
         li {
@@ -97,35 +259,6 @@
               font-size: 16px;
             }
           }
-        }
-      }
-    }
-  }
-  .icon_content {
-    // width: 25%;
-    ul {
-      display: block;
-      li {
-        padding: 0 20px;
-        display: inline-block;
-        position: relative;
-        .main_icon {
-          font-size: 16px;
-          cursor: pointer;
-          position: relative;
-        }
-        .bag_count {
-          position: absolute;
-          background: $theme2;
-          text-align: center;
-          border-radius: 50%;
-          color: white;
-          top: -12px;
-          right: 8px;
-          padding: 2px;
-          min-height: 18px;
-          min-width: 18px;
-          font-size: 10px;
         }
       }
     }

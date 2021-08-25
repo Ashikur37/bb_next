@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "../../i18n";
@@ -42,7 +43,8 @@ function Footer({ FontAwesomeIcon, t }) {
               <span>info@beautyboothqa.com</span>
             </div>
             <div className="mt-3">
-              <a rel="noreferrer"
+              <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://theqa.qa/certificates/details/5ea9cfa1-35a2-408b-9fdb-e76369dd5255"
               >
@@ -138,13 +140,13 @@ function Footer({ FontAwesomeIcon, t }) {
                           onChange={(e) => setEmail(e.currentTarget.value)}
                         />
 
-                          <button
-                            className={styles.subs_button}
-                            type="button"
-                            onClick={subscribeHandler}
-                          >
-                            {t("subs")}
-                          </button>
+                        <button
+                          className={styles.subs_button}
+                          type="button"
+                          onClick={subscribeHandler}
+                        >
+                          {t("subs")}
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -157,7 +159,11 @@ function Footer({ FontAwesomeIcon, t }) {
           <div className={styles.social_icons_wrapper}>
             <span>{t("follow_us")}</span>
             <div className={styles.social_icons}>
-              <a target="_blank" href="https://www.facebook.com/beautyboothqa" rel="noreferrer">
+              <a
+                target="_blank"
+                href="https://www.facebook.com/beautyboothqa"
+                rel="noreferrer"
+              >
                 <FontAwesomeIcon
                   className={styles.social_icon_logo}
                   icon={faFacebookSquare}

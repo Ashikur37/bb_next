@@ -4,7 +4,7 @@ import styles from "../../styles/Menu.module.scss";
 import SubMenuLi from "../atom/SubMenuLi";
 function Menu() {
   return (
-    <div className="container">
+    <div className={`container ${styles.menu_container}`}>
       <div className="row">
         <nav className={styles.nav}>
           <ul className={styles.nav_main_ul}>
@@ -30,48 +30,56 @@ function Menu() {
                       url={"/category/Skin-Care?sub=ampoule"}
                       main="true"
                       name="Ampoule"
+                      img="skin-care/Ampoule.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Bundle-Set"}
                       main="true"
                       name="Bundle Set"
+                      img="skin-care/Bundle.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Cream"}
                       main="true"
                       name="Cream"
+                      img="skin-care/Cream.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Essence"}
                       main="true"
                       name="Essence"
+                      img="skin-care/Essence.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Face-Roller"}
                       main="true"
                       name="Face Roller"
+                      img="skin-care/Roller.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Kit"}
                       main="true"
                       name="kit"
+                      img="skin-care/Kit.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Scrub"}
                       main="true"
                       name="Scurb"
+                      img="skin-care/Scrub.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Serum"}
                       main="true"
                       name="Serum"
+                      img="skin-care/Serum.png"
                     />
                   </ul>
                 </li>
@@ -82,24 +90,28 @@ function Menu() {
                       url={"/category/Skin-Care?sub=Sun-Care"}
                       main="true"
                       name="Sun Care"
+                      img="skin-care/Sun_cream.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Soothing-Gel"}
                       main="true"
                       name="Soothing Gel"
+                      img="skin-care/Soothing_gel.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?sub=Toner"}
                       main="true"
                       name="Toner"
+                      img="skin-care/Toner.png"
                     />
                     <SubMenuLi
                       styles={styles}
                       url={"/category/Skin-Care?Lip-Care"}
                       main="true"
                       name="Lip Care"
+                      img="skin-care/Lipsticks.png"
                       childs={[
                         {
                           name: "Lip-Blam",
@@ -120,6 +132,7 @@ function Menu() {
                       url={"/category/Skin-Care?sub=Cleansers"}
                       main="true"
                       name="Cleansers"
+                      img="skin-care/Cleaner.png"
                       childs={[
                         {
                           name: "Cleansing Balms",
@@ -164,6 +177,7 @@ function Menu() {
                       url={"/category/Skin-Care?sub=Eye"}
                       main="true"
                       name="Eye"
+                      img="skin-care/Eye.png"
                       childs={[
                         {
                           name: "Eye Cream",
@@ -184,6 +198,7 @@ function Menu() {
                       url={"/category/Skin-Care?sub=Masks-&-Exfolators"}
                       main="true"
                       name="Masks & Exfolators"
+                      img="skin-care/Mask.png"
                       childs={[
                         {
                           name: "Exfoliators",

@@ -1,5 +1,9 @@
 @import "./sass/_variables.scss";
-
+.menu_container {
+  @media only screen and (max-width: 991px) {
+    display: none;
+  }
+}
 .nav {
   width: 100%;
   font-family: $sulphar;
@@ -35,12 +39,15 @@
             width: 100%;
             font-size: 18px;
             li {
-              padding: 0 5px;
+              padding: 0 6px;
               a {
                 color: #000000;
-                padding: 2px 5px;
-                display: inline-block;
+                padding: 5px;
+                // display: inline-block;
                 width: 100%;
+                align-items: center;
+                display: flex;
+                gap: 10px;
                 &:hover {
                   background-color: $theme2;
                   color: white;
@@ -63,6 +70,6 @@
   .childs {
     color: black;
     display: block;
-    margin-left: 20px;
+    margin-left: 25px;
   }
 }
