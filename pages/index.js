@@ -10,12 +10,13 @@ import LazyLoad from "react-lazyload";
 
 // css must the the last normal import
 import styles from "../styles/HomePage.module.scss";
+import MobileMenu from "../components/layout/MobileMenu";
 //dynamic imports should be in bottom
 const Title = dynamic(() => import("../components/layout/partials/Title"));
 const Header = dynamic(() => import("../components/layout/partials/Header"));
 const Slider = dynamic(() => import("../components/homepage/Slider"));
 const Trending = dynamic(() => import("../components/homepage/Trending"));
-const Loading = dynamic(()=>import("../components/atom/Loading"));
+const Loading = dynamic(() => import("../components/atom/Loading"));
 const Concern = dynamic(() => import("../components/homepage/Concern"));
 const TopSellers = dynamic(() => import("../components/homepage/TopSellers"));
 const NewArrival = dynamic(() => import("../components/homepage/NewArrival"));
@@ -51,6 +52,7 @@ const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
   return (
     <>
       <Title title="Home | BeautyboothQA"></Title>
+      <MobileMenu style={styles} lang={lang} Link={Link} isMobile={isMobile} ></MobileMenu>
       <Slider
         styles={styles}
         lang={lang}
@@ -69,7 +71,9 @@ const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
       ></Trending>
       <LazyLoad
         offset={[-200, 0]}
-        placeholder={<Loading text={t("shop_by_concern")} h="h2" Header={Header}></Loading>}
+        placeholder={
+          <Loading text={t("shop_by_concern")} h="h2" Header={Header}></Loading>
+        }
         debounce={200}
         once
       >
@@ -85,7 +89,9 @@ const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
       </LazyLoad>
       <LazyLoad
         offset={[-240, 0]}
-        placeholder={<Loading text={t("best_selling")} h="h2"  Header={Header}></Loading>}
+        placeholder={
+          <Loading text={t("best_selling")} h="h2" Header={Header}></Loading>
+        }
         debounce={200}
         once
       >
@@ -100,7 +106,9 @@ const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
       </LazyLoad>
       <LazyLoad
         offset={[-240, 0]}
-        placeholder={<Loading text={t("new_arrival")} h="h2" Header={Header}></Loading>}
+        placeholder={
+          <Loading text={t("new_arrival")} h="h2" Header={Header}></Loading>
+        }
         debounce={200}
         once
       >
@@ -115,7 +123,9 @@ const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
       </LazyLoad>
       <LazyLoad
         offset={[-240, 0]}
-        placeholder={<Loading text={t("best_brands")} h="h2" Header={Header}></Loading>}
+        placeholder={
+          <Loading text={t("best_brands")} h="h2" Header={Header}></Loading>
+        }
         debounce={200}
         once
       >
@@ -143,7 +153,6 @@ const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
           t={t}
         />
       </LazyLoad>
-      
     </>
   );
 };
