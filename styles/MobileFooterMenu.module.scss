@@ -1,0 +1,123 @@
+@import "./sass/_variables.scss";
+@import "./sass/mixins";
+.mobile_footer_menu {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999999;
+  background: white;
+  padding: 5px 0;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  .mobile_scroll_top {
+    position: absolute;
+    right: 10px;
+    top: -60%;
+    padding: 6px 10px;
+    border-radius: 50%;
+    border: 1px solid $theme2;
+    background: white;
+    color: $theme2;
+    svg {
+      font-size: 1.3rem;
+    }
+  }
+  ul.mobile_footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+    li {
+      width: 20%;
+
+      .menu_item_wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        .svgWrap {
+          position: relative;
+          display: inline-flex;
+          span.bag_count {
+            position: absolute;
+            font-size: 16px;
+            color: red;
+            background: white;
+            top: 6px;
+            padding: 0px 6px;
+            border-radius: 50%;
+            right: 20%;
+          }
+        }
+        svg {
+          font-size: 1.2rem;
+        }
+        span {
+          margin-top: 3px;
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 12px;
+          text-align: center;
+        }
+        .bag_top {
+          background-color: $theme2;
+          padding: 18px;
+          border-radius: 50%;
+          position: absolute;
+          top: -20px;
+          box-shadow: 0px 10px 10px #ff1a5830;
+        }
+      }
+    }
+  }
+}
+.category_slide_div {
+  &.active {
+    left: 0;
+    overflow: auto;
+  }
+  position: fixed;
+  left: -100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.9);
+  height: 100vh;
+  width: 100%;
+  z-index: 999;
+  padding: 30px 30px 80px;
+  opacity: 1;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  span.back {
+    color: red;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  ul {
+    display: block;
+
+    // border-top: 1px solid;
+    border-bottom: 1px solid;
+    li {
+      padding: 10px;
+      font-size: 17px;
+      font-weight: 600;
+      ul {
+        display: none;
+        &.open {
+          display: block;
+        }
+      }
+      // &:focus-visible {
+      //   > ul {
+      //     display: block;
+      //   }
+      // }
+      a {
+        color: white;
+      }
+    }
+  }
+}

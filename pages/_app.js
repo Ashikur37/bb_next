@@ -3,18 +3,37 @@ import { createWrapper } from "next-redux-wrapper";
 import store from "../redux/store";
 import dynamic from "next/dynamic";
 import Cookies from "universal-cookie";
+import Media from "react-media";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { appWithTranslation, useTranslation } from "../i18n";
 import Navbar from "../components/layout/Navbar";
 // Import the CSS
 import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import MobileFooterMenu from "../components/mobile/MobileFooterMenu";
 
 const Divider = dynamic(() => import("../components/layout/partials/Divider"));
 const Menu = dynamic(() => import("../components/layout/Menu"));
 const Footer = dynamic(() => import("../components/layout/Footer"));
 const cookies = new Cookies();
-
+const Tidio = () => {
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+        document.addEventListener("DOMContentLoaded", function(event) {
+          setTimeout(function() {
+            const script = document.createElement('script');
+            script.src = "https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js";
+            script.async = true;
+            document.body.appendChild(script);
+          }, 4000)
+        });
+      `,
+      }}
+    ></script>
+  );
+};
 function MyApp({ Component, pageProps }) {
   if (cookies.get("lang") === undefined) {
     cookies.set("next-i18next", "en");
@@ -49,6 +68,8 @@ function MyApp({ Component, pageProps }) {
         store={store}
       />
       <Footer lang={cookies.get("lang")} FontAwesomeIcon={FontAwesomeIcon} />
+      <Media query="(max-width: 991px)" render={() => <MobileFooterMenu />} />
+      <Media query="(min-width: 992px)" render={() => <Tidio />} />
     </Provider>
   );
 }
