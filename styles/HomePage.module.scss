@@ -312,4 +312,34 @@ a.blog_wrapper {
   padding: 8px 0;
   color: #9a9a9a;
   font-size: 16px;
+  overflow: hidden;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .mobile_menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .mobile_menu {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .mobile_menu {
+    display: flex;
+    overflow: auto;
+  }
+  .menu_li a {
+    padding: 5px 25px;
+    display: inline;
+    white-space: nowrap;
+    font-size: 18px;
+    display: inline-block;
+    letter-spacing: 1px;
+  }
+  .menu_li {
+    &:first-child {
+      a {
+        padding-left: 0;
+      }
+    }
+  }
 }
