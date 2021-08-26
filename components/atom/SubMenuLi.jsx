@@ -1,11 +1,9 @@
-import Link from "next/link";
-import React from "react";
 import Image from "next/image";
-function SubMenuLi({ url, main = false, styles, name, img, childs }) {
+function SubMenuLi({ lang, url, t = null, styles, name, img, Link, childs }) {
   return (
     <li>
       <Link href={url}>
-        <a className={main ? styles.main : null}>
+        <a className={styles.main}>
           {" "}
           <Image
             src={`/images/${img}`}
@@ -17,11 +15,11 @@ function SubMenuLi({ url, main = false, styles, name, img, childs }) {
         </a>
       </Link>
       {childs && (
-        <ul className={styles.childs}>
+        <ul className={styles.childs} dir={lang == 'ar_QA' ? "rtl":"ltr"}>
           {childs.map((child, index) => (
             <li key={index}>
               <Link href={child.url}>
-                <a>{child.name}</a>
+                <a>{t(child.name)}</a>
               </Link>
             </li>
           ))}
