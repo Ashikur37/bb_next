@@ -4,7 +4,7 @@ import store from "../redux/store";
 import dynamic from "next/dynamic";
 import Cookies from "universal-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { appWithTranslation } from "../i18n";
+import { appWithTranslation, useTranslation } from "../i18n";
 import Navbar from "../components/layout/Navbar";
 // Import the CSS
 import "../styles/sass/main.scss";
@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={cookies.get("lang")} />
       <Divider />
-      <Menu />
+      <Menu lang={cookies.get("lang")} />
       <Divider />
 
       <Component
