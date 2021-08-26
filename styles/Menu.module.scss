@@ -32,24 +32,25 @@
         min-height: 401px;
         z-index: 5;
         box-shadow: 0px 0px 24px #afafaf3d;
-        padding: 15px;
+        padding: 10px;
         .sub_menu_li {
           width: 25%;
           .sub_menu_li_ul {
             width: 100%;
             font-size: 18px;
             li {
-              padding: 0 6px;
+              // padding: 0 6px;
               a {
                 color: #000000;
-                padding: 5px;
+                padding: 6px;
                 // display: inline-block;
                 width: 100%;
                 align-items: center;
                 display: flex;
                 gap: 10px;
                 &:hover {
-                  color: $theme2;
+                  background-color: $theme2;
+                  color: white;
                 }
               }
             }
@@ -69,6 +70,12 @@
   .childs {
     color: black;
     display: block;
-    margin-left: 25px;
+    margin-left: 40px;
+  }
+  .childs[dir="rtl"] {
+    color: black;
+    display: block;
+    margin-left: 0;
+    margin-right: 40px;
   }
 }
