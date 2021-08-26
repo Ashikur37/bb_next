@@ -124,11 +124,6 @@
   }
   .custom_card {
     padding: 15px 10px;
-    .footer_newsletter {
-      > h6 {
-        color: #fff;
-      }
-    }
     .btn-danger.btn-sm {
       background-color: $theme2;
       color: $theme1;
@@ -151,6 +146,15 @@
       padding: 3px 5px;
       top: 4px;
     }
+  }
+}
+.footer_container[dir="rtl"] {
+  .footer_wrap {
+    text-align: right;
+  }
+  .subs_button {
+    left: 20px;
+    right: unset;
   }
 }
 span.heading {

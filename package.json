@@ -49,6 +49,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "sass": "^1.38.0",
+    "sharp": "^0.29.0",
     "swiper": "^5.4.3",
     "universal-cookie": "^4.0.4",
     "universal-cookie-express": "^4.0.3"

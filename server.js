@@ -1007,11 +1007,15 @@ server.post(
       handle(req, res);
     });
     server.get("*", (req, res) => {
-      if (dev || req.query.noCache) {
-        res.setHeader("X-Cache-Status", "DISABLED");
-        handle(req, res);
-      } else {
-        ssrCache({ req, res, pagePath: req.path, queryParams: req.query });
+      try {
+        if (dev || req.query.noCache) {
+          res.setHeader("X-Cache-Status", "DISABLED");
+          handle(req, res);
+        } else {
+          ssrCache({ req, res, pagePath: req.path, queryParams: req.query });
+        }        
+      } catch (error) {
+        console.log(error);
       }
     });
     // server.get('/', (req, res) => ssrCache({ req, res, pagePath: req.path, queryParams: req.query }))

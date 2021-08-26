@@ -8,10 +8,8 @@ import styles from "../../styles/Navbar.module.scss";
 import { Dropdown } from "react-bootstrap";
 import "flag-icon-css/css/flag-icon.min.css";
 import {
-  faCross,
   faSearch,
   faShoppingBag,
-  faShoppingCart,
   faTimesCircle,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -110,7 +108,7 @@ function Navbar({ FontAwesomeIcon, lang }) {
             <div className={styles.logo_content}>
               <h1>
                 <Link href="/">
-                  <a>Beauty Booth.</a>
+                  <a>Beauty Booth</a>
                 </Link>
               </h1>
             </div>

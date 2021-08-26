@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import axios from "../redux/actions/axios";
 import Error from "next/error";
@@ -12,6 +12,7 @@ function Page({ pageTitle, slug,lang }) {
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
     useEffect(() => {
+        console.log(lang);
         axios.get(`${lang}/getdata/page/${slug}`).then((res) => {
             if (res.data) {
                 setData(res.data);

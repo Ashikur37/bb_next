@@ -1,0 +1,152 @@
+@import "./sass/variables";
+@import "./sass/mixins";
+.brands_page {
+  // .brands_navigations {
+  // width: 100%;
+  .title {
+    font-family: $belleza;
+    font-size: 36px;
+    margin: 15px 0;
+    @include breakpoint(tablet) {
+      font-size: 20px;
+      margin-left: 5px;
+    }
+  }
+  .title[dir="rtl"] {
+    text-align: right;
+  }
+  .navigation_div {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgb(245, 245, 245);
+    border-bottom: 1px solid rgb(245, 245, 245);
+    margin-bottom: 20px;
+    padding: 15px;
+    @include breakpoint(tablet) {
+      flex-direction: column;
+    }
+    .title_div {
+      width: 11%;
+      @include breakpoint(tablet) {
+        width: 100%;
+      }
+      span {
+        font-size: 26px;
+        display: inline-block;
+
+        font-weight: 400;
+        color: rgb(187, 187, 187);
+        font-family: initial;
+      }
+    }
+    ul {
+      display: flex;
+      flex: 1;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 14px;
+      @include breakpoint(tablet) {
+        width: 100%;
+        display: block;
+
+        li {
+          width: 35px;
+          margin-bottom: 5px;
+          float: left;
+        }
+      }
+      li {
+        text-transform: uppercase;
+        button {
+          border: none;
+          outline: none;
+          background: white;
+        }
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  // }
+
+  // .brand_list_details {
+  //   width: 100%;
+    .brand_lists {
+      width: 100%;
+
+      .brandlist_group {
+        display: flex;
+
+        padding: 10px 0;
+        border-bottom: 1px solid rgb(245, 245, 245);
+        &:hover {
+          .letter {
+            .letter_wrapper {
+              background-color: $theme2;
+              color: white;
+            }
+          }
+        }
+        .letter {
+          width: 10%;
+          margin-bottom: 20px;
+          .letter_wrapper {
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            background: rgb(245, 245, 245);
+            // margin: 0px auto;
+          }
+        }
+        .lists {
+          width: 100%;
+          align-self: center;
+          ul {
+            width: 100%;
+            li {
+              float: left;
+              width: 20%;
+              padding-left: 20px;
+              box-sizing: border-box;
+
+              @include breakpoint(tablet) {
+                width: 50%;
+                text-align: left;
+                padding-bottom: 5px;
+                padding-left: 25px;
+              }
+              a {
+                font-size: 18px;
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .brand_lists[dir="rtl"]{
+      .lists{
+        ul{
+          li{
+            float: right;
+          }
+        }
+      }
+    }
+  // }
+}
+
+// // brands page from global
+// .brands_page .brands_navigations .title[dir='rtl'] {
+//     text-align: right;
+// }
+// .brands_page .brand_list_details .brand_lists .brandlist_group .lists ul li[dir='rtl'] {
+//     float: right;
+// }

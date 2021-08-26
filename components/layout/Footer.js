@@ -1,17 +1,17 @@
 /*eslint-disable*/
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { withTranslation } from "../../i18n";
 import Link from "next/link";
 import axios from "../../redux/actions/axios";
-import styles from "../../styles/Footer.module.scss";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookSquare,
   faInstagramSquare,
   faYoutubeSquare,
 } from "@fortawesome/free-brands-svg-icons";
+import styles from "../../styles/Footer.module.scss";
 
-function Footer({ FontAwesomeIcon, t }) {
+function Footer({ lang, FontAwesomeIcon, t }) {
   const [email, setEmail] = useState("");
   const subscribeHandler = () => {
     axios
@@ -25,8 +25,8 @@ function Footer({ FontAwesomeIcon, t }) {
       });
   };
   return (
-    <div className={styles.footer_container}>
-      <div className="container mt-4">
+    <div className={styles.footer_container} dir={lang == 'en' ? "ltr" : "rtl"}>
+      <div className=" container mt-4">
         <div className={`row ${styles.footer_wrap}`}>
           <div className={styles.first}>
             <h2 className={styles.footer_logo}>Beauty Booth.</h2>
@@ -73,21 +73,9 @@ function Footer({ FontAwesomeIcon, t }) {
                 <li>
                   <Link href="/terms-and-conditions">{t("terms")}</Link>
                 </li>
-                {/* <li>
-                  <Link href="#">Shipping Policy</Link>
-                </li>
-                <li>
-                  <Link href="#">Return Policy</Link>
-                </li> */}
               </ul>
             </div>
           </div>
-          {/* <div className="third">
-            <div className="explore">
-              <span className="heading">EXPLORE</span>
-              <ul className="footer_ul"></ul>
-            </div>
-          </div> */}
           <div className={styles.fourth}>
             <div className={styles.about}>
               <span className={styles.heading}>{t("ab")}</span>
@@ -95,12 +83,6 @@ function Footer({ FontAwesomeIcon, t }) {
                 <li>
                   <Link href="/about-us">{t("abb")}</Link>
                 </li>
-                {/* <li>
-                      <Link href="">{t("careers")}</Link>
-                    </li> */}
-                {/* <li>
-                      <Link href="">{t("developers")}</Link>
-                    </li> */}
                 <li>
                   <Link href="/privacy-policy">{t("privacy")}</Link>
                 </li>
@@ -125,11 +107,9 @@ function Footer({ FontAwesomeIcon, t }) {
               <section className="my-2">
                 <div className={`${styles.custom_card} `}>
                   <div className="row justify-content-center align-items-center">
-                    <div className="footer_newsletter">
-                      <h6 className="text-center text-uppercase mb-3">
-                        {t("sn")}
-                      </h6>
-                    </div>
+                    <h6 className="text-center text-uppercase mb-3">
+                      {t("sn")}
+                    </h6>
                     <div className="col-12 ">
                       <div className="input-group">
                         <input
@@ -169,12 +149,6 @@ function Footer({ FontAwesomeIcon, t }) {
                   icon={faFacebookSquare}
                 />
               </a>
-              {/* <Link href="#">
-                <FontAwesomeIcon
-                  className="social_icon_logo"
-                  icon={faInstagramSquare}
-                />
-              </Link> */}
               <a
                 target="_blank"
                 href="https://www.instagram.com/beautyboothqtr"

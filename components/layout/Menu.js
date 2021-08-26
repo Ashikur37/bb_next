@@ -345,12 +345,12 @@ function Menu({ lang, t }) {
         <nav className={styles.nav}>
           <ul className={styles.nav_main_ul}>
             <li className={styles.nav_main_li}>
-              <Link href="/">
+              <Link href="/new">
                 <a className={styles.nav_main_a}> {t("New")}</a>
               </Link>
             </li>
             <li className={styles.nav_main_li}>
-              <Link href="/">
+              <Link href="/brands">
                 <a className={styles.nav_main_a}> {t("Brands")}</a>
               </Link>
             </li>
@@ -474,7 +474,6 @@ function Menu({ lang, t }) {
                           Link={Link}
                           name={t("Lip Care")}
                           img="skin-care/Lipsticks.png"
-                          t={t}
                           t={t}
                           childs={[
                             {
