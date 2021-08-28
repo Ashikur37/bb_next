@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
+// import Image from "next/image";
 // styles
 import styles from "../../styles/sass/homepage_sections/Trending.module.scss";
 
-const Trending = ({
-  trendings,
-  FontAwesomeIcon,
-  lang,
-  isMobile,
-  Link,
-  Header,
-  t,
-}) => {
+export default function Trending({ trendings, FontAwesomeIcon, lang, Link, Header, t }) {
   const [trending, setTrending] = useState(null);
   useEffect(() => {
     const t =
@@ -35,6 +28,8 @@ const Trending = ({
                     src="/circular.svg"
                     alt={trend ? trend.slug : ""}
                     className="swiper-lazy"
+                  // width="62"
+                  // height="62"
                   />
                   <span className={`${styles.text}`}>
                     {trend ? trend.value : ""}
@@ -48,16 +43,6 @@ const Trending = ({
   }, [trendings, lang]);
 
   const [swiper, updateSwiper] = useState(null);
-  // const goNext = () => {
-  //     if (swiper !== null) {
-  //         swiper.slideNext();
-  //     }
-  // };
-  // const goPrev = () => {
-  //     if (swiper !== null) {
-  //         swiper.slidePrev();
-  //     }
-  // };
   const params = {
     lazy: true,
     pagination: {
@@ -89,13 +74,13 @@ const Trending = ({
   };
   const params2 = {
     ...params,
-    rtl: true,
+    rtl: "rtl",
   };
 
   return (
     <div className="container mt-4">
       <div className="row">
-        <div className="col">
+        <div className="col-12">
           <Header
             h="h2"
             text={t("trending")}
@@ -103,9 +88,7 @@ const Trending = ({
             FontAwesomeIcon={FontAwesomeIcon}
           ></Header>
         </div>
-      </div>
-      <div className="row">
-        <div className="col">
+        <div className="col-12">
           <div className={`trending_global ${styles.trending}`}>
             {trending && lang == "en" ? (
               <div className={`${styles.trending_swiper}`}>
@@ -127,9 +110,8 @@ const Trending = ({
             ) : null}
           </div>
         </div>
+
       </div>
     </div>
   );
 };
-
-export default Trending;

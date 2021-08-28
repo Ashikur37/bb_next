@@ -7,12 +7,14 @@ import Cookies from "universal-cookie";
 import Media from "react-media";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { appWithTranslation, useTranslation } from "../i18n";
-import Navbar from "../components/layout/Navbar";
 // Import the CSS
+import nav from "../styles/Navbar.module.scss";
+// import footer from "../styles/Footer.module.scss";
 import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useEffect, useState } from "react";
 
+const Navbar = dynamic(()=>import("../components/layout/Navbar"));
 const Divider = dynamic(() => import("../components/layout/partials/Divider"));
 const Menu = dynamic(() => import("../components/layout/Menu"));
 const Footer = dynamic(() => import("../components/layout/Footer"));
@@ -64,7 +66,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <Provider store={store}>
-      <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} />
+      <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={nav}/>
       <Divider />
       <Menu lang={lang} />
       <Divider />

@@ -1,18 +1,24 @@
 /*eslint-disable*/
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "../../i18n";
 import Link from "next/link";
 import axios from "../../redux/actions/axios";
+import styles from "../../styles/Footer.module.scss";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookSquare,
   faInstagramSquare,
   faYoutubeSquare,
 } from "@fortawesome/free-brands-svg-icons";
-import styles from "../../styles/Footer.module.scss";
 
 function Footer({ lang, FontAwesomeIcon, t }) {
+  const [locale, setLocale] = useState();
   const [email, setEmail] = useState("");
+  useEffect(() => {
+    return () => {
+      setLocale(lang == 'en' ? "ltr" : "rtl");
+    };
+  }, [lang])
   const subscribeHandler = () => {
     axios
       .post("setdata/subscribe/store", { email })
@@ -25,7 +31,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
       });
   };
   return (
-    <div className={styles.footer_container} dir={lang == 'en' ? "ltr" : "rtl"}>
+    <div className={styles.footer_container} dir={locale}>
       <div className=" container mt-4">
         <div className={`row ${styles.footer_wrap}`}>
           <div className={styles.first}>

@@ -1,7 +1,6 @@
 import React from "react";
-import Link from "next/link";
-import style from "../../styles/HomePage.module.scss";
-function MobileMenu({ lang, FontAwesomeIcon }) {
+import { isMobile } from "react-device-detect";
+function MobileMenu({ lang, style, Link }) {
   const enMenu = [
     {
       name: "New",
@@ -53,7 +52,8 @@ function MobileMenu({ lang, FontAwesomeIcon }) {
   return (
     <div className="container">
       <div className="row">
-        <div className="col">
+        {
+          isMobile && (<div className="col">
             <div className={style.mobile_menu_wrapper}>
               {lang == "en" ? (
                 <ul className={style.mobile_menu}>
@@ -77,7 +77,8 @@ function MobileMenu({ lang, FontAwesomeIcon }) {
                 </ul>
               )}
             </div>
-        </div>
+          </div>)
+        }
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Cookies from "universal-cookie";
-import { i18n, withTranslation } from "../../i18n";
+import { i18n } from "../../i18n";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Axios from "../../redux/actions/axios";
-import styles from "../../styles/Navbar.module.scss";
+// import styles from "../../styles/Navbar.module.scss";
 import { Dropdown } from "react-bootstrap";
 import "flag-icon-css/css/flag-icon.min.css";
 import {
@@ -27,7 +27,7 @@ const languages = [
     country_code: "qa",
   },
 ];
-function Navbar({ FontAwesomeIcon, lang }) {
+function Navbar({ FontAwesomeIcon, lang, styles, Media }) {
   const router = useRouter();
   const [language, setLanguage] = useState();
   const [searchQuery, setSearchQuery] = useState("");

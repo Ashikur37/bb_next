@@ -2,9 +2,8 @@ const { nextI18NextRewrites } = require("next-i18next/rewrites");
 const path = require("path");
 const localeSubpaths = {};
 module.exports = {
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "ar_QA"],
+  images: {
+    domains: ['admin.beautyboothqa.com'],
   },
   localePath: path.resolve("./public/locales"),
   env: {

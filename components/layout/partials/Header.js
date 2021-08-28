@@ -6,7 +6,7 @@
  * @returns component
  */
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-const Header = ({ h: Tag, text, cssClass = "", lang="en", url = null, urlText = { en: "see all", ar_QA: "اظهار الكل" }, Link, FontAwesomeIcon }) => {
+export default function Header({ h: Tag = "h2", text, cssClass = "", lang="en", url = null, urlText = { en: "see all", ar_QA: "اظهار الكل" }, Link, FontAwesomeIcon }){
     return (
         <div className="header_component">
             <Tag className={`${cssClass}`}>
@@ -23,5 +23,3 @@ const Header = ({ h: Tag, text, cssClass = "", lang="en", url = null, urlText = 
         </div>
     )
 }
-
-export default Header;

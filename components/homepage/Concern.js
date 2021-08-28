@@ -7,7 +7,6 @@ const Concern = ({
   concerns,
   FontAwesomeIcon,
   lang,
-  isMobile,
   Link,
   Header,
   t,

@@ -5,15 +5,9 @@ import {
   faChevronRight,
   faArrowUp,
   faSpinner,
+  faBackspace
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  /*faUser,
-  faHome,
-  faShoppingBag,
-  faBars,
-  faCommentDots,*/
-  faBackspace,
-} from "@fortawesome/free-solid-svg-icons";
+
 import { withTranslation } from "react-i18next";
 import styles from "../../styles/MobileFooterMenu.module.scss";
 

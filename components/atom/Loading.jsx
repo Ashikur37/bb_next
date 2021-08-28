@@ -1,7 +1,7 @@
-export default function Loading({ title, Header, lang }) {
+export default function Loading({ title }) {
     return (
-        <div>
-            <Header text={title} h="h2" lang={lang} />
+        <>
+            <h3>{title}</h3>
             <div className="text-center">
                 <svg
                     width="135"
@@ -102,6 +102,6 @@ export default function Loading({ title, Header, lang }) {
                     </rect>
                 </svg>
             </div>
-        </div>
+        </>
     );
 }
