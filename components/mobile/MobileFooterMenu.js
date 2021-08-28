@@ -33,7 +33,7 @@ function MobileFooterMenu(props) {
   const [showScroll, setShowScroll] = useState(false);
   const [openChild, setOpenChild] = useState(-1);
   const [indexLevel, setIndexLevel] = useState(-1);
-
+  const [openPopup, setOpenPopup] = useState(false);
   // const checkScrollTop = () => {
   //   if (!showScroll && window.pageYOffset > 200) {
   //     setShowScroll(true);
@@ -189,8 +189,11 @@ function MobileFooterMenu(props) {
                 <FontAwesomeIcon icon={faBars} />
                 <span>Category</span>
               </div> */}
-              <Link href="/categories">
-                <a className={styles.menu_item_wrap}>
+              <Link href="">
+                <a
+                  className={styles.menu_item_wrap}
+                  onClick={() => setOpenPopup(true)}
+                >
                   <>
                     {/* <FontAwesomeIcon icon={faBars} /> */}
                     <img
@@ -267,7 +270,7 @@ function MobileFooterMenu(props) {
           </ul>
         </div>
       </div>
-      <div
+      {/* <div
         className={active ? "category_slide_div active" : "category_slide_div"}
       >
         <span onClick={() => setActive(false)} className="back">
@@ -282,6 +285,79 @@ function MobileFooterMenu(props) {
             />
           </ul>
         ) : null}
+      </div> */}
+
+      <div
+        className={
+          openPopup
+            ? `${styles.category_popup} ${styles.active}`
+            : `${styles.category_popup}`
+        }
+      >
+        <div className={styles.category_popup_inner}>
+          <div className={styles.popup_top} onClick={() => setOpenPopup(false)}>
+            <div className={styles.close}>
+              <img
+                src="footericon/close.svg"
+                style={{ width: 25, height: 25 }}
+                alt=""
+                srcSet=""
+              />
+            </div>
+          </div>
+          <div className={styles.inner_content}>
+            <div className={styles.popup_title}>CATEGORIES</div>
+            <div>
+              <ul className={styles.cat_list}>
+                <li>
+                  <Link href="/">
+                    <a>New</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Skin Care</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Body Care</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Make Up</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Hair Care</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Fragrance</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Accessories</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Campaign</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/">
+                    <a>Best Selling</a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
