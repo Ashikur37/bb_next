@@ -1,58 +1,59 @@
 import React from "react";
-function MobileMenu({ lang, Link, style, isMobile }) {
+import Link from "next/link";
+import style from "../../styles/HomePage.module.scss";
+function MobileMenu({ lang, FontAwesomeIcon }) {
   const enMenu = [
     {
       name: "New",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Brands",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Skin Care",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Hair Care",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "New",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Brands",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Skin Care",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Hair Care",
-      slug: "/new",
+      slug: "new",
     },
   ];
   const arMenu = [
     {
       name: "New",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Skin Care",
-      slug: "/new",
+      slug: "new",
     },
     {
       name: "Hair Care",
-      slug: "/new",
+      slug: "new",
     },
   ];
   return (
     <div className="container">
       <div className="row">
         <div className="col">
-          {isMobile && (
             <div className={style.mobile_menu_wrapper}>
               {lang == "en" ? (
                 <ul className={style.mobile_menu}>
@@ -76,7 +77,6 @@ function MobileMenu({ lang, Link, style, isMobile }) {
                 </ul>
               )}
             </div>
-          )}
         </div>
       </div>
     </div>

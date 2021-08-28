@@ -54,6 +54,7 @@ const uri =
   process.env.NODE_ENV == "development"
     ? process.env.API_DEVELOPMENT
     : process.env.API_PRODUCTION;
+    
 const ssrCache = cacheableResponse({
   ttl: 1000 * 60 * 60, // 1hour
   get: async ({ req, res, pagePath, queryParams }) => {
@@ -1007,16 +1008,16 @@ server.post(
       handle(req, res);
     });
     server.get("*", (req, res) => {
-      try {
+      // try {
         if (dev || req.query.noCache) {
           res.setHeader("X-Cache-Status", "DISABLED");
           handle(req, res);
         } else {
           ssrCache({ req, res, pagePath: req.path, queryParams: req.query });
         }        
-      } catch (error) {
-        console.log(error);
-      }
+      // } catch (error) {
+      //   console.log(error);
+      // }
     });
     // server.get('/', (req, res) => ssrCache({ req, res, pagePath: req.path, queryParams: req.query }))
 

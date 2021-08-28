@@ -10,7 +10,6 @@ import LazyLoad from "react-lazyload";
 
 // css must the the last normal import
 import styles from "../styles/HomePage.module.scss";
-import MobileMenu from "../components/layout/MobileMenu";
 //dynamic imports should be in bottom
 const Title = dynamic(() => import("../components/layout/partials/Title"));
 const Header = dynamic(() => import("../components/layout/partials/Header"));
@@ -22,6 +21,7 @@ const TopSellers = dynamic(() => import("../components/homepage/TopSellers"));
 const NewArrival = dynamic(() => import("../components/homepage/NewArrival"));
 const Brands = dynamic(() => import("../components/homepage/Brands"));
 const Blogs = dynamic(() => import("../components/homepage/Blogs"));
+const MobileMenu = dynamic(()=>import("../components/layout/MobileMenu"));
 
 const Home = ({ FontAwesomeIcon, lang, store, slider, t }) => {
   useEffect(() => {

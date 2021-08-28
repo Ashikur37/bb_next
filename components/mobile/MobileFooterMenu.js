@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/MobileFooterMenu.module.scss";
 import {
   faChevronRight,
   faArrowUp,
@@ -17,10 +15,11 @@ import {
   faBackspace,
 } from "@fortawesome/free-solid-svg-icons";
 import { withTranslation } from "react-i18next";
+import styles from "../../styles/MobileFooterMenu.module.scss";
 
 function MobileFooterMenu(props) {
   const { isAuthenticated } = props.auth;
-  const { t } = props;
+  const { t, FontAwesomeIcon } = props;
   useEffect(() => {
     if (props.menu) {
       setCategoryMenu(props.menu);

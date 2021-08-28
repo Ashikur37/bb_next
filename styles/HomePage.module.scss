@@ -309,6 +309,10 @@ a.blog_wrapper {
 
 // Mobile Menu
 .mobile_menu_wrapper {
+  display: none;
+  @include breakpoint(tablet){
+    display: unset;
+  }
   padding: 8px 0;
   color: #9a9a9a;
   font-size: 16px;

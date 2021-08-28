@@ -28,7 +28,7 @@ module.exports = {
   //   domains: ['admin.beautyboothqa.com','beautyboothqa.sgp1.digitaloceanspaces.com'],
   // },
   distDir: "build",
-  reactStrictMode: false,
+  reactStrictMode: true,
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
   publicRuntimeConfig: {
     localeSubpaths,
