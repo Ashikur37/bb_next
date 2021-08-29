@@ -5,12 +5,15 @@ import {
   faChevronRight,
   faArrowUp,
   faSpinner,
-  faBackspace
+  faBackspace,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { withTranslation } from "react-i18next";
 import styles from "../../styles/MobileFooterMenu.module.scss";
-
+import Image from "next/image";
+import { menus } from "./menu";
+import router from "next/router";
 function MobileFooterMenu(props) {
   const { isAuthenticated } = props.auth;
   const { t, FontAwesomeIcon } = props;
@@ -27,6 +30,11 @@ function MobileFooterMenu(props) {
   const [openChild, setOpenChild] = useState(-1);
   const [indexLevel, setIndexLevel] = useState(-1);
   const [openPopup, setOpenPopup] = useState(false);
+
+  const [step, setStep] = useState(0);
+  const [stepValue, setStepValue] = useState();
+  const [step2Value, setStep2Value] = useState();
+
   // const checkScrollTop = () => {
   //   if (!showScroll && window.pageYOffset > 200) {
   //     setShowScroll(true);
@@ -150,6 +158,19 @@ function MobileFooterMenu(props) {
         );
       }
     });
+  };
+
+  const itemHandler = (item) => {
+    setStep(1);
+    setStepValue(item);
+  };
+  const itemHandler2 = (item) => {
+    setStep(2);
+    setStep2Value(item);
+  };
+  const routeHandler = (routeName) => {
+    setOpenPopup(false);
+    router.push(routeName);
   };
   return (
     <div className={styles.mobileFooterMenu}>
@@ -299,55 +320,126 @@ function MobileFooterMenu(props) {
             </div>
           </div>
           <div className={styles.inner_content}>
-            <div className={styles.popup_title}>CATEGORIES</div>
+            {step == 0 && <div className={styles.popup_title}>CATEGORIES</div>}
             <div>
-              <ul className={styles.cat_list}>
-                <li>
-                  <Link href="/">
-                    <a>New</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Skin Care</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Body Care</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Make Up</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Hair Care</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Fragrance</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Accessories</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Campaign</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/">
-                    <a>Best Selling</a>
-                  </Link>
-                </li>
-              </ul>
+              {step == 0 && (
+                <ul className={styles.cat_list}>
+                  {menus.map((item) => (
+                    <li>
+                      {item.hasItems ? (
+                        <span
+                          className={styles.a}
+                          onClick={() => {
+                            itemHandler(item);
+                          }}
+                        >
+                          {item.name}
+                          <span className={styles.cat_img}>
+                            <Image
+                              src={`/category/${item.image}`}
+                              height={40}
+                              width={40}
+                            />
+                          </span>
+                        </span>
+                      ) : (
+                        <span onClick={() => routeHandler(item.slug)}>
+                          <a className={styles.a}>
+                            {item.name}
+                            <span className={styles.cat_img}>
+                              <Image
+                                src={`/category/${item.image}`}
+                                height={40}
+                                width={40}
+                              />
+                            </span>
+                          </a>
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {step == 1 && (
+                <div>
+                  <button
+                    className={styles.back_button}
+                    onClick={() => {
+                      setStep(0);
+                    }}
+                  >
+                    <Image src="/footericon/back.svg" height={8} width={12} />
+                    <span>{stepValue.name}</span>
+                  </button>
+
+                  <ul className={styles.sub_cat_list}>
+                    {stepValue.items.map((item) => (
+                      <li>
+                        {item.hasItems ? (
+                          <span
+                            className={styles.a}
+                            onClick={() => itemHandler2(item)}
+                          >
+                            <span>{item.name}</span>{" "}
+                            <Image
+                              src={"/footericon/arrow.svg"}
+                              width={20}
+                              height={20}
+                            />
+                          </span>
+                        ) : (
+                          <span
+                            onClick={() => routeHandler(item.slug)}
+                            className={styles.a}
+                          >
+                            {item.name}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {step == 2 && (
+                <div>
+                  <button
+                    className={styles.back_button}
+                    onClick={() => {
+                      setStep(1);
+                    }}
+                  >
+                    <Image src="/footericon/back.svg" height={8} width={12} />
+                    <span>{step2Value.name}</span>
+                  </button>
+
+                  <ul className={styles.sub_cat_list}>
+                    {step2Value.items.map((item) => (
+                      <li>
+                        {item.hasItems ? (
+                          <span
+                            className={styles.a}
+                            onClick={() => itemHandler2(item)}
+                          >
+                            <span>{item.name}</span>{" "}
+                            <Image
+                              src={"/footericon/arrow.svg"}
+                              width={20}
+                              height={20}
+                            />
+                          </span>
+                        ) : (
+                          <span
+                            onClick={() => routeHandler(item.slug)}
+                            className={styles.a}
+                          >
+                            {item.name}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
