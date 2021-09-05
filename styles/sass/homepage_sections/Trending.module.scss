@@ -5,6 +5,9 @@
 
   .trending_swiper {
     margin-bottom: 15px;
+    @include breakpoint(tablet) {
+      margin-bottom: 0;
+    }
     .slide {
       border-radius: 14px;
       box-sizing: border-box;
@@ -43,6 +46,9 @@
     }
     .slide_one {
       margin: 5px 5px 30px;
+      @include breakpoint(tablet) {
+        margin: 5px 5px 8px;
+      }
     }
   }
 }
