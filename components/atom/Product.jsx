@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import LazyLoad from "react-lazyload";
-
-function Product({ product, lazy = false, styles }) {
+import styles from "../../styles/ProductCard.module.scss";
+function Product({ product, lazy = false }) {
   const [innBag, setInBag] = useState(0);
 
   const RibbonNew = () => {
@@ -59,7 +59,11 @@ function Product({ product, lazy = false, styles }) {
           </span>
         );
       } else {
-        return <span className={`${styles.product_price}`}>{product.price.formatted}</span>;
+        return (
+          <span className={`${styles.product_price}`}>
+            {product.price.formatted}
+          </span>
+        );
       }
     }
     return <span className={`${styles.product_price}`}>QAR 00.00</span>;
@@ -103,7 +107,7 @@ function Product({ product, lazy = false, styles }) {
           </LazyLoad>
         </div>
 
-        <BrandName attribute={product.attributes}/>
+        <BrandName attribute={product.attributes} />
         <span className={`${styles.product_name}`}>
           {product
             ? product.name

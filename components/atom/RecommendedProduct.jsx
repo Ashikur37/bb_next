@@ -1,21 +1,23 @@
 import React from "react";
 import Link from "next/link";
 
-function RecommendedProduct({ product }) {
+function RecommendedProduct({ product, style }) {
   const Price = () => {
     if (product) {
       if (product.has_offer) {
         return (
-          <span className="product_price offer_price">
+          <span className={`${style.product_price} ${style.offer_price}`}>
             {product.selling_price.formatted}{" "}
-            <span className="old">{product.price.formatted}</span>
+            <span className={style.old}>{product.price.formatted}</span>
           </span>
         );
       } else {
-        return <span className="product_price">{product.price.formatted}</span>;
+        return (
+          <span className={style.product_price}>{product.price.formatted}</span>
+        );
       }
     }
-    return <span className="product_price">QAR 00.00</span>;
+    return <span className={style.product_price}>QAR 00.00</span>;
   };
   const BrandName = (attribute) => {
     if (attribute.attribute.length > 0) {
@@ -23,9 +25,9 @@ function RecommendedProduct({ product }) {
       if (brand.length > 0) {
         brand = brand[0].Brand;
         return brand ? (
-          <span className="product_brand">{brand}</span>
+          <span className={style.product_brand}>{brand}</span>
         ) : (
-          <span className="product_brand"> </span>
+          <span className={style.product_brand}> </span>
         );
       }
     }
@@ -33,9 +35,8 @@ function RecommendedProduct({ product }) {
   };
   return (
     <Link href={`/product/${product.slug}`}>
-      <a className="product">
-        <BrandName attribute={product.attributes} />
-        <div className="product_img">
+      <a className={style.product}>
+        <div className={style.product_img}>
           <img
             src={
               product
@@ -45,8 +46,9 @@ function RecommendedProduct({ product }) {
             alt=""
           />
         </div>
+        <BrandName attribute={product.attributes} />
 
-        <span className="product_name">{product.name}</span>
+        <span className={style.product_name}>{product.name}</span>
         <Price />
       </a>
     </Link>
