@@ -7,6 +7,7 @@ import Swiper from "react-id-swiper";
 
 import { toast, ToastContainer } from "react-toastify";
 import ReactImageMagnify from "react-image-magnify";
+import ReactImageZoom from "react-image-zoom";
 import { withTranslation } from "../../i18n";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,6 +29,7 @@ import Countdown from "react-countdown";
 import Axios from "axios";
 import { GTMAddToCart, GTMProductView } from "../../components/utils/gtm";
 import styles from "../../styles/ProductPage.module.scss";
+import ProductImage from "../../components/ProductImage";
 // import Cookies from "universal-cookie";
 function ProductPage(props) {
   const { t } = props;
@@ -61,6 +63,12 @@ function ProductPage(props) {
       clickable: true,
     },
     height: 420,
+    zoom: {
+      maxRatio: 1.5,
+      minRation: 1,
+    },
+    grabCursor: true,
+    centeredSlides: true,
   };
   const thumbnailSwiperParams = {
     observer: true,
@@ -572,7 +580,8 @@ function ProductPage(props) {
               <div className="col-lg-10 col-sm-12">
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="product_slider_container">
+                    <ProductImage style={styles} images={product.files} />
+                    {/* <div className="product_slider_container">
                       <div className="thumbnail_images mr-3">
                         <Swiper
                           ref={thumb}
@@ -641,12 +650,13 @@ function ProductPage(props) {
                                     },
                                   }}
                                 />
+                                
                               </div>
                             ))}
                           </Swiper>
                         )}
                       </div>
-                    </div>
+                    </div> */}
                     <div>
                       {variantProduct?.length > 0 && <h4>Variants:</h4>}
                       <div className={styles.variant_products}>
