@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import {
   faChevronRight,
   faArrowUp,
-  faSpinner,
-  faBackspace,
-  faArrowLeft,
+  faSpinner
 } from "@fortawesome/free-solid-svg-icons";
 
 import { withTranslation } from "react-i18next";
@@ -189,7 +187,7 @@ function MobileFooterMenu(props) {
                 <a className={styles.menu_item_wrap}>
                   {/* <FontAwesomeIcon icon={faHome} /> */}
                   <img
-                    src="footericon/home.svg"
+                    src="/footericon/home.svg"
                     style={{ width: 25, height: 25 }}
                     alt=""
                     srcSet=""
@@ -211,7 +209,7 @@ function MobileFooterMenu(props) {
                   <>
                     {/* <FontAwesomeIcon icon={faBars} /> */}
                     <img
-                      src="footericon/menu.svg"
+                      src="/footericon/menu.svg"
                       style={{ width: 25, height: 25 }}
                       alt=""
                       srcSet=""
@@ -227,7 +225,7 @@ function MobileFooterMenu(props) {
                   <>
                     <div className={`${styles.svgWrap} ${styles.bag_top}`}>
                       <img
-                        src="footericon/bag.svg"
+                        src="/footericon/bag.svg"
                         style={{ width: 30, height: 30 }}
                         alt=""
                         srcSet=""
@@ -255,7 +253,7 @@ function MobileFooterMenu(props) {
                 /> */}
                 {chat ? (
                   <img
-                    src="footericon/chat.svg"
+                    src="/footericon/chat.svg"
                     style={{ width: 25, height: 25 }}
                     alt=""
                     srcSet=""
@@ -271,7 +269,7 @@ function MobileFooterMenu(props) {
                 <a className={styles.menu_item_wrap}>
                   <>
                     <img
-                      src="footericon/user.svg"
+                      src="/footericon/user.svg"
                       style={{ width: 25, height: 25 }}
                       alt=""
                       srcSet=""
@@ -312,7 +310,7 @@ function MobileFooterMenu(props) {
           <div className={styles.popup_top} onClick={() => setOpenPopup(false)}>
             <div className={styles.close}>
               <img
-                src="footericon/close.svg"
+                src="/footericon/close.svg"
                 style={{ width: 25, height: 25 }}
                 alt=""
                 srcSet=""

@@ -7,13 +7,15 @@ import styles from "../styles/BestSelling.module.scss";
 const BestSelling = ({ bestSellingProducts }) => {
   return (
     <>
-      <div className="container">
+      <div className="container mt-4">
         <Head>
           <title>Best selling | Beautyboothqa</title>
         </Head>
-        <div className={styles.best_selling_page}>
+        <div className="row">
           {bestSellingProducts.map((product) => (
-            <Product product={product} key={product.id} styles={styles}/>
+            <div className="col-md-3 col-sm-6">
+              <Product product={product} key={product.id} styles={styles} />
+            </div>
           ))}
         </div>
       </div>

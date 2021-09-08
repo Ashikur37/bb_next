@@ -2,19 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 // import { withRouter } from "react-router-dom";
 import Head from "next/head";
 import Link from "next/link";
-import Swiper from "react-id-swiper";
+// import Swiper from "react-id-swiper";
 // import { Wrapper, Button, Menu, MenuItem } from "react-aria-menubutton";
 
 import { toast, ToastContainer } from "react-toastify";
-import ReactImageMagnify from "react-image-magnify";
-import ReactImageZoom from "react-image-zoom";
+// import ReactImageMagnify from "react-image-magnify";
+// import ReactImageZoom from "react-image-zoom";
 import { withTranslation } from "../../i18n";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
-  faStarHalfAlt,
-  faHeart,
+  faStarHalfAlt
 } from "@fortawesome/free-solid-svg-icons";
 import Descriptions from "../../components/Descriptions";
 import Recomanded from "../../components/Recomanded";
@@ -166,7 +165,7 @@ function ProductPage(props) {
   const Variants = () => {
     if (variantProduct?.length > 0) {
       let t = variantProduct.map((product, index) => (
-        <div key={index} className="variant_product">
+        <div key={index} className={styles.variant_product}>
           <Link href={`/product/${product.slug}`}>
             <a>
               <img
@@ -657,7 +656,7 @@ function ProductPage(props) {
                         )}
                       </div>
                     </div> */}
-                    <div>
+                    <div className="mt-4">
                       {variantProduct?.length > 0 && <h4>Variants:</h4>}
                       <div className={styles.variant_products}>
                         <Variants></Variants>

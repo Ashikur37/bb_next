@@ -757,7 +757,7 @@ function Menu({ lang, t }) {
               </Link>
             </li>
             <li className={styles.nav_main_li}>
-              <Link href="/best_selling">
+              <Link href="/best-selling">
                 <a className={styles.nav_main_a}> {t("Best Selling")}</a>
               </Link>
             </li>
