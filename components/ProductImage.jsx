@@ -4,6 +4,7 @@ function ProductImage({ style, images }) {
   const [activeImg, setActiveImg] = useState(0);
 
   return (
+    <>
     <div className={style.product_images}>
       <div className={style.thumbs_images}>
         {images.map((image, index) => (
@@ -46,6 +47,16 @@ function ProductImage({ style, images }) {
         </div>
       </div>
     </div>
+    {/* <div className={style.test}>
+      <div className={style.test_item}></div>
+      <div className={style.test_item}></div>
+      <div className={style.test_item}></div>
+      <div className={style.test_item}></div>
+      <div className={style.test_item}></div>
+      <div className={style.test_item}></div>
+      <div className={style.test_item}></div>
+    </div> */}
+    </>
   );
 }
 
