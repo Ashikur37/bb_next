@@ -7,19 +7,39 @@ import Cookies from "universal-cookie";
 import Media from "react-media";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { appWithTranslation, useTranslation } from "../i18n";
+import "react-toastify/dist/ReactToastify.css";
+
 // Import the CSS
 import nav from "../styles/Navbar.module.scss";
 // import footer from "../styles/Footer.module.scss";
 import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useEffect, useState } from "react";
-
-const Navbar = dynamic(()=>import("../components/layout/Navbar"));
+const Navbar = dynamic(() => import("../components/layout/Navbar"));
 const Divider = dynamic(() => import("../components/layout/partials/Divider"));
 const Menu = dynamic(() => import("../components/layout/Menu"));
 const Footer = dynamic(() => import("../components/layout/Footer"));
-const MobileFooterMenu = dynamic(() => import("../components/mobile/MobileFooterMenu"));
+const MobileFooterMenu = dynamic(() =>
+  import("../components/mobile/MobileFooterMenu")
+);
+import { setCartFromLocal } from "../redux/actions/cartAction";
 const cookies = new Cookies();
+
+if (process.browser) {
+  if (localStorage) {
+    //check for cart Items
+    if (localStorage.cart) {
+      store.dispatch(setCartFromLocal());
+    }
+    if (localStorage.auth_token && localStorage.user) {
+      store.dispatch(setCurrentUser(localStorage.user));
+    }
+    if (localStorage.expire_time < Date.now()) {
+      logoutUser(store.dispatch);
+    }
+  }
+}
+
 const Tidio = () => {
   return (
     <script
@@ -41,9 +61,9 @@ const Tidio = () => {
 
 const MyApp = ({ Component, pageProps }) => {
   const [lang, setLang] = useState(cookies.get("lang"));
-  useEffect(()=>{
+  useEffect(() => {
     setLang(cookies.get("lang"));
-  },[cookies.get("lang")]);
+  }, [cookies.get("lang")]);
   if (lang === undefined) {
     cookies.set("next-i18next", "en");
     cookies.set("lang", "en");
@@ -66,7 +86,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <Provider store={store}>
-      <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={nav}/>
+      <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={nav} />
       <Divider />
       <Menu lang={lang} />
       <Divider />
@@ -78,11 +98,24 @@ const MyApp = ({ Component, pageProps }) => {
         store={store}
       />
       <Footer lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
-      <Media query="(max-width: 991px)" render={() => <MobileFooterMenu lang={lang} FontAwesomeIcon={FontAwesomeIcon} />} />
-      <Media query="(min-width: 992px)" render={() => <Script src="https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js" strategy="lazyOnload" />} />
+      <Media
+        query="(max-width: 991px)"
+        render={() => (
+          <MobileFooterMenu lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
+        )}
+      />
+      <Media
+        query="(min-width: 992px)"
+        render={() => (
+          <Script
+            src="https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js"
+            strategy="lazyOnload"
+          />
+        )}
+      />
     </Provider>
   );
-}
+};
 // MyApp.getInitialProps = (context) => {
 //   console.log(context);
 //   return {pageProps:{

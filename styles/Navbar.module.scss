@@ -55,7 +55,7 @@
         background: white;
         left: 50%;
         transform: translateX(-50%);
-        box-shadow: 0px 12px 12px #F6D3D54D;
+        box-shadow: 0px 12px 12px #f6d3d54d;
         ul {
           display: block;
           li {
@@ -149,6 +149,108 @@
           min-height: 18px;
           min-width: 18px;
           font-size: 10px;
+        }
+        .bag_popup {
+          background-color: white;
+          position: absolute;
+          width: 320px;
+          left: -500%;
+          height: 0;
+          z-index: 444;
+          top: 87px;
+          box-shadow: 0 3px 6px rgb(0 0 0 / 16%);
+          transition: all 0.4s ease-in-out;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+
+          &.active {
+            height: calc(100vh - 115px);
+          }
+          .bag_top {
+            // background-color: yellow;
+            .top_inner {
+              display: flex;
+              justify-content: space-between;
+              padding: 10px;
+              .bag_total {
+                border-bottom: 1px solid #f5f5f5;
+                font-size: 18px;
+              }
+            }
+          }
+          .bag_middle {
+            flex: 1;
+            overflow-y: auto;
+            .product__item {
+              display: flex;
+              align-items: center;
+              padding: 15px 0;
+              border-bottom: 1px solid #ebebeb;
+
+              .product__quantity {
+                width: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                button {
+                  background: none;
+                  border: none;
+                  outline: none;
+                }
+                svg {
+                  font-size: 12px;
+                  cursor: pointer;
+                }
+                .qnt {
+                  font-size: 14px;
+                  font-weight: 600;
+                }
+              }
+              .product__img {
+                max-width: 40px;
+                max-height: 40px;
+                margin: 0 8px;
+              }
+              .product__name {
+                width: 130px;
+                font-size: 13px;
+                line-height: 15px;
+                .option__lavel {
+                  display: block;
+                }
+              }
+              .product__price {
+                flex: 1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-right: 8px;
+                padding-left: 5px;
+                svg {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+          .bag_bottom {
+            .place_order {
+              text-align: center;
+              display: block;
+              padding: 10px 0;
+              font-size: 18px;
+              background: linear-gradient(
+                90deg,
+                #e21895 42%,
+                #9342d1 100%,
+                #9e1157 0,
+                #9342d1 0
+              );
+              color: white;
+              text-transform: uppercase;
+              font-weight: 500;
+            }
+          }
         }
       }
     }

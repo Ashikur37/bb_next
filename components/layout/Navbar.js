@@ -1,15 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import Cookies from "universal-cookie";
-import { i18n } from "../../i18n";
+import { i18n, withTranslation } from "../../i18n";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Axios from "../../redux/actions/axios";
+import axios from "../../redux/actions/axios";
 // import styles from "../../styles/Navbar.module.scss";
 import { Dropdown } from "react-bootstrap";
 import "flag-icon-css/css/flag-icon.min.css";
+import { connect } from "react-redux";
 import {
+  removeCartItem,
+  PlusOne,
+  minusOne,
+  setCartAfterPriceChange,
+} from "../../redux/actions/cartAction";
+import { logoutUser } from "../../redux/actions/authActions";
+import { getPrice } from "../utils/helper";
+import {
+  faMinus,
+  faPlus,
   faSearch,
   faShoppingBag,
+  faTimes,
   faTimesCircle,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,13 +40,36 @@ const languages = [
     country_code: "qa",
   },
 ];
-function Navbar({ FontAwesomeIcon, lang, styles, Media }) {
+function Navbar({
+  FontAwesomeIcon,
+  lang,
+  styles,
+  Media,
+  cartItems,
+  t,
+  plusOne,
+  minusOne,
+  logout,
+  removeCartItem,
+  setCartAfterPriceChange,
+  i18n,
+}) {
   const router = useRouter();
   const [language, setLanguage] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
+  const [instock, setInstock] = useState([]);
+  const [oos, setOos] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState(false);
+  const [shipping, setShipping] = useState(10);
+  const [subTotal, setSubTotal] = useState(
+    cartItems.reduce((acc, item) => (acc += item.qnt * item.price.amount), 0)
+  );
+  const [discount, setDiscount] = useState(
+    process.browser ? localStorage.getItem("discount") || 0 : 0
+  );
   const searchHandler = (event) => {
     if (searchQuery.length > 3) {
       setShowResult(true);
@@ -92,6 +128,28 @@ function Navbar({ FontAwesomeIcon, lang, styles, Media }) {
       setLanguage("ar_QA");
     }
   };
+  const deleteHandler = (id, option_id, bulk_id = null) => {
+    let confirm = window.confirm("Are You Sure To Delete ??");
+    if (confirm) {
+      removeCartItem(id, option_id, bulk_id);
+    }
+  };
+
+  //logout
+  const logoutClick = () => {
+    // console.log("logout");
+    logout();
+    // logoutUser();
+  };
+
+  const plusHandler = (product_id, qnt, option_id) => {
+    plusOne(product_id, option_id);
+  };
+  const minusHandler = (product_id, qnt, option_id) => {
+    if (qnt > 1) {
+      minusOne(product_id, option_id);
+    }
+  };
   useEffect(() => {
     setLanguage(cookies.get("lang"));
   }, [language]);
@@ -100,8 +158,133 @@ function Navbar({ FontAwesomeIcon, lang, styles, Media }) {
     setSearchQuery("");
     setSearchResult([]);
   };
+  const cartCount = () => {
+    // console.log(props.cartItems);
+    let t = cartItems.reduce((acc, item) => (acc += item.qnt), 0);
+    return t;
+  };
+  useEffect(() => {
+    setSubTotal(
+      cartItems.reduce(
+        (acc, item) => (acc += item.qnt * item.price.amount),
+        0
+      ) - discount
+    );
+    if (subTotal < 100) {
+      setShipping(10);
+    } else {
+      setShipping(0);
+    }
+  }, [subTotal, cartItems, discount]);
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      let formData = cartItems.map((item) => {
+        return {
+          product_id: item.product_id,
+          price: item.price.amount,
+          qty: item.qnt,
+          option: item.option_main_id || null,
+          option_child: item.option_id || null,
+        };
+      });
+      let locale = i18n.language || "en";
+      axios.post("/" + locale + "/cartdata/items", formData).then((res) => {
+        let instock = [];
+        res.data.map((dt) => {
+          instock.push(dt.in_stock);
+        });
+        let current = res.data;
+        let ifUpdate = false;
+        let update = cartItems.map((item, index) => {
+          if (item.price.amount !== current[index].selling_price.amount) {
+            ifUpdate = true;
+            item.price = current[index].selling_price;
+          }
+          return item;
+        });
+        if (ifUpdate) {
+          // console.log(update);
+          setCartAfterPriceChange(update);
+        }
+        setInstock(instock);
+        let r = instock.filter((d) => d === false).length;
+        if (r > 0) {
+          setOos(true);
+          if (router.pathname === "/checkout") {
+            router.replace("/bag");
+          }
+        } else {
+          setOos(false);
+        }
+      });
+      if (
+        localStorage.getItem("coupon_id") ||
+        localStorage.getItem("discount") ||
+        localStorage.getItem("coupon")
+      ) {
+        couponHandler();
+      }
+    }
+  }, [cartItems, i18n.language]);
+  const couponHandler = () => {
+    let myCoupon = coupon || localStorage.getItem("coupon");
+    if (coupon == "" && localStorage.getItem("coupon_id")) {
+      setCoupon(localStorage.getItem("coupon"));
+    }
+    if (cartItems.length > 0) {
+      let cart = cartItems.map((item) => {
+        return {
+          product_id: item.product_id,
+          price: item.price.amount,
+          qty: item.qnt,
+          option: item.option_main_id || null,
+          option_child: item.option_id || null,
+        };
+      });
+      axios
+        .post("en/checkout/coupon", {
+          api: true,
+          cart,
+          coupon: myCoupon,
+        })
+        .then((res) => {
+          setFlag(true);
+          setMsg(null);
+          // setCouponId(res.data.coupon_id);
+          setDiscount(res.data.discount);
+          setSubTotal(
+            cartItems.reduce(
+              (acc, item) => (acc += item.qnt * item.price.amount),
+              0
+            ) - res.data.discount
+          );
+          if (
+            localStorage.getItem("coupon_id") &&
+            res.data.coupon_id != localStorage.getItem("coupon_id")
+          ) {
+            localStorage.removeItem("coupon");
+            localStorage.removeItem("coupon_id");
+            localStorage.removeItem("discount");
+            // setCouponId("");
+            setCoupon("");
+            setDiscount(0);
+            setFlag(false);
+          } else {
+            localStorage.setItem("coupon_id", res.data.coupon_id);
+            localStorage.setItem("discount", res.data.discount);
+            localStorage.setItem("coupon", myCoupon);
+          }
+          // alert(res.data.msg);
+        })
+        .catch((err) => {
+          setMsg(err.response.data);
+          setDiscount(0);
+          // clearCoupon();
+        });
+    }
+  };
   return (
-    <div className="container">
+    <div className="container navbar">
       <div className="row">
         <div className="col">
           <div className={styles.navbar_content}>
@@ -259,8 +442,162 @@ function Navbar({ FontAwesomeIcon, lang, styles, Media }) {
                   <FontAwesomeIcon
                     icon={faShoppingBag}
                     className={styles.main_icon}
+                    onClick={() => {
+                      if (
+                        localStorage.getItem("coupon_id") ||
+                        localStorage.getItem("discount") ||
+                        localStorage.getItem("coupon")
+                      ) {
+                        couponHandler();
+                      }
+                      setActive(!active);
+                    }}
                   />
-                  <span className={`${styles.bag_count}`}>2</span>
+                  <span className={`${styles.bag_count}`}>{cartCount()}</span>
+                  <div
+                    className={
+                      active
+                        ? `${styles.bag_popup} ${styles.active}`
+                        : styles.bag_popup
+                    }
+                  >
+                    <div className={styles.bag_top}>
+                      <div className={styles.top_inner}>
+                        <span className={styles.bag_total}>
+                          {cartItems.length} {t("items")}
+                        </span>
+                        <button
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() => setActive(!active)}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                    <div className={styles.bag_middle}>
+                      <div className="progress">
+                        <div
+                          className={
+                            subTotal + discount < 100
+                              ? "progress-bar bg-danger"
+                              : "progress-bar bg-success"
+                          }
+                          role="progressbar"
+                          style={{
+                            width: `${subTotal + discount}%`,
+                          }}
+                          aria-valuenow={`${subTotal + discount}`}
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                        <span className="shipping__progress">
+                          {subTotal + discount < 100
+                            ? `Order QAR${
+                                100 - parseInt(subTotal + discount)
+                              }.00 more to get free shipping`
+                            : t("free_shipping")}
+                        </span>
+                      </div>
+                      {cartItems.length > 0 ? (
+                        cartItems.map((cartItem, index) => (
+                          <div className={styles.product__item} key={index}>
+                            <div className={styles.product__quantity}>
+                              <button
+                                disabled={cartItem.max_cart_qnt <= cartItem.qnt}
+                                onClick={() =>
+                                  plusHandler(
+                                    cartItem.product_id,
+                                    cartItem.qnt,
+                                    cartItem.option_id
+                                  )
+                                }
+                              >
+                                <FontAwesomeIcon icon={faPlus} />
+                              </button>
+                              <span className={styles.qnt}>{cartItem.qnt}</span>
+                              <button
+                                disabled={cartItem.qnt <= 1}
+                                onClick={() =>
+                                  minusHandler(
+                                    cartItem.product_id,
+                                    cartItem.qnt,
+                                    cartItem.option_id
+                                  )
+                                }
+                              >
+                                {" "}
+                                <FontAwesomeIcon icon={faMinus} />
+                              </button>
+                            </div>
+                            <div className={styles.product__img}>
+                              <img src={cartItem.thumb} alt="" />
+                            </div>
+                            <div className={styles.product__name}>
+                              {cartItem.name}
+                              <span className={styles.option__lavel}>
+                                {cartItem.option_value}
+                              </span>
+                              {instock ? (
+                                <div>
+                                  {instock[index] ? (
+                                    <span
+                                      className={`${styles.status} text-success`}
+                                    >
+                                      {t("in stock")}
+                                    </span>
+                                  ) : (
+                                    <span
+                                      className={styles.status}
+                                      style={{ color: "red" }}
+                                    >
+                                      {t("out of stock")}
+                                    </span>
+                                  )}
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                            <div className={styles.product__price}>
+                              <span>
+                                {cartItem.price.currency}{" "}
+                                {/* {cartItem.price.amount * cartItem.qnt}.00 */}
+                                {/* {cartItem.price.amount * cartItem.qnt } */}
+                                {getPrice(cartItem)}
+                                {/* {cartItem.price.formatted} */}
+                              </span>
+                              <FontAwesomeIcon
+                                onClick={() =>
+                                  deleteHandler(
+                                    cartItem.product_id,
+                                    cartItem.option_id,
+                                    cartItem.bulk_id
+                                  )
+                                }
+                                icon={faTimes}
+                              />
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <h6 className="text-center mt-5 mb-5">
+                          {t("empty_bag")}
+                        </h6>
+                      )}
+                    </div>
+                    <div className={styles.bag_bottom}>
+                      <Link href="/bag">
+                        <a
+                          onClick={() => {
+                            setActive(false);
+                          }}
+                          className={styles.place_order}
+                        >
+                          Place Order
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -381,5 +718,24 @@ function Navbar({ FontAwesomeIcon, lang, styles, Media }) {
     </div>
   );
 }
-
-export default Navbar;
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.cartItem,
+  auth: state.auth,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeCartItem: (id, option_id, bulk_id) =>
+      removeCartItem(dispatch, id, option_id, bulk_id),
+    logout: () => logoutUser(dispatch),
+    plusOne: (product_id, option_id) =>
+      PlusOne(dispatch, product_id, option_id),
+    minusOne: (product_id, option_id) =>
+      minusOne(dispatch, product_id, option_id),
+    setCartAfterPriceChange: (cartItems) =>
+      setCartAfterPriceChange(dispatch, cartItems),
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withTranslation("common")(Navbar));

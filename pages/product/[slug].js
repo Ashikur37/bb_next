@@ -11,10 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { withTranslation } from "../../i18n";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faStar,
-  faStarHalfAlt
-} from "@fortawesome/free-solid-svg-icons";
+import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import Descriptions from "../../components/Descriptions";
 import Recomanded from "../../components/Recomanded";
 

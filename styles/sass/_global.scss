@@ -508,3 +508,43 @@ div.zoomPortion {
     background-color: $theme2;
   }
 }
+.navbar {
+  .progress {
+    height: 2rem;
+    border-radius: 0;
+    position: relative;
+    background-color: #444;
+    border-top: 2px solid $theme1;
+    border-bottom: 2px solid $theme1;
+    box-sizing: border-box;
+    .shipping__progress {
+      position: absolute;
+      left: 5px;
+      font-family: $lato;
+      top: 50%;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .bg-danger {
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ff1a00+0,ff1a00+100;Red+Flat+%231 */
+      background: rgb(255, 26, 0); /* Old browsers */
+      background: -moz-linear-gradient(
+        left,
+        rgba(255, 26, 0, 1) 0%,
+        rgba(255, 26, 0, 1) 100%
+      ); /* FF3.6-15 */
+      background: -webkit-linear-gradient(
+        left,
+        rgba(255, 26, 0, 1) 0%,
+        rgba(255, 26, 0, 1) 100%
+      ); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(
+        to right,
+        rgba(255, 26, 0, 1) 0%,
+        rgba(255, 26, 0, 1) 100%
+      ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff1a00', endColorstr='#ff1a00',GradientType=1 ); /* IE6-9 */
+    }
+  }
+}

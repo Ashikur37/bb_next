@@ -49,8 +49,8 @@
                 display: flex;
                 gap: 10px;
                 &:hover {
-                  background-color: $theme2;
-                  color: white;
+                  // background-color: $theme2;
+                  color: $theme2;
                 }
               }
             }
