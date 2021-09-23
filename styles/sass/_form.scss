@@ -1,0 +1,46 @@
+.input_label {
+  color: $theme1;
+  font-size: 15px;
+  font-weight: 600;
+}
+.input_box {
+  background: white !important;
+  padding: 20px 10px !important;
+  border-radius: none !important;
+}
+.form_check_label {
+  color: #2971ef;
+}
+.help_container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  a {
+    text-decoration: underline;
+    color: $theme1;
+    font-size: $belleza;
+  }
+}
+.form_btn_container {
+  text-align: center;
+  .submit_btn{
+    background: $theme1;
+    color: white;
+    padding: 20px 50px;
+    box-shadow: 0px 3px 6px #00000040;
+    margin-bottom: 30px;
+    transition: all 0.4s ease-in-out;
+    border-radius: 4px;
+    &.disabled{
+      pointer-events: none;
+      background-color: ivory;
+      color: grey;
+    }
+  }
+}
+
+.sub_title {
+  font-size: 20px;
+  color: #1b1b1b;
+  margin: 15px 0px;
+}

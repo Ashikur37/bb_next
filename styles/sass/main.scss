@@ -9,8 +9,8 @@
 
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/type";
-// @import "~bootstrap/scss/forms";
-// @import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/custom-forms";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/transitions";
@@ -20,14 +20,16 @@
 @import "variables";
 @import "resets";
 @import "mixins";
-
+@import "algolia";
 @import "global";
+@import "form";
+
 
 
 //mobile
 // @import "./mobile/mobile_navbar";
 // @import "./mobile/mobile_footer_menu";
-// @import "./mobile/mobile_category_page";
+@import "./mobile/mobile_category_page";
 // @import "navbar";
 // @import "footer";
 
@@ -36,9 +38,9 @@
 
 // @import "~bootstrap/scss/list-group";
 // @import "~bootstrap/scss/badge";
-// @import "~bootstrap/scss/alert";
-// @import "~bootstrap/scss/tables";
-// @import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/progress";
 // @import "~bootstrap/scss/modal";
 // @import "~bootstrap/scss/card";

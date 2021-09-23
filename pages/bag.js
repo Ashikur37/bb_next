@@ -527,7 +527,7 @@ function MyBag(props) {
               </div>
               <div className="col-12">
                 <ToastContainer />
-                {gifts && !giftProduct && <h4 className="text-center mt-2">{t("Free Gift")}</h4>}
+                {gifts && !giftProduct && <h4 className="text-center my-2">{t("Free Gift")}</h4>}
                 <div className="row">
                   <div className="col-12">
                     {gifts &&

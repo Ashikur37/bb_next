@@ -46,6 +46,7 @@ function Navbar({
   styles,
   Media,
   cartItems,
+  auth,
   t,
   plusOne,
   minusOne,
@@ -432,12 +433,62 @@ function Navbar({
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>
-                <li>
+                {/* <li>
                   <FontAwesomeIcon
                     icon={faUser}
                     className={`${styles.main_icon}`}
                   />
+                </li> */}
+                <li>
+                  <Dropdown id="profile_dropdown">
+                    <Dropdown.Toggle id="profile_dropdown_button">
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className={`${styles.main_icon}`}
+                      />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu alignRight>
+                      {auth.isAuthenticated ? (
+                        <>
+                          <Dropdown.Item>
+                            <span>
+                              {
+                                JSON.parse(localStorage.getItem("user"))
+                                  .first_name
+                              }
+                            </span>
+                          </Dropdown.Item>
+                          <Dropdown.Item>
+                            <Link href="/profile">
+                              <a>{t("Profile")}</a>
+                            </Link>
+                          </Dropdown.Item>
+                          <Dropdown.Item>
+                            <button onClick={logoutClick}>
+                              {" "}
+                              {t("Logout")}
+                            </button>
+                          </Dropdown.Item>
+                        </>
+                      ) : (
+                        <>
+                          <Dropdown.Item>
+                            <Link href="/login">
+                              <a>{t("login")}</a>
+                            </Link>
+                          </Dropdown.Item>
+                          <Dropdown.Item>
+                            <Link href="/register">
+                              <a>{t("registration")}</a>
+                            </Link>
+                          </Dropdown.Item>
+                        </>
+                      )}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </li>
+
                 <li>
                   <FontAwesomeIcon
                     icon={faShoppingBag}

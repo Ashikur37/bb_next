@@ -156,13 +156,14 @@
     text-transform: uppercase;
     color: #d1a333;
     @include breakpoint(tablet) {
-      font-size: 13px;
+      font-size: 12px;
       min-height: 20px;
     }
   }
   .product_price {
     @include breakpoint(tablet) {
       font-size: 14px;
+      margin-top: 0;
     }
     transition: 0.4s all ease-in-out;
     font-size: 16px;

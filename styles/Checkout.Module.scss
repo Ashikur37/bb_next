@@ -1,0 +1,563 @@
+@import "./sass/variables";
+@import "./sass/mixins";
+.checkout_container {
+  margin: 15px auto;
+  @include breakpoint(tablet) {
+    margin: 10px auto;
+  }
+}
+.step_zero {
+  .step_zero_title {
+    background-color: $theme1;
+    text-align: center;
+    padding: 10px 6px;
+    font-size: 18px;
+    margin: 14px 0;
+    color: white;
+    font-weight: 600;
+  }
+  .method_one {
+    padding-right: 30px;
+    .login_submit {
+      width: 130px;
+    }
+    @include breakpoint(minitab) {
+      padding-right: 0;
+      &:first-child {
+        &::before {
+          display: none;
+        }
+      }
+    }
+    &:first-child {
+      &::before {
+        content: "";
+        width: 2px;
+        height: 70%;
+        background: $theme2;
+        position: absolute;
+        right: 0;
+        top: 20px;
+      }
+    }
+  }
+  .method_two {
+    padding-left: 30px;
+    @include breakpoint(tablet) {
+      padding-left: 0;
+    }
+    padding-top: 50px;
+    .phone_submit_wrapper {
+      text-align: center;
+      margin: 30px;
+      button {
+        padding: 10px 0;
+        background-color: $theme1;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 18px;
+        width: 130px;
+      }
+      button[disabled] {
+        background: grey;
+        cursor: not-allowed;
+      }
+    }
+  }
+  .submit_wrapper {
+    text-align: center;
+    button {
+      background: $theme1;
+      color: white;
+      border: none;
+      // padding: 10px 40px;
+      font-size: 18px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      min-width: 130px;
+      padding: 10px 0;
+    }
+  }
+}
+.step_one {
+  .delivery_form {
+    margin: 10px 0;
+
+    // checkbox
+    .checkbox_label {
+      font-size: 15px;
+      color: $theme2;
+    }
+    label input {
+      display: none; /* Hide the default checkbox */
+    }
+
+    /* Style the artificial checkbox */
+    label span {
+      height: 15px;
+      width: 15px;
+      border: 1px solid grey;
+      display: inline-block;
+      position: relative;
+      margin-right: 5px;
+    }
+
+    /* Style its checked state...with a ticked icon */
+    [type="checkbox"]:checked + span:before {
+      content: "\2714";
+      position: absolute;
+      top: -4px;
+      left: 0;
+    } //end checkbox
+    .form_title {
+      color: $theme1;
+      font-size: 20px;
+      text-align: center;
+      font-weight: 600;
+      margin: 12px;
+    }
+    .deleviry_schedule {
+      display: flex;
+      margin-top: 15px;
+      .form_group {
+        min-width: 80px;
+        margin-right: 0.5rem;
+        border: 1px solid $theme2;
+        padding: 5px;
+        border-radius: 4px;
+      }
+      .info_wrap {
+        position: relative;
+        span.info {
+          position: absolute;
+          top: -20px;
+          width: 100%;
+        }
+      }
+      input[type="radio"] {
+        height: 16px;
+        outline: none;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+    .submit_container {
+      text-align: center;
+      padding: 10px;
+      .proceed {
+        background: $theme1;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          background: $theme2;
+        }
+      }
+    }
+    .form_group {
+      min-width: 80px;
+      margin-right: 0.5rem;
+      border: 1px solid $theme2;
+      padding: 5px;
+      border-radius: 4px;
+    }
+  }
+  .cart_list {
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #707070;
+    max-height: 350px;
+    overflow-y: scroll;
+    .item_title {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #707070;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .cart_item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      .details {
+        display: flex;
+        .img_wrap {
+          min-width: 25%;
+          max-width: 25%;
+          width: 25%;
+        }
+        .detail {
+          display: flex;
+          flex-direction: column;
+          margin-left: 10px;
+          justify-content: center;
+          span.name {
+            font-size: 14px;
+            font-weight: 600;
+          }
+          span.brand {
+            font-size: 14px;
+            margin: 0;
+          }
+          span.status {
+            color: green;
+            font-size: 12px;
+          }
+          .price_tag {
+            color: $theme2;
+            font-size: 18px;
+            margin-top: 5px;
+          }
+          .delete_btn {
+            background: #d39e00;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            color: white;
+            width: 60px;
+            font-size: 12px;
+          }
+        }
+      }
+      .quantity {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .button_group {
+          span {
+            border: 1px solid;
+            cursor: pointer;
+            width: 18px;
+            display: inline-block;
+            font-weight: 600;
+            text-align: center;
+            &:nth-child(2) {
+              border-left: 0;
+              border-right: 0;
+              cursor: initial;
+            }
+          }
+        }
+        .price_tag {
+          color: $theme2;
+          font-size: 18px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+  .summery {
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #707070;
+    .item_title {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #707070;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .summery_item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      &.total {
+        margin-top: 15px;
+        padding-top: 5px;
+        border-top: 3px solid #707070;
+      }
+    }
+  }
+  .store_pickup {
+    border: 1px solid;
+    padding: 15px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    .form-check {
+      display: flex;
+      align-items: center;
+      .form-check-input {
+        height: 20px;
+        width: 20px;
+      }
+      .form-check-label {
+        margin-left: 20px;
+        @include breakpoint(tablet) {
+          margin-left: 10px;
+        }
+      }
+      .shop__address {
+        @include breakpoint(tablet) {
+          font-size: 13px;
+        }
+      }
+    }
+    .free {
+      width: 65%;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      @include breakpoint(tablet) {
+        font-size: 14px;
+      }
+    }
+  }
+}
+.step_two {
+  .details {
+    margin: 5px;
+    span.question {
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      color: $theme1;
+      margin: 10px;
+    }
+    .payment_group {
+      margin: 0 auto;
+      display: block;
+      width: 300px;
+
+      padding: 5px;
+      box-shadow: 0px 3px 6px #00000026;
+      .wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        label {
+          padding: 15px;
+          color: $theme1;
+          cursor: pointer;
+        }
+      }
+    }
+    .next_btn_wrap {
+      text-align: center;
+      margin: 0 auto;
+      width: 500px;
+      @include breakpoint(tablet) {
+        width: 300px;
+        &:first-child {
+          margin-bottom: 15px;
+        }
+      }
+      button {
+        border: none;
+        outline: none;
+        width: 145px;
+        background: $theme1;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          background: $theme2;
+        }
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+.step_three {
+  .invoice {
+    .invoice_title {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .customer_info {
+      font-size: 14px;
+      li {
+        text-transform: capitalize;
+        span.label {
+          font-weight: 600;
+          margin-right: 5px;
+        }
+      }
+    }
+    .table_footer {
+      display: flex;
+      @include breakpoint(tablet) {
+        flex-direction: column;
+      }
+      justify-content: space-between;
+      .left {
+        @include breakpoint(tablet) {
+          margin-bottom: 5px;
+        }
+      }
+      .right {
+        width: 200px;
+        @include breakpoint(tablet) {
+          width: 100%;
+        }
+        .common {
+          font-size: 16px;
+          font-weight: 600;
+          border-bottom: 1px solid;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    .place_order_container {
+      text-align: center;
+      max-width: 600px;
+      margin: 20px auto;
+      button {
+        background: $theme1;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        color: white;
+        width: 48%;
+        padding: 12px 10px;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          background: $theme2;
+        }
+      }
+    }
+  }
+}
+.step_four {
+  .circle {
+    width: 120px;
+    height: 120px;
+    background: #1db700;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      font-size: 4rem;
+      color: white;
+    }
+  }
+  .greet {
+    text-align: center;
+    width: 340px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: $theme1;
+    font-weight: 600;
+    margin-top: 20px;
+    &:nth-of-type(2) {
+      margin-top: 5px;
+    }
+    &:nth-of-type(3) {
+      margin-top: 5px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+  .continue_container {
+    text-align: center;
+    margin: 20px;
+    a {
+      display: inline-block;
+      padding: 12px;
+      background: $theme1;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+      width: 340px;
+      font-weight: 600;
+      font-size: 16px;
+      color: white;
+      transition: all 0.4s ease-in-out;
+      &:hover {
+        background: $theme2;
+      }
+    }
+  }
+}
+
+div#react-autowhatever-states,
+div#react-autowhatever-city {
+  input.react-autosuggest__input {
+    background: white;
+  }
+  max-height: 120px;
+  position: absolute;
+  z-index: 55555;
+
+  width: 92%;
+  background-color: #fff;
+  // border-bottom: 1px solid grey;
+  overflow-y: auto;
+  ul.react-autosuggest__suggestions-list {
+    width: 100%;
+    padding: 4px 8px;
+    margin-bottom: 5px;
+    li {
+      width: 100%;
+      cursor: pointer;
+      padding: 3px 0;
+      border-bottom: 1px solid;
+    }
+  }
+}
+
+//
+.pregress_bar {
+  width: 600px;
+  @include breakpoint(tablet) {
+    width: 300px;
+  }
+  margin: 0 auto;
+  // padding: 10px 0;
+  ul {
+    display: flex;
+    justify-content: space-between;
+    li {
+      flex: 1;
+      position: relative;
+      .wrap {
+        background: #a9a9a9;
+        position: relative;
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 50%;
+        z-index: 444;
+        margin: 0 auto;
+        &.active {
+          background-color: $theme2;
+        }
+        svg {
+          font-size: 2em;
+          color: white;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      &:not(:last-child)::after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: $theme2;
+        position: absolute;
+        top: 50%;
+        left: 35%;
+      }
+    }
+  }
+}

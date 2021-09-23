@@ -5,23 +5,29 @@ import {
   faPaperPlane,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
-function ProgressBar({ active }) {
+function ProgressBar({ active, styles }) {
   return (
-    <div className="pregress_bar">
+    <div className={styles.pregress_bar}>
       <div className="container">
         <ul>
           <li>
-            <div className={`wrap ${active >= 1 ? "active" : ""}`}>
+            <div
+              className={`${styles.wrap} ${active >= 1 ? styles.active : ""}`}
+            >
               <FontAwesomeIcon icon={faPaperPlane} />
             </div>
           </li>
           <li>
-            <div className={`wrap ${active >= 2 ? "active" : ""}`}>
+            <div
+              className={`${styles.wrap} ${active >= 2 ? styles.active : ""}`}
+            >
               <FontAwesomeIcon icon={faMoneyCheckAlt} />
             </div>
           </li>
           <li>
-            <div className={`wrap ${active >= 3 ? "active" : ""}`}>
+            <div
+              className={`${styles.wrap} ${active >= 3 ? styles.active : ""}`}
+            >
               <FontAwesomeIcon icon={faCheck} />
             </div>
           </li>

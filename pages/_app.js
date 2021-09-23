@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 // Import the CSS
 import nav from "../styles/Navbar.module.scss";
 // import footer from "../styles/Footer.module.scss";
+import "react-phone-number-input/style.css";
 import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useEffect, useState } from "react";
@@ -22,6 +23,7 @@ const Footer = dynamic(() => import("../components/layout/Footer"));
 const MobileFooterMenu = dynamic(() =>
   import("../components/mobile/MobileFooterMenu")
 );
+import { setCurrentUser, logoutUser } from "../redux/actions/authActions";
 import { setCartFromLocal } from "../redux/actions/cartAction";
 const cookies = new Cookies();
 

@@ -127,13 +127,14 @@
   .icon_content {
     // width: 25%;
     ul {
-      display: block;
+      display: flex;
+      align-items: center;
       li {
         padding: 0 20px;
         display: inline-block;
         position: relative;
         .main_icon {
-          font-size: 16px;
+          font-size: 20px;
           cursor: pointer;
           position: relative;
         }
@@ -154,7 +155,7 @@
           background-color: white;
           position: absolute;
           width: 320px;
-          left: -500%;
+          left: -470%;
           height: 0;
           z-index: 444;
           top: 87px;

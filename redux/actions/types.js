@@ -5,7 +5,7 @@ export const GET_HOME_PAGE_DATA = "GET_HOME_PAGE_DATA";
 export const BEST_SELLING_PRODUCTS = "BEST_SELLING_PRODUCTS";
 export const TRENDING_ATTRIBUTES = "TRENDING_ATTRIBUTES";
 export const NEW_ARRIVALS = "NEW_ARRIVALS";
-// export const GET_ALL_BRANDS = "GET_ALL_BRANDS";
+export const GET_ALL_BRANDS = "GET_ALL_BRANDS";
 export const GET_BEST_BRANDS = "GET_BEST_BRANDS";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
@@ -20,5 +20,5 @@ export const SET_CART_AFTER_PRICE_CHANGE = "SET_CART_AFTER_PRICE_CHANGE";
 
 // //auth actions
 
-// export const LOGIN_USER = "LOGIN_USER";
-// export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
