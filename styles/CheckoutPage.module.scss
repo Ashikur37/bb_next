@@ -1,5 +1,6 @@
 @import "./sass/variables";
 @import "./sass/mixins";
+
 .checkout_container {
   margin: 15px auto;
   @include breakpoint(tablet) {
