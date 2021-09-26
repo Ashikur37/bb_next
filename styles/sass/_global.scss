@@ -90,11 +90,13 @@
     }
   }
 }
-#language_dropdown_button::after , #profile_dropdown_button::after {
+#language_dropdown_button::after,
+#profile_dropdown_button::after {
   display: none;
   background-color: white;
 }
-#language_dropdown_button,#profile_dropdown_button {
+#language_dropdown_button,
+#profile_dropdown_button {
   background-color: white;
   padding: 0;
   outline: none;
@@ -1061,3 +1063,31 @@ a.ais-Pagination-link.ais-Pagination-link--selected {
     }
   }
 }
+
+// userprofile page
+.order_history_page {
+  .accordion__item {
+    border: 1px solid;
+    padding: 5px;
+    .accordion__panel {
+      padding: 5px 0px;
+    }
+  }
+  .accordion__button {
+    border: none;
+    outline: none;
+    padding: 5px;
+    &::before {
+      display: none !important;
+    }
+  }
+  .accordion__button[aria-expanded="true"],
+  .accordion__button[aria-selected="true"] {
+    .sts {
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+//
