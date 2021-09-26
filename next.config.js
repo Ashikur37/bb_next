@@ -12,15 +12,15 @@ module.exports = {
     //   "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa?retryWrites=true&w=majority",
 
     // test
-    // algolia: {
-    //   appId: "HPKCKDRHRT",
-    //   appKey: "eec40e4466e90ed437e1c7639aa54feb",
-    // },
-    // production
     algolia: {
-      appId: "4F2AV10UAX",
-      appKey: "b7e52f6f6ad165b30cfdc3d0e2e3e67d",
+      appId: "HPKCKDRHRT",
+      appKey: "eec40e4466e90ed437e1c7639aa54feb",
     },
+    // production
+    // algolia: {
+    //   appId: "4F2AV10UAX",
+    //   appKey: "b7e52f6f6ad165b30cfdc3d0e2e3e67d",
+    // },
   },
   // images: {
   //   loader: 'imgix',
