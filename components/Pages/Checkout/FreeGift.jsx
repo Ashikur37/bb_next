@@ -51,7 +51,7 @@ function FreeGift({ Header, headerText, gifts, cartTotal, giftHandler }) {
       <Header text={headerText} />
         <Swiper getSwiper={updateSwiper} {...params} shouldSwiperUpdate>
           {filterGifts.map((gift) => (
-            <div>
+            <div key={gift.id}>
               <GiftCard
                 img={gift.files[0].thumbnail_image}
                 name={gift.name}

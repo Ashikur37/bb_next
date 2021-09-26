@@ -11,7 +11,7 @@ import Styles from "../../styles/Faq.module.scss";
 import Header from "../../components/layout/partials/Header";
 const cookies = new Cookies();
 
-function index({ t }) {
+function Index({ t }) {
   const router = useRouter();
   let lang = cookies.get("lang");
   const [mark, setMark] = useState(
@@ -99,8 +99,8 @@ function index({ t }) {
             <div className={Styles.faq_content}>
               <div className={Styles.custom}>
                 {lang == "en" &&
-                  faqs.map((faq) => (
-                    <>
+                  faqs.map((faq, index) => (
+                    <React.Fragment key={index}>
                       <h4
                         ref={refs[faq.title.toLowerCase()]}
                         className={
@@ -112,8 +112,8 @@ function index({ t }) {
                         <span> {faq.title} </span>
                       </h4>
                       <div className={Styles.custom__accordion}>
-                        {faq.details.map((item) => (
-                          <div className={Styles.single__accordion}>
+                        {faq.details.map((item, index) => (
+                          <div className={Styles.single__accordion} key={index}>
                             <input
                               type="checkbox"
                               name={faq.title}
@@ -130,7 +130,7 @@ function index({ t }) {
                             </label>
                             <div className={Styles.accordion__content}>
                               <div
-                                class="p py-3"
+                                className="p py-3"
                                 dangerouslySetInnerHTML={createMarkup(
                                   item.content
                                 )}
@@ -139,11 +139,11 @@ function index({ t }) {
                           </div>
                         ))}
                       </div>
-                    </>
+                    </React.Fragment>
                   ))}
                 {lang == "ar" &&
-                  faqsAr.map((faq) => (
-                    <>
+                  faqsAr.map((faq, index) => (
+                    <React.Fragment key={index}>
                       <h4
                         ref={refsAr[faq.title.toLowerCase()]}
                         className={
@@ -155,8 +155,8 @@ function index({ t }) {
                         <span> {faq.title} </span>
                       </h4>
                       <div className={Styles.custom__accordion}>
-                        {faq.details.map((item) => (
-                          <div className={Styles.single__accordion}>
+                        {faq.details.map((item, index) => (
+                          <div className={Styles.single__accordion} key={index}>
                             <input
                               type="checkbox"
                               name={faq.title}
@@ -173,7 +173,7 @@ function index({ t }) {
                             </label>
                             <div className={Styles.accordion__content}>
                               <div
-                                class="p my-3"
+                                className="p my-3"
                                 dangerouslySetInnerHTML={createMarkup(
                                   item.content
                                 )}
@@ -182,7 +182,7 @@ function index({ t }) {
                           </div>
                         ))}
                       </div>
-                    </>
+                    </React.Fragment>
                   ))}
               </div>
             </div>
@@ -194,4 +194,4 @@ function index({ t }) {
   );
 }
 
-export default withTranslation("common")(index);
+export default withTranslation("common")(Index);

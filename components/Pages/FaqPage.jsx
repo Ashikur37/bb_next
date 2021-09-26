@@ -51,8 +51,8 @@ function FaqPage() {
             </div>
             <div className="faq_content">
               <div className="custom">
-                {faqs.map((faq) => (
-                  <>
+                {faqs.map((faq,index) => (
+                  <React.Fragment key={index}>
                     <h4
                       ref={refs[faq.title.toLowerCase()]}
                       className={
@@ -64,8 +64,8 @@ function FaqPage() {
                       <span> {faq.title} </span>
                     </h4>
                     <div className="custom__accordion">
-                      {faq.details.map((item) => (
-                        <div className="single__accordion">
+                      {faq.details.map((item,index) => (
+                        <div className="single__accordion" key={index}>
                           <input
                             type="checkbox"
                             name={faq.title}
@@ -90,7 +90,7 @@ function FaqPage() {
                         </div>
                       ))}
                     </div>
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             </div>

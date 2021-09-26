@@ -8,7 +8,7 @@ function ProductImage({ style, images }) {
       <div className={style.product_images}>
         <div className={style.thumbs_images}>
           {images.map((image, index) => (
-            <div>
+            <div key={index}>
               <button
                 className={
                   index == activeImg

@@ -322,8 +322,8 @@ function MobileFooterMenu(props) {
             <div>
               {step == 0 && (
                 <ul className={styles.cat_list}>
-                  {menus.map((item) => (
-                    <li>
+                  {menus.map((item,index) => (
+                    <li key={index}>
                       {item.hasItems ? (
                         <span
                           className={styles.a}
@@ -371,8 +371,8 @@ function MobileFooterMenu(props) {
                   </button>
 
                   <ul className={styles.sub_cat_list}>
-                    {stepValue.items.map((item) => (
-                      <li>
+                    {stepValue.items.map((item,index) => (
+                      <li key={index}>
                         {item.hasItems ? (
                           <span
                             className={styles.a}
@@ -411,8 +411,8 @@ function MobileFooterMenu(props) {
                   </button>
 
                   <ul className={styles.sub_cat_list}>
-                    {step2Value.items.map((item) => (
-                      <li>
+                    {step2Value.items.map((item,index) => (
+                      <li key={index}>
                         {item.hasItems ? (
                           <span
                             className={styles.a}

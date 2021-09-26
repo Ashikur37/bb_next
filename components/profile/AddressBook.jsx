@@ -31,7 +31,7 @@ function AddressBook({ Auth, language, data }) {
       <div className="row mb-3">
         {defaultAddress &&
           defaultAddress.map((address) => (
-            <div className="col-md-6">
+            <div className="col-md-6" key={address.fname + address.phoneNumber}>
               <div className={styles.address_info}>
                 <div className={styles.address_title}>
                   {address.addressType == "shipping"
@@ -73,7 +73,7 @@ function AddressBook({ Auth, language, data }) {
       <div className="row">
         {additionalAddress &&
           additionalAddress.map((address) => (
-            <div className="col-md-6">
+            <div className="col-md-6" key={address.fname + address.phoneNumber}>
               <div className={styles.address_info}>
                 <div className={styles.address_title}>
                   {address.addressType == "shipping"

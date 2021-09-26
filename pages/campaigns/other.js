@@ -44,8 +44,8 @@ const Others = (props) => {
                 <div className="sidebarContent">
                   <ul>
                     {props.offers &&
-                      props.offers.map((offer) => (
-                        <li>
+                      props.offers.map((offer, index) => (
+                        <li key={index}>
                           <Link href={`/campaigns?id=${offer.id}`}>
                             <a onClick={() => setMFilter(false)}>
                               {offer.name}
@@ -74,8 +74,8 @@ const Others = (props) => {
             <div className="sidebarContent">
               <ul>
                 {props.offers &&
-                  props.offers.map((offer) => (
-                    <li>
+                  props.offers.map((offer, index) => (
+                    <li key={index}>
                       <Link href={`/campaigns?id=${offer.id}`}>
                         <a>{offer.name}</a>
                       </Link>

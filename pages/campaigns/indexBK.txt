@@ -7,7 +7,7 @@ import OfferByCategories from "../../components/campaign/OfferByCategories";
 import Head from "next/head";
 import FreeGiftList from "../../components/campaign/FreeGiftList";
 const DumpStockItems = lazy(() => import("../../components/campaign/DumpStockList"));
-function index({lang}) {
+function Index({lang}) {
   const [campaigns, setCampaigns] = useState(null);
   useEffect(() => {
     let locale = lang == "en" ?"en":"ar_QA";
@@ -38,4 +38,4 @@ function index({lang}) {
   );
 }
 
-export default index;
+export default Index;

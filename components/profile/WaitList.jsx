@@ -20,7 +20,7 @@ function WaitList({ language, data, Auth }) {
         </thead>
         <tbody>
           {waitList && waitList.map((list,key) => (
-              <tr>
+              <tr key={key}>
               <th scope="row">{key+1}</th>
               <td><img style={{width:80,height:80}} src={list.product.image} alt="" /></td>
               <td>{list.product.name}</td>

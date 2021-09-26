@@ -10,7 +10,7 @@ import Head from "next/head";
 import { withTranslation } from "../../i18n";
 import Header from "../../components/layout/partials/Header";
 import styles from "../../styles/CampaignPage.module.scss";
-function index(props) {
+function Index(props) {
   const { t } = props;
   const [offers, setOffers] = useState();
   const [products, setProducts] = useState();
@@ -88,16 +88,24 @@ function index(props) {
         <div className="col">
           <div className={styles.mbRefine}>
             <div className={`${styles.mbbuttonWrap} text-right mr-2 mb-3`}>
-              <button onClick={() => setMFilter(!mFilter)} className={styles.mbButton}>
+              <button
+                onClick={() => setMFilter(!mFilter)}
+                className={styles.mbButton}
+              >
                 {t("Refine")}
               </button>
             </div>
             <div
               className={
-                mFilter ? `${styles.filterItemContainer} ${styles.active}` : `${styles.filterItemContainer}`
+                mFilter
+                  ? `${styles.filterItemContainer} ${styles.active}`
+                  : `${styles.filterItemContainer}`
               }
             >
-              <span onClick={() => setMFilter(false)} className={styles.cancleBtn}>
+              <span
+                onClick={() => setMFilter(false)}
+                className={styles.cancleBtn}
+              >
                 <FontAwesomeIcon icon={faWindowClose} size="3x" />
               </span>
               <div className={styles.filterInner}>
@@ -107,8 +115,8 @@ function index(props) {
                 <div className={styles.sidebarContent}>
                   <ul>
                     {offers &&
-                      offers.map((offer) => (
-                        <li>
+                      offers.map((offer, index) => (
+                        <li key={index}>
                           <Link href={`/campaigns?id=${offer.id}`}>
                             <a
                               onClick={() => setMFilter(false)}
@@ -142,8 +150,8 @@ function index(props) {
             <div className={styles.sidebarContent}>
               <ul>
                 {offers &&
-                  offers.map((offer) => (
-                    <li>
+                  offers.map((offer, index) => (
+                    <li key={index}>
                       <Link href={`/campaigns?id=${offer.id}`}>
                         <a
                           className={
@@ -206,7 +214,10 @@ function index(props) {
                   <div className="row no-gutters">
                     {items.map((product) => (
                       // <h2>{product.name}</h2>
-                      <div className=" mb-3 col-6 col-xs-6 col-xs-6 col-md-4  ">
+                      <div
+                        key={product.id}
+                        className=" mb-3 col-6 col-xs-6 col-xs-6 col-md-4  "
+                      >
                         <Product product={product} key={product.id} />
                       </div>
                     ))}
@@ -237,4 +248,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
-export default withTranslation("common")(index);
+export default withTranslation("common")(Index);

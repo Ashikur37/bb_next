@@ -86,7 +86,7 @@ function AddAddress({ lang, auth }) {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
-                <label for="fname">First Name</label>
+                <label htmlFor="fname">First Name</label>
                 <input
                   type="text"
                   className="form-control"
@@ -101,7 +101,7 @@ function AddAddress({ lang, auth }) {
             </div>
             <div className="col-md-6">
               <div className="form-group">
-                <label for="lname">Last Name</label>
+                <label htmlFor="lname">Last Name</label>
                 <input
                   type="text"
                   required
@@ -118,7 +118,7 @@ function AddAddress({ lang, auth }) {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
-                <label for="telephone">Telephone</label>
+                <label htmlFor="telephone">Telephone</label>
                 <PhoneInput
                   international
                   defaultCountry="QA"
@@ -158,7 +158,7 @@ function AddAddress({ lang, auth }) {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
-                <label for="address1">Address</label>
+                <label htmlFor="address1">Address</label>
                 <input
                   type="text"
                   required
@@ -172,7 +172,7 @@ function AddAddress({ lang, auth }) {
             </div>
             <div className="col-md-6">
               <div className="form-group">
-                <label for="city">City</label>
+                <label htmlFor="city">City</label>
                 <input
                   type="text"
                   required
@@ -188,7 +188,7 @@ function AddAddress({ lang, auth }) {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
-                <label for="postcode">Post Code/Zip</label>
+                <label htmlFor="postcode">Post Code/Zip</label>
                 <input
                   required
                   type="text"
@@ -213,7 +213,7 @@ function AddAddress({ lang, auth }) {
                     checked={dbilling}
                     onChange={(e) => setDBilling(!dbilling)}
                   />
-                  <label className="custom-control-label" for="dbilling">
+                  <label className="custom-control-label" htmlFor="dbilling">
                     Use as my default billing address
                   </label>
                 </div>
@@ -230,7 +230,7 @@ function AddAddress({ lang, auth }) {
                     checked={dshipping}
                     onChange={(e) => setDShipping(!dshipping)}
                   />
-                  <label className="custom-control-label" for="dshipping">
+                  <label className="custom-control-label" htmlFor="dshipping">
                     Use as my default shipping address
                   </label>
                 </div>

@@ -13,7 +13,7 @@ const BestSelling = ({ bestSellingProducts }) => {
         </Head>
         <div className="row">
           {bestSellingProducts.map((product) => (
-            <div className="col-md-3 col-sm-6">
+            <div className="col-md-3 col-sm-6" key={product.id}>
               <Product product={product} key={product.id} styles={styles} />
             </div>
           ))}
@@ -24,7 +24,6 @@ const BestSelling = ({ bestSellingProducts }) => {
   );
 };
 export async function getServerSideProps(context) {
-
   let language = context.req.language || "en";
   let bestSellingProducts = await axios
     .get(`${language}/getdata/products/best-selling`)
@@ -34,7 +33,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       bestSellingProducts,
-    }
+    },
   };
 }
 
