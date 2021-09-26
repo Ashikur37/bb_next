@@ -492,7 +492,9 @@ function StepOne(props) {
                       </label>
 
                       <div className={styles.deleviry_schedule}>
-                        <div className={`form-group ${styles.info_wrap} ${styles.form_group}`}>
+                        <div
+                          className={`form-group ${styles.info_wrap} ${styles.form_group}`}
+                        >
                           <span className={styles.info}>9AM - 1PM </span>
                           <label
                             htmlFor="morning"
@@ -513,7 +515,9 @@ function StepOne(props) {
                             className="form-control "
                           />
                         </div>
-                        <div className={`${styles.info_wrap} form-group ${styles.form_group}`}>
+                        <div
+                          className={`${styles.info_wrap} form-group ${styles.form_group}`}
+                        >
                           <span className={styles.info}>4PM - 7PM </span>
                           <label htmlFor="afternoon" className="input_label">
                             {t("Afternoon")}
@@ -531,7 +535,9 @@ function StepOne(props) {
                             className="form-control "
                           />
                         </div>
-                        <div className={`form-group ${styles.info_wrap} ${styles.form_group}`}>
+                        <div
+                          className={`form-group ${styles.info_wrap} ${styles.form_group}`}
+                        >
                           <span className={styles.info}>7PM - 10PM </span>
                           <label htmlFor="evening" className="input_label">
                             {t("Evening")}
@@ -549,7 +555,9 @@ function StepOne(props) {
                             className="form-control "
                           />
                         </div>
-                        <div className={`form-group ${styles.info_wrap} ${styles.form_group}`}>
+                        <div
+                          className={`form-group ${styles.info_wrap} ${styles.form_group}`}
+                        >
                           {/* <span className={styles.info}>7PM - 10PM </span> */}
                           <label htmlFor="anytime" className="input_label">
                             {t("Any Time")}
@@ -650,7 +658,6 @@ function StepOne(props) {
                 </div>
                 <select
                   name="order_source"
-                  className="custom-select"
                   value={orderSource}
                   onChange={(e) => setOrderSource(e.currentTarget.value)}
                   className={

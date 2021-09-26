@@ -94,7 +94,6 @@ export async function getStaticPaths() {
     return {
         paths: [
             { params: { page: 'about-us' } },
-            { params: { page: 'faq' } },
             { params: { page: 'delivery' } },
             { params: { page: 'terms-and-conditions' } },
             { params: { page: 'privacy-policy' } },

@@ -5,7 +5,7 @@ import Layout from "../../components/profile/Layout";
 const Dashboard = dynamic(() => import("../../components/profile/Dashboard"));
 import styles from "../../styles/UserProfilePage.module.scss";
 import { useRouter } from "next/router";
-function index({ language, Auth = null, user = null }) {
+function Index({ language, Auth = null, user = null }) {
   const router = useRouter();
   useEffect(() => {
     if (!Auth) {
@@ -63,4 +63,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
-export default index;
+export default Index;

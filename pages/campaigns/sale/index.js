@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import InfiniteScroll from "react-infinite-scroll-component";
-function index(props) {
+function Index(props) {
   const router = useRouter();
   const [offers, setOffers] = useState();
   const [products, setProducts] = useState();
@@ -100,7 +100,7 @@ function index(props) {
                   <ul>
                     {offers &&
                       offers.map((offer) => (
-                        <li>
+                        <li key={offer.id}>
                           <Link href={`/campaigns/sale?id=${offer.id}`}>
                             <a
                               onClick={() => setMFilter(false)}
@@ -130,7 +130,7 @@ function index(props) {
               <ul>
                 {offers &&
                   offers.map((offer) => (
-                    <li>
+                    <li key={offer.id}>
                       <Link href={`/campaigns/sale?id=${offer.id}`}>
                         <a
                           className={categoryParams == offer.id ? "active" : ""}
@@ -195,4 +195,4 @@ export async function getServerSideProps(context) {
     }
   };
 }
-export default index;
+export default Index;

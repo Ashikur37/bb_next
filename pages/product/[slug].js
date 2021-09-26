@@ -984,6 +984,7 @@ function ProductPage(props) {
                         <div className={styles.bulk_buy_wrapper}>
                           {product.product_offers.map((offer) => (
                             <div
+                            key={offer.id}
                               disabled={product.qty < offer.min_qnt}
                               onClick={() =>
                                 bulkBuyHandler(
