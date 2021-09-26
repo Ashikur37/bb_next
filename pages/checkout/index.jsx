@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 
 import styles from "../../styles/Checkout.module.scss";
-
+import { GTMCheckout } from "../../components/utils/gtm";
 // import "../../assets/sass/checkout.scss";
 
 function Checkout(props) {
@@ -361,6 +361,8 @@ function Checkout(props) {
           /**
            * Fire the Purchase Event End
            */
+          // checkout dataLayer
+          GTMCheckout(props.cartItems);
           props.emptyCart();
           /**
            * fire for special coupons

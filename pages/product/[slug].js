@@ -93,38 +93,38 @@ function ProductPage(props) {
     /**
      * FOR FB CONVERSION API
      */
-    let fbp = document.cookie
-      .split(";")
-      .filter((c) => c.includes("_fbp="))
-      .map((c) => c.split("_fbp=")[1]);
-    let fbc = document.cookie
-      .split(";")
-      .filter((c) => c.includes("_fbc="))
-      .map((c) => c.split("_fbc=")[1]);
-    fbp = (fbp.length && fbp[0]) || null;
-    fbc = (fbc.length && fbc[0]) || null;
+    // let fbp = document.cookie
+    //   .split(";")
+    //   .filter((c) => c.includes("_fbp="))
+    //   .map((c) => c.split("_fbp=")[1]);
+    // let fbc = document.cookie
+    //   .split(";")
+    //   .filter((c) => c.includes("_fbc="))
+    //   .map((c) => c.split("_fbc=")[1]);
+    // fbp = (fbp.length && fbp[0]) || null;
+    // fbc = (fbc.length && fbc[0]) || null;
 
-    if (!fbc && window.location.search.includes("fbclid=")) {
-      fbc =
-        "fb.1." +
-        +new Date() +
-        "." +
-        window.location.search.split("fbclid=")[1];
-    }
-    let em = props.auth.isAuthenticated
-      ? JSON.parse(props.auth.user).email
-      : null;
+    // if (!fbc && window.location.search.includes("fbclid=")) {
+    //   fbc =
+    //     "fb.1." +
+    //     +new Date() +
+    //     "." +
+    //     window.location.search.split("fbclid=")[1];
+    // }
+    // let em = props.auth.isAuthenticated
+    //   ? JSON.parse(props.auth.user).email
+    //   : null;
 
-    Axios.post("/event/viewProduct", {
-      em,
-      product_id: props.product.id,
-      name: props.product.name,
-      eventName: "ViewContent",
-      eventNameSource: `https://beautyboothqa.com/product/${props.product.slug}`,
-      fbp,
-      fbc,
-    });
-  }, []);
+    // Axios.post("/event/viewProduct", {
+    //   em,
+    //   product_id: props.product.id,
+    //   name: props.product.name,
+    //   eventName: "ViewContent",
+    //   eventNameSource: `https://beautyboothqa.com/product/${props.product.slug}`,
+    //   fbp,
+    //   fbc,
+    // });
+  }, [props.product.slug]);
   useEffect(() => {
     let cartProduct = props.cart.filter(
       (p) => p.product_id == props.product.id
@@ -294,36 +294,36 @@ function ProductPage(props) {
     /**
      * FOR FB CONVERSION API
      */
-    let fbp = document.cookie
-      .split(";")
-      .filter((c) => c.includes("_fbp="))
-      .map((c) => c.split("_fbp=")[1]);
-    let fbc = document.cookie
-      .split(";")
-      .filter((c) => c.includes("_fbc="))
-      .map((c) => c.split("_fbc=")[1]);
-    fbp = (fbp.length && fbp[0]) || null;
-    fbc = (fbc.length && fbc[0]) || null;
+    // let fbp = document.cookie
+    //   .split(";")
+    //   .filter((c) => c.includes("_fbp="))
+    //   .map((c) => c.split("_fbp=")[1]);
+    // let fbc = document.cookie
+    //   .split(";")
+    //   .filter((c) => c.includes("_fbc="))
+    //   .map((c) => c.split("_fbc=")[1]);
+    // fbp = (fbp.length && fbp[0]) || null;
+    // fbc = (fbc.length && fbc[0]) || null;
 
-    if (!fbc && window.location.search.includes("fbclid=")) {
-      fbc =
-        "fb.1." +
-        +new Date() +
-        "." +
-        window.location.search.split("fbclid=")[1];
-    }
-    let em = props.auth.isAuthenticated
-      ? JSON.parse(props.auth.user).email
-      : null;
-    Axios.post("/event/addToBag", {
-      em,
-      product_id: product.id,
-      name: product.name,
-      eventName: "AddToCart",
-      eventNameSource: `https://beautyboothqa.com/product/${product.slug}`,
-      fbp,
-      fbc,
-    });
+    // if (!fbc && window.location.search.includes("fbclid=")) {
+    //   fbc =
+    //     "fb.1." +
+    //     +new Date() +
+    //     "." +
+    //     window.location.search.split("fbclid=")[1];
+    // }
+    // let em = props.auth.isAuthenticated
+    //   ? JSON.parse(props.auth.user).email
+    //   : null;
+    // Axios.post("/event/addToBag", {
+    //   em,
+    //   product_id: product.id,
+    //   name: product.name,
+    //   eventName: "AddToCart",
+    //   eventNameSource: `https://beautyboothqa.com/product/${product.slug}`,
+    //   fbp,
+    //   fbc,
+    // });
     // setTimeout(notify,100);
   };
   function handleSelection(value, event) {
