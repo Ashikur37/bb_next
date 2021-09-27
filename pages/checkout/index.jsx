@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 
-import styles from "../../styles/Checkout.module.scss";
+import styles from "../../styles/CheckoutPage.module.scss";
 
 // import "../../assets/sass/checkout.scss";
 

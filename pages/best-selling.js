@@ -11,9 +11,9 @@ const BestSelling = ({ bestSellingProducts }) => {
         <Head>
           <title>Best selling | Beautyboothqa</title>
         </Head>
-        <div className="row">
+        <div className="row no-gutters">
           {bestSellingProducts.map((product) => (
-            <div className="col-md-3 col-sm-6" key={product.id}>
+            <div className="col-md-3 col-sm-6 col-6" key={product.id}>
               <Product product={product} key={product.id} styles={styles} />
             </div>
           ))}
