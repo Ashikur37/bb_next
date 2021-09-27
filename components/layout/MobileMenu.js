@@ -1,6 +1,7 @@
 import React from "react";
+import Link from "next/link";
 import { isMobile } from "react-device-detect";
-function MobileMenu({ lang, style, Link }) {
+function MobileMenu({ lang, style }) {
   const enMenu = [
     {
       name: "New",

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "../../i18n"
-import { useRouter, history } from "next/router";
-import HeaderComponent from "../../components/atom/HeaderComponent";
+import { useRouter } from "next/router";
+import HeaderComponent from "../../components/layout/partials/Header";
 import Media from "react-media";
 import Head from "next/head";
 import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch,
-  SearchBox,
   Hits,
   HitsPerPage,
   Stats,
@@ -19,11 +18,13 @@ import {
   ScrollTo,
   connectCurrentRefinements,
 } from "react-instantsearch-dom";
+// import RheostatRangeSlider from "../../components/atom/RheostatRangeSlider";
 import arabic from "../../public/static/category";
 import withURLSync from "../../components/URLSync";
 
 import SingleProduct from "../../components/atom/SingleProduct";
-import CustomRangeSlider from "../../components/atom/CustomRangeSlider";
+// import CustomRangeSlider from "../../components/atom/CustomRangeSlider";
+
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -100,7 +101,7 @@ const CategoryPage = (props) => {
       if (subCategoryChild === "" && subCategoryName === "") {
         setSelected(categoryName);
       }
-      
+
       setCategoryName(router.query.category);
     } else {
       if (props.router) {
@@ -109,7 +110,7 @@ const CategoryPage = (props) => {
         router.back();
       }
     }
-    
+
   }, [props.searchState, props.context, selected]);
 
   useEffect(() => {
@@ -378,9 +379,8 @@ const CategoryPage = (props) => {
         defaultMatches={{ medium: initialState.device === "mobile" }}
         render={() => (
           <>
-            <div className="category_page">
+            <div className="category_page mt-4">
               <div className="container">
-                <HeaderComponent text={t(selected)} />
                 <InstantSearch
                   searchClient={searchClient}
                   indexName="products"
@@ -402,6 +402,7 @@ const CategoryPage = (props) => {
                       />
                       <span className="refinment_title">Price</span>
                       {/* <CustomRangeSlider attribute="product.price.amount" /> */}
+                      {/* <RheostatRangeSlider attribute="product.price.amount" direction="LTR"/> */}
                       <NumericMenu
                         attribute="product.price.amount"
                         defaultRefinement={props.searchState.rank}
@@ -437,7 +438,8 @@ const CategoryPage = (props) => {
                       />
                     </div>
                     <div className="col-md-9">
-                      {/* <SearchBox /> */}
+
+                      <HeaderComponent text={t(selected)}/>
                       <div className="categories">
                         <div className="hit_result_info">
                           <SortBy

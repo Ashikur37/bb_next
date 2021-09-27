@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Swiper from "react-id-swiper";
 import { connect } from "react-redux";
 import { getBestSellingProducts } from "../../redux/actions/homePageActions";
@@ -6,7 +7,7 @@ import dynamic from "next/dynamic";
 
 const Product = dynamic(() => import("../atom/Product"));
 function TopSellers(props) {
-  const { t, Header, Link, styles, FontAwesomeIcon, lang } = props;
+  const { t, Header, styles, FontAwesomeIcon, lang } = props;
 
   useEffect(() => {
     if (props.bestSelling.length == 0 || props.localLang !== props.lang) {
