@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Swiper from "react-id-swiper";
 import { isMobile } from "react-device-detect";
 import { connect } from "react-redux";
 import Axios from "axios";
 
-function Slider({ styles, lang, slides, store, Link }) {
+function Slider({ styles, lang, slides, store }) {
     const [slider, setSlider] = useState();
     const [swiper, updateSwiper] = useState(null);
     const [params, setParams] = useState({

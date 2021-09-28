@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Swiper from "react-id-swiper";
+import Link from "next/link";
+import { trending as trendings } from "../utils/static"
 // import Image from "next/image";
 // styles
 import styles from "../../styles/sass/homepage_sections/Trending.module.scss";
 
-export default function Trending({ trendings, FontAwesomeIcon, lang, Link, Header, t }) {
+export default function Trending({ FontAwesomeIcon, lang, Header, t }) {
   const [trending, setTrending] = useState(null);
   useEffect(() => {
     const t =

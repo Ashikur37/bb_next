@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Swiper from "react-id-swiper";
 import { connect } from "react-redux";
 import { getBestBrands } from "../../redux/actions/homePageActions";
 import Link from "next/link";
 
-import dynamic from "next/dynamic";
-
 function Brands(props) {
-  const { styles, lang, t, Header, Link, FontAwesomeIcon } = props;
+  const { styles, lang, t, Header, FontAwesomeIcon } = props;
   const swiperRef = useRef(null);
   useEffect(() => {
     if (!props.bestBrands) {

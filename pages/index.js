@@ -1,8 +1,7 @@
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { withTranslation } from "../i18n";
 import LazyLoad from "react-lazyload";
-import { trending, concern } from "../components/utils/static";
+// import { trending, concern } from "../components/utils/static";
 
 // css must the the last normal import
 import styles from "../styles/HomePage.module.scss";
@@ -24,13 +23,12 @@ const Home = ({ FontAwesomeIcon, lang, store, t }) => {
   return (
     <>
       <Title title="Home | BeautyboothQA"></Title>
-      <MobileMenu style={styles} lang={lang} Link={Link} />
+      <MobileMenu style={styles} lang={lang} />
 
       <Slider
         styles={styles}
         store={store}
         lang={lang}
-        Link={Link}
       ></Slider>
 
       <LazyLoad
@@ -42,12 +40,10 @@ const Home = ({ FontAwesomeIcon, lang, store, t }) => {
         once
       >
         <Trending
-          trendings={trending}
           FontAwesomeIcon={FontAwesomeIcon}
           lang={lang}
           Header={Header}
           t={t}
-          Link={Link}
         ></Trending>
       </LazyLoad>
       <LazyLoad
@@ -59,10 +55,8 @@ const Home = ({ FontAwesomeIcon, lang, store, t }) => {
         once
       >
         <Concern
-          concerns={concern}
           FontAwesomeIcon={FontAwesomeIcon}
           lang={lang}
-          Link={Link}
           Header={Header}
           t={t}
         ></Concern>
@@ -77,7 +71,6 @@ const Home = ({ FontAwesomeIcon, lang, store, t }) => {
       >
         <TopSellers
           FontAwesomeIcon={FontAwesomeIcon}
-          Link={Link}
           Header={Header}
           styles={styles}
           lang={lang}
@@ -94,7 +87,6 @@ const Home = ({ FontAwesomeIcon, lang, store, t }) => {
       >
         <NewArrival
           FontAwesomeIcon={FontAwesomeIcon}
-          Link={Link}
           Header={Header}
           styles={styles}
           lang={lang}
@@ -111,7 +103,6 @@ const Home = ({ FontAwesomeIcon, lang, store, t }) => {
       >
         <Brands
           FontAwesomeIcon={FontAwesomeIcon}
-          Link={Link}
           Header={Header}
           styles={styles}
           lang={lang}
@@ -126,7 +117,6 @@ const Home = ({ FontAwesomeIcon, lang, store, t }) => {
       >
         <Blogs
           FontAwesomeIcon={FontAwesomeIcon}
-          Link={Link}
           Header={Header}
           styles={styles}
           lang={lang}
