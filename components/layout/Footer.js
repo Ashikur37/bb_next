@@ -15,10 +15,8 @@ function Footer({ lang, FontAwesomeIcon, t }) {
   const [locale, setLocale] = useState();
   const [email, setEmail] = useState("");
   useEffect(() => {
-    return () => {
-      setLocale(lang == 'en' ? "ltr" : "rtl");
-    };
-  }, [lang])
+    setLocale(lang == "en" ? "ltr" : "rtl");
+  }, [lang]);
   const subscribeHandler = () => {
     axios
       .post("setdata/subscribe/store", { email })

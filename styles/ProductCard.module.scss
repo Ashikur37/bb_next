@@ -190,4 +190,11 @@
       font-size: 13px;
     }
   }
+  [dir="rtl"] & {
+    .product_brand,
+    .product_name,
+    .product_price {
+      text-align: right;
+    }
+  }
 }

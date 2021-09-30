@@ -74,7 +74,7 @@ function TopSellers(props) {
                 <Swiper getSwiper={updateSwiper} {...params} shouldSwiperUpdate>
                   {props.bestSelling.map((product, index) => (
                     <div key={index}>
-                      <Product product={product} lazy={true} styles={styles} />
+                      <Product product={product} lazy={true} styles={styles} lang={lang} />
                     </div>
                   ))}
                 </Swiper>
@@ -82,7 +82,7 @@ function TopSellers(props) {
                 <Swiper getSwiper={updateSwiper} {...params2} shouldSwiperUpdate>
                   {props.bestSelling.map((product, index) => (
                     <div key={index}>
-                      <Product product={product} lazy={true} styles={styles} />
+                      <Product product={product} lazy={true} styles={styles} lang={lang} />
                     </div>
                   ))}
                 </Swiper>

@@ -366,4 +366,14 @@
       }
     }
   }
+
+  [dir="rtl"] & {
+    .bag_popup {
+      right: -250px;
+    }
+    .search_content svg {
+      left: 20px;
+      right: unset;
+    }
+  }
 }

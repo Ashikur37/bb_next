@@ -42,6 +42,18 @@
     }
   }
 }
+.rtl {
+  .header_component {
+    text-align: right;
+    .header_see_all {
+      left: 0;
+      right: unset;
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
 .slider_global {
   position: relative;
   .swiper-slide {
@@ -875,7 +887,7 @@ div.zoomPortion {
     border-color: $theme2;
   }
 }
-.ais-ScrollTo{
+.ais-ScrollTo {
   width: 100%;
 }
 // ai hits
@@ -895,6 +907,10 @@ ul.ais-Hits-list {
 input.ais-RefinementList-checkbox,
 input.ais-NumericMenu-radio {
   margin-right: 5px;
+  [dir="rtl"] & {
+    margin-right: unset;
+    margin-left: 5px;
+  }
 }
 span.refinment_title {
   font-size: 16px;
@@ -1176,6 +1192,11 @@ a.ais-Pagination-link.ais-Pagination-link--selected {
         transform: rotate(45deg);
       }
     }
+  }
+}
+.category_page {
+  [dir="rtl"] & {
+    text-align: right;
   }
 }
 //
