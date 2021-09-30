@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import HeaderComponent from "../../components/atom/HeaderComponent";
+import Header from "../../components/layout/partials/Header";
 import algoliasearch from "algoliasearch/lite";
 import Media from "react-media";
 import {
@@ -43,16 +43,16 @@ const initialState = {
 const NewProductPage = (props) => {
   const [mFilter, setMfilter] = useState(false);
   const [locale, setLocale] = useState("en");
-  const {t}  = props;
+  const { t } = props;
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    setLocale(props.lang == 'ar' ? 'ar_QA' : 'en');
+    setLocale(props.lang == "ar" ? "ar_QA" : "en");
   }, [props.lang]);
   const Hit = ({ hit }) => (
     <div className="product_wrapper">
-      <SingleProduct product={hit.product}  locale={locale}/>
+      <SingleProduct product={hit.product} locale={locale} />
     </div>
   );
 
@@ -85,7 +85,10 @@ const NewProductPage = (props) => {
           <>
             <div className="category_page">
               <div className="container">
-                <HeaderComponent text={t("NEW PRODUCTS")} />
+                {/* <HeaderComponent text={t("NEW PRODUCTS")} /> */}
+                <div className="text-center mt-2">
+                  <Header text={t("NEW PRODUCTS")} />
+                </div>
                 <InstantSearch searchClient={searchClient} indexName="products">
                   <div className="row">
                     <div className="col-12">
@@ -255,7 +258,9 @@ const NewProductPage = (props) => {
         render={() => (
           <div className="category_page">
             <div className="container">
-              <HeaderComponent text={t("NEW PRODUCTS")} />
+              <div className="text-center mt-2">
+                <Header text={t("NEW PRODUCTS")} />
+              </div>
               <InstantSearch
                 searchClient={searchClient}
                 indexName="products"
@@ -377,4 +382,4 @@ const NewProductPage = (props) => {
     </>
   );
 };
-export default withTranslation('common')(NewProductPage);
+export default withTranslation("common")(NewProductPage);
