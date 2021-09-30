@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-function SingleProduct({ product,locale }) {
+function SingleProduct({ product, locale }) {
   const [innBag, setInBag] = useState(0);
   const RibbonNew = () => {
     if (product && product.is_new) {
@@ -53,7 +53,11 @@ function SingleProduct({ product,locale }) {
           </span>
         );
       } else {
-        return <span className="product_price">{product.price.formatted[locale]}</span>;
+        return (
+          <span className="product_price">
+            {product.price.formatted[locale]}
+          </span>
+        );
       }
     }
     return <span className="product_price">QAR 00.00</span>;
@@ -69,19 +73,21 @@ function SingleProduct({ product,locale }) {
         <img src={product.image} alt="" />
       </div>
 
-      <span className="product_name">{product.name[locale] || product.name['en']}</span>
       <span className="product_brand">
         {BrandName(product.attributes)}
         {/* {product.attributes[0]
           ? Object.keys(product.attributes[0]) == "Brand"
-            ? `${product.attributes[0].Brand}`
-            : ""
+          ? `${product.attributes[0].Brand}`
+          : ""
           : ""}
-        {product.attributes[1]
-          ? Object.keys(product.attributes[1]) == "Brand"
+          {product.attributes[1]
+            ? Object.keys(product.attributes[1]) == "Brand"
             ? `${product.attributes[1].Brand}`
             : ""
           : ""} */}
+      </span>
+      <span className="product_name">
+        {product.name[locale] || product.name["en"]}
       </span>
       {/* <span className="product_price">Price: {product.price.formatted}</span> */}
       <Price />

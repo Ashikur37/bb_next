@@ -582,10 +582,11 @@ div.zoomPortion {
   display: inherit;
   // box-shadow: 0px 3px 6px #0000001a;
   margin: 5px;
-  box-shadow: 1px 1px 4px 1px #0000001a;
-
+  box-shadow: 0px 12px 24px #afafaf1f;
+  padding: 20px;
   position: relative;
   // margin-top: 20px;
+  border-radius: 14px;
   &:hover {
     .product_name {
       a {
@@ -703,14 +704,14 @@ div.zoomPortion {
   .product_name {
     transition: 0.4s all ease-in-out;
     min-height: 30px;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 16px;
     font-weight: 400;
-    margin: 0px 5px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-align: left;
     @include breakpoint(tablet) {
       font-size: 12px;
       line-height: 15px;
@@ -724,10 +725,12 @@ div.zoomPortion {
   }
   .product_brand {
     transition: 0.4s all ease-in-out;
-    font-size: 13px;
-    font-weight: 800;
     text-transform: uppercase;
-    color: #444444;
+    font-size: 13px;
+    text-align: left;
+    text-transform: uppercase;
+    color: #d1a333;
+    padding: 2px 0;
     @include breakpoint(tablet) {
       font-size: 13px;
       min-height: 20px;
@@ -738,11 +741,12 @@ div.zoomPortion {
       font-size: 14px;
     }
     transition: 0.4s all ease-in-out;
-    text-align: center;
+    text-align: left;
     font-size: 16px;
     color: $theme1;
     font-weight: 600;
-    padding-bottom: 10px;
+    margin-top: 5px;
+    font-family: $belleza;
     &.offer_price {
       color: red;
     }
@@ -815,6 +819,9 @@ div.zoomPortion {
       }
     }
   }
+  @include breakpoint(tablet) {
+    padding: 5px;
+  }
 }
 
 .brand_page {
@@ -867,6 +874,9 @@ div.zoomPortion {
     background-color: $theme2;
     border-color: $theme2;
   }
+}
+.ais-ScrollTo{
+  width: 100%;
 }
 // ai hits
 ul.ais-Hits-list {
