@@ -121,12 +121,12 @@ function Navbar({
     i18n.changeLanguage(value);
     if (value == "en") {
       document.body.classList.remove("rtl");
-      cookies.set("lang", "en");
+      cookies.set("lang", "en",{ path: '/' });
       setLanguage("en");
       window.location.pathname == "/" && window.location.reload();
     } else {
       document.body.classList.add("rtl");
-      cookies.set("lang", "ar_QA");
+      cookies.set("lang", "ar_QA",{ path: '/' });
       setLanguage("ar_QA");
       window.location.pathname == "/" && window.location.reload();
     }

@@ -5,10 +5,9 @@ import Axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-export const loginUser =(dispatch, userInfo) => {
+export const loginUser = (dispatch, userInfo) => {
   dispatch(setLoginError(""));
-  Axios
-    .post("/api/login", userInfo)
+  Axios.post("/api/login", userInfo)
     .then((res) => {
       // Set token to local storage
       let { token, user } = res.data;
