@@ -123,12 +123,12 @@ function Navbar({
       document.body.classList.remove("rtl");
       cookies.set("lang", "en");
       setLanguage("en");
-      window.location.reload();
+      window.location.pathname == "/" && window.location.reload();
     } else {
       document.body.classList.add("rtl");
       cookies.set("lang", "ar_QA");
       setLanguage("ar_QA");
-      window.location.reload();
+      window.location.pathname == "/" && window.location.reload();
     }
   };
   const deleteHandler = (id, option_id, bulk_id = null) => {
