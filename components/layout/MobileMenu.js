@@ -9,31 +9,31 @@ function MobileMenu({ lang, style }) {
     },
     {
       name: "Brands",
-      slug: "new",
+      slug: "brands",
     },
     {
       name: "Skin Care",
-      slug: "new",
+      slug: "category/Skin-Care",
     },
     {
       name: "Hair Care",
-      slug: "new",
+      slug: "category/Hair-Care",
     },
     {
-      name: "New",
-      slug: "new",
+      name: "Makeup",
+      slug: "category/Makeup",
     },
     {
-      name: "Brands",
-      slug: "new",
+      name: "Fragrance",
+      slug: "category/Fragrance",
     },
     {
-      name: "Skin Care",
-      slug: "new",
+      name: "Campaigns",
+      slug: "campaigns",
     },
     {
-      name: "Hair Care",
-      slug: "new",
+      name: "Best Selling",
+      slug: "best-selling",
     },
   ];
   const arMenu = [
@@ -42,25 +42,45 @@ function MobileMenu({ lang, style }) {
       slug: "new",
     },
     {
+      name: "Brands",
+      slug: "brands",
+    },
+    {
       name: "Skin Care",
-      slug: "new",
+      slug: "category/Skin-Care",
     },
     {
       name: "Hair Care",
-      slug: "new",
+      slug: "category/Hair-Care",
+    },
+    {
+      name: "Makeup",
+      slug: "category/Makeup",
+    },
+    {
+      name: "Fragrance",
+      slug: "category/Fragrance",
+    },
+    {
+      name: "Campaigns",
+      slug: "campaigns",
+    },
+    {
+      name: "Best Selling",
+      slug: "best-selling",
     },
   ];
   return (
     <div className="container">
       <div className="row">
-        {
-          isMobile && (<div className="col">
+        {isMobile && (
+          <div className="col">
             <div className={style.mobile_menu_wrapper}>
               {lang == "en" ? (
                 <ul className={style.mobile_menu}>
                   {enMenu.map((item, index) => (
                     <li className={style.menu_li} key={index}>
-                      <Link href={`/concern/${item.slug}`}>
+                      <Link href={`/${item.slug}`}>
                         <a className="">{item.name}</a>
                       </Link>
                     </li>
@@ -70,7 +90,7 @@ function MobileMenu({ lang, style }) {
                 <ul className={style.mobile_menu}>
                   {arMenu.map((item, index) => (
                     <li className={style.menu_li} key={index}>
-                      <Link href={`/concern/${item.slug}`}>
+                      <Link href={`/${item.slug}`}>
                         <a className="">{item.name}</a>
                       </Link>
                     </li>
@@ -78,8 +98,8 @@ function MobileMenu({ lang, style }) {
                 </ul>
               )}
             </div>
-          </div>)
-        }
+          </div>
+        )}
       </div>
     </div>
   );

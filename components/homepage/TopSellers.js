@@ -16,6 +16,7 @@ function TopSellers(props) {
   }, [lang]);
   const [swiper, updateSwiper] = useState(null);
   const params = {
+    rtl:false,
     loop: false,
     lazy: {
       loadPrevNext: true,
