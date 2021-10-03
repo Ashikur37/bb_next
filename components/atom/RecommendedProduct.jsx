@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-function RecommendedProduct({ product, style }) {
+const RecommendedProduct = ({ product, style }) => {
   const Price = () => {
     if (product) {
       if (product.has_offer) {

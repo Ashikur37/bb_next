@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-// import Product from "./atom/Product";
 import Product from "./atom/RecommendedProduct";
-import { i18n, withTranslation } from "../i18n";
+import { withTranslation } from "../i18n";
 import styles from "../styles/Recomanded.module.scss";
 function Recomanded({ products, t }) {
   return (
