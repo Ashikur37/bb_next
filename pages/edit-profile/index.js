@@ -45,7 +45,7 @@ function EditProfile({ auth, history, logout, lang }) {
       Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("auth_token") || ""
         }`;
 
-      const locale = lang == "ar" ? "ar_QA" : "en";
+      const locale = lang == "ar_QA" ? "ar_QA" : "en";
       Axios.get(`/api/profile?locale=${locale}`)
         .then((res) => {
           setFullName(res.data.user.first_name);

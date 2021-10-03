@@ -56,7 +56,7 @@ function OrdersPage({ auth, t, lang, language, data, Auth }) {
   const pointsToWallet = (e) => {
     e.preventDefault();
 
-    const locale = lang == "ar" ? "ar_QA" : "en";
+    const locale = lang == "ar_QA" ? "ar_QA" : "en";
 
     Axios.defaults.headers.common["Authorization"] = `Bearer ${
       localStorage.getItem("auth_token") || ""

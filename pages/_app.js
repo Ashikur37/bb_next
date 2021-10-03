@@ -70,19 +70,19 @@ const MyApp = ({ Component, pageProps }) => {
   if (lang === undefined) {
     cookies.remove("next-i18next");
     cookies.remove("lang");
-    cookies.set("next-i18next", "en");
-    cookies.set("lang", "en");
+    cookies.set("next-i18next", "en",{ path: '/' });
+    cookies.set("lang", "en",{ path: '/' });
     // document.body.dir = "ltr";
   }
   if (lang === "en") {
-    cookies.set("next-i18next", "en");
+    cookies.set("next-i18next", "en",{ path: '/' });
     if (typeof document != "undefined") {
       document.body.classList.remove("rtl");
       document.body.dir = "ltr";
     }
   }
   if (lang == "ar_QA") {
-    cookies.set("next-i18next", "ar_QA");
+    cookies.set("next-i18next", "ar_QA",{ path: '/' });
     if (document) {
       document.body.classList.add("rtl");
       document.body.dir = "rtl";

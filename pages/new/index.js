@@ -48,7 +48,7 @@ const NewProductPage = (props) => {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    setLocale(props.lang == "ar" ? "ar_QA" : "en");
+    setLocale(props.lang == "ar_QA" ? "ar_QA" : "en");
   }, [props.lang]);
   const Hit = ({ hit }) => (
     <div className="product_wrapper">
