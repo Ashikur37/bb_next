@@ -68,7 +68,7 @@ function ConcernPage(props) {
   }, [concernName, props.concern, props.name]);
 
   useEffect(() => {
-    setLocale(props.lang == "ar" ? "ar_QA" : "en");
+    setLocale(props.lang );
   }, [props.lang]);
 
   const Hit = ({ hit }) => (

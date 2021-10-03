@@ -66,7 +66,10 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     setLang(cookies.get("lang"));
   }, [cookies.get("lang")]);
+
   if (lang === undefined) {
+    cookies.remove("next-i18next");
+    cookies.remove("lang");
     cookies.set("next-i18next", "en");
     cookies.set("lang", "en");
     // document.body.dir = "ltr";

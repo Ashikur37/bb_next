@@ -19,6 +19,11 @@
   }
   .method_one {
     padding-right: 30px;
+    [dir="rtl"] & {
+      padding-right: unset;
+      padding-left: 30px;
+      text-align: right;
+    }
     .login_submit {
       width: 130px;
     }
@@ -39,11 +44,20 @@
         position: absolute;
         right: 0;
         top: 20px;
+        [dir="rtl"] & {
+          right: unset;
+          left: 0;
+        }
       }
     }
   }
   .method_two {
     padding-left: 30px;
+    [dir="rtl"] & {
+      padding-left: unset;
+      padding-right: 30px;
+      text-align: right;
+    }
     @include breakpoint(tablet) {
       padding-left: 0;
     }
@@ -84,7 +98,9 @@
 .step_one {
   .delivery_form {
     margin: 10px 0;
-
+    [dir="rtl"] & {
+      text-align: right;
+    }
     // checkbox
     .checkbox_label {
       font-size: 15px;
@@ -102,6 +118,10 @@
       display: inline-block;
       position: relative;
       margin-right: 5px;
+      [dir="rtl"] & {
+        margin-left: 5px;
+        margin-right: unset;
+      }
     }
 
     /* Style its checked state...with a ticked icon */
@@ -364,6 +384,10 @@
         }
         &:first-child {
           margin-right: 10px;
+          [dir="rtl"] & {
+            margin-left: 10px;
+            margin-right: unset;
+          }
         }
       }
     }
@@ -430,6 +454,9 @@
         transition: all 0.4s ease-in-out;
         &:hover {
           background: $theme2;
+        }
+        [dir = "rtl"] & {
+          margin: 0 5px;
         }
       }
     }
@@ -558,6 +585,10 @@ div#react-autowhatever-city {
         position: absolute;
         top: 50%;
         left: 35%;
+        [dir="rtl"] & {
+          left: unset;
+          right: 35%;
+        }
       }
     }
   }

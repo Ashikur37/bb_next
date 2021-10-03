@@ -44,7 +44,7 @@ function SearchPage(props) {
   useEffect(() => {
     let query = props.name;
     setQuery(query);
-    setLocale(props.lang=='ar'?'ar_QA':'en');
+    setLocale(props.lang);
   }, [props.name,props.lang]);
 
   const ClearRefinements = ({ items, refine }) => {

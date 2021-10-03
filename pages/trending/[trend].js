@@ -48,7 +48,7 @@ function TrendingPage(props) {
   }, [props.trend]);
 
   useEffect(() => {
-    setLocale(props.lang == "ar" ? "ar_QA" : "en");
+    setLocale(props.lang);
   }, [props.lang]);
 
   const Hit = ({ hit }) => (
