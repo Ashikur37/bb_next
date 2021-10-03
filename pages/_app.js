@@ -68,21 +68,19 @@ const MyApp = ({ Component, pageProps }) => {
   }, [cookies.get("lang")]);
 
   if (lang === undefined) {
-    cookies.remove("next-i18next");
-    cookies.remove("lang");
-    cookies.set("next-i18next", "en",{ path: '/' });
-    cookies.set("lang", "en",{ path: '/' });
+    cookies.set("next-i18next", "en", { path: "/" });
+    cookies.set("lang", "en", { path: "/" });
     // document.body.dir = "ltr";
   }
   if (lang === "en") {
-    cookies.set("next-i18next", "en",{ path: '/' });
+    cookies.set("next-i18next", "en", { path: "/" });
     if (typeof document != "undefined") {
       document.body.classList.remove("rtl");
       document.body.dir = "ltr";
     }
   }
   if (lang == "ar_QA") {
-    cookies.set("next-i18next", "ar_QA",{ path: '/' });
+    cookies.set("next-i18next", "ar_QA", { path: "/" });
     if (document) {
       document.body.classList.add("rtl");
       document.body.dir = "rtl";
@@ -91,33 +89,36 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <Provider store={store}>
-      <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={nav} />
-      <Divider />
-      <Menu lang={lang} />
-      <Divider />
-
-      <Component
-        {...pageProps}
-        FontAwesomeIcon={FontAwesomeIcon}
-        lang={lang}
-        store={store}
-      />
-      <Footer lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
-      <Media
-        query="(max-width: 991px)"
-        render={() => (
-          <MobileFooterMenu lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
-        )}
-      />
-      <Media
-        query="(min-width: 992px)"
-        render={() => (
-          <Script
-            src="https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js"
-            strategy="lazyOnload"
+      {lang && (
+        <>
+          <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={nav} />
+          <Divider />
+          <Menu lang={lang} />
+          <Divider />
+          <Component
+            {...pageProps}
+            FontAwesomeIcon={FontAwesomeIcon}
+            lang={lang}
+            store={store}
           />
-        )}
-      />
+          <Footer lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
+          <Media
+            query="(max-width: 991px)"
+            render={() => (
+              <MobileFooterMenu lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
+            )}
+          />
+          <Media
+            query="(min-width: 992px)"
+            render={() => (
+              <Script
+                src="https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js"
+                strategy="lazyOnload"
+              />
+            )}
+          />{" "}
+        </>
+      )}
     </Provider>
   );
 };
