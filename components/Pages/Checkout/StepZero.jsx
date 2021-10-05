@@ -221,7 +221,7 @@ function StepZero({
                 <h6>{t("GUEST CHECKOUT")}</h6>
                 <PhoneInput
                   international
-                  defaultCountry="BD"
+                  defaultCountry="QA"
                   value={value}
                   onChange={valueHandler}
                   error={
