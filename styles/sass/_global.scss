@@ -162,6 +162,16 @@
   top: 40%;
   transform: translateY(-50%);
 }
+// otp
+.otp {
+  display: flex;
+  justify-content: space-evenly;
+  input {
+    width: 2.5em !important;
+    padding: 8px 5px;
+    background-color: #fff;
+  }
+}
 // rtl css
 .rtl {
   direction: rtl;

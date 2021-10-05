@@ -33,6 +33,8 @@ function StepZero({
   const [show, setShow] = useState(false);
   const otp_modal = React.createRef();
   const [showLogin, setShowLogin] = useState(false);
+  const [resendCounter,setResendCounter] = useState(false);
+  const [counter,setCounter] = useState(59);
   useEffect(() => {
     if (auth.isAuthenticated) {
       setShowLogin(true);
@@ -57,6 +59,13 @@ function StepZero({
       window.alert(auth.error);
     }
   }, [auth]);
+
+  useEffect(()=>{
+    const timer = counter > 0 && setInterval(() => {
+      setCounter(counter -1 );
+    }, 1000);
+    return ()=> clearInterval(timer);
+  },[counter,resendCounter])
 
   useEffect(() => {
     if (cartItems?.length <= 0) {
@@ -89,6 +98,8 @@ function StepZero({
       .then((res) => {
         if (res.data === false) {
           setShow(true);
+          setResendCounter(true);
+          setCounter(59);
           axios
             .post(`${locale}/checkout/verify/now`, {
               cell_no: phone.nationalNumber,
@@ -210,7 +221,7 @@ function StepZero({
                 <h6>{t("GUEST CHECKOUT")}</h6>
                 <PhoneInput
                   international
-                  defaultCountry="QA"
+                  defaultCountry="BD"
                   value={value}
                   onChange={valueHandler}
                   error={
@@ -267,6 +278,9 @@ function StepZero({
               onClick={proceedVerify}
             >
               Verify
+            </button>
+            <button type="button" className="btn btn-info" onClick={numberInput} disabled={counter < 1 ? false:true }>
+              Resend {resendCounter && counter > 1 && <span>({counter})</span> }
             </button>
           </Modal.Footer>
         </Modal>
