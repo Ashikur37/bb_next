@@ -224,17 +224,17 @@ function StepZero({
                   defaultCountry="QA"
                   value={value}
                   onChange={valueHandler}
-                  error={
-                    value
-                      ? isValidPhoneNumber(value)
-                        ? undefined
-                        : "Invalid phone number"
-                      : "Phone number required"
-                  }
+                  // error={
+                  //   value
+                  //     ? isValidPhoneNumber(value)
+                  //       ? undefined
+                  //       : "Invalid phone number"
+                  //     : "Phone number required"
+                  // }
                 />
                 <div className={styles.phone_submit_wrapper}>
                   <button
-                    disabled={isValidPhoneNumber(value) ? false : true}
+                    disabled={value && isValidPhoneNumber(value) ? false : true}
                     type="submit"
                     className={styles.phone_proceed}
                     onClick={numberInput}
