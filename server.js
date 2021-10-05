@@ -59,7 +59,7 @@ const ssrCache = cacheableResponse({
   ttl: 1000 * 60 * 60, // 1hour
   get: async ({ req, res, pagePath, queryParams }) => {
     try {
-      return { data: await app.renderToHTML(req, res, pagePath, queryParams) };
+      return { data: await app.renderToHTML(req, res, pagePath, queryParams), ttl: 1000 * 60 * 60 };
     } catch (e) {
       return { data: "error: " + e };
     }
@@ -1013,7 +1013,12 @@ server.post(
           res.setHeader("X-Cache-Status", "DISABLED");
           handle(req, res);
         } else {
-          ssrCache({ req, res, pagePath: req.path, queryParams: req.query });
+          res.setHeader(
+            'Cache-Control',
+            'public, s-maxage=3600, stale-while-revalidate=59'
+          );
+          handle(req,res);
+          // ssrCache({ req, res, pagePath: req.path, queryParams: req.query });
         }        
       // } catch (error) {
       //   console.log(error);
