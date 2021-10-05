@@ -137,9 +137,8 @@ function ProductPage(props) {
         ? setMaxQnt(props.product.max_cart_qnt)
         : setMaxQnt(1000);
     }
-console.log(props.product?.slug)
     if (props.product) {
-    setProduct(props.product);
+      setProduct(props.product);
       axios
         .get(`/${props.language}/getdata/variant/${props.product.slug}`)
         .then((res) => {
@@ -1094,11 +1093,12 @@ export async function getServerSideProps(context) {
   // Fetch data from external API
   let slug = context.params.slug;
 
+
   try {
     let product = await axios
       .get(`${language}/getdata/product/${encodeURI(slug)}`)
-      .then((res) => {
-        return res.data;
+      .then((response) => {
+        return response.data;
       });
     return { props: { product, language } };
   } catch (err) {
