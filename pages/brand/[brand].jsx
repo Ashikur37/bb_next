@@ -209,7 +209,7 @@ function BrandPage(props) {
                                   )
                                 }
                               />
-                              <span className="mb_refinment_title">Price</span>
+                              {/* <span className="mb_refinment_title">Price</span> */}
                               {/* <CustomRangeSlider  attribute="product.price.amount" /> */}
                               <span className="mb_refinment_title">Brand</span>
                               <RefinementList
@@ -297,7 +297,7 @@ function BrandPage(props) {
                             )
                           }
                         />
-                        <span className="refinment_title">Price</span>
+                        {/* <span className="refinment_title">Price</span> */}
                         {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                         <NumericMenu
                           attribute="product.price.amount"

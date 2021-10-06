@@ -145,7 +145,7 @@ const NewProductPage = (props) => {
                                 )
                               }
                             />
-                            <span className="mb_refinment_title">Price</span>
+                            {/* <span className="mb_refinment_title">Price</span> */}
                             {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                             {/* <span className="mb_refinment_title">Category</span>
                             <RefinementList
@@ -180,7 +180,7 @@ const NewProductPage = (props) => {
                                     Category
                                   </span>
                                 </label>
-                                <div className="accordion__content mt-3">
+                                <div className="accordion__content mt-md-3">
                                   <RefinementList
                                     attribute="product.categories.name"
                                     limit={15}
@@ -206,7 +206,7 @@ const NewProductPage = (props) => {
                                 >
                                   <span className="refinment_title">Brand</span>
                                 </label>
-                                <div className="accordion__content mt-3">
+                                <div className="accordion__content mt-md-3">
                                   <RefinementList
                                     attribute="product.attributes.Brand"
                                     limit={15}
@@ -276,7 +276,7 @@ const NewProductPage = (props) => {
                         defaultRefinement={["true"]}
                       />
                     </span>
-                    <span className="refinment_title">Price</span>
+                    {/* <span className="refinment_title">Price</span> */}
                     {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                     <NumericMenu
                       attribute="product.price.amount"

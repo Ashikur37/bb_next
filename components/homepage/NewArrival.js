@@ -56,7 +56,7 @@ function NewArrival(props) {
     <div className="container">
       {props.newArrivals ? (
         <>
-          <div className="row">
+          <div className="row mt-3">
             <div className="col">
               <Header
                 h="h2"
