@@ -16,7 +16,9 @@ import "react-phone-number-input/style.css";
 import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useEffect, useState } from "react";
-const Navbar = dynamic(() => import("../components/layout/Navbar"));
+const NavbarWrapper = dynamic(() =>
+  import("../components/layout/NavbarWrapper")
+);
 const Divider = dynamic(() => import("../components/layout/partials/Divider"));
 const Menu = dynamic(() => import("../components/layout/Menu"));
 const Footer = dynamic(() => import("../components/layout/Footer"));
@@ -25,6 +27,7 @@ const MobileFooterMenu = dynamic(() =>
 );
 import { setCurrentUser, logoutUser } from "../redux/actions/authActions";
 import { setCartFromLocal } from "../redux/actions/cartAction";
+import ScrollTop from "../components/layout/ScrollTop";
 const cookies = new Cookies();
 
 if (process.browser) {
@@ -91,10 +94,14 @@ const MyApp = ({ Component, pageProps }) => {
     <Provider store={store}>
       {lang && (
         <>
-          <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={nav} />
-          <Divider />
+          <NavbarWrapper
+            FontAwesomeIcon={FontAwesomeIcon}
+            lang={lang}
+            styles={nav}
+          />
+          {/* <Divider />
           <Menu lang={lang} />
-          <Divider />
+          <Divider /> */}
           <Component
             {...pageProps}
             FontAwesomeIcon={FontAwesomeIcon}
@@ -117,6 +124,7 @@ const MyApp = ({ Component, pageProps }) => {
               />
             )}
           />{" "}
+          {process.browser && <ScrollTop />}
         </>
       )}
     </Provider>
