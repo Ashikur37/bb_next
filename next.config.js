@@ -21,6 +21,10 @@ module.exports = {
     //   appId: "4F2AV10UAX",
     //   appKey: "b7e52f6f6ad165b30cfdc3d0e2e3e67d",
     // },
+    pgw:{
+      development:"https://apitest.myfatoorah.com/",
+      production:"https://api.myfatoorah.com/"
+    }
   },
   // images: {
   //   loader: 'imgix',

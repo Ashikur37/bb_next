@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
+import Script from 'next/script';
 import StepOne from "../../components/Pages/Checkout/StepOne";
 import StepTwo from "../../components/Pages/Checkout/StepTwo";
 import StepThree from "../../components/Pages/Checkout/StepThree";
@@ -27,7 +28,7 @@ function Checkout(props) {
       : null
   );
   const [method, setMethod] = useState();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [msg, setMsg] = useState(null);
   const [shipping, setShipping] = useState(10);
   const [subTotal, setSubTotal] = useState(
@@ -486,6 +487,8 @@ function Checkout(props) {
     <>
       <Head>
         <title>Checkout | Beautyboothqa </title>
+        <Script src="https://demo.myfatoorah.com/cardview/v1/session.js"></Script>
+
       </Head>
       <div className={styles.checkout_container}>
         {step === 0 && (
