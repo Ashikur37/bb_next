@@ -196,9 +196,8 @@ function Checkout(props) {
         props.auth.isAuthenticated &&
         localStorage.getItem("coupon_id") != "influencer"
       ) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${
-          localStorage.getItem("auth_token") || ""
-        }`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("auth_token") || ""
+          }`;
         axios
           .post("en/auth/rewards/calculate", {
             subTotal,
@@ -222,7 +221,7 @@ function Checkout(props) {
             localStorage.setItem("discount", res.data.discount);
             localStorage.setItem("coupon", coupon);
           })
-          .catch((err) => {});
+          .catch((err) => { });
       }
     } else {
       let cart = props.cartItems.map((item) => {
@@ -373,9 +372,8 @@ function Checkout(props) {
             stepOneValue.coupon_id !== parseInt(stepOneValue.coupon_id, 10) &&
             localStorage.getItem("coupon_id") != "influencer"
           ) {
-            Axios.defaults.headers.common["Authorization"] = `Bearer ${
-              localStorage.getItem("auth_token") || ""
-            }`;
+            Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("auth_token") || ""
+              }`;
             Axios.post("/api/coupon/mark_used", {
               id: stepOneValue.coupon_id,
               email: stepOneValue.customer_email,
@@ -468,13 +466,15 @@ function Checkout(props) {
     setMethod(
       process.browser ? localStorage.getItem("method") || "regular" : "regular"
     );
+    if (process.browser) {
 
-    const script = document.createElement("script");
+      const script = document.createElement("script");
 
-    script.src = "https://demo.myfatoorah.com/cardview/v1/session.js";
-    script.async = true;
+      script.src = "https://demo.myfatoorah.com/cardview/v1/session.js";
+      script.async = true;
 
-    document.body.appendChild(script);
+      document.body.appendChild(script);
+    }
   }, []);
 
   // check giftproduct
