@@ -28,7 +28,7 @@ function Checkout(props) {
       : null
   );
   const [method, setMethod] = useState();
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   const [msg, setMsg] = useState(null);
   const [shipping, setShipping] = useState(10);
   const [subTotal, setSubTotal] = useState(
