@@ -151,7 +151,7 @@ function StepTwo(props) {
             </div>
           </div>
           <div id="card-element" className="d-none py-3">
-            <small>Test API supports only Kuwait so don't add any cards</small>
+            <small>Test API supports only Kuwait so do not add any cards</small>
             <button onClick="myFatoorahSubmit">Verify</button>
           </div>
           {/* )} */}
