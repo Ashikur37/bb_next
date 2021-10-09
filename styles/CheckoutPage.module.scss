@@ -344,19 +344,21 @@
     .payment_group {
       margin: 0 auto;
       display: block;
-      width: 300px;
-
-      padding: 5px;
+      max-width: 300px;
       box-shadow: 0px 3px 6px #00000026;
       .wrap {
         display: flex;
         justify-content: center;
         align-items: center;
-
         label {
-          padding: 15px;
+          padding: 20px;
+          width: 300px;
           color: $theme1;
           cursor: pointer;
+          text-align: center;
+          input[type="radio"] {
+            margin-left: 10px;
+          }
         }
       }
     }
@@ -455,7 +457,7 @@
         &:hover {
           background: $theme2;
         }
-        [dir = "rtl"] & {
+        [dir="rtl"] & {
           margin: 0 5px;
         }
       }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Script from 'next/script';
+// import Script from 'next/script';
 import StepOne from "../../components/Pages/Checkout/StepOne";
 import StepTwo from "../../components/Pages/Checkout/StepTwo";
 import StepThree from "../../components/Pages/Checkout/StepThree";
@@ -468,6 +468,13 @@ function Checkout(props) {
     setMethod(
       process.browser ? localStorage.getItem("method") || "regular" : "regular"
     );
+
+    const script = document.createElement("script");
+
+    script.src = "https://demo.myfatoorah.com/cardview/v1/session.js";
+    script.async = true;
+
+    document.body.appendChild(script);
   }, []);
 
   // check giftproduct
@@ -487,7 +494,7 @@ function Checkout(props) {
     <>
       <Head>
         <title>Checkout | Beautyboothqa </title>
-        <Script src="https://demo.myfatoorah.com/cardview/v1/session.js"></Script>
+        {/* <Script src="https://demo.myfatoorah.com/cardview/v1/session.js"></Script> */}
 
       </Head>
       <div className={styles.checkout_container}>

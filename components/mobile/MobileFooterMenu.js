@@ -60,14 +60,14 @@ function MobileFooterMenu(props) {
     return () => (mounted = false);
   }, [chat]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     const script = document.createElement("script");
-  //     script.src = "https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js";
-  //     script.async = true;
-  //     document.body.appendChild(script);
-  //   }, 1500);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      const script = document.createElement("script");
+      script.src = "https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }, 1500);
+  }, []);
 
   const openChat = () => {
     window.tidioChatApi.display(true);

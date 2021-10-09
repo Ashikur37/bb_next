@@ -71,19 +71,19 @@ const MyApp = ({ Component, pageProps }) => {
   }, [cookies.get("lang")]);
 
   if (lang === undefined) {
-    cookies.set("next-i18next", "en", { path: "/", SameSite: "None" });
+    cookies.set("next-i18next", "en", { path: "/", SameSite: "None; Secure", maxAge:15*86400});
     cookies.set("lang", "en", { path: "/" });
     // document.body.dir = "ltr";
   }
   if (lang === "en") {
-    cookies.set("next-i18next", "en", { path: "/", SameSite: "None" });
+    cookies.set("next-i18next", "en", { path: "/", SameSite: "None; Secure", maxAge:15*86400});
     if (typeof document != "undefined") {
       document.body.classList.remove("rtl");
       document.body.dir = "ltr";
     }
   }
   if (lang == "ar_QA") {
-    cookies.set("next-i18next", "ar_QA", { path: "/", SameSite: "None" });
+    cookies.set("next-i18next", "ar_QA", { path: "/", SameSite: "None; Secure", maxAge:15*86400});
     if (document) {
       document.body.classList.add("rtl");
       document.body.dir = "rtl";
