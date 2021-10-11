@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ProgressBar from "../../atom/ProgressBar";
-import { i18n, withTranslation } from "../../../i18n";
+import { withTranslation } from "../../../i18n";
 import Header from "../../layout/partials/Header";
-import Axios from "axios";
+// import Axios from "axios";
 // import Modal from "react-bootstrap/Modal";
 
 function StepTwo(props) {
@@ -16,7 +16,7 @@ function StepTwo(props) {
   // const [flag,setFlag] = useState(null);
   const [coupon, setCoupon] = useState(props.val.coupon);
   const [adminAccount, setAdminAccount] = useState();
-  const [paymentURL, setPaymentURL] = useState(null);
+  // const [paymentURL, setPaymentURL] = useState(null);
   // const [auth, setAuth] = useState({isAuthenticated:null,user:null});
 
   // useEffect(() => {
@@ -30,23 +30,23 @@ function StepTwo(props) {
     );
 
     window.scrollTo(0, 0);
-    Axios.get("/v2/InitiateSession").then(({ data }) => {
-      if (data.IsSuccess) {
-        var config = {
-          countryCode: data.Data.CountryCode, // Here, add your Country Code you receive from InitiateSession Endpoint.
-          sessionId: data.Data.SessionId, // Here you add the "SessionId" you receive from InitiateSession Endpoint.
-          cardViewId: "card-element",
-        };
-        setTimeout(function () {
-          myFatoorah.init(config);
-        }, 800);
+    // Axios.get("/v2/InitiateSession").then(({ data }) => {
+    //   if (data.IsSuccess) {
+    //     var config = {
+    //       countryCode: data.Data.CountryCode, // Here, add your Country Code you receive from InitiateSession Endpoint.
+    //       sessionId: data.Data.SessionId, // Here you add the "SessionId" you receive from InitiateSession Endpoint.
+    //       cardViewId: "card-element",
+    //     };
+    //     setTimeout(function () {
+    //       myFatoorah.init(config);
+    //     }, 800);
 
-      } else {
-        window.alert("Payment Initiate Failed")
-      }
-    }).catch(function (error) {
-      console.error(error);
-    });
+    //   } else {
+    //     window.alert("Payment Initiate Failed")
+    //   }
+    // }).catch(function (error) {
+    //   console.error(error);
+    // });
 
 
   }, []);
@@ -70,11 +70,11 @@ function StepTwo(props) {
   // },[props.msg]);
 
   const deliveryHandler = (e) => {
-    if (e.target.value == "op") {
-      document.getElementById("card-element").classList.remove('d-none');
-    } else {
-      document.getElementById("card-element").classList.add('d-none');
-    }
+    // if (e.target.value == "op") {
+    //   document.getElementById("card-element").classList.remove('d-none');
+    // } else {
+    //   document.getElementById("card-element").classList.add('d-none');
+    // }
     props.deliviryHandler(e.target.value);
   };
 
@@ -84,56 +84,56 @@ function StepTwo(props) {
   //     props.couponHandler(coupon);
   //   }
   // }
-  const myFatoorahSubmit = () => {
-    myFatoorah.submit()
-      // On success
-      .then(function (response) {
-        // Here you need to pass session id to you backend here
-        var sessionId = response.SessionId;
-        var cardBrand = response.CardBrand;
-        Axios.post('/v2/ExecutePayment', {
-          SessionId: sessionId,
-          InvoiceValue: 10,
-          CustomerName: val.customer_first_name,
-          DisplayCurrencyIso: "KWD",
-          MobileCountryCode: val.country_code,
-          CustomerMobile: val.customer_phone,
-          CustomerEmail: val.customer_email,
-          CallBackUrl: "https://beautybooth.shop/checkout",
-          ErrorUrl: "https://beautybooth.shop/checkout",
-          Language: "en",
-          CustomerReference: "noshipping-nosupplier",
-          CustomerAddress: {
-            Block: "string",
-            Street: "string",
-            HouseBuildingNo: "string",
-            AddressInstructions: "string"
-          },
-          InvoiceItems: [
-            {
-              ItemName: "item name",
-              Quantity: 10,
-              UnitPrice: 1
-            }
-          ]
-        }).then(({ data }) => {
-          if (data.IsSuccess) {
-            setPaymentURL(data.Data.PaymentURL);
-            if (data.Data.PaymentURL) {
-              document.getElementById("paymentURL").classList.remove("d-none");
-            } else {
-              document.getElementById("paymentURL").classList.add("d-none");
-            }
-          } else {
-            document.getElementById("paymentURL").classList.add("d-none");
-          }
-        })
-      })
-      // In case of errors
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+  // const myFatoorahSubmit = () => {
+  //   myFatoorah.submit()
+  //     // On success
+  //     .then(function (response) {
+  //       // Here you need to pass session id to you backend here
+  //       var sessionId = response.SessionId;
+  //       var cardBrand = response.CardBrand;
+  //       Axios.post('/v2/ExecutePayment', {
+  //         SessionId: sessionId,
+  //         InvoiceValue: 10,
+  //         CustomerName: val.customer_first_name,
+  //         DisplayCurrencyIso: "KWD",
+  //         MobileCountryCode: val.country_code,
+  //         CustomerMobile: val.customer_phone,
+  //         CustomerEmail: val.customer_email,
+  //         CallBackUrl: "https://beautybooth.shop/checkout",
+  //         ErrorUrl: "https://beautybooth.shop/checkout",
+  //         Language: "en",
+  //         CustomerReference: "noshipping-nosupplier",
+  //         CustomerAddress: {
+  //           Block: "string",
+  //           Street: "string",
+  //           HouseBuildingNo: "string",
+  //           AddressInstructions: "string"
+  //         },
+  //         InvoiceItems: [
+  //           {
+  //             ItemName: "item name",
+  //             Quantity: 10,
+  //             UnitPrice: 1
+  //           }
+  //         ]
+  //       }).then(({ data }) => {
+  //         if (data.IsSuccess) {
+  //           setPaymentURL(data.Data.PaymentURL);
+  //           if (data.Data.PaymentURL) {
+  //             document.getElementById("paymentURL").classList.remove("d-none");
+  //           } else {
+  //             document.getElementById("paymentURL").classList.add("d-none");
+  //           }
+  //         } else {
+  //           document.getElementById("paymentURL").classList.add("d-none");
+  //         }
+  //       })
+  //     })
+  //     // In case of errors
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
 
   return (
     <div className={styles.step_two}>
@@ -191,7 +191,7 @@ function StepTwo(props) {
                 </div>
               </div>
             </div>
-            <div className="mt-4 col-lg-8 col-md-12">
+            {/* <div className="mt-4 col-lg-8 col-md-12">
               <div id="card-element" className="d-none">
                 <i>Test API supports only Kuwait so do not add any cards</i>
                 <button onClick={myFatoorahSubmit}>Verify</button>
@@ -201,7 +201,8 @@ function StepTwo(props) {
                 <a className="btn-link" target="_blank" href={paymentURL} rel="noreferrer">
                   {paymentURL}
                 </a>
-              </div></div>
+              </div>
+              </div> */}
           </div>
           {/* {auth.isAuthenticated && auth.user.isCustomer ? ( */}
           {/* <div className="payment_group mt-4">

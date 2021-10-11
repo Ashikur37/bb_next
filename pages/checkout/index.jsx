@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-// import Script from 'next/script';
-import StepOne from "../../components/Pages/Checkout/StepOne";
-import StepTwo from "../../components/Pages/Checkout/StepTwo";
-import StepThree from "../../components/Pages/Checkout/StepThree";
-import StepFour from "../../components/Pages/Checkout/StepFour";
-import StepZero from "../../components/Pages/Checkout/StepZero";
 
 import axios from "../../redux/actions/axios";
 import Axios from "axios";
@@ -13,6 +7,12 @@ import { emptyCart } from "../../redux/actions/cartAction";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
+
+import StepOne from "../../components/Pages/Checkout/StepOne";
+import StepTwo from "../../components/Pages/Checkout/StepTwo";
+import StepThree from "../../components/Pages/Checkout/StepThree";
+import StepFour from "../../components/Pages/Checkout/StepFour";
+import StepZero from "../../components/Pages/Checkout/StepZero";
 
 import styles from "../../styles/CheckoutPage.module.scss";
 import { GTMCheckout } from "../../components/utils/gtm";
@@ -494,8 +494,6 @@ function Checkout(props) {
     <>
       <Head>
         <title>Checkout | Beautyboothqa </title>
-        {/* <Script src="https://demo.myfatoorah.com/cardview/v1/session.js"></Script> */}
-
       </Head>
       <div className={styles.checkout_container}>
         {step === 0 && (
