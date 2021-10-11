@@ -1,120 +1,162 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import axios from "../../../redux/actions/axios";
+// import axios from "../../../redux/actions/axios";
+import Axios from "axios";
+
 import { withTranslation } from "react-i18next";
 import HeaderComponent from "../../../components/atom/HeaderComponent";
-function StepFour({ order,t }) {
-  const router = useRouter()
+import Header from "../../../components/layout/partials/Header";
+import styles from "../../../styles/OrderRecived.module.scss";
+function StepFour({ order, t }) {
+  const router = useRouter();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [success, setSuccess] = useState(false);
-  const [orderId,setOrderId] = useState();
+  const [orderId, setOrderId] = useState();
+  const [paymentURL, setPaymentURL] = useState(null);
   useEffect(() => {
     window.scrollTo(0, 0);
     setOrderId(router.query.id);
+    if (process.browser) {
+
+      const script = document.createElement("script");
+
+      script.src = "https://demo.myfatoorah.com/cardview/v1/session.js";
+      script.async = true;
+
+      document.body.appendChild(script);
+    }
   }, []);
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (confirmPassword == password) {
-      let data = {
-        password,
-        confirm_password: confirmPassword,
-        order,
-      };
-      axios
-        .post("en/auth/post-order-register", data)
-        .then((res) => {
-          setSuccess(true);
-          alert("Your account has been created");
-        })
-        .catch((err) => {
-          if (err.response) {
-            alert(err.response.data.message);
+  useEffect(() => {
+    
+    Axios.get("/v2/InitiateSession").then(({ data }) => {
+      if (data.IsSuccess) {
+        var config = {
+          countryCode: data.Data.CountryCode, // Here, add your Country Code you receive from InitiateSession Endpoint.
+          sessionId: data.Data.SessionId, // Here you add the "SessionId" you receive from InitiateSession Endpoint.
+          cardViewId: "card-element",
+        };
+        setTimeout(function () {
+          myFatoorah.init(config);
+        }, 800);
+
+      } else {
+        window.alert("Payment Initiate Failed")
+      }
+    }).catch(function (error) {
+      console.error(error);
+    });
+
+
+  }, []);
+  const myFatoorahSubmit = () => {
+    myFatoorah
+      .submit()
+      // On success
+      .then(function (response) {
+        // Here you need to pass session id to you backend here
+        var sessionId = response.SessionId;
+        var cardBrand = response.CardBrand;
+        Axios.post("/v2/ExecutePayment", {
+          SessionId: sessionId,
+          InvoiceValue: 10,
+          CustomerName: val.customer_first_name,
+          DisplayCurrencyIso: "KWD",
+          MobileCountryCode: val.country_code,
+          CustomerMobile: val.customer_phone,
+          CustomerEmail: val.customer_email,
+          CallBackUrl: "https://beautybooth.shop/checkout",
+          ErrorUrl: "https://beautybooth.shop/checkout",
+          Language: "en",
+          CustomerReference: "noshipping-nosupplier",
+          CustomerAddress: {
+            Block: "string",
+            Street: "string",
+            HouseBuildingNo: "string",
+            AddressInstructions: "string",
+          },
+          InvoiceItems: [
+            {
+              ItemName: "item name",
+              Quantity: 10,
+              UnitPrice: 1,
+            },
+          ],
+        }).then(({ data }) => {
+          if (data.IsSuccess) {
+            setPaymentURL(data.Data.PaymentURL);
+            if (data.Data.PaymentURL) {
+              document.getElementById("paymentURL").classList.remove("d-none");
+            } else {
+              document.getElementById("paymentURL").classList.add("d-none");
+            }
           } else {
-            alert("We're sorry but this operation cannot be completed now");
+            document.getElementById("paymentURL").classList.add("d-none");
           }
         });
-    } else {
-      alert("password doesn't match");
-    }
+      })
+      // In case of errors
+      .catch(function (error) {
+        console.log(error);
+      });
   };
-  return (
-    <div className="step_four">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-3"></div>
-          {/* { process.browser && localStorage.getItem("user") && <div className="col-lg-1"></div>} */}
 
+  return (
+    <div className={styles.step_four}>
+      <div className="container">
+        <div className="text-center mt-3">
+          <Header text={t("CONFIRMATION")} />
+        </div>
+        <div className="row justify-content-center">
           <div className="col-lg-5">
-            <HeaderComponent text={t("CONFIRMATION")} />
-            <div className="circle">
+            {/* <div className="circle">
               <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <p className="greet">{t("Thank you for shopping with us")}</p>
+            </div> */}
+            <p className={styles.greet}>
+              {t("Thank you for shopping with us")}
+            </p>
             {/* <p className="greet">Your ORDER ID is {order}</p> */}
-            <p className="greet">{t("Your ORDER ID is ")}{orderId} </p>
-            <p className="greet">
+            <p className={styles.greet}>
+              {t("Your ORDER ID is ")}
+              {orderId}{" "}
+            </p>
+            <p className={styles.greet}>
               {t("Order will be processed with 24-72 hours after confirmation")}
             </p>
-            <div className="continue_container">
+            <div className={styles.continue_container}>
               <Link href="/">
-                <a>{t("Back To Shopping")}</a>
+                <a className={styles.back_shopping}>{t("Back To Shopping")}</a>
               </Link>
             </div>
           </div>
-          {/* {process.browser && !localStorage.getItem("user") && (
-            <div className="col-lg-4">
-              <HeaderComponent text="Set password " />
-              <form onSubmit={submitHandler}>
-                <strong>
-                  Set password for future login with the email you have ordered
-                  now!
-                </strong>
-                <div className="form-group my-4">
-                  <label htmlFor="exampleInputPassword1">Password</label>
-                  <input
-                    required
-                    type="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div className="form-group my-4">
-                  <label htmlFor="exampleInputPassword1">
-                    Confirm Password
-                  </label>
-                  <input
-                    required
-                    type="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Confirm  Password"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="btn btn-block btn-outline-success my-3"
-                  disabled={success}
-                >
-                  Submit
-                </button>
-              </form>
+          <div className="col-lg-7">
+            <div id="card-element" className="">
+              <i>Test API supports only Kuwait so do not add any cards</i>
+              <button onClick={myFatoorahSubmit}>Verify</button>
             </div>
-          )} */}
+            <div className="d-none mt-4" id="paymentURL">
+              <i>
+                Please complete your payment from the url. You&apos;ll be
+                redirected and after that nothing developed yet
+              </i>
+              <hr />
+              <a
+                className="btn-link"
+                target="_blank"
+                href={paymentURL}
+                rel="noreferrer"
+              >
+                {paymentURL}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default withTranslation('common')(StepFour);
+export default withTranslation("common")(StepFour);

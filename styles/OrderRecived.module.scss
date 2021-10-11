@@ -1,0 +1,19 @@
+@import "./sass/variables";
+@import "./sass/mixins";
+
+.step_four {
+  .greet {
+    color: $theme1;
+    font-weight: 600;
+  }
+}
+.continue_container {
+  display: block;
+  margin: 20px 0;
+  .back_shopping {
+    background-color: $theme1;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+  }
+}

@@ -38,7 +38,7 @@ function MobileMenu({ lang, style }) {
   ];
   const arMenu = [
     {
-      name: "New",
+      name: "جديد",
       slug: "new",
     },
     {
