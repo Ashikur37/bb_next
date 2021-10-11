@@ -2,9 +2,9 @@ import Moment from 'react-moment';
 export default function PaymentStatus(props){
     const { Data } = props;
     return (
-        <div className="col-lg-7">
-            <h5>Invoice {Data.InvoiceId} Details</h5>
-            <table className="table table-sm">
+        <div className="col-lg-8">
+            <h5 className="mb-3">Invoice {Data.InvoiceId} Details</h5>
+            <table className="table table-sm table-responsive-sm table-bordered table-striped table-hover">
                 <tbody>
                     <tr>
                         <td>Name: </td>
@@ -30,9 +30,7 @@ export default function PaymentStatus(props){
                         <td>Amount: </td>
                         <td>{Data.InvoiceDisplayValue}</td>
                     </tr>
-                    <tr>
-                        <td colSpan="4"></td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>

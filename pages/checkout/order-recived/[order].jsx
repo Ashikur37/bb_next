@@ -44,11 +44,11 @@ function StepFour({ order, t }) {
       axios.get("/en/getdata/order_by_id/" + router.query.order)
         .then(({ data }) => {
           setMyOrder(data);
-          if (data.payment_method == "Online Payment") {
-            document.getElementById("paymentView").classList.remove("d-none");
+          if (data.payment_method == "Card Payment") {
+            // document.getElementById("paymentView").classList.remove("d-none");
           }
 
-          if (data.payment_method == "Online Payment" && !router.query.paymentId) {
+          if (data.payment_method == "Card Payment" && !router.query.paymentId) {
             Axios.get("/v2/InitiateSession").then(({ data }) => {
               if (data.IsSuccess) {
                 var config = {
@@ -68,12 +68,14 @@ function StepFour({ order, t }) {
             });
           }
           if (router.query.paymentId) {
+            console.log(router.query.paymentId);
             Axios.post("/v2/GetPaymentStatus", {
               Key: router.query.paymentId,
               KeyType: "paymentId"
             }).then(({ data }) => {
               if (data.Data.InvoiceTransactions.length > 0) {
                 setPaymentDetails(data);
+                // TODO: api call to change payment status
               }
             })
           }
@@ -112,12 +114,12 @@ function StepFour({ order, t }) {
             Additional: myOrder.billing_address_2,
             AddressInstructions: myOrder.billing_address_1,
           },
-          UserDefinedField: { "order": myOrder.id, "card": cardBrand }
+          UserDefinedField:  myOrder.id, 
         }).then(({ data }) => {
           console.log(data);
           if (data.IsSuccess) {
             setPaymentURL(data.Data.PaymentURL);
-            axios.post('/checkout/save_payment_id', {
+            axios.post('/en/checkout/save_payment_id', {
               order_id: myOrder.id,
               transaction_id: "",
               payment_method: data.Data.PaymentURL,
@@ -148,7 +150,7 @@ function StepFour({ order, t }) {
           <Header text={t("CONFIRMATION")} />
         </div>
         <div className="row justify-content-center">
-          <div className="col-lg-5">
+          <div className="col-lg-4">
             {/* <div className="circle">
               <FontAwesomeIcon icon={faCheck} />
             </div> */}
