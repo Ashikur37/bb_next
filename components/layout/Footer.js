@@ -46,7 +46,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
               <FontAwesomeIcon className="fa_icon" icon={faEnvelope} />
               <span>info@beautyboothqa.com</span>
             </div>
-            <div className="mt-3">
+            {/* <div className="mt-3">
               <a
                 rel="noreferrer"
                 target="_blank"
@@ -59,7 +59,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
                   width="200"
                 />
               </a>
-            </div>
+            </div> */}
           </div>
           <div className={styles.second}>
             <div className={styles.customer_service}>

@@ -1,7 +1,7 @@
 const axios = require("axios");
 // const url = "https://admin.beautyboothqa.com/";
-const url = "http://localhost:8000/";
-// const url = "https://new.beautybooth.shop/";
+// const url = "http://localhost:8000/";
+const url = "https://new.beautybooth.shop/";
 const Axios = axios.create({
   baseURL: url,
   responseType: "json",

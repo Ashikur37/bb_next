@@ -58,6 +58,7 @@ function StepFour({ order, t }) {
                 };
                 setTimeout(function () {
                   myFatoorah.init(config);
+                  document.getElementById("paymentView").classList.remove("d-none");
                 }, 1000);
 
               } else {
@@ -68,7 +69,6 @@ function StepFour({ order, t }) {
             });
           }
           if (router.query.paymentId) {
-            console.log(router.query.paymentId);
             Axios.post("/v2/GetPaymentStatus", {
               Key: router.query.paymentId,
               KeyType: "paymentId"
@@ -76,6 +76,10 @@ function StepFour({ order, t }) {
               if (data.Data.InvoiceTransactions.length > 0) {
                 setPaymentDetails(data);
                 // TODO: api call to change payment status
+                axios.post('/en/checkout/save_payment_id', {
+                  order_id: parseInt(data.Data.UserDefinedField),
+                  payment_id: router.query.paymentId,
+                });
               }
             })
           }
@@ -116,12 +120,11 @@ function StepFour({ order, t }) {
           },
           UserDefinedField:  myOrder.id, 
         }).then(({ data }) => {
-          console.log(data);
           if (data.IsSuccess) {
             setPaymentURL(data.Data.PaymentURL);
             axios.post('/en/checkout/save_payment_id', {
               order_id: myOrder.id,
-              transaction_id: "",
+              transaction_id: data.Data.InvoiceId,
               payment_method: data.Data.PaymentURL,
             });
             if (data.Data.PaymentURL) {
@@ -177,7 +180,7 @@ function StepFour({ order, t }) {
                 <div id="card-element" className="my-2">
                   <i>Test API supports only Kuwait so do not add any cards</i>
                 </div>
-                <button onClick={myFatoorahSubmit} className="btn btn-info">Verify &amp; Proceed Next</button>
+                <button onClick={()=>myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
                 <div className="d-none mt-4" id="paymentURL">
                   <i>
                     Please complete your payment from the url. You&apos;ll be
