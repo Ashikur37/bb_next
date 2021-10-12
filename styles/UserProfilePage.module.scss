@@ -39,6 +39,11 @@
         margin-bottom: 20px;
       }
     }
+    [dir="rtl"] & {
+      border-right: unset;
+      border-left: 2px solid #e7e7e7;
+      text-align: right;
+    }
   }
   .main_container {
     .welcome {
@@ -134,6 +139,9 @@
           width: 130px;
         }
       }
+    }
+    [dir="rtl"] &{
+      text-align: right;
     }
   }
 }

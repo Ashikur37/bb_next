@@ -1,0 +1,49 @@
+@import "./sass/variables";
+@import "./sass/mixins";
+.edit__profile__page {
+
+    form {
+      label {
+        color: black;
+        font-weight: 600;
+      }
+      .buttons__wrapper {
+        margin: 20px;
+        text-align: center;
+        a,
+        input {
+          padding: 10px 15px;
+          font-size: 18px;
+          width: 200px;
+          border-radius: 25px;
+          outline: none;
+          border: none;
+          display: inline-block;
+          @include breakpoint(tablet) {
+            width: 280px;
+          }
+        }
+  
+        .cancle {
+          margin-right: 20px;
+          background: transparent;
+          border: 1px solid #707070;
+          @include breakpoint(tablet) {
+            margin: 0 0 20px;
+          }
+          [dir="rtl"] & {
+              margin-right: unset;
+              margin-left: 20px;
+          }
+        }
+        .update {
+          background: #d9215f;
+          color: white;
+          padding: 15px;
+        }
+      }
+    }
+    [dir = "rtl"] & {
+        text-align: right;
+    }
+  }

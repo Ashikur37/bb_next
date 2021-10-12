@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-function SideBar({ active,styles }) {
+import { withTranslation } from "../../i18n";
+function SideBar({ active,styles,t }) {
   const router = useRouter();
 
   const [page, setPage] = useState();
@@ -27,46 +28,46 @@ function SideBar({ active,styles }) {
 
   return (
     <div className={styles.side_container}>
-      <div className={styles.side_header}>My Account</div>
+      <div className={styles.side_header}>{t("My Account")}</div>
       <ul className={styles.side_list}>
         <li className={styles.side_item}>
           <Link href="/profile">
             <a className={active == "dashboard" ? styles.active : ""}>
-              Account Dashboard
+              {t("Account Dashboard")}
             </a>
           </Link>
         </li>
         <li className={styles.side_item}>
           <Link href="/profile/refer">
-            <a className={active == "refer" ? styles.active : ""}>Refer Friends</a>
+            <a className={active == "refer" ? styles.active : ""}>{t("Refer Friends")}</a>
           </Link>
         </li>
         <li className={styles.side_item}>
           <Link href="/profile/addressbook">
             <a className={active == "addressbook" ? styles.active : ""}>
-              Address Book
+              {t("Address Book")}
             </a>
           </Link>
         </li>
         <li className={styles.side_item}>
           <Link href="/profile/orders">
-            <a className={active == "orders" ? styles.active : ""}>My Orders</a>
+            <a className={active == "orders" ? styles.active : ""}>{t("My Orders")}</a>
           </Link>
         </li>
         <li className={styles.side_item}>
           <Link href="/profile/waitlist">
-              <a className={active == "waitlist" ? styles.active : ""}>WaitList</a>
+              <a className={active == "waitlist" ? styles.active : ""}>{t("WaitList")}</a>
           </Link>
         </li>
       </ul>
       <select className={` ${styles.mb_select} form-control`} onChange={selectHandler} value={page == "dashboard" ? "/":page}>
-        <option value="/">Account Dashboard</option>
-        <option value="refer">Refer Friends</option>
-        <option value="addressbook">Address Book</option>
-        <option value="orders">My Order</option>
-        <option value="waitlist">waitlist</option>
+        <option value="/">{t("Account Dashboard")}</option>
+        <option value="refer">{t("Refer Friends")}</option>
+        <option value="addressbook">{t("Address Book")}</option>
+        <option value="orders">{t("My Order")}</option>
+        <option value="waitlist">{t("waitlist")}</option>
       </select>
     </div>
   );
 }
-export default SideBar;
+export default withTranslation("common")(SideBar);
