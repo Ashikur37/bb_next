@@ -20,6 +20,10 @@ class MyDocument extends Document {
           ></meta>
           <meta property="og:type" content="website"></meta>
           <link rel="icon" href="/fav1.ico"></link>
+
+        {/*eslint-disable */}
+        <script src="https://demo.myfatoorah.com/cardview/v1/session.js" async></script>
+        {/*eslint-enable */}
         </Head>
 
         <body>
