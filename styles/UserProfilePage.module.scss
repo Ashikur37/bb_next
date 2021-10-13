@@ -43,6 +43,9 @@
       border-right: unset;
       border-left: 2px solid #e7e7e7;
       text-align: right;
+      @include breakpoint (tablet){
+        border: none;
+      }
     }
   }
   .main_container {

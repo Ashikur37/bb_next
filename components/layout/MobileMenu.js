@@ -42,31 +42,31 @@ function MobileMenu({ lang, style }) {
       slug: "new",
     },
     {
-      name: "Brands",
+      name: "ماركات",
       slug: "brands",
     },
     {
-      name: "Skin Care",
+      name: "العناية بالبشرة",
       slug: "category/Skin-Care",
     },
     {
-      name: "Hair Care",
+      name: "العناية بالشعر",
       slug: "category/Hair-Care",
     },
     {
-      name: "Makeup",
+      name: "مستحضرات  التجميل",
       slug: "category/Makeup",
     },
     {
-      name: "Fragrance",
+      name: "اكسسوارات",
       slug: "category/Fragrance",
     },
     {
-      name: "Campaigns",
+      name: "الحملات",
       slug: "campaigns",
     },
     {
-      name: "Best Selling",
+      name: "افضل المبيعات",
       slug: "best-selling",
     },
   ];
