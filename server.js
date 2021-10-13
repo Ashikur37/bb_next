@@ -141,7 +141,7 @@ server.post('/v2/GetPaymentStatus', async (req,res)=>{
     return res.json(response.data)
   }).catch(err=>{
     console.log(err);
-    return res.json({IsSucess:false});
+    return res.json({IsSucess:false,data:err.response});
   });
 });
 //MyFatoorah END

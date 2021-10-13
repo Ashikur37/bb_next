@@ -11,16 +11,15 @@ import { withTranslation } from "react-i18next";
 const Header = dynamic(() => import("../../../components/layout/partials/Header"));
 const PaymentStatus = dynamic(() => import("../../../components/Pages/Checkout/PaymentStatus"));
 import styles from "../../../styles/OrderRecived.module.scss";
-function StepFour({ order, t }) {
+function StepFour({ order, t, paymentDetails, sessionDetails }) {
   const router = useRouter();
-  const [myOrder, setMyOrder] = useState(null);
+  const [myOrder, setMyOrder] = useState(order);
   const [hostName, setHostName] = useState("http://localhost:3000");
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [success, setSuccess] = useState(false);
   const [orderId, setOrderId] = useState();
   const [paymentURL, setPaymentURL] = useState(null);
-  const [paymentDetails, setPaymentDetails] = useState(null);
   useEffect(() => {
     window.scrollTo(0, 0);
     setOrderId(router.query.order);
@@ -40,53 +39,29 @@ function StepFour({ order, t }) {
     }
   }, []);
   useEffect(() => {
-    if (!myOrder) {
-      axios.get("/en/getdata/order_by_id/" + router.query.order)
-        .then(({ data }) => {
-          setMyOrder(data);
-          if (data.payment_method == "Card Payment") {
-            // document.getElementById("paymentView").classList.remove("d-none");
-          }
+    if (sessionDetails) {
+      if (sessionDetails.IsSuccess) {
+        var config = {
+          countryCode: sessionDetails.Data.CountryCode, // Here, add your Country Code you receive from InitiateSession Endpoint.
+          sessionId: sessionDetails.Data.SessionId, // Here you add the "SessionId" you receive from InitiateSession Endpoint.
+          cardViewId: "card-element",
+        };
+        setTimeout(function () {
+          myFatoorah.init(config);
+          document.getElementById("paymentView").classList.remove("d-none");
+        }, 1000);
 
-          if (data.payment_method == "Card Payment" && !router.query.paymentId) {
-            Axios.get("/v2/InitiateSession").then(({ data }) => {
-              if (data.IsSuccess) {
-                var config = {
-                  countryCode: data.Data.CountryCode, // Here, add your Country Code you receive from InitiateSession Endpoint.
-                  sessionId: data.Data.SessionId, // Here you add the "SessionId" you receive from InitiateSession Endpoint.
-                  cardViewId: "card-element",
-                };
-                setTimeout(function () {
-                  myFatoorah.init(config);
-                  document.getElementById("paymentView").classList.remove("d-none");
-                }, 1000);
-
-              } else {
-                window.alert("Payment Initiate Failed")
-              }
-            }).catch(function (error) {
-              console.error(error);
-            });
-          }
-          if (router.query.paymentId) {
-            Axios.post("/v2/GetPaymentStatus", {
-              Key: router.query.paymentId,
-              KeyType: "paymentId"
-            }).then(({ data }) => {
-              if (data.Data.InvoiceTransactions.length > 0) {
-                setPaymentDetails(data);
-                // TODO: api call to change payment status
-                axios.post('/en/checkout/save_payment_id', {
-                  order_id: parseInt(data.Data.UserDefinedField),
-                  payment_id: router.query.paymentId,
-                });
-              }
-            })
-          }
-        })
-        .catch(err => {
-          console.log(err);
+      } else {
+        window.alert("Payment Initiate Failed")
+      }
+    }
+    if (router.query.paymentId) {
+      if (paymentDetails.Data.InvoiceTransactions.length > 0) {
+        axios.post('/en/checkout/save_payment_id', {
+          order_id: parseInt(paymentDetails.Data.UserDefinedField),
+          payment_id: router.query.paymentId,
         });
+      }
     }
   }, [router.query.order]);
 
@@ -99,7 +74,7 @@ function StepFour({ order, t }) {
         // Here you need to pass session id to you backend here
         var sessionId = response.SessionId;
         var cardBrand = response.CardBrand;
-        
+
         Axios.post("/v2/ExecutePayment", {
           SessionId: sessionId,
           InvoiceValue: myOrder.total.amount,
@@ -108,8 +83,8 @@ function StepFour({ order, t }) {
           MobileCountryCode: myOrder.country_code,
           CustomerMobile: myOrder.customer_phone,
           CustomerEmail: myOrder.customer_email,
-          CallBackUrl: hostName + "/checkout/order-recived/" + router.query.order,
-          ErrorUrl: hostName + "/checkout/order-recived/" + router.query.order,
+          CallBackUrl: "https://beautybooth.shop/checkout/order-recived/" + router.query.order,
+          ErrorUrl: "https://beautybooth.shop/checkout/order-recived/" + router.query.order,
           Language: "en",
           CustomerReference: "noshipping-nosupplier",
           CustomerAddress: {
@@ -118,7 +93,7 @@ function StepFour({ order, t }) {
             Additional: myOrder.billing_address_2,
             AddressInstructions: myOrder.billing_address_1,
           },
-          UserDefinedField:  myOrder.id, 
+          UserDefinedField: myOrder.id,
         }).then(({ data }) => {
           if (data.IsSuccess) {
             setPaymentURL(data.Data.PaymentURL);
@@ -177,15 +152,8 @@ function StepFour({ order, t }) {
           {
             router.query.paymentId ? <>{paymentDetails && <PaymentStatus {...paymentDetails}></PaymentStatus>}</> :
               <div className="col-lg-7 d-none" id="paymentView">
-                <div id="card-element" className="my-2">
-                  {/* <i>Test API supports only Kuwait so do not add any cards</i> */}
-                </div>
-                <button onClick={()=>myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
+                <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
                 <div className="d-none mt-4" id="paymentURL">
-                  <i>
-                    Please complete your payment from the url. You&apos;ll be
-                    redirected and after that nothing developed yet
-                  </i>
                   <hr />
                   <a
                     className="btn-link"
@@ -204,4 +172,57 @@ function StepFour({ order, t }) {
   );
 }
 
+// This gets called on every request
+export async function getServerSideProps(ctx) {
+  const token = process.env.NODE_ENV == "production" ? process.env.PGW_PROD : process.env.PGW_DEV;
+  const fatoorahEndpoint = process.env.NODE_ENV == "production" ? "https://api.myfatoorah.com" : "https://apitest.myfatoorah.com";
+  const order = await axios.get("/en/getdata/order_by_id/" + ctx.query.order)
+    .then(({ data }) => (data))
+    .catch(error => (error.response));
+
+  let paymentDetails = null;
+  let sessionDetails = null;
+
+  if (order.payment_method == "Card Payment" && !ctx.query.paymentId) {
+    const options = {
+      method: 'POST',
+      url: fatoorahEndpoint + '/v2/InitiateSession',
+      data: { "countryCode": "QAT" },
+      headers: {
+        Accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+    sessionDetails = await Axios.request(options).then(response => {
+      return response.data;
+    }).catch(err => {
+      console.log(err);
+      return { IsSucess: false };
+    });
+  }
+
+  if (ctx.query.paymentId) {
+    const options = {
+      method: 'POST',
+      url: fatoorahEndpoint + '/v2/GetPaymentStatus',
+      data: {
+        Key: ctx.query.paymentId,
+        KeyType: "paymentId"
+      },
+      headers: {
+        Accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+    paymentDetails = await Axios.request(options).then(response => {
+      return response.data;
+    }).catch(err => {
+      console.log(err);
+      return { IsSucess: false, data: err.response };
+    });
+  }
+  return { props: { paymentDetails, order, sessionDetails } };
+}
 export default withTranslation("common")(StepFour);

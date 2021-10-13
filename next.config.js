@@ -7,7 +7,7 @@ module.exports = {
   },
   localePath: path.resolve("./public/locales"),
   env: {
-    mongodburl: "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa_test?retryWrites=true&w=majority",
+    mongodburl: "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa?retryWrites=true&w=majority",
     // mongodburl:
     //   "mongodb+srv://beautybooth:mwu6V4HwAVo7ISmS@cluster0.uzdrs.mongodb.net/bbqa?retryWrites=true&w=majority",
 
