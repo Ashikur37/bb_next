@@ -104,7 +104,7 @@ function StepFour({ order, t }) {
           SessionId: sessionId,
           InvoiceValue: myOrder.total.amount,
           CustomerName: myOrder.customer_first_name,
-          DisplayCurrencyIso: "KWD",
+          DisplayCurrencyIso: "QAT",
           MobileCountryCode: myOrder.country_code,
           CustomerMobile: myOrder.customer_phone,
           CustomerEmail: myOrder.customer_email,
