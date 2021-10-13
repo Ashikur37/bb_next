@@ -99,17 +99,17 @@ function StepFour({ order, t }) {
         // Here you need to pass session id to you backend here
         var sessionId = response.SessionId;
         var cardBrand = response.CardBrand;
-        console.log(response);
+        
         Axios.post("/v2/ExecutePayment", {
           SessionId: sessionId,
           InvoiceValue: myOrder.total.amount,
           CustomerName: myOrder.customer_first_name,
-          DisplayCurrencyIso: "KWD",
+          DisplayCurrencyIso: "QAR",
           MobileCountryCode: myOrder.country_code,
           CustomerMobile: myOrder.customer_phone,
           CustomerEmail: myOrder.customer_email,
-          CallBackUrl: "https://beautybooth.shop" + "/checkout/order-recived/" + router.query.order,
-          ErrorUrl: "https://beautybooth.shop" + "/checkout/order-recived/" + router.query.order,
+          CallBackUrl: hostName + "/checkout/order-recived/" + router.query.order,
+          ErrorUrl: hostName + "/checkout/order-recived/" + router.query.order,
           Language: "en",
           CustomerReference: "noshipping-nosupplier",
           CustomerAddress: {
@@ -178,7 +178,7 @@ function StepFour({ order, t }) {
             router.query.paymentId ? <>{paymentDetails && <PaymentStatus {...paymentDetails}></PaymentStatus>}</> :
               <div className="col-lg-7 d-none" id="paymentView">
                 <div id="card-element" className="my-2">
-                  <i>Test API supports only Kuwait so do not add any cards</i>
+                  {/* <i>Test API supports only Kuwait so do not add any cards</i> */}
                 </div>
                 <button onClick={()=>myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
                 <div className="d-none mt-4" id="paymentURL">
