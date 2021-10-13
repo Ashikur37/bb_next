@@ -191,6 +191,8 @@
     "ADD NEW":"ADD NEW",
     "Additional Addresses":"Additional Addresses",
     "REWARDS HISTORY":"REWARDS HISTORY",
-    "refresh now":"refresh now"
+    "refresh now":"refresh now",
+    "Payment": "Payment",
+    "Shipping":"Shipping"
 
 }

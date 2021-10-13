@@ -203,7 +203,9 @@
     "ADD NEW":"اضف جديد",
     "Additional Addresses" : "عناوين إضافية",
     "REWARDS HISTORY":"تاريخ المكافآت",
-    "refresh now":"تحديث الآن"
+    "refresh now":"تحديث الآن",
+    "Payment": "قسط",
+    "Shipping":"شحن"
 
 
 }

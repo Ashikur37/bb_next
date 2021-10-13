@@ -64,8 +64,8 @@ function SideBar({ active,styles,t }) {
         <option value="/">{t("Account Dashboard")}</option>
         <option value="refer">{t("Refer Friends")}</option>
         <option value="addressbook">{t("Address Book")}</option>
-        <option value="orders">{t("My Order")}</option>
-        <option value="waitlist">{t("waitlist")}</option>
+        <option value="orders">{t("My Orders")}</option>
+        <option value="waitlist">{t("WaitList")}</option>
       </select>
     </div>
   );

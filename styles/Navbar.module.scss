@@ -296,6 +296,10 @@
       color: #d3c9c9;
       top: 50%;
       transform: translateY(-50%);
+      [dir = "rtl"] & {
+        right: unset;
+        left: 15px;
+      }
     }
     &.closed {
       margin-top: -60px;
