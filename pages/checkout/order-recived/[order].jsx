@@ -78,7 +78,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
 
         Axios.post("/v2/ExecutePayment", {
           SessionId: sessionId,
-          InvoiceValue: myOrder.total.amount,
+          InvoiceValue: (myOrder.total.amount - myOrder.discount.amount),
           CustomerName: myOrder.customer_first_name,
           DisplayCurrencyIso: "QAR",
           MobileCountryCode: myOrder.country_code,
