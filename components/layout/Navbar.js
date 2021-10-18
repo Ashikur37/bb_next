@@ -225,7 +225,7 @@ function Navbar({
         localStorage.getItem("discount") ||
         localStorage.getItem("coupon")
       ) {
-        couponHandler();
+        // couponHandler();
       }
     }
   }, [cartItems, i18n.language]);
@@ -501,7 +501,7 @@ function Navbar({
                         localStorage.getItem("discount") ||
                         localStorage.getItem("coupon")
                       ) {
-                        couponHandler();
+                        // couponHandler();
                       }
                       setActive(!active);
                     }}

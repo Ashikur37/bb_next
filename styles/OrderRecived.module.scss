@@ -2,6 +2,7 @@
 @import "./sass/mixins";
 
 .step_four {
+  min-height: 400px;
   .greet {
     color: $theme1;
     font-weight: 600;
