@@ -56,7 +56,7 @@ function OrdersPage({ auth, t, lang, language, data, Auth }) {
   const pointsToWallet = (e) => {
     e.preventDefault();
 
-    const locale = lang == "ar" ? "ar_QA" : "en";
+    const locale = lang == "ar_QA" ? "ar_QA" : "en";
 
     Axios.defaults.headers.common["Authorization"] = `Bearer ${
       localStorage.getItem("auth_token") || ""
@@ -106,7 +106,7 @@ function OrdersPage({ auth, t, lang, language, data, Auth }) {
             <div className={`${styles.order_history} row`}>
               <div className={styles.history_title_container}>
                 <span className={styles.history_title}>
-                  {t("Rewards history")}
+                  {t("REWARDS HISTORY")}
                 </span>
               </div>
               <table className="table table-bordered">
@@ -162,7 +162,7 @@ function OrdersPage({ auth, t, lang, language, data, Auth }) {
                   ))}
                 </tbody>
               </table>
-              <h5 className={styles.history_title}>Convert Points: </h5>
+              <h5 className={styles.history_title}>{t("Convert Points")}: </h5>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <form method="POST" onSubmit={pointsToWallet}>
                 <div className="form-row">
@@ -180,7 +180,7 @@ function OrdersPage({ auth, t, lang, language, data, Auth }) {
                     <input
                       type="submit"
                       className="btn btn-sm btn-success"
-                      value="Submit"
+                      value={t("submit")}
                     />
                   </div>
                 </div>
@@ -190,7 +190,7 @@ function OrdersPage({ auth, t, lang, language, data, Auth }) {
             <h2 className="text-center"> No Orders Yet</h2>
           )}
           <button className="btn btn-sm btn-secondary" onClick={refreshNow}>
-            refresh now
+            {t("refresh now")}
           </button>
           {orders.length > 0 ? (
             <div className="row">

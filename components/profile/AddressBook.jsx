@@ -3,8 +3,9 @@ import Link from "next/link";
 import Axios from "axios";
 import { useRouter } from 'next/router'
 import styles from "../../styles/UserProfilePage.module.scss"
+import { withTranslation } from "../../i18n";
 
-function AddressBook({ Auth, language, data }) {
+function AddressBook({ Auth, language, data,t }) {
   const router = useRouter()
   const [defaultAddress] = useState(data.filter((a) => a.isDefault));
   const [additionalAddress] = useState(
@@ -27,7 +28,7 @@ function AddressBook({ Auth, language, data }) {
   };
   return (
     <div className={styles.addressbook}>
-      {defaultAddress && <div className={styles.addressbook_title}>Default Addresses</div>}
+      {defaultAddress && <div className={styles.addressbook_title}>{t("Default Addresses")}</div>}
       <div className="row mb-3">
         {defaultAddress &&
           defaultAddress.map((address) => (
@@ -35,8 +36,8 @@ function AddressBook({ Auth, language, data }) {
               <div className={styles.address_info}>
                 <div className={styles.address_title}>
                   {address.addressType == "shipping"
-                    ? "Shipping Address"
-                    : "Billing Address"}
+                    ? t("Shipping Address")
+                    : t("Billing Address")}
                 </div>
 
                 <ul className={`${styles.address_list} mb-2`}>
@@ -69,7 +70,7 @@ function AddressBook({ Auth, language, data }) {
             </div>
           ))}
       </div>
-      {additionalAddress && <div className={styles.addressbook_title}>Additional Addresses</div>}
+      {additionalAddress && <div className={styles.addressbook_title}>{t("Additional Addresses")}</div>}
       <div className="row">
         {additionalAddress &&
           additionalAddress.map((address) => (
@@ -77,8 +78,8 @@ function AddressBook({ Auth, language, data }) {
               <div className={styles.address_info}>
                 <div className={styles.address_title}>
                   {address.addressType == "shipping"
-                    ? "Shipping Address"
-                    : "Billing Address"}
+                    ? t("Shipping Address")
+                    : t("Billing Address")}
                 </div>
 
                 <ul className={styles.address_list}>
@@ -113,11 +114,11 @@ function AddressBook({ Auth, language, data }) {
       </div>
       <div className={`${styles.add_new } mt-3`}>
         <Link href="/profile/address/new">
-          <a className="btn btn-lg">ADD NEW</a>
+          <a className="btn btn-lg">{t('ADD NEW')}</a>
         </Link>
       </div>
     </div>
   );
 }
 
-export default AddressBook;
+export default withTranslation("common")(AddressBook);

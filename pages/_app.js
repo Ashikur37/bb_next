@@ -16,7 +16,9 @@ import "react-phone-number-input/style.css";
 import "../styles/sass/main.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useEffect, useState } from "react";
-const Navbar = dynamic(() => import("../components/layout/Navbar"));
+const NavbarWrapper = dynamic(() =>
+  import("../components/layout/NavbarWrapper")
+);
 const Divider = dynamic(() => import("../components/layout/partials/Divider"));
 const Menu = dynamic(() => import("../components/layout/Menu"));
 const Footer = dynamic(() => import("../components/layout/Footer"));
@@ -25,6 +27,7 @@ const MobileFooterMenu = dynamic(() =>
 );
 import { setCurrentUser, logoutUser } from "../redux/actions/authActions";
 import { setCartFromLocal } from "../redux/actions/cartAction";
+import ScrollTop from "../components/layout/ScrollTop";
 const cookies = new Cookies();
 
 if (process.browser) {
@@ -66,20 +69,21 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     setLang(cookies.get("lang"));
   }, [cookies.get("lang")]);
+
   if (lang === undefined) {
-    cookies.set("next-i18next", "en");
-    cookies.set("lang", "en");
+    cookies.set("next-i18next", "en", { path: "/", SameSite: "None; Secure", maxAge:15*86400});
+    cookies.set("lang", "en", { path: "/" });
     // document.body.dir = "ltr";
   }
   if (lang === "en") {
-    cookies.set("next-i18next", "en");
+    cookies.set("next-i18next", "en", { path: "/", SameSite: "None; Secure", maxAge:15*86400});
     if (typeof document != "undefined") {
       document.body.classList.remove("rtl");
       document.body.dir = "ltr";
     }
   }
   if (lang == "ar_QA") {
-    cookies.set("next-i18next", "ar_QA");
+    cookies.set("next-i18next", "ar_QA", { path: "/", SameSite: "None; Secure", maxAge:15*86400});
     if (document) {
       document.body.classList.add("rtl");
       document.body.dir = "rtl";
@@ -88,33 +92,41 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <Provider store={store}>
-      <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={nav} />
-      <Divider />
-      <Menu lang={lang} />
-      <Divider />
-
-      <Component
-        {...pageProps}
-        FontAwesomeIcon={FontAwesomeIcon}
-        lang={lang}
-        store={store}
-      />
-      <Footer lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
-      <Media
-        query="(max-width: 991px)"
-        render={() => (
-          <MobileFooterMenu lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
-        )}
-      />
-      <Media
-        query="(min-width: 992px)"
-        render={() => (
-          <Script
-            src="https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js"
-            strategy="lazyOnload"
+      {lang && (
+        <>
+          <NavbarWrapper
+            FontAwesomeIcon={FontAwesomeIcon}
+            lang={lang}
+            styles={nav}
           />
-        )}
-      />
+          {/* <Divider />
+          <Menu lang={lang} />
+          <Divider /> */}
+          <Component
+            {...pageProps}
+            FontAwesomeIcon={FontAwesomeIcon}
+            lang={lang}
+            store={store}
+          />
+          <Footer lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
+          <Media
+            query="(max-width: 991px)"
+            render={() => (
+              <MobileFooterMenu lang={lang} FontAwesomeIcon={FontAwesomeIcon} />
+            )}
+          />
+          <Media
+            query="(min-width: 992px)"
+            render={() => (
+              <Script
+                src="https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js"
+                strategy="lazyOnload"
+              />
+            )}
+          />{" "}
+          {process.browser && <ScrollTop />}
+        </>
+      )}
     </Provider>
   );
 };

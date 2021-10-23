@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 import {
   faChevronRight,
   faArrowUp,
-  faSpinner
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { withTranslation } from "react-i18next";
 import styles from "../../styles/MobileFooterMenu.module.scss";
 import Image from "next/image";
 import { menus } from "./menu";
-import router from "next/router";
+import { useRouter } from "next/router";
 function MobileFooterMenu(props) {
+  const router = useRouter();
   const { isAuthenticated } = props.auth;
   const { t, FontAwesomeIcon } = props;
   useEffect(() => {
@@ -59,14 +60,14 @@ function MobileFooterMenu(props) {
     return () => (mounted = false);
   }, [chat]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     const script = document.createElement("script");
-  //     script.src = "https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js";
-  //     script.async = true;
-  //     document.body.appendChild(script);
-  //   }, 1500);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      const script = document.createElement("script");
+      script.src = "https://code.tidio.co/78qfcpefcnzbgxw8p5mepwdusgyunte4.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }, 1500);
+  }, []);
 
   const openChat = () => {
     window.tidioChatApi.display(true);
@@ -166,9 +167,13 @@ function MobileFooterMenu(props) {
     setStep(2);
     setStep2Value(item);
   };
-  const routeHandler = (routeName) => {
+  const routeHandler = (item) => {
     setOpenPopup(false);
-    router.push(routeName);
+    if (item.isCategory) {
+      router.push(`/category/${item.url}`);
+    } else {
+      router.push(`/${item.url}`);
+    }
   };
   return (
     <div className={styles.mobileFooterMenu}>
@@ -204,7 +209,10 @@ function MobileFooterMenu(props) {
               <Link href="">
                 <a
                   className={styles.menu_item_wrap}
-                  onClick={() => setOpenPopup(true)}
+                  onClick={() => {
+                    setStep(0);
+                    setOpenPopup(true);
+                  }}
                 >
                   <>
                     {/* <FontAwesomeIcon icon={faBars} /> */}
@@ -322,7 +330,7 @@ function MobileFooterMenu(props) {
             <div>
               {step == 0 && (
                 <ul className={styles.cat_list}>
-                  {menus.map((item,index) => (
+                  {menus.map((item, index) => (
                     <li key={index}>
                       {item.hasItems ? (
                         <span
@@ -341,7 +349,7 @@ function MobileFooterMenu(props) {
                           </span>
                         </span>
                       ) : (
-                        <span onClick={() => routeHandler(item.slug)}>
+                        <span onClick={() => routeHandler(item)}>
                           <a className={styles.a}>
                             {item.name}
                             <span className={styles.cat_img}>
@@ -371,30 +379,31 @@ function MobileFooterMenu(props) {
                   </button>
 
                   <ul className={styles.sub_cat_list}>
-                    {stepValue.items.map((item,index) => (
-                      <li key={index}>
-                        {item.hasItems ? (
-                          <span
-                            className={styles.a}
-                            onClick={() => itemHandler2(item)}
-                          >
-                            <span>{item.name}</span>{" "}
-                            <Image
-                              src={"/footericon/arrow.svg"}
-                              width={20}
-                              height={20}
-                            />
-                          </span>
-                        ) : (
-                          <span
-                            onClick={() => routeHandler(item.slug)}
-                            className={styles.a}
-                          >
-                            {item.name}
-                          </span>
-                        )}
-                      </li>
-                    ))}
+                    {stepValue.items &&
+                      stepValue.items.map((item, index) => (
+                        <li key={index}>
+                          {item.hasItems ? (
+                            <span
+                              className={styles.a}
+                              onClick={() => itemHandler2(item)}
+                            >
+                              <span>{item.name}</span>{" "}
+                              <Image
+                                src={"/footericon/arrow.svg"}
+                                width={20}
+                                height={20}
+                              />
+                            </span>
+                          ) : (
+                            <span
+                              onClick={() => routeHandler(item)}
+                              className={styles.a}
+                            >
+                              {item.name}
+                            </span>
+                          )}
+                        </li>
+                      ))}
                   </ul>
                 </div>
               )}
@@ -411,7 +420,7 @@ function MobileFooterMenu(props) {
                   </button>
 
                   <ul className={styles.sub_cat_list}>
-                    {step2Value.items.map((item,index) => (
+                    {step2Value.items.map((item, index) => (
                       <li key={index}>
                         {item.hasItems ? (
                           <span
@@ -427,7 +436,7 @@ function MobileFooterMenu(props) {
                           </span>
                         ) : (
                           <span
-                            onClick={() => routeHandler(item.slug)}
+                            onClick={() => routeHandler(item)}
                             className={styles.a}
                           >
                             {item.name}

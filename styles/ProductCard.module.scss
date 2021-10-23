@@ -7,7 +7,7 @@
   // box-shadow: 1px 1px 4px 1px #0000001a;
   box-shadow: 0px 12px 24px #afafaf1f;
   position: relative;
-  padding: 0px;
+  padding: 20px;
   border-radius: 14px;
   @include breakpoint(tablet) {
     padding: 10px;
@@ -188,6 +188,13 @@
     }
     @include breakpoint(tablet) {
       font-size: 13px;
+    }
+  }
+  [dir="rtl"] & {
+    .product_brand,
+    .product_name,
+    .product_price {
+      text-align: right;
     }
   }
 }

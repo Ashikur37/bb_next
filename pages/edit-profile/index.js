@@ -12,11 +12,14 @@ import Link from "next/link";
 // import axios from "../../redux/actions/axios";
 import Axios from "axios";
 import HeaderComponent from "../../components/atom/HeaderComponent";
+import Header from "../../components/layout/partials/Header";
 import { toast, ToastContainer } from "react-toastify";
+import { withTranslation } from "../../i18n";
+import styles from "../../styles/EditProfilePage.module.scss"
 
 // import "react-datepicker/dist/react-datepicker.css";
 const proImg = "images/avatar.png";
-function EditProfile({ auth, history, logout, lang }) {
+function EditProfile({ auth, history, logout, lang ,t}) {
   const [user, setUser] = useState(null);
 
   const [profileImg, setProfileImg] = useState();
@@ -42,10 +45,11 @@ function EditProfile({ auth, history, logout, lang }) {
       location.replace("/login");
     }
     if (auth.isAuthenticated && !user) {
-      Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("auth_token") || ""
-        }`;
+      Axios.defaults.headers.common["Authorization"] = `Bearer ${
+        localStorage.getItem("auth_token") || ""
+      }`;
 
-      const locale = lang == "ar" ? "ar_QA" : "en";
+      const locale = lang == "ar_QA" ? "ar_QA" : "en";
       Axios.get(`/api/profile?locale=${locale}`)
         .then((res) => {
           setFullName(res.data.user.first_name);
@@ -86,26 +90,24 @@ function EditProfile({ auth, history, logout, lang }) {
       // formData.append("profile_image", profileImg);
       // formData.append("others[profession]", profession);
       // formData.append("others[dob]", dob);
-      Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("auth_token") || ""
-        }`;
-      Axios.post(
-        "/api/profiles/update-profile",
-        {
-          first_name: fullName,
-          email,
-          profile: {
-            city: area,
-            apartment: apt,
-            address: fullAddress,
-            profile_image: profileImg,
-            phone_no: phone,
-          },
-          others: {
-            profession: profession,
-            dob: dob,
-          }
-        }
-      ).then((res) => {
+      Axios.defaults.headers.common["Authorization"] = `Bearer ${
+        localStorage.getItem("auth_token") || ""
+      }`;
+      Axios.post("/api/profiles/update-profile", {
+        first_name: fullName,
+        email,
+        profile: {
+          city: area,
+          apartment: apt,
+          address: fullAddress,
+          profile_image: profileImg,
+          phone_no: phone,
+        },
+        others: {
+          profession: profession,
+          dob: dob,
+        },
+      }).then((res) => {
         toast.success(res.data, {
           position: "bottom-right",
           autoClose: 2000,
@@ -144,7 +146,8 @@ function EditProfile({ auth, history, logout, lang }) {
     return errorsValues;
   };
   function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
   //for image change
@@ -180,12 +183,11 @@ function EditProfile({ auth, history, logout, lang }) {
       confirm__pass: newPasswrodConfirm,
     };
     // TODO: axios request
-    Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("auth_token") || ""
-      }`;
-    Axios
-      .post("/api/profiles/change-password", data)
+    Axios.defaults.headers.common["Authorization"] = `Bearer ${
+      localStorage.getItem("auth_token") || ""
+    }`;
+    Axios.post("/api/profiles/change-password", data)
       .then((res) => {
-
         setValidationMessage(null);
         logout();
       })
@@ -198,14 +200,17 @@ function EditProfile({ auth, history, logout, lang }) {
   };
 
   return (
-    <div className="edit__profile__page">
+    <div className={styles.edit__profile__page}>
       <Head>
         <title>Edit Profile</title>
       </Head>
       <div className="container">
-
         <ToastContainer />
-        <HeaderComponent text="Edit Profile" />
+        {/* <HeaderComponent text="Edit Profile" /> */}
+        <div className="text-center mt-2">
+          <Header text={t("Edit Profile")} />
+        </div>
+
         {/* <div className="row">
           <div className="col">
             <div className="update__profile__title">
@@ -238,7 +243,7 @@ function EditProfile({ auth, history, logout, lang }) {
                 <div className="row ">
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="fullname">Full Name</label>
+                      <label htmlFor="fullname">{t("Full Name")}</label>
                       <input
                         type="text"
                         className={
@@ -260,7 +265,7 @@ function EditProfile({ auth, history, logout, lang }) {
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="email">{t("Email address")}</label>
                       <input
                         type="email"
                         className={
@@ -310,7 +315,7 @@ function EditProfile({ auth, history, logout, lang }) {
                 <div className="row ">
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="phone__number">Phone Number</label>
+                      <label htmlFor="phone__number">{t("Your Phone Number")}</label>
                       <PhoneInput
                         international
                         defaultCountry="QA"
@@ -347,7 +352,7 @@ function EditProfile({ auth, history, logout, lang }) {
                 <div className="row ">
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="address">Full Address</label>
+                      <label htmlFor="address">{t("Full Address")}</label>
                       <input
                         type="text"
                         className={
@@ -370,7 +375,7 @@ function EditProfile({ auth, history, logout, lang }) {
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="area">Area</label>
+                      <label htmlFor="area">{t("Area")}</label>
                       <input
                         type="text"
                         className={
@@ -431,11 +436,11 @@ function EditProfile({ auth, history, logout, lang }) {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <div className="buttons__wrapper">
+                    <div className={styles.buttons__wrapper}>
                       <Link href="/profile">
-                        <a className="cancle"> Cancel</a>
+                        <a className={styles.cancle}> {t("Cancel")}</a>
                       </Link>
-                      <input type="submit" className="update" value="update" />
+                      <input type="submit" className={styles.update} value={t("Update")} />
                     </div>
                   </div>
                 </div>
@@ -443,15 +448,15 @@ function EditProfile({ auth, history, logout, lang }) {
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row ">
           <HeaderComponent />
 
-          <div className="col-md-6 offset-md-3">
+          <div className="col-md-6 mx-auto">
             <div className="change_pass">
-              <span className="title">Change Password</span>
+              <span className="title">{t("Change Password")}</span>
               <form onSubmit={changePasswordSubmitHandler}>
                 <div className="form-group pass_group">
-                  <label className="input_label">Old Password</label>
+                  <label className="input_label">{t("Old Password")}</label>
                   <input
                     type="password"
                     required
@@ -462,7 +467,7 @@ function EditProfile({ auth, history, logout, lang }) {
                   />
                 </div>
                 <div className="form-group pass_group">
-                  <label className="input_label">New Password</label>
+                  <label className="input_label">{t("New Password")}</label>
                   <input
                     type="password"
                     required
@@ -473,7 +478,7 @@ function EditProfile({ auth, history, logout, lang }) {
                   />
                 </div>
                 <div className="form-group pass_group">
-                  <label className="input_label">Confirm Password</label>
+                  <label className="input_label">{t("Confirm Password")}</label>
                   <input
                     type="password"
                     required
@@ -492,7 +497,7 @@ function EditProfile({ auth, history, logout, lang }) {
                   <input
                     className="submit_btn change_btn"
                     type="submit"
-                    value="Save Changes"
+                    value={t("Save Changes")}
                   />
                 </div>
               </form>
@@ -512,4 +517,4 @@ const mapDispatchToProps = (dispatch) => {
     logout: () => logoutUser(dispatch),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps) (withTranslation("common")(EditProfile));

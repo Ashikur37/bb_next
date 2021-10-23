@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import LazyLoad from "react-lazyload";
 import styles from "../../styles/ProductCard.module.scss";
-function Product({ product, lazy = false }) {
+function Product({ product, lazy = false, lang = "en" }) {
   const [innBag, setInBag] = useState(0);
 
   const RibbonNew = () => {
@@ -86,7 +86,7 @@ function Product({ product, lazy = false }) {
 
   return (
     <Link href={product ? `/product/${product.slug}` : "/products/slug"}>
-      <a className={`${styles.product}`}>
+      <a className={`${styles.product}`} dir={lang == "en" ? "ltr" : "rlt"}>
         <RibbonNew />
         <RibbonOffer />
         <RibbonSoldOut />

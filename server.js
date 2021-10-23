@@ -47,19 +47,16 @@ const SpecialCoupon = require("./server/models/SpecialCoupon");
  const api = bizSdk.FacebookAdsApi.init(access_token);
  const api2 = bizSdk.FacebookAdsApi.init(access_token2);
  
-
 //passport config
 require("./server/middleware/passport")(passport);
-const uri =
-  process.env.NODE_ENV == "development"
-    ? process.env.API_DEVELOPMENT
-    : process.env.API_PRODUCTION;
+const token = process.env.NODE_ENV == "production" ? process.env.PGW_PROD : process.env.PGW_DEV;
+const fatoorahEndpoint = process.env.NODE_ENV == "production" ? "https://api.myfatoorah.com":"https://apitest.myfatoorah.com"
     
 const ssrCache = cacheableResponse({
   ttl: 1000 * 60 * 60, // 1hour
   get: async ({ req, res, pagePath, queryParams }) => {
     try {
-      return { data: await app.renderToHTML(req, res, pagePath, queryParams) };
+      return { data: await app.renderToHTML(req, res, pagePath, queryParams), ttl: 1000 * 60 * 60 };
     } catch (e) {
       return { data: "error: " + e };
     }
@@ -89,6 +86,66 @@ app
     server.use(passport.session());
     server.use(cookiesMiddleware());
     server.use(cors(options));
+/**
+ * MyFatoorah BEGIN
+ */
+server.get('/v2/InitiateSession', async(req,res)=>{  
+  const options = {
+    method: 'POST',
+    url: fatoorahEndpoint+'/v2/InitiateSession',
+    data: { "countryCode": "QAT" },
+    headers: {
+      Accept: 'application/json',
+      'content-type': 'application/json',
+      Authorization: 'Bearer '+token
+    }
+  };
+  Axios.request(options).then(response=>{
+    return res.json(response.data)
+  }).catch(err=>{
+    console.log(err);
+    return res.json({IsSucess:false});
+  });
+});
+
+server.post('/v2/ExecutePayment', async (req,res)=>{
+  const options = {
+    method: 'POST',
+    url: fatoorahEndpoint+'/v2/ExecutePayment',
+    data: req.body,
+    headers: {
+      Accept: 'application/json',
+      'content-type': 'application/json',
+      Authorization: 'Bearer '+token
+    }
+  };
+  Axios.request(options).then(response=>{
+    return res.json(response.data)
+  }).catch(err=>{
+    console.log(err.response.data.ValidationErrors);
+    return res.json({IsSucess:false,data:err.response});
+  });
+});
+server.post('/v2/GetPaymentStatus', async (req,res)=>{
+  const options = {
+    method: 'POST',
+    url: fatoorahEndpoint+'/v2/GetPaymentStatus',
+    data: req.body,
+    headers: {
+      Accept: 'application/json',
+      'content-type': 'application/json',
+      Authorization: 'Bearer '+token
+    }
+  };
+  Axios.request(options).then(response=>{
+    return res.json(response.data)
+  }).catch(err=>{
+    console.log(err);
+    return res.json({IsSucess:false,data:err.response});
+  });
+});
+//MyFatoorah END
+
 
     server.post('/event/checkout-success', async (req,res) => {
       const {em,ph,product, total, eventName, eventNameSource, order_id, fbp, fbc} = req.body;
@@ -1013,7 +1070,12 @@ server.post(
           res.setHeader("X-Cache-Status", "DISABLED");
           handle(req, res);
         } else {
-          ssrCache({ req, res, pagePath: req.path, queryParams: req.query });
+          res.setHeader(
+            'Cache-Control',
+            'public, s-maxage=3600, stale-while-revalidate=59'
+          );
+          handle(req,res);
+          // ssrCache({ req, res, pagePath: req.path, queryParams: req.query });
         }        
       // } catch (error) {
       //   console.log(error);

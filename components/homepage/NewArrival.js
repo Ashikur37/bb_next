@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Swiper from "react-id-swiper";
 import { connect } from "react-redux";
 import { getNewArrivals } from "../../redux/actions/homePageActions";
@@ -8,7 +9,7 @@ import dynamic from "next/dynamic";
 const Product = dynamic(() => import("../atom/Product"));
 
 function NewArrival(props) {
-  const { t, Header, Link, styles, FontAwesomeIcon } = props;
+  const { t, Header, styles, FontAwesomeIcon } = props;
   useEffect(() => {
     if (!props.newArrivals || props.localLang !== props.lang) {
       props.getNewArrivals(props.lang);
@@ -55,7 +56,7 @@ function NewArrival(props) {
     <div className="container">
       {props.newArrivals ? (
         <>
-          <div className="row">
+          <div className="row mt-3">
             <div className="col">
               <Header
                 h="h2"

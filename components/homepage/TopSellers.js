@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Swiper from "react-id-swiper";
 import { connect } from "react-redux";
 import { getBestSellingProducts } from "../../redux/actions/homePageActions";
@@ -6,7 +7,7 @@ import dynamic from "next/dynamic";
 
 const Product = dynamic(() => import("../atom/Product"));
 function TopSellers(props) {
-  const { t, Header, Link, styles, FontAwesomeIcon, lang } = props;
+  const { t, Header, styles, FontAwesomeIcon, lang } = props;
 
   useEffect(() => {
     if (props.bestSelling.length == 0 || props.localLang !== props.lang) {
@@ -15,6 +16,7 @@ function TopSellers(props) {
   }, [lang]);
   const [swiper, updateSwiper] = useState(null);
   const params = {
+    rtl:false,
     loop: false,
     lazy: {
       loadPrevNext: true,
@@ -73,7 +75,7 @@ function TopSellers(props) {
                 <Swiper getSwiper={updateSwiper} {...params} shouldSwiperUpdate>
                   {props.bestSelling.map((product, index) => (
                     <div key={index}>
-                      <Product product={product} lazy={true} styles={styles} />
+                      <Product product={product} lazy={true} styles={styles} lang={lang} />
                     </div>
                   ))}
                 </Swiper>
@@ -81,7 +83,7 @@ function TopSellers(props) {
                 <Swiper getSwiper={updateSwiper} {...params2} shouldSwiperUpdate>
                   {props.bestSelling.map((product, index) => (
                     <div key={index}>
-                      <Product product={product} lazy={true} styles={styles} />
+                      <Product product={product} lazy={true} styles={styles} lang={lang} />
                     </div>
                   ))}
                 </Swiper>

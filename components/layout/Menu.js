@@ -719,12 +719,12 @@ function Menu({ lang, t }) {
               </ul>
             </li>
             <li className={styles.nav_main_li}>
-              <Link href="/">
+              <Link href="/category/Fragrance">
                 <a className={styles.nav_main_a}> {t("Fragrance")}</a>
               </Link>
             </li>
             <li className={styles.nav_main_li}>
-              <Link href="/category/Fragrance">
+              <Link href="/category/Accessories">
                 <a className={styles.nav_main_a} data-index={6} onMouseEnter={handleHover}> {t("Accessories")}</a>
               </Link>
               <ul className={styles.sub_menu}>

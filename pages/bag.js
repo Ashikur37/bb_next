@@ -251,7 +251,7 @@ function MyBag(props) {
           // alert(res.data.msg);
         })
         .catch((err) => {
-          setMsg(err.response.data);
+          // setMsg(err.response.data);
           // clearCoupon();
           setDiscount(0);
         });

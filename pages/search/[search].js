@@ -44,7 +44,7 @@ function SearchPage(props) {
   useEffect(() => {
     let query = props.name;
     setQuery(query);
-    setLocale(props.lang=='ar'?'ar_QA':'en');
+    setLocale(props.lang);
   }, [props.name,props.lang]);
 
   const ClearRefinements = ({ items, refine }) => {
@@ -138,7 +138,7 @@ function SearchPage(props) {
                                 )
                               }
                             />
-                            <span className="mb_refinment_title">Price</span>
+                            {/* <span className="mb_refinment_title">Price</span> */}
                             {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                             <span className="mb_refinment_title">Brand</span>
                             <RefinementList
@@ -224,7 +224,7 @@ function SearchPage(props) {
                 <InstantSearch searchClient={searchClient} indexName="products">
                   <div className="row">
                     <div className="col-md-3">
-                      <span className="refinment_title">Price</span>
+                      {/* <span className="refinment_title">Price</span> */}
                       {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                       <span className="refinment_title">Category</span>
                       <RefinementList

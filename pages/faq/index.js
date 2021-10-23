@@ -38,7 +38,7 @@ function Index({ t }) {
     window.scrollTo(0, y);
   };
   useEffect(() => {
-    if (lang == "ar") {
+    if (lang == "ar_QA") {
       refHnadlerAr(markAr);
     } else {
       refHnadler(mark);
@@ -79,7 +79,7 @@ function Index({ t }) {
                       {faq.title}
                     </li>
                   ))}
-                {lang == "ar" &&
+                {lang == "ar_QA" &&
                   faqsAr.map((faq, index) => (
                     <li
                       onClick={() => refHnadlerAr(faq.title.toLowerCase())}
@@ -141,7 +141,7 @@ function Index({ t }) {
                       </div>
                     </React.Fragment>
                   ))}
-                {lang == "ar" &&
+                {lang == "ar_QA" &&
                   faqsAr.map((faq, index) => (
                     <React.Fragment key={index}>
                       <h4

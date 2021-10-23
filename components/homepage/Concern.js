@@ -1,13 +1,13 @@
 import { useState } from "react";
+import Link from "next/link";
 import Swiper from "react-id-swiper";
+import { concern as concerns } from "../utils/static"
 // styles
 import styles from "../../styles/sass/homepage_sections/Concern.module.scss";
 
 const Concern = ({
-  concerns,
   FontAwesomeIcon,
   lang,
-  Link,
   Header,
   t,
 }) => {

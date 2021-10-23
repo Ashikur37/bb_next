@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { withTranslation } from "../../i18n"
-import { useRouter, history } from "next/router";
-import HeaderComponent from "../../components/atom/HeaderComponent";
+import { withTranslation } from "../../i18n";
+import { useRouter } from "next/router";
+import HeaderComponent from "../../components/layout/partials/Header";
 import Media from "react-media";
 import Head from "next/head";
 import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch,
-  SearchBox,
   Hits,
   HitsPerPage,
   Stats,
@@ -19,11 +18,13 @@ import {
   ScrollTo,
   connectCurrentRefinements,
 } from "react-instantsearch-dom";
+// import RheostatRangeSlider from "../../components/atom/RheostatRangeSlider";
 import arabic from "../../public/static/category";
 import withURLSync from "../../components/URLSync";
 
 import SingleProduct from "../../components/atom/SingleProduct";
-import CustomRangeSlider from "../../components/atom/CustomRangeSlider";
+// import CustomRangeSlider from "../../components/atom/CustomRangeSlider";
+
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -53,40 +54,39 @@ const CategoryPage = (props) => {
     router.push(router.asPath, undefined, { shallow: true });
   }, []);
   useEffect(() => {
-    setLocale(props.lang == 'ar' ? 'ar_QA' : 'en');
+    setLocale(props.lang == "ar" ? "ar_QA" : "en");
   }, [props.lang]);
-
 
   useEffect(() => {
     setSubCategoryName(
       router.query.sub
         ? decodeURIComponent(
-          router.asPath
-            .split("=")[1]
-            .replace(/\&child/s, "")
-            .replace(/\?page.*/s, "&page")
-            .replace(/\&page.*/s, "")
-        )
-          .replace(/\?rank.*/s, "&rank")
-          .replace(/\&rank.*/s, "")
-          .replace(/\?price.*/s, "")
-          .replace(/\&price.*/s, "")
-          .replace(/\?query.*/s, "")
+            router.asPath
+              .split("=")[1]
+              .replace(/\&child/s, "")
+              .replace(/\?page.*/s, "&page")
+              .replace(/\&page.*/s, "")
+          )
+            .replace(/\?rank.*/s, "&rank")
+            .replace(/\&rank.*/s, "")
+            .replace(/\?price.*/s, "")
+            .replace(/\&price.*/s, "")
+            .replace(/\?query.*/s, "")
         : ""
     );
     setSubCategoryChild(
       router.query.child
         ? decodeURIComponent(
-          router.asPath
-            .split("=")[2]
-            .replace(/\?page.*/s, "")
-            .replace(/\&page.*/s, "&page")
-        )
-          .replace(/\?rank.*/s, "&rank")
-          .replace(/\&rank.*/s, "")
-          .replace(/\?price.*/s, "")
-          .replace(/\&price.*/s, "")
-          .replace(/\?query.*/s, "")
+            router.asPath
+              .split("=")[2]
+              .replace(/\?page.*/s, "")
+              .replace(/\&page.*/s, "&page")
+          )
+            .replace(/\?rank.*/s, "&rank")
+            .replace(/\&rank.*/s, "")
+            .replace(/\?price.*/s, "")
+            .replace(/\&price.*/s, "")
+            .replace(/\?query.*/s, "")
         : ""
     );
     if (props.searchState.hierarchicalMenu) {
@@ -100,7 +100,7 @@ const CategoryPage = (props) => {
       if (subCategoryChild === "" && subCategoryName === "") {
         setSelected(categoryName);
       }
-      
+
       setCategoryName(router.query.category);
     } else {
       if (props.router) {
@@ -109,7 +109,6 @@ const CategoryPage = (props) => {
         router.back();
       }
     }
-    
   }, [props.searchState, props.context, selected]);
 
   useEffect(() => {
@@ -117,26 +116,32 @@ const CategoryPage = (props) => {
     if (subCategoryName !== "" && subCategoryChild === "") {
       searchState.hierarchicalMenu[
         "product.hierarchicalCategories.lvl0.en"
-      ] = `${router.query.category
+      ] = `${router.query.category.split("-").join(" ")} > ${subCategoryName
         .split("-")
-        .join(" ")} > ${subCategoryName.split("-").join(" ")}`;
+        .join(" ")}`;
       setSelected(subCategoryName.split("-").join(" "));
 
       if (props.i18n.language == "ar_QA") {
-        searchState.hierarchicalMenu["product.hierarchicalCategories.lvl0.ar_QA"] =
-          searchState.category_ar + " > " + arabic[subCategoryName];
+        searchState.hierarchicalMenu[
+          "product.hierarchicalCategories.lvl0.ar_QA"
+        ] = searchState.category_ar + " > " + arabic[subCategoryName];
       }
     }
     if (subCategoryChild !== "" && subCategoryName !== "") {
       searchState.hierarchicalMenu[
         "product.hierarchicalCategories.lvl0.en"
-      ] = `${router.query.category
+      ] = `${router.query.category.split("-").join(" ")} > ${subCategoryName
         .split("-")
-        .join(" ")} > ${subCategoryName
-          .split("-")
-          .join(" ")} > ${subCategoryChild.split("-").join(" ")}`;
+        .join(" ")} > ${subCategoryChild.split("-").join(" ")}`;
       if (props.i18n.language == "ar_QA") {
-        searchState.hierarchicalMenu["product.hierarchicalCategories.lvl0.ar_QA"] = searchState.category_ar + " > " + searchState.sub_ar + " > " + searchState.child_ar;
+        searchState.hierarchicalMenu[
+          "product.hierarchicalCategories.lvl0.ar_QA"
+        ] =
+          searchState.category_ar +
+          " > " +
+          searchState.sub_ar +
+          " > " +
+          searchState.child_ar;
       }
       setSelected(subCategoryChild.split("-").join(" "));
     }
@@ -147,7 +152,9 @@ const CategoryPage = (props) => {
       ] = `${router.query.category.split("-").join(" ")}`;
 
       if (props.i18n.language == "ar_QA") {
-        searchState.hierarchicalMenu["product.hierarchicalCategories.lvl0.ar_QA"] = searchState.category_ar;
+        searchState.hierarchicalMenu[
+          "product.hierarchicalCategories.lvl0.ar_QA"
+        ] = searchState.category_ar;
       }
 
       setSelected(categoryName.split("-").join(" "));
@@ -162,7 +169,6 @@ const CategoryPage = (props) => {
     searchState.sub_ar = arabic[subCategoryName];
     searchState.child_ar = arabic[subCategoryChild];
     searchState.locale = props.i18n.language;
-
   }, [props.context, subCategoryName, subCategoryChild, selected, router]);
 
   const Hit = ({ hit }) => (
@@ -257,9 +263,8 @@ const CategoryPage = (props) => {
                                 )
                               }
                             />
-                            <span className="mb_refinment_title">Price</span>
+                            {/* <span className="mb_refinment_title">Price</span> */}
                             {/* <CustomRangeSlider attribute="product.price.amount" /> */}
-
 
                             {/*  custom accordion */}
                             <div className="custom__accordion">
@@ -278,12 +283,15 @@ const CategoryPage = (props) => {
                                     Category
                                   </span>
                                 </label>
-                                <div className="accordion__content mt-3">
+                                <div className="accordion__content mt-md-3">
                                   <HierarchicalMenu
                                     attributes={[
-                                      "product.hierarchicalCategories.lvl0." + props.i18n.language,
-                                      "product.hierarchicalCategories.lvl1." + props.i18n.language,
-                                      "product.hierarchicalCategories.lvl2." + props.i18n.language,
+                                      "product.hierarchicalCategories.lvl0." +
+                                        props.i18n.language,
+                                      "product.hierarchicalCategories.lvl1." +
+                                        props.i18n.language,
+                                      "product.hierarchicalCategories.lvl2." +
+                                        props.i18n.language,
                                     ]}
                                     limit={15}
                                     showMoreLimit={15}
@@ -303,7 +311,7 @@ const CategoryPage = (props) => {
                                 >
                                   <span className="refinment_title">Brand</span>
                                 </label>
-                                <div className="accordion__content mt-3">
+                                <div className="accordion__content mt-md-3">
                                   <RefinementList
                                     attribute="product.attributes.Brand"
                                     showMore
@@ -325,7 +333,7 @@ const CategoryPage = (props) => {
                                     Concern
                                   </span>
                                 </label>
-                                <div className="accordion__content mt-3">
+                                <div className="accordion__content mt-md-3">
                                   <RefinementList
                                     attribute="product.attributes.Concern"
                                     showMore
@@ -378,9 +386,8 @@ const CategoryPage = (props) => {
         defaultMatches={{ medium: initialState.device === "mobile" }}
         render={() => (
           <>
-            <div className="category_page">
+            <div className="category_page mt-4">
               <div className="container">
-                <HeaderComponent text={t(selected)} />
                 <InstantSearch
                   searchClient={searchClient}
                   indexName="products"
@@ -396,12 +403,14 @@ const CategoryPage = (props) => {
                           items.filter(
                             ({ attribute }) =>
                               attribute !==
-                              "product.hierarchicalCategories.lvl0." + props.i18n.language
+                              "product.hierarchicalCategories.lvl0." +
+                                props.i18n.language
                           )
                         }
                       />
-                      <span className="refinment_title">Price</span>
+                      {/* <span className="refinment_title">Price</span> */}
                       {/* <CustomRangeSlider attribute="product.price.amount" /> */}
+                      {/* <RheostatRangeSlider attribute="product.price.amount" direction="LTR"/> */}
                       <NumericMenu
                         attribute="product.price.amount"
                         defaultRefinement={props.searchState.rank}
@@ -417,9 +426,12 @@ const CategoryPage = (props) => {
 
                       <HierarchicalMenu
                         attributes={[
-                          "product.hierarchicalCategories.lvl0." + props.i18n.language,
-                          "product.hierarchicalCategories.lvl1." + props.i18n.language,
-                          "product.hierarchicalCategories.lvl2." + props.i18n.language,
+                          "product.hierarchicalCategories.lvl0." +
+                            props.i18n.language,
+                          "product.hierarchicalCategories.lvl1." +
+                            props.i18n.language,
+                          "product.hierarchicalCategories.lvl2." +
+                            props.i18n.language,
                         ]}
                         limit={15}
                         showMoreLimit={15}
@@ -437,7 +449,7 @@ const CategoryPage = (props) => {
                       />
                     </div>
                     <div className="col-md-9">
-                      {/* <SearchBox /> */}
+                      <HeaderComponent text={t(selected)} />
                       <div className="categories">
                         <div className="hit_result_info">
                           <SortBy

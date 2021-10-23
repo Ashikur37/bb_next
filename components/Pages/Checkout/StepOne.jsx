@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { i18n, withTranslation } from "../../../i18n";
 import Link from "next/link";
 import { connect } from "react-redux";
-import HeaderComponent from "../../atom/HeaderComponent";
 const Header = dynamic(() =>
   import("../../../components/layout/partials/Header")
 );
@@ -18,7 +17,13 @@ import { calculateSubTotal, priceWithoutDiscount } from "../../utils/helper";
 
 function StepOne(props) {
   const { t, styles } = props;
-  const { register, errors, handleSubmit, getValues } = useForm();
+  const {
+    register,
+    formState: { errors },
+    watch,
+    handleSubmit,
+    getValues,
+  } = useForm();
   const [suggestions, setSuggestions] = useState({ suggestions: [] });
   const [suggestionsCity, setSuggestionsCity] = useState({ suggestions: [] });
   const [value, setValue] = useState(props.val.billing_state);
@@ -200,6 +205,7 @@ function StepOne(props) {
                             ? "form-control  is-invalid"
                             : "form-control "
                         }
+                        {...register("customer_first_name", { required: true })}
                         // ref={register({ required: true })}
                       />
                       {errors?.customer_first_name && (
@@ -255,6 +261,7 @@ function StepOne(props) {
                               ? "form-control  is-invalid"
                               : "form-control "
                           }
+                          {...register("customer_email",{required:true,pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
                           // ref={register({
                           //   required: true,
                           //   pattern:
@@ -304,6 +311,7 @@ function StepOne(props) {
                               ? "form-control  is-invalid"
                               : "form-control "
                           }
+                          {...register("street", { required: true })}
                           // ref={register({ required: true })}
                         />
                         {errors?.street && (
@@ -327,6 +335,8 @@ function StepOne(props) {
                               ? "form-control  is-invalid"
                               : "form-control "
                           }
+                          {...register("zone",{required:true})}
+
                           // ref={register({ required: true })}
                         />
                         {errors?.zone && (
@@ -348,6 +358,8 @@ function StepOne(props) {
                               ? "form-control  is-invalid"
                               : "form-control "
                           }
+                          {...register("building",{required:true})}
+
                           // ref={register({ required: true })}
                         />
                         {errors?.building && (
@@ -375,6 +387,7 @@ function StepOne(props) {
                             ? "form-control  is-invalid"
                             : "form-control "
                         }
+                        {...register("billing_address_1", { required: true })}
                         // ref={register({ required: true })}
                       />
                       {errors?.billing_address_1 && (
@@ -395,6 +408,7 @@ function StepOne(props) {
                         defaultValue={props.val.billing_address_2}
                         type="text"
                         className="form-control "
+                        {...register("billing_address_2")}
                         // ref={register}
                       />
                     </div>

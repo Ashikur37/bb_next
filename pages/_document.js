@@ -20,11 +20,24 @@ class MyDocument extends Document {
           ></meta>
           <meta property="og:type" content="website"></meta>
           <link rel="icon" href="/fav1.ico"></link>
+
+        {/*eslint-disable */}
+        <script src="https://demo.myfatoorah.com/cardview/v1/session.js" async></script>
+        {/*eslint-enable */}
         </Head>
 
         <body>
           <Main />
           <NextScript />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-K8KJCH2');`,
+            }}
+          ></script>
         </body>
       </Html>
     );

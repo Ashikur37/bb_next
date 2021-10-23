@@ -48,7 +48,7 @@ function TrendingPage(props) {
   }, [props.trend]);
 
   useEffect(() => {
-    setLocale(props.lang == "ar" ? "ar_QA" : "en");
+    setLocale(props.lang);
   }, [props.lang]);
 
   const Hit = ({ hit }) => (
@@ -142,7 +142,7 @@ function TrendingPage(props) {
                                 )
                               }
                             />
-                            <span className="mb_refinment_title">Price</span>
+                            {/* <span className="mb_refinment_title">Price</span> */}
                             {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                             <span className="mb_refinment_title">Trending</span>
                             <RefinementList
@@ -214,7 +214,7 @@ function TrendingPage(props) {
                 <InstantSearch searchClient={searchClient} indexName="products">
                   <div className="row">
                     <div className="col-md-3">
-                      <span className="refinment_title">Price</span>
+                      {/* <span className="refinment_title">Price</span> */}
                       {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                       <NumericMenu
                         attribute="product.price.amount"

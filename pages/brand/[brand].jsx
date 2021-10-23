@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import HeaderComponent from "../../components/atom/HeaderComponent";
+import Header from "../../components/layout/partials/Header";
 import algoliasearch from "algoliasearch/lite";
 import Media from "react-media";
 import {
@@ -36,7 +36,7 @@ const Loader = dynamic(() => import("../../components/atom/Loader"));
 
 function BrandPage(props) {
   const [defaultNumber, setDefaultNumber] = useState(1);
-  const [locale,setLocale] = useState("en");
+  const [locale, setLocale] = useState("en");
   const [brandName, setBrandName] = useState("");
   const [mFilter, setMfilter] = useState(false);
 
@@ -52,7 +52,7 @@ function BrandPage(props) {
   useEffect(() => {
     let name = props.name;
     setBrandName(name.split("-").join(" "));
-    setLocale(props.lang=='ar'?'ar_QA':'en');
+    setLocale(props.lang == "ar" ? "ar_QA" : "en");
 
     let searchState = props.searchState;
     searchState.refinementList = {
@@ -63,11 +63,11 @@ function BrandPage(props) {
     // searchState.multiRange="";
     searchState.sortBy = props.params.sortBy || "products";
     props.onSearchStateChange(searchState);
-  }, [props.name,props.lang]);
+  }, [props.name, props.lang]);
 
   const Hit = ({ hit }) => (
     <div className="product_wrapper">
-      <SingleProduct product={hit.product} locale={locale}/>
+      <SingleProduct product={hit.product} locale={locale} />
     </div>
   );
   const createMarkup = (data) => {
@@ -150,7 +150,7 @@ function BrandPage(props) {
             <div className="category_page">
               {props.attributeDetails ? (
                 <div className="container">
-                  <HeaderComponent text={brandName} />
+                  <Header text={brandName} />
                   <BrandDetails />
                   <InstantSearch
                     searchClient={searchClient}
@@ -209,7 +209,7 @@ function BrandPage(props) {
                                   )
                                 }
                               />
-                              <span className="mb_refinment_title">Price</span>
+                              {/* <span className="mb_refinment_title">Price</span> */}
                               {/* <CustomRangeSlider  attribute="product.price.amount" /> */}
                               <span className="mb_refinment_title">Brand</span>
                               <RefinementList
@@ -275,7 +275,10 @@ function BrandPage(props) {
             <div className="brand_page">
               {props.attributeDetails ? (
                 <div className="container">
-                  <HeaderComponent text={brandName} />
+                  <div className="text-center mt-2">
+                    <Header text={brandName} />
+                  </div>
+
                   <BrandDetails />
                   <div className="row">
                     <InstantSearch
@@ -294,7 +297,7 @@ function BrandPage(props) {
                             )
                           }
                         />
-                        <span className="refinment_title">Price</span>
+                        {/* <span className="refinment_title">Price</span> */}
                         {/* <CustomRangeSlider attribute="product.price.amount" /> */}
                         <NumericMenu
                           attribute="product.price.amount"
@@ -400,7 +403,7 @@ export async function getServerSideProps(context) {
   let name = context.params.brand;
   let language = context.req.language || "en";
   let attributeDetails = await axios
-    .get(language+"/getdata/attribute", {
+    .get(language + "/getdata/attribute", {
       params: {
         name,
       },

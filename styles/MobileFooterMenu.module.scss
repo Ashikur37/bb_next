@@ -6,7 +6,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 9999999;
+  z-index: 998;
   background: white;
   padding: 5px 0;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
@@ -127,16 +127,18 @@
   background: #0000004d;
   position: fixed;
   height: 100vh;
+  opacity: 0;
   left: 0;
-  z-index: 9999999999999999999999999;
+  z-index: 999;
   width: 100%;
   top: 100%;
   &.active {
     top: 0;
+    opacity: 1;
   }
   transition: 0.4s ease-in-out;
   .popup_top {
-    height: calc(100vh - 560px);
+    height: calc(100vh - 580px);
     position: relative;
     .close {
       position: absolute;
@@ -157,7 +159,7 @@
     z-index: 6565;
     .inner_content {
       background: white;
-      height: 560px;
+      height: 580px;
       width: 100%;
       border-radius: 20px 20px 0px 0px;
       padding: 20px;

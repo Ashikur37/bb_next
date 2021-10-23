@@ -121,12 +121,14 @@ function Navbar({
     i18n.changeLanguage(value);
     if (value == "en") {
       document.body.classList.remove("rtl");
-      cookies.set("lang", "en");
+      cookies.set("lang", "en",{ path: "/", SameSite: "None; Secure", maxAge:15*86400});
       setLanguage("en");
+      window.location.pathname == "/" && window.location.reload();
     } else {
       document.body.classList.add("rtl");
-      cookies.set("lang", "ar_QA");
+      cookies.set("lang", "ar_QA",{ path: "/", SameSite: "None; Secure", maxAge:15*86400});
       setLanguage("ar_QA");
+      window.location.pathname == "/" && window.location.reload();
     }
   };
   const deleteHandler = (id, option_id, bulk_id = null) => {
@@ -223,7 +225,7 @@ function Navbar({
         localStorage.getItem("discount") ||
         localStorage.getItem("coupon")
       ) {
-        couponHandler();
+        // couponHandler();
       }
     }
   }, [cartItems, i18n.language]);
@@ -499,7 +501,7 @@ function Navbar({
                         localStorage.getItem("discount") ||
                         localStorage.getItem("coupon")
                       ) {
-                        couponHandler();
+                        // couponHandler();
                       }
                       setActive(!active);
                     }}
