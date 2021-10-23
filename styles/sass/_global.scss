@@ -68,6 +68,9 @@
   }
   .swiper-pagination-bullets {
     bottom: 40px;
+    @include breakpoint(tablet) {
+      bottom: 10px;
+    }
   }
   .swiper-pagination-bullet {
     background-color: $theme2;
