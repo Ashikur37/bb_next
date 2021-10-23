@@ -3,7 +3,7 @@ const path = require("path");
 const localeSubpaths = {};
 module.exports = {
   images: {
-    domains: ['*.beautybooth.shop','beautyboothqa.sgp1.digitaloceanspaces.com'],
+    domains: ['*.beautyboothqa.com','beautyboothqa.sgp1.digitaloceanspaces.com'],
   },
   localePath: path.resolve("./public/locales"),
   env: {
