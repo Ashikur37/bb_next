@@ -10,6 +10,8 @@ import { withTranslation } from "react-i18next";
 const Header = dynamic(() => import("../../../components/layout/partials/Header"));
 const PaymentStatus = dynamic(() => import("../../../components/Pages/Checkout/PaymentStatus"));
 import styles from "../../../styles/OrderRecived.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
   const { order, paymentId, Id } = query;
   const [hostName, setHostName] = useState("http://localhost:3000");
@@ -36,6 +38,9 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         setHostName('https://' + window.location.host);
       }
     }
+    // if(c_order.transaction.payment_method){
+    //   window.open(c_order.transaction.payment_method);
+    // }
   }, []);
   useEffect(() => {
     if (c_order.payment_method == "Card Payment" && !paymentId) {
@@ -103,11 +108,14 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
               transaction_id: data.Data.InvoiceId,
               payment_method: data.Data.PaymentURL,
             })
-            .catch(()=>{
-              window.alert("There are some problems with the payment id. please contact support");
-            });
+              .catch(() => {
+                window.alert("There are some problems with the payment id. please contact support");
+              });
+              
             if (data.Data.PaymentURL) {
               document.getElementById("paymentURL").classList.remove("d-none");
+
+              window.open(data.Data.PaymentURL);
             } else {
               document.getElementById("paymentURL").classList.add("d-none");
             }
@@ -115,9 +123,9 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
             document.getElementById("paymentURL").classList.add("d-none");
           }
         })
-        .catch(()=>{
-          window.alert("There are some problems with the payment id. please contact support");
-        });
+          .catch(() => {
+            window.alert("There are some problems with the payment id. please contact support");
+          });
       })
       .catch(function (error) {
         // In case of errors
@@ -136,9 +144,9 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         </div>
         <div className="row justify-content-center">
           <div className="col-lg-4">
-            {/* <div className="circle">
-              <FontAwesomeIcon icon={faCheck} />
-            </div> */}
+            <div className={styles.circle}>
+              <FontAwesomeIcon icon={faCheck} className="fa-2x text-success"/>
+            </div>
             <p className={styles.greet}>
               {t("Thank you for shopping with us")}
             </p>
@@ -166,7 +174,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
                 <div className="d-none mt-4" id="paymentURL">
                   <i>
                     Please complete your payment from the url. You&apos;ll be
-                    redirected and after that nothing developed yet
+                    redirected, after that payment will complete and we&apos;ll start processing your order
                   </i>
                   <hr />
                   <a
@@ -180,7 +188,27 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
                 </div>
               </div>
           }
+          
         </div>
+        {
+            c_order.transaction.payment_method &&
+            <div className="mt-3">
+              <i>
+              Please complete your payment from the url. You&apos;ll be
+                    redirected, after that payment will complete and we&apos;ll start processing your order. <br/>
+                    The link will be valid for 15minutes after that provide your card info again.
+              </i>
+              <hr />
+              <a
+                className="btn-link"
+                target="_blank"
+                href={c_order.transaction.payment_method}
+                rel="noreferrer"
+              >
+                {c_order.transaction.payment_method}
+              </a>
+            </div>
+          }
       </div>
     </div>
   );
