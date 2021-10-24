@@ -12,7 +12,8 @@ yarn dev
 ## Live deploy
 
 Run
-```npm run build
+```bash
+npm run build
 # then
 pm2 restart bbnext
 ```

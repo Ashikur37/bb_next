@@ -78,28 +78,28 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
 
         Axios.post("/v2/ExecutePayment", {
           SessionId: sessionId,
-          InvoiceValue: (myOrder.total.amount - myOrder.discount.amount),
-          CustomerName: myOrder.customer_first_name,
+          InvoiceValue: (c_order.total.amount - c_order.discount.amount),
+          CustomerName: c_order.customer_first_name,
           DisplayCurrencyIso: "QAR",
-          MobileCountryCode: myOrder.country_code,
-          CustomerMobile: myOrder.customer_phone,
-          CustomerEmail: myOrder.customer_email,
-          CallBackUrl: "https://beautybooth.shop/checkout/order-recived/" + router.query.order,
-          ErrorUrl: "https://beautybooth.shop/checkout/order-recived/" + router.query.order,
+          MobileCountryCode: c_order.country_code,
+          CustomerMobile: c_order.customer_phone,
+          CustomerEmail: c_order.customer_email,
+          CallBackUrl: "https://beautybooth.shop/checkout/order-recived/" + query.order,
+          ErrorUrl: "https://beautybooth.shop/checkout/order-recived/" + query.order,
           Language: "en",
           CustomerReference: "noshipping-nosupplier",
           CustomerAddress: {
-            BillingCity: myOrder.billing_city,
-            BillingState: myOrder.billing_state,
-            Additional: myOrder.billing_address_2,
-            AddressInstructions: myOrder.billing_address_1,
+            BillingCity: c_order.billing_city,
+            BillingState: c_order.billing_state,
+            Additional: c_order.billing_address_2,
+            AddressInstructions: c_order.billing_address_1,
           },
-          UserDefinedField: myOrder.id,
+          UserDefinedField: c_order.id,
         }).then(({ data }) => {
           if (data.IsSuccess) {
             setPaymentURL(data.Data.PaymentURL);
             axios.post('/en/checkout/save_payment_id', {
-              order_id: myOrder.id,
+              order_id: c_order.id,
               transaction_id: data.Data.InvoiceId,
               payment_method: data.Data.PaymentURL,
             })

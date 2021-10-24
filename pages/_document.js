@@ -11,7 +11,7 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="UTF-8"></meta>
           {/* comment out this line for production */}
-          {/* <meta name="robots" content="noindex"></meta> */}
+          <meta name="robots" content="noindex"></meta>
 
           <meta property="og:locale" content="en_US"></meta>
           <meta
@@ -21,9 +21,6 @@ class MyDocument extends Document {
           <meta property="og:type" content="website"></meta>
           <link rel="icon" href="/fav1.ico"></link>
 
-        {/*eslint-disable */}
-        <script src="https://demo.myfatoorah.com/cardview/v1/session.js" async></script>
-        {/*eslint-enable */}
         </Head>
 
         <body>
