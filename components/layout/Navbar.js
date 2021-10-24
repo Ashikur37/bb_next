@@ -477,12 +477,12 @@ function Navbar({
                         <>
                           <Dropdown.Item>
                             <Link href="/login">
-                              <a>{t("login")}</a>
+                              <a className="d-block">{t("login")}</a>
                             </Link>
                           </Dropdown.Item>
                           <Dropdown.Item>
                             <Link href="/register">
-                              <a>{t("registration")}</a>
+                              <a className="d-block">{t("registration")}</a>
                             </Link>
                           </Dropdown.Item>
                         </>

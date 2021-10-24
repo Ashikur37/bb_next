@@ -912,7 +912,7 @@ function ProductPage(props) {
                               <div>
                                 <button
                                   type="button"
-                                  className="btn join_button"
+                                  className="btn join_button btn-info"
                                   onClick={() => addToWaitListHandlerAsUser()}
                                 >
                                   JOIN THE WAITLIST
@@ -941,7 +941,7 @@ function ProductPage(props) {
                             )}
                           </div>
                         )
-                        : product.qty == 0 && (
+                        : product.qty == 0 || !product.in_stock && (
                           <div className={styles.waiting_div}>
                             <div className={styles.waiting_div_title}>
                               IN STOCK SOON
@@ -950,7 +950,7 @@ function ProductPage(props) {
                               <div>
                                 <button
                                   type="button"
-                                  className="btn join_button"
+                                  className="btn join_button btn-info"
                                   onClick={() => addToWaitListHandlerAsUser()}
                                 >
                                   JOIN THE WAITLIST
