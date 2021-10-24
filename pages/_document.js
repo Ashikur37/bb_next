@@ -21,7 +21,6 @@ class MyDocument extends Document {
           <meta property="og:type" content="website"></meta>
           <link rel="icon" href="/fav1.ico"></link>
 
-       
         </Head>
 
         <body>
