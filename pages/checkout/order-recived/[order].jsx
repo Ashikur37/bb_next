@@ -191,7 +191,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
           
         </div>
         {
-            c_order.transaction.payment_method &&
+            c_order.transaction?.payment_method &&
             <div className="mt-3">
               <i>
               Please complete your payment from the url. You&apos;ll be
