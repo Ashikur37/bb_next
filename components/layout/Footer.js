@@ -5,6 +5,7 @@ import Link from "next/link";
 import axios from "../../redux/actions/axios";
 import styles from "../../styles/Footer.module.scss";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import Image from 'next/image'
 import {
   faFacebookSquare,
   faInstagramSquare,
@@ -60,6 +61,12 @@ function Footer({ lang, FontAwesomeIcon, t }) {
                 />
               </a>
             </div> */}
+            <ul className={styles.payment_link}>
+              <li><Image src="/images/visa.jpg" width="60" height="40"  /></li>
+              <li><Image src="/images/card-visa_2.svg" width="60" height="40"  /></li>
+              
+            </ul>
+
           </div>
           <div className={styles.second}>
             <div className={styles.customer_service}>
