@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 // import axios from "../../../redux/actions/axios";
 import Axios from "axios";
 import axios from "../../../redux/actions/axios";
@@ -13,6 +14,7 @@ import styles from "../../../styles/OrderRecived.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
+  const router = useRouter();
   const { order, paymentId, Id } = query;
   const [hostName, setHostName] = useState("http://localhost:3000");
   const [password, setPassword] = useState();
@@ -38,10 +40,11 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         setHostName('https://' + window.location.host);
       }
     }
-    // if(c_order.transaction.payment_method){
-    //   window.open(c_order.transaction.payment_method);
-    // }
-  }, []);
+    if(c_order.transaction?.payment_id && !router.query.paymentId){
+      router.push(`${router.asPath}?paymentId=${c_order.transaction.payment_id}`);
+
+    }
+  }, [router]);
   useEffect(() => {
     if (c_order.payment_method == "Card Payment" && !paymentId) {
       if (sessionDetails.IsSuccess) {
@@ -191,7 +194,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
           
         </div>
         {
-            c_order.transaction?.payment_method &&
+            (c_order.transaction?.payment_method && c_order.transaction?.payment_id == null) &&
             <div className="mt-3">
               <i>
               Please complete your payment from the url. You&apos;ll be
@@ -265,6 +268,7 @@ export async function getServerSideProps(ctx) {
       return { IsSucess: false, data: err.response };
     });
   }
+  
   return { props: { paymentDetails, sessionDetails, c_order: order, query: ctx.query } };
 }
 export default withTranslation("common")(StepFour);
