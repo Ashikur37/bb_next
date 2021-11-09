@@ -40,7 +40,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         setHostName('https://' + window.location.host);
       }
     }
-    if(c_order.transaction?.payment_id && !router.query.paymentId){
+    if (c_order.transaction?.payment_id && !router.query.paymentId) {
       router.push(`${router.asPath}?paymentId=${c_order.transaction.payment_id}`);
 
     }
@@ -63,6 +63,24 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
       }
     }
   }, [order]);
+  useEffect(() => {
+    if (c_order.payment_method == "Card Payment" && paymentDetails && paymentDetails.Data.InvoiceTransactions[0]?.TransactionStatus == "Failed") {
+      if (sessionDetails.IsSuccess) {
+        var config = {
+          countryCode: sessionDetails.Data.CountryCode, // Here, add your Country Code you receive from InitiateSession Endpoint.
+          sessionId: sessionDetails.Data.SessionId, // Here you add the "SessionId" you receive from InitiateSession Endpoint.
+          cardViewId: "card-element",
+        };
+        setTimeout(function () {
+          myFatoorah.init(config);
+          document.getElementById("paymentView").classList.remove("d-none");
+        }, 1000);
+
+      } else {
+        window.alert("Payment Initiate Failed")
+      }
+    }
+  }, [paymentDetails]);
 
   useEffect(() => {
     if (paymentId) {
@@ -92,8 +110,8 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
           MobileCountryCode: c_order.country_code,
           CustomerMobile: c_order.customer_phone,
           CustomerEmail: c_order.customer_email,
-          CallBackUrl: "https://beautybooth.shop/checkout/order-recived/" + query.order,
-          ErrorUrl: "https://beautybooth.shop/checkout/order-recived/" + query.order,
+          CallBackUrl: "https://beautybooth.shop/checkout/order-received/" + query.order,
+          ErrorUrl: "https://beautybooth.shop/checkout/order-received/" + query.order,
           Language: "en",
           CustomerReference: "noshipping-nosupplier",
           CustomerAddress: {
@@ -114,7 +132,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
               .catch(() => {
                 window.alert("There are some problems with the payment id. please contact support");
               });
-              
+
             if (data.Data.PaymentURL) {
               document.getElementById("paymentURL").classList.remove("d-none");
 
@@ -148,12 +166,11 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         <div className="row justify-content-center">
           <div className="col-lg-4">
             <div className={styles.circle}>
-              <FontAwesomeIcon icon={faCheck} className="fa-2x text-success"/>
+              <FontAwesomeIcon icon={faCheck} className="fa-2x text-success" />
             </div>
             <p className={styles.greet}>
               {t("Thank you for shopping with us")}
             </p>
-            {/* <p className="greet">Your ORDER ID is {order}</p> */}
             <p className={styles.greet}>
               {t("Your ORDER ID is ")}
               {orderId}{" "}
@@ -171,7 +188,6 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
             paymentId ? <>{paymentDetails && <PaymentStatus {...paymentDetails}></PaymentStatus>}</> :
               <div className="col-lg-7 d-none" id="paymentView">
                 <div id="card-element" className="my-2">
-                  {/* <i>Test API supports only Kuwait so do not add any cards</i> */}
                 </div>
                 <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
                 <div className="d-none mt-4" id="paymentURL">
@@ -191,27 +207,50 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
                 </div>
               </div>
           }
-          
-        </div>
-        {
-            (c_order.transaction?.payment_method && c_order.transaction?.payment_id == null) &&
-            <div className="mt-3">
-              <i>
-              Please complete your payment from the url. You&apos;ll be
-                    redirected, after that payment will complete and we&apos;ll start processing your order. <br/>
-                    The link will be valid for 15minutes after that provide your card info again.
-              </i>
-              <hr />
-              <a
-                className="btn-link"
-                target="_blank"
-                href={c_order.transaction.payment_method}
-                rel="noreferrer"
-              >
-                {c_order.transaction.payment_method}
-              </a>
+          {
+            (paymentDetails && paymentDetails.Data.InvoiceTransactions[0]?.TransactionStatus == "Failed") &&
+            <div className="col-lg-7 d-none" id="paymentView">
+              <div id="card-element" className="my-2">
+              </div>
+              <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
+              <div className="d-none mt-4" id="paymentURL">
+                <i>
+                  Please complete your payment from the url. You&apos;ll be
+                  redirected, after that payment will complete and we&apos;ll start processing your order
+                </i>
+                <hr />
+                <a
+                  className="btn-link"
+                  target="_blank"
+                  href={paymentURL}
+                  rel="noreferrer"
+                >
+                  {paymentURL}
+                </a>
+              </div>
             </div>
           }
+
+        </div>
+        {
+          (c_order.transaction?.payment_method && c_order.transaction?.payment_id == null) &&
+          <div className="mt-3">
+            <i>
+              Please complete your payment from the url. You&apos;ll be
+              redirected, after that payment will complete and we&apos;ll start processing your order. <br />
+              The link will be valid for 30 minutes after that provide your card info again.
+            </i>
+            <hr />
+            <a
+              className="btn-link"
+              target="_blank"
+              href={c_order.transaction.payment_method}
+              rel="noreferrer"
+            >
+              {c_order.transaction.payment_method}
+            </a>
+          </div>
+        }
       </div>
     </div>
   );
@@ -226,26 +265,6 @@ export async function getServerSideProps(ctx) {
     .then(({ data }) => (data))
     .catch(error => (error.response));
 
-  let sessionDetails = null;
-
-  if (order.payment_method == "Card Payment" && !ctx.query.paymentId) {
-    const options = {
-      method: 'POST',
-      url: fatoorahEndpoint + '/v2/InitiateSession',
-      data: { "countryCode": "QAT" },
-      headers: {
-        Accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: 'Bearer ' + token
-      }
-    };
-    sessionDetails = await Axios.request(options).then(response => {
-      return response.data;
-    }).catch(err => {
-      console.log(err);
-      return { IsSucess: false };
-    });
-  }
   let paymentDetails = null;
   if (ctx.query.paymentId) {
     const options = {
@@ -268,7 +287,28 @@ export async function getServerSideProps(ctx) {
       return { IsSucess: false, data: err.response };
     });
   }
-  
+
+  let sessionDetails = null;
+
+  if (order.payment_method == "Card Payment" && (!ctx.query.paymentId || (paymentDetails && paymentDetails.Data.InvoiceTransactions[0].TransactionStatus == "Failed"))) {
+    const options = {
+      method: 'POST',
+      url: fatoorahEndpoint + '/v2/InitiateSession',
+      data: { "countryCode": "QAT" },
+      headers: {
+        Accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+    sessionDetails = await Axios.request(options).then(response => {
+      return response.data;
+    }).catch(err => {
+      console.log(err);
+      return { IsSucess: false, data: err};
+    });
+  }
+
   return { props: { paymentDetails, sessionDetails, c_order: order, query: ctx.query } };
 }
 export default withTranslation("common")(StepFour);

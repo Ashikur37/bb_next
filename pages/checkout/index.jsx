@@ -386,7 +386,7 @@ function Checkout(props) {
           localStorage.removeItem("method");
           setTimeout(() => {
             //redirect
-            router.push(`/checkout/order-recived/${res.data.order}`);
+            router.push(`/checkout/order-received/${res.data.order}`);
             // setStep(step + 1);
           }, 500);
         }
