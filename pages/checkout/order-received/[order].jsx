@@ -89,6 +89,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         axios.post('/en/checkout/save_payment_id', {
           order_id: parseInt(paymentDetails.Data.UserDefinedField),
           payment_id: paymentId,
+          paid_amount: paymentDetails.Data.InvoiceValue
         });
       }
     }
@@ -129,6 +130,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
               order_id: c_order.id,
               transaction_id: data.Data.InvoiceId,
               payment_method: data.Data.PaymentURL,
+              paid_amount: 0
             })
               .catch(() => {
                 window.alert("There are some problems with the payment id. please contact support");
