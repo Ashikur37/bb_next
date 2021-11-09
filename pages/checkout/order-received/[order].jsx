@@ -22,6 +22,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
   const [success, setSuccess] = useState(false);
   const [orderId, setOrderId] = useState();
   const [paymentURL, setPaymentURL] = useState(null);
+  const [cardError, setCardError] = useState(null);
   // const [paymentDetails, setPaymentDetails] = useState(null);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -151,6 +152,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
       .catch(function (error) {
         // In case of errors
         console.log(error);
+        setCardError(error);
       });
   };
 
@@ -207,9 +209,15 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
                 </div>
               </div>
           }
+          <div className='col-lg-4'>
+              <h5 className={cardError ? 'mt-4 text-danger':'mt-4'}>{cardError}</h5>
+            </div>
           {
             (paymentDetails && (paymentDetails.Data || paymentDetails.IsSuccess == false) && paymentDetails.Data?.InvoiceTransactions[0]?.TransactionStatus == "Failed") &&
-            <div className="col-lg-7 d-none" id="paymentView">
+           
+            <>
+            
+           <div className="col-lg-8 d-none" id="paymentView">
               <div id="card-element" className="my-2">
               </div>
               <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
@@ -229,6 +237,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
                 </a>
               </div>
             </div>
+            </>
           }
 
         </div>
