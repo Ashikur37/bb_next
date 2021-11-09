@@ -64,7 +64,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
     }
   }, [order]);
   useEffect(() => {
-    if (c_order.payment_method == "Card Payment" && paymentDetails && paymentDetails.Data.InvoiceTransactions[0]?.TransactionStatus == "Failed") {
+    if (c_order.payment_method == "Card Payment" && paymentDetails && paymentDetails.Data?.InvoiceTransactions[0]?.TransactionStatus == "Failed") {
       if (sessionDetails.IsSuccess) {
         var config = {
           countryCode: sessionDetails.Data.CountryCode, // Here, add your Country Code you receive from InitiateSession Endpoint.
@@ -84,7 +84,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
 
   useEffect(() => {
     if (paymentId) {
-      if (paymentDetails.Data.InvoiceTransactions.length > 0) {
+      if (paymentDetails.Data?.InvoiceTransactions.length > 0) {
         axios.post('/en/checkout/save_payment_id', {
           order_id: parseInt(paymentDetails.Data.UserDefinedField),
           payment_id: paymentId,
@@ -185,7 +185,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
             </div>
           </div>
           {
-            paymentId ? <>{paymentDetails && <PaymentStatus {...paymentDetails}></PaymentStatus>}</> :
+            paymentId ? <>{paymentDetails.Data && <PaymentStatus {...paymentDetails}></PaymentStatus>}</> :
               <div className="col-lg-7 d-none" id="paymentView">
                 <div id="card-element" className="my-2">
                 </div>
@@ -208,7 +208,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
               </div>
           }
           {
-            (paymentDetails && paymentDetails.Data.InvoiceTransactions[0]?.TransactionStatus == "Failed") &&
+            (paymentDetails && (paymentDetails.Data || paymentDetails.IsSuccess == false) && paymentDetails.Data?.InvoiceTransactions[0]?.TransactionStatus == "Failed") &&
             <div className="col-lg-7 d-none" id="paymentView">
               <div id="card-element" className="my-2">
               </div>
@@ -283,14 +283,13 @@ export async function getServerSideProps(ctx) {
     paymentDetails = await Axios.request(options).then(response => {
       return response.data;
     }).catch(err => {
-      console.log(err);
-      return { IsSucess: false, data: err.response };
+      return { ...err.response.data };
     });
   }
-
+  
   let sessionDetails = null;
 
-  if (order.payment_method == "Card Payment" && (!ctx.query.paymentId || (paymentDetails && paymentDetails.Data.InvoiceTransactions[0].TransactionStatus == "Failed"))) {
+  if (order.payment_method == "Card Payment" && !ctx.query.paymentId) {
     const options = {
       method: 'POST',
       url: fatoorahEndpoint + '/v2/InitiateSession',
@@ -304,8 +303,23 @@ export async function getServerSideProps(ctx) {
     sessionDetails = await Axios.request(options).then(response => {
       return response.data;
     }).catch(err => {
-      console.log(err);
-      return { IsSucess: false, data: err};
+      return { ...err.response.data };
+    });
+  } else if (order.payment_method == "Card Payment" && (paymentDetails.Data && paymentDetails.Data.InvoiceTransactions[0].TransactionStatus == "Failed")) {
+    const options = {
+      method: 'POST',
+      url: fatoorahEndpoint + '/v2/InitiateSession',
+      data: { "countryCode": "QAT" },
+      headers: {
+        Accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+    sessionDetails = await Axios.request(options).then(response => {
+      return response.data;
+    }).catch(err => {
+      return { ...err.response.data };
     });
   }
 
