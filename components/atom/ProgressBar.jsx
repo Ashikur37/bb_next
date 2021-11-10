@@ -5,6 +5,7 @@ import {
   faPaperPlane,
   faCheck,
   faUserCheck,
+  faCreditCard,
 } from "@fortawesome/free-solid-svg-icons";
 function ProgressBar({ active, styles, online = false }) {
   return (
@@ -37,7 +38,7 @@ function ProgressBar({ active, styles, online = false }) {
               <div
                 className={`${styles.wrap} ${active >= 4 ? styles.active : ""}`}
               >
-                <FontAwesomeIcon icon={faCheck} />
+                <FontAwesomeIcon icon={faCreditCard} />
               </div>
             </li>
           )}
