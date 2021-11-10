@@ -89,7 +89,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         axios.post('/en/checkout/save_payment_id', {
           order_id: parseInt(paymentDetails.Data.UserDefinedField),
           payment_id: paymentId,
-          paid_amount: paymentDetails.Data.InvoiceValue
+          paid_amount: paymentDetails.Data.InvoiceStatus == "Paid" ? paymentDetails.Data.InvoiceValue : 0
         });
       }
     }
@@ -212,33 +212,33 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
               </div>
           }
           <div className='col-lg-4'>
-              <h5 className={cardError ? 'mt-4 text-danger':'mt-4'}>{cardError}</h5>
-            </div>
+            <h5 className={cardError ? 'mt-4 text-danger' : 'mt-4'}>{cardError}</h5>
+          </div>
           {
             (paymentDetails && (paymentDetails.Data || paymentDetails.IsSuccess == false) && paymentDetails.Data?.InvoiceTransactions[0]?.TransactionStatus == "Failed") &&
-           
+
             <>
-            
-           <div className="col-lg-8 d-none" id="paymentView">
-              <div id="card-element" className="my-2">
+
+              <div className="col-lg-8 d-none" id="paymentView">
+                <div id="card-element" className="my-2">
+                </div>
+                <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
+                <div className="d-none mt-4" id="paymentURL">
+                  <i>
+                    Please complete your payment from the url. You&apos;ll be
+                    redirected, after that payment will complete and we&apos;ll start processing your order
+                  </i>
+                  <hr />
+                  <a
+                    className="btn-link"
+                    target="_blank"
+                    href={paymentURL}
+                    rel="noreferrer"
+                  >
+                    {paymentURL}
+                  </a>
+                </div>
               </div>
-              <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
-              <div className="d-none mt-4" id="paymentURL">
-                <i>
-                  Please complete your payment from the url. You&apos;ll be
-                  redirected, after that payment will complete and we&apos;ll start processing your order
-                </i>
-                <hr />
-                <a
-                  className="btn-link"
-                  target="_blank"
-                  href={paymentURL}
-                  rel="noreferrer"
-                >
-                  {paymentURL}
-                </a>
-              </div>
-            </div>
             </>
           }
 
@@ -297,7 +297,7 @@ export async function getServerSideProps(ctx) {
       return { ...err.response.data };
     });
   }
-  
+
   let sessionDetails = null;
 
   if (order.payment_method == "Card Payment" && !ctx.query.paymentId) {
