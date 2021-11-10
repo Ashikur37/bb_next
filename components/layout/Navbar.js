@@ -57,6 +57,7 @@ function Navbar({
 }) {
   const router = useRouter();
   const [language, setLanguage] = useState();
+  const [placeHolderText, setPlaceHolderText] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
@@ -76,12 +77,6 @@ function Navbar({
       setShowResult(true);
       clearTimeout(timeout);
       timeout = setTimeout(function () {
-        /*
-          `http://localhost:8000/en/products?query=${searchQuery}`
-          `https://admin.beautyboothqa.com/en/products?query=${searchQuery}`
-        
-        */
-
         Axios.get(`${lang}/products?query=${searchQuery}`)
           .then((res) => {
             setSearchResult(res.data);
@@ -121,15 +116,16 @@ function Navbar({
     i18n.changeLanguage(value);
     if (value == "en") {
       document.body.classList.remove("rtl");
-      cookies.set("lang", "en",{ path: "/", SameSite: "None; Secure", maxAge:15*86400});
+      cookies.set("lang", "en", { path: "/", SameSite: "None; Secure", maxAge: 15 * 86400 });
       setLanguage("en");
-      window.location.pathname == "/" && window.location.reload();
+      // window.location.pathname == "/" && window.location.reload();
     } else {
       document.body.classList.add("rtl");
-      cookies.set("lang", "ar_QA",{ path: "/", SameSite: "None; Secure", maxAge:15*86400});
+      cookies.set("lang", "ar_QA", { path: "/", SameSite: "None; Secure", maxAge: 15 * 86400 });
       setLanguage("ar_QA");
-      window.location.pathname == "/" && window.location.reload();
+      // window.location.pathname == "/" && window.location.reload();
     }
+    window.location.reload();
   };
   const deleteHandler = (id, option_id, bulk_id = null) => {
     let confirm = window.confirm("Are You Sure To Delete ??");
@@ -155,6 +151,50 @@ function Navbar({
   };
   useEffect(() => {
     setLanguage(cookies.get("lang"));
+    const searchKeys = {
+      en: [
+        'Cream',
+        'Lotion',
+        'Face Wipes',
+        'Eye Liner',
+        'Lip Care'
+      ],
+      ar_QA: [
+        'كريم',
+        'لوشن',
+        'مناديل الوجه للعناية',
+        'محدد العين/ايلاينر',
+        'العناية بالشفاه'
+      ]
+    };
+    const defaultText = {
+      en: "Search for",
+      ar_QA: "بحث عن"
+    }
+    /**
+     * 
+     * @param {Integer} i 
+     * @return void
+     */
+    const pollPlaceholder = (i) => {
+      let len = 0, keyLen = searchKeys[language][i].length;
+      let x = setInterval(() => {
+        let searchKey = searchKeys[language][i].slice(0, len);
+        setPlaceHolderText(defaultText[language] + ' ' + searchKey);
+        if (keyLen == len) {
+          clearInterval(x);
+          setTimeout(() => {
+            len = -1;
+            let index = (i == searchKeys[language].length - 1) ? 0 : i + 1;
+            pollPlaceholder(index);
+          }, 1000);
+        }
+        len += 1;
+      }, 120);
+    }
+    if (language) {
+      setTimeout(pollPlaceholder(0), 1000);
+    }
   }, [language]);
   const mobileSearchHandler = () => {
     setIsOpen(!isOpen);
@@ -303,7 +343,7 @@ function Navbar({
                 <input
                   type="text"
                   name="search"
-                  placeholder="Search For.."
+                  placeholder={placeHolderText}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyUp={searchHandler}
@@ -412,9 +452,8 @@ function Navbar({
                   <Dropdown id="language_dropdown">
                     <Dropdown.Toggle id="language_dropdown_button">
                       <span
-                        className={`select-flag flag-icon flag-icon-${
-                          language == "en" ? "us" : "qa"
-                        }`}
+                        className={`select-flag flag-icon flag-icon-${language == "en" ? "us" : "qa"
+                          }`}
                       ></span>
                     </Dropdown.Toggle>
 
@@ -545,9 +584,8 @@ function Navbar({
                         ></div>
                         <span className="shipping__progress">
                           {subTotal + discount < 100
-                            ? `Order QAR${
-                                100 - parseInt(subTotal + discount)
-                              }.00 more to get free shipping`
+                            ? `Order QAR${100 - parseInt(subTotal + discount)
+                            }.00 more to get free shipping`
                             : t("free_shipping")}
                         </span>
                       </div>

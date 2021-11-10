@@ -36,14 +36,18 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
       }
       script.async = true;
 
-      document.body.appendChild(script);
+      document.head.appendChild(script);
       if (window.location.hostname != "localhost") {
         setHostName('https://' + window.location.host);
       }
     }
     if (c_order.transaction?.payment_id && !router.query.paymentId) {
       router.push(`${router.asPath}?paymentId=${c_order.transaction.payment_id}`);
+    }
+    if (c_order.transaction?.payment_method) {
+      setPaymentURL(c_order.transaction?.payment_method);
 
+      document.getElementById("paymentURL").classList.remove("d-none");
     }
   }, [router]);
   useEffect(() => {
@@ -96,6 +100,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
   }, [paymentId]);
 
   const myFatoorahSubmit = () => {
+    document.getElementById("myFatoorahSubmitBtn").classList.add("disabled");
     myFatoorah
       .submit()
       .then(function (response) {
@@ -153,9 +158,11 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
       })
       .catch(function (error) {
         // In case of errors
-        console.log(error);
         setCardError(error);
       });
+    setTimeout(function(){
+      document.getElementById("myFatoorahSubmitBtn").classList.remove("disabled");
+    }, 5000);
   };
 
   return (
@@ -193,24 +200,26 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
               <div className="col-lg-7 d-none" id="paymentView">
                 <div id="card-element" className="my-2">
                 </div>
-                <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
-                <div className="d-none mt-4" id="paymentURL">
-                  <i>
-                    Please complete your payment from the url. You&apos;ll be
-                    redirected, after that payment will complete and we&apos;ll start processing your order
-                  </i>
-                  <hr />
-                  <a
-                    className="btn-link"
-                    target="_blank"
-                    href={paymentURL}
-                    rel="noreferrer"
-                  >
-                    {paymentURL}
-                  </a>
-                </div>
+                <button onClick={() => myFatoorahSubmit()} className="btn btn-info" id="myFatoorahSubmitBtn">Verify &amp; Proceed Next</button>
               </div>
           }
+
+          <div className="d-none mt-3 col-lg-12" id="paymentURL">
+            <div className={styles.payment_link_info}>
+              Please complete your payment from the url. You&apos;ll be
+              redirected, after that payment will complete and we&apos;ll start processing your order.
+              The link will be valid for 30 minutes after that provide your card info again.
+            </div>
+            <a
+              className="btn-link"
+              target="_blank"
+              href={paymentURL}
+              rel="noreferrer"
+            >
+              {paymentURL}
+            </a>
+            <hr />
+          </div>
           <div className='col-lg-4'>
             <h5 className={cardError ? 'mt-4 text-danger' : 'mt-4'}>{cardError}</h5>
           </div>
@@ -218,50 +227,16 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
             (paymentDetails && (paymentDetails.Data || paymentDetails.IsSuccess == false) && paymentDetails.Data?.InvoiceTransactions[0]?.TransactionStatus == "Failed") &&
 
             <>
-
               <div className="col-lg-8 d-none" id="paymentView">
                 <div id="card-element" className="my-2">
                 </div>
-                <button onClick={() => myFatoorahSubmit()} className="btn btn-info">Verify &amp; Proceed Next</button>
-                <div className="d-none mt-4" id="paymentURL">
-                  <i>
-                    Please complete your payment from the url. You&apos;ll be
-                    redirected, after that payment will complete and we&apos;ll start processing your order
-                  </i>
-                  <hr />
-                  <a
-                    className="btn-link"
-                    target="_blank"
-                    href={paymentURL}
-                    rel="noreferrer"
-                  >
-                    {paymentURL}
-                  </a>
-                </div>
+                <button onClick={() => myFatoorahSubmit()} className="btn btn-info" id="myFatoorahSubmitBtn">Verify &amp; Proceed Next</button>
               </div>
             </>
           }
 
         </div>
-        {
-          (c_order.transaction?.payment_method && c_order.transaction?.payment_id == null) &&
-          <div className="mt-3">
-            <i>
-              Please complete your payment from the url. You&apos;ll be
-              redirected, after that payment will complete and we&apos;ll start processing your order. <br />
-              The link will be valid for 30 minutes after that provide your card info again.
-            </i>
-            <hr />
-            <a
-              className="btn-link"
-              target="_blank"
-              href={c_order.transaction.payment_method}
-              rel="noreferrer"
-            >
-              {c_order.transaction.payment_method}
-            </a>
-          </div>
-        }
+
       </div>
     </div>
   );
