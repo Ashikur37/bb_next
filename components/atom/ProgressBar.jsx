@@ -4,8 +4,9 @@ import {
   faMoneyCheckAlt,
   faPaperPlane,
   faCheck,
+  faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
-function ProgressBar({ active, styles }) {
+function ProgressBar({ active, styles, online = false }) {
   return (
     <div className={styles.pregress_bar}>
       <div className="container">
@@ -28,9 +29,18 @@ function ProgressBar({ active, styles }) {
             <div
               className={`${styles.wrap} ${active >= 3 ? styles.active : ""}`}
             >
-              <FontAwesomeIcon icon={faCheck} />
+              <FontAwesomeIcon icon={online ? faUserCheck : faCheck} />
             </div>
           </li>
+          {online && (
+            <li>
+              <div
+                className={`${styles.wrap} ${active >= 4 ? styles.active : ""}`}
+              >
+                <FontAwesomeIcon icon={faCheck} />
+              </div>
+            </li>
+          )}
         </ul>
       </div>
     </div>
