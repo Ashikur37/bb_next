@@ -203,7 +203,7 @@ function Index(props) {
                     <div className="row">
                       <div className="col">
                         <p style={{ textAlign: "center" }}>
-                          <b>Yay! You have seen it all</b>
+                          <b>You have seen it all</b>
                         </p>
                       </div>
                     </div>
