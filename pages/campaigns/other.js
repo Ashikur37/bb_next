@@ -6,6 +6,7 @@ import { withTranslation } from "../../i18n";
 import axios from "../../redux/actions/axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import styles from "../../styles/CampaignPage.module.scss";
 const FreeGiftList = dynamic(() =>
   import("../../components/campaign/FreeGiftList")
 );
@@ -23,25 +24,27 @@ const Others = (props) => {
       </Head>
       <div className="row">
         <div className="col">
-          <div className="mbRefine">
-            <div className="mbbuttonWrap text-right mr-2">
-              <button onClick={() => setMFilter(!mFilter)} className="mbButton">
+          <div className={styles.mbRefine}>
+          <div className={`${styles.mbbuttonWrap} text-right mr-2 mb-3`}>
+              <button onClick={() => setMFilter(!mFilter)} className={styles.mbButton}>
                 Refine
               </button>
             </div>
             <div
               className={
-                mFilter ? "filterItemContainer active" : "filterItemContainer"
+                mFilter
+                  ? `${styles.filterItemContainer} ${styles.active}`
+                  : `${styles.filterItemContainer}`
               }
             >
-              <span onClick={() => setMFilter(false)} className="cancleBtn">
+              <span onClick={() => setMFilter(false)}  className={styles.cancleBtn}>
                 <FontAwesomeIcon icon={faWindowClose} size="3x" />
               </span>
-              <div className="filterInner">
-                <div className="sidebarHeader">
-                  <span className="headerTitle">Refine</span>
+              <div className={styles.filterInner}>
+                <div className={styles.sidebarHeader}>
+                  <span className={styles.headerTitle}>Refine</span>
                 </div>
-                <div className="sidebarContent">
+                <div className={styles.sidebarContent}>
                   <ul>
                     {props.offers &&
                       props.offers.map((offer, index) => (
@@ -67,11 +70,11 @@ const Others = (props) => {
       </div>
       <div className="row">
         <div className="col-md-3">
-          <div className="sidebar">
-            <div className="sidebarHeader">
-              <span className="headerTitle">Refine</span>
+          <div className={styles.sidebar}>
+            <div className={styles.sidebarHeader}>
+              <span className={styles.headerTitle}>Refine</span>
             </div>
-            <div className="sidebarContent">
+            <div className={styles.sidebarContent}>
               <ul>
                 {props.offers &&
                   props.offers.map((offer, index) => (
@@ -91,7 +94,7 @@ const Others = (props) => {
           </div>
         </div>
         <div className="col-md-9">
-          <FreeGiftList products={props.freeGift} t={t}></FreeGiftList>
+          <FreeGiftList styles={styles} products={props.freeGift} t={t}></FreeGiftList>
           <DumpStockItems axios={axios} lang={props.lang} t={t} />
         </div>
       </div>
