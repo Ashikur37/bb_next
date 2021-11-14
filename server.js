@@ -533,7 +533,7 @@ server.post('/v2/GetPaymentStatus', async (req,res)=>{
     server.post("/api/login", async (req, res) => {
       const { email, password } = req.body;
 
-      Customer.findOne({ email })
+      Customer.findOne({ email: email.toLowerCase() })
         .then((user) => {
           if (!user) {
             let url =
