@@ -64,6 +64,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
             <ul className={styles.payment_link}>
               <li><Image src="/images/visa.jpg" width="60" height="40"  /></li>
               <li><Image src="/images/card-visa_2.svg" width="60" height="40"  /></li>
+              <li><Image src="/images/np.png" width="60" height="40"  /></li>
               
             </ul>
 
