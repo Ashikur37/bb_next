@@ -27,20 +27,20 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     setOrderId(order);
-    if (process.browser) {
-      const script = document.createElement("script");
-      if (process.env.NODE_ENV == "development") {
-        script.src = "https://demo.myfatoorah.com/cardview/v1/session.js";
-      } else {
-        script.src = "https://portal.myfatoorah.com/cardview/v1/session.js";
-      }
-      script.async = true;
+    // if (process.browser) {
+    //   const script = document.createElement("script");
+    //   if (process.env.NODE_ENV == "development") {
+    //     script.src = "https://demo.myfatoorah.com/cardview/v1/session.js";
+    //   } else {
+    //     script.src = "https://portal.myfatoorah.com/cardview/v1/session.js";
+    //   }
+    //   script.async = false;
 
-      document.head.appendChild(script);
-      if (window.location.hostname != "localhost") {
-        setHostName('https://' + window.location.host);
-      }
-    }
+    //   document.body.appendChild(script);
+    //   if (window.location.hostname != "localhost") {
+    //     setHostName('https://' + window.location.host);
+    //   }
+    // }
     if (c_order.transaction?.payment_id && !router.query.paymentId) {
       router.push(`${router.asPath}?paymentId=${c_order.transaction.payment_id}`);
     }
@@ -238,6 +238,16 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
         </div>
 
       </div>
+  {
+    (process.env.NODE_ENV == "development") ? (<script dangerouslySetInnerHTML={{
+      __html:`const script = document.createElement("script");script.src = "https://demo.myfatoorah.com/cardview/v1/session.js";
+      script.async = true;document.body.appendChild(script);`
+    }}/>):
+      (<script dangerouslySetInnerHTML={{
+        __html:`const script = document.createElement("script");script.src = "https://portal.myfatoorah.com/cardview/v1/session.js";
+        script.async = true;document.body.appendChild(script);`
+      }}/>)
+  }
     </div>
   );
 }

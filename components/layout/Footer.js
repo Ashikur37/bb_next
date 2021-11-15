@@ -20,7 +20,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
   }, [lang]);
   const subscribeHandler = () => {
     axios
-      .post("setdata/subscribe/store", { email })
+      .post("/en/setdata/subscribe/store", { email,lang })
       .then((res) => {
         setEmail("");
         window.alert(res.data);
