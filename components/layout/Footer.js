@@ -47,7 +47,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
               <FontAwesomeIcon className="fa_icon" icon={faEnvelope} />
               <span>info@beautyboothqa.com</span>
             </div>
-            {/* <div className="mt-3">
+            <div className="mt-3">
               <a
                 rel="noreferrer"
                 target="_blank"
@@ -60,7 +60,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
                   width="200"
                 />
               </a>
-            </div> */}
+            </div>
             <ul className={styles.payment_link}>
               <li><Image src="/images/visa.jpg" width="60" height="40"  /></li>
               <li><Image src="/images/card-visa_2.svg" width="60" height="40"  /></li>
