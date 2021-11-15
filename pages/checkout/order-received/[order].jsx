@@ -15,8 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
   const router = useRouter();
-  const { order, paymentId, Id } = query;
-  const [hostName, setHostName] = useState("http://localhost:3000");
+  const { order, paymentId } = query;
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [success, setSuccess] = useState(false);

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { i18n, withTranslation } from "../../../i18n";
 
-import HeaderComponent from "../../atom/HeaderComponent";
 import ProgressBar from "../../atom/ProgressBar";
 import { connect } from "react-redux";
 import Loader from "../../atom/Loader";
