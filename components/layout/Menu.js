@@ -321,6 +321,7 @@ function Menu({ lang, t }) {
         isCategory: true,
         name: "Beauty Tools",
         url: "Accessories?sub=Beauty-Tools",
+        image:"accesso.jpg",
         slug: "beauty-tools",
         items: [],
       },
@@ -330,6 +331,7 @@ function Menu({ lang, t }) {
         isCategory: true,
         name: "Women's Fashion Jewelry",
         url: "Accessories?sub=Women's-Fashion-Jewelry",
+        image:"accesso.jpg",
         slug: "womens-fashion-jewelry-accessories",
         items: [],
       },
@@ -356,7 +358,7 @@ function Menu({ lang, t }) {
             </li>
             <li className={styles.nav_main_li}>
               <Link href="/category/Skin-Care">
-                <a className={styles.nav_main_a} data-index={1} onMouseEnter={handleHover}> {t("Skin Care")}</a>
+                <a className={styles.nav_main_a} href="/category/Skin-Care" data-index={1} onMouseEnter={handleHover}> {t("Skin Care")}</a>
               </Link>
               <ul className={styles.sub_menu}>
                 {
@@ -469,7 +471,7 @@ function Menu({ lang, t }) {
                         <SubMenuLi
                           lang={lang}
                           styles={styles}
-                          url={"/category/Skin-Care?Lip-Care"}
+                          url={"/category/Skin-Care?sub=Lip-Care"}
                           main={true}
                           Link={Link}
                           name={t("Lip Care")}

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import arabic from "../public/static/category";
+// import en from "../public/static/category_en";
 
 import qs from "qs";
 
-const updateAfter = 350;
+const updateAfter = 500;
 
 const routeStateDefaultValues = {
   query: "",
@@ -18,22 +19,6 @@ const routeStateDefaultValues = {
   hitsPerPage: "21"
 };
 
-// const encodedCategories = {
-//   Cameras: "Cameras & Camcorders",
-//   Cars: "Car Electronics & GPS",
-//   Phones: "Cell Phones",
-//   TV: "TV & Home Theater",
-// };
-
-// const decodedCategories = Object.keys(encodedCategories).reduce((acc, key) => {
-//   const newKey = encodedCategories[key];
-//   const newValue = key;
-
-//   return {
-//     ...acc,
-//     [newKey]: newValue,
-//   };
-// }, {});
 
 // Returns a slug from the category name.
 // Spaces are replaced by "-" to make
@@ -68,16 +53,26 @@ function setArabic(val) {
   return arabic[val];
 }
 
-const searchStateToURL = (searchState) => {
-
+const searchStateToURL = (searchState, lang = "en") => {
+  let clicked = [];
+  let hlen = 0;
+  if (searchState.hierarchicalMenu) {
+    // if (lang == "ar_QA") {
+    //   clicked = searchState.hierarchicalMenu["product.hierarchicalCategories.lvl0.ar_QA"].split(" < ");
+    // }else{
+      clicked = searchState.hierarchicalMenu["product.hierarchicalCategories.lvl0.en"].split(" > ");
+    // }
+    hlen = clicked.length;
+    console.log(searchState.hierarchicalMenu);
+  }
   const routeState = {
-    query: searchState.query,
-    category: searchState.category && searchState.category,
-    category_ar: searchState.category_ar && searchState.category_ar,
-    sub: searchState.sub && searchState.sub,
-    child: searchState.child && searchState.child,
-    sub_ar: searchState.sub_ar && searchState.sub_ar,
-    child_ar: searchState.child_ar && searchState.child_ar,
+    // query: searchState.query,
+    category: clicked[0].split(" ").join("-"),//searchState.category && searchState.category
+    category_ar: setArabic(clicked[0].split(" ").join("-")),//searchState.category_ar && searchState.category_ar,
+    sub: hlen > 1 ? clicked[1].split(" ").join("-") : "",//searchState.sub && searchState.sub,
+    child: hlen > 2 ? clicked[2].split(" ").join("-") : "",//searchState.child && searchState.child,
+    sub_ar: hlen > 1 ? setArabic(clicked[1].split(" ").join("-")) : "",//searchState.sub_ar && searchState.sub_ar,
+    child_ar: hlen > 2 ? setArabic(clicked[2].split(" ").join("-")) : "",//searchState.child_ar && searchState.child_ar,
     page: String(searchState.page),
     price:
       searchState.range &&
@@ -104,7 +99,7 @@ const searchStateToURL = (searchState) => {
     ? `${getCategorySlug(routeState.category, routeState.sub, routeState.child)}`
     : "";
 
-  const queryParameters = { query: "" };
+  const queryParameters = {};
 
   if (routeState.query && routeState.query !== routeStateDefaultValues.query) {
     queryParameters.query = routeState.query;
@@ -132,7 +127,7 @@ const searchStateToURL = (searchState) => {
   }
   const queryString = qs.stringify(queryParameters, {
     addQueryPrefix: true,
-    arrayFormat: "repeat",
+    arrayFormat: "indices",
   });
 
   return `${baseUrl}/${categoryPath}${queryString}${hash}`;
@@ -214,7 +209,7 @@ const urlToSearchState = (location) => {
 
   return searchState;
 };
-
+let debouncedSetState = 0;
 const withURLSync = (CategoryPage) =>
   class WithURLSync extends Component {
     state = {
@@ -228,23 +223,22 @@ const withURLSync = (CategoryPage) =>
       window.addEventListener("popstate", this.onPopState);
     }
     componentWillUnmount() {
-      clearTimeout(this.debouncedSetState);
+      clearTimeout(debouncedSetState);
       window.removeEventListener("popstate", this.onPopState);
     }
 
-    onPopState = ({ state }) =>
+    onPopState = ({ state }) => {
       this.setState({
         searchState: state || {},
       });
-
+    }
     onSearchStateChange = (searchState) => {
-      clearTimeout(this.debouncedSetState);
-
-      this.debouncedSetState = setTimeout(() => {
+      clearTimeout(debouncedSetState);
+      debouncedSetState = setTimeout(() => {
         window.history.pushState(
           searchState,
           null,
-          searchStateToURL(searchState)
+          searchStateToURL(searchState, this.props.lang)
         );
       }, updateAfter);
 
