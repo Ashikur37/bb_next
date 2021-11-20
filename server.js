@@ -532,19 +532,17 @@ server.post('/v2/GetPaymentStatus', async (req,res)=>{
     // login
     server.post("/api/login", async (req, res) => {
       const { email, password } = req.body;
-
+      let url =
+      process.env.NODE_ENV == "development"
+        ? process.env.MAIN_SERVER_DEV
+        : process.env.MAIN_SERVER_PROD;
+    if (process.env.NODE_ENV == "local") {
+      url = process.env.MAIN_SERVER_HOME;
+    }
       Customer.findOne({ email: email.toLowerCase() })
-        .then((user) => {
-          if (!user) {
-            let url =
-              process.env.NODE_ENV == "development"
-                ? process.env.MAIN_SERVER_DEV
-                : process.env.MAIN_SERVER_PROD;
-            if (process.env.NODE_ENV == "local") {
-              url = process.env.MAIN_SERVER_HOME;
-            }
-            
-            axios
+        .then((user) => {          
+          if (!user) {            
+            Axios
               .post(`${url}/en/getdata/user_info_by_email`, { email })
               .then((res) => {
                 if (res.data.user) {
@@ -655,9 +653,73 @@ server.post('/v2/GetPaymentStatus', async (req,res)=>{
                   }
                 );
               } else {
+                Axios
+                .post(`${url}/en/getdata/user_info_by_email`, { email })
+                .then((resp) => {
+                if (resp.data.user) {
+                  Customer.findOne({email:email.toLowerCase()})
+                    .then((u) => {
+                      if (u) {
+                        //check passpord
+                        bcrypt
+                          .compare(password, resp.data.user.password)
+                          .then((isMatch) => {
+                            if (isMatch) {
+                              // user matched
+                              const {
+                                id,
+                                first_name,
+                                last_name,
+                                email,
+                                isCustomer,
+                                last_login,
+                              } = resp.data.user;
+
+                              u.password = resp.data.user.password;
+                              u.save();
+
+                              const payload = { id: u._id }; // create jwt payload
+                              //sign token
+                              jwt.sign(
+                                payload,
+                                "BBsecret",
+                                { expiresIn: 172800 },
+                                (err, token) => {
+                                  if (err) {
+                                    console.log(err.response.data);
+                                  }
+                                  return res.json({
+                                    success: true,
+                                    token: { access_token: token },
+                                    user: {
+                                      id,
+                                      first_name,
+                                      last_name,
+                                      email,
+                                      isCustomer,
+                                      last_login,
+                                    },
+                                  });
+                                }
+                              );
+                            } else {                              
+                              let errors = {message:"Password Incorrect!"};
+                              res.statusCode = 422;
+                              return res.json(errors);
+                            }
+                          })
+                          .catch((err) =>
+                            res.status(500).json({ message: err.response.data })
+                          );
+                      }
+                    });
+                }
+              }).catch(error=>{
                 let errors = {message:"Password Incorrect!"};
                 res.statusCode = 422;
                 return res.json(errors);
+
+              });
               }
             })
             .catch((err) => {

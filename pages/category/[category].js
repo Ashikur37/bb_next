@@ -54,39 +54,39 @@ const CategoryPage = (props) => {
     router.push(router.asPath, undefined, { shallow: true });
   }, []);
   useEffect(() => {
-    setLocale(props.lang == "ar" ? "ar_QA" : "en");
+    setLocale(props.lang);
   }, [props.lang]);
 
   useEffect(() => {
     setSubCategoryName(
       router.query.sub
         ? decodeURIComponent(
-            router.asPath
-              .split("=")[1]
-              .replace(/\&child/s, "")
-              .replace(/\?page.*/s, "&page")
-              .replace(/\&page.*/s, "")
-          )
-            .replace(/\?rank.*/s, "&rank")
-            .replace(/\&rank.*/s, "")
-            .replace(/\?price.*/s, "")
-            .replace(/\&price.*/s, "")
-            .replace(/\?query.*/s, "")
+          router.asPath
+            .split("=")[1]
+            .replace(/\&child/s, "")
+            .replace(/\?page.*/s, "&page")
+            .replace(/\&page.*/s, "")
+        )
+          .replace(/\?rank.*/s, "&rank")
+          .replace(/\&rank.*/s, "")
+          .replace(/\?price.*/s, "")
+          .replace(/\&price.*/s, "")
+          .replace(/\?query.*/s, "")
         : ""
     );
     setSubCategoryChild(
       router.query.child
         ? decodeURIComponent(
-            router.asPath
-              .split("=")[2]
-              .replace(/\?page.*/s, "")
-              .replace(/\&page.*/s, "&page")
-          )
-            .replace(/\?rank.*/s, "&rank")
-            .replace(/\&rank.*/s, "")
-            .replace(/\?price.*/s, "")
-            .replace(/\&price.*/s, "")
-            .replace(/\?query.*/s, "")
+          router.asPath
+            .split("=")[2]
+            .replace(/\?page.*/s, "")
+            .replace(/\&page.*/s, "&page")
+        )
+          .replace(/\?rank.*/s, "&rank")
+          .replace(/\&rank.*/s, "")
+          .replace(/\?price.*/s, "")
+          .replace(/\&price.*/s, "")
+          .replace(/\?query.*/s, "")
         : ""
     );
     if (props.searchState.hierarchicalMenu) {
@@ -109,7 +109,7 @@ const CategoryPage = (props) => {
         router.back();
       }
     }
-  }, [props.searchState, props.context, selected]);
+  }, [props.context,props.lang, selected, categoryName]);
 
   useEffect(() => {
     let searchState = props.searchState;
@@ -121,11 +121,11 @@ const CategoryPage = (props) => {
         .join(" ")}`;
       setSelected(subCategoryName.split("-").join(" "));
 
-      if (props.i18n.language == "ar_QA") {
+      // if (props.lang == "ar_QA") {
         searchState.hierarchicalMenu[
           "product.hierarchicalCategories.lvl0.ar_QA"
         ] = searchState.category_ar + " > " + arabic[subCategoryName];
-      }
+      // }
     }
     if (subCategoryChild !== "" && subCategoryName !== "") {
       searchState.hierarchicalMenu[
@@ -133,7 +133,7 @@ const CategoryPage = (props) => {
       ] = `${router.query.category.split("-").join(" ")} > ${subCategoryName
         .split("-")
         .join(" ")} > ${subCategoryChild.split("-").join(" ")}`;
-      if (props.i18n.language == "ar_QA") {
+      // if (props.lang == "ar_QA") {
         searchState.hierarchicalMenu[
           "product.hierarchicalCategories.lvl0.ar_QA"
         ] =
@@ -142,7 +142,7 @@ const CategoryPage = (props) => {
           searchState.sub_ar +
           " > " +
           searchState.child_ar;
-      }
+      // }
       setSelected(subCategoryChild.split("-").join(" "));
     }
 
@@ -151,11 +151,11 @@ const CategoryPage = (props) => {
         "product.hierarchicalCategories.lvl0.en"
       ] = `${router.query.category.split("-").join(" ")}`;
 
-      if (props.i18n.language == "ar_QA") {
+      // if (props.lang == "ar_QA") {
         searchState.hierarchicalMenu[
           "product.hierarchicalCategories.lvl0.ar_QA"
         ] = searchState.category_ar;
-      }
+      // }
 
       setSelected(categoryName.split("-").join(" "));
     }
@@ -168,8 +168,8 @@ const CategoryPage = (props) => {
     searchState.category_ar = arabic[categoryName];
     searchState.sub_ar = arabic[subCategoryName];
     searchState.child_ar = arabic[subCategoryChild];
-    searchState.locale = props.i18n.language;
-  }, [props.context, subCategoryName, subCategoryChild, selected, router]);
+    searchState.locale = props.lang;
+  }, [props.context,props.lang, subCategoryName, subCategoryChild, selected, router]);
 
   const Hit = ({ hit }) => (
     <div className="product_wrapper">
@@ -287,11 +287,11 @@ const CategoryPage = (props) => {
                                   <HierarchicalMenu
                                     attributes={[
                                       "product.hierarchicalCategories.lvl0." +
-                                        props.i18n.language,
+                                      props.lang,
                                       "product.hierarchicalCategories.lvl1." +
-                                        props.i18n.language,
+                                      props.lang,
                                       "product.hierarchicalCategories.lvl2." +
-                                        props.i18n.language,
+                                      props.lang,
                                     ]}
                                     limit={15}
                                     showMoreLimit={15}
@@ -404,7 +404,7 @@ const CategoryPage = (props) => {
                             ({ attribute }) =>
                               attribute !==
                               "product.hierarchicalCategories.lvl0." +
-                                props.i18n.language
+                              props.lang
                           )
                         }
                       />
@@ -427,14 +427,15 @@ const CategoryPage = (props) => {
                       <HierarchicalMenu
                         attributes={[
                           "product.hierarchicalCategories.lvl0." +
-                            props.i18n.language,
+                          props.lang,
                           "product.hierarchicalCategories.lvl1." +
-                            props.i18n.language,
+                          props.lang,
                           "product.hierarchicalCategories.lvl2." +
-                            props.i18n.language,
+                          props.lang
                         ]}
                         limit={15}
                         showMoreLimit={15}
+                      // defaultRefinement={props.searchState.hierarchicalMenu["product.hierarchicalCategories.lvl0."+props.lang]}
                       />
                       <span className="refinment_title">Brand</span>
                       <RefinementList
@@ -497,8 +498,7 @@ const CategoryPage = (props) => {
 // This gets called on every request
 export async function getServerSideProps(context) {
   // Pass data to the page via props
-
-  return { props: { context: context.query } };
+  return { props: { context: context.query, lang: context.req.language } };
 }
 
 export default withTranslation("menu")(withURLSync(CategoryPage));

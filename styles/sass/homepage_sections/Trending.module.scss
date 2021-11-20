@@ -11,19 +11,19 @@
     .slide {
       border-radius: 14px;
       box-sizing: border-box;
-      padding: 4px;
+      padding: 8px 4px;
       transition: none;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       flex-direction: column;
       img {
-        height: 96px;
-        width: 96px;
+        height: 64px;
+        width: 64px;
         box-sizing: border-box;
         @include breakpoint(tablet) {
-          height: 50px;
-          width: 50px;
+          height: 48px;
+          width: 48px;
         }
       }
       span.text {
