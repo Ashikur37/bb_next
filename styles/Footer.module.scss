@@ -96,6 +96,16 @@
         }
       }
     }
+    .payment_link {
+      display: flex;
+      margin-top: 10px;
+      :last-child {
+        margin-left: 10px;
+      }
+      @include breakpoint (tablet){
+        justify-content: center;
+      }
+    }
   }
   .social_icons_wrapper {
     width: 100%;

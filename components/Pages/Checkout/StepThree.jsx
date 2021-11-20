@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { i18n, withTranslation } from "../../../i18n";
 
-import HeaderComponent from "../../atom/HeaderComponent";
 import ProgressBar from "../../atom/ProgressBar";
 import { connect } from "react-redux";
 import Loader from "../../atom/Loader";
@@ -181,7 +180,7 @@ function StepThree(props) {
             <div className="text-center">
               <Header text={t("INVOICE")} />
             </div>
-            <ProgressBar styles={styles} active={3} />
+            <ProgressBar styles={styles} active={3} online={props.data.payment_method == "op"} />
 
             {/* {gifts &&
               props.cartItems.reduce(

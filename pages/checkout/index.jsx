@@ -340,24 +340,24 @@ function Checkout(props) {
               "." +
               window.location.search.split("fbclid=")[1];
           }
-          Axios.post("/event/checkout-success", {
-            em: stepOneValue.customer_email,
-            ph: stepOneValue.customer_phone,
-            product: props.cartItems.map((c) => {
-              return {
-                product_id: c.product_id,
-                name: c.name,
-                qty: c.qnt,
-                price: c.price.amount,
-              };
-            }),
-            total: subTotal,
-            eventName: "Purchase",
-            eventNameSource: "https://beautyboothqa.com/",
-            order_id: res.data.order,
-            fbp,
-            fbc,
-          });
+          // Axios.post("/event/checkout-success", {
+          //   em: stepOneValue.customer_email,
+          //   ph: stepOneValue.customer_phone,
+          //   product: props.cartItems.map((c) => {
+          //     return {
+          //       product_id: c.product_id,
+          //       name: c.name,
+          //       qty: c.qnt,
+          //       price: c.price.amount,
+          //     };
+          //   }),
+          //   total: subTotal,
+          //   eventName: "Purchase",
+          //   eventNameSource: "https://beautyboothqa.com/",
+          //   order_id: res.data.order,
+          //   fbp,
+          //   fbc,
+          // });
           /**
            * Fire the Purchase Event End
            */
@@ -386,7 +386,7 @@ function Checkout(props) {
           localStorage.removeItem("method");
           setTimeout(() => {
             //redirect
-            router.push(`/checkout/order-recived/${res.data.order}`);
+            window.location.href = `/checkout/order-received/${res.data.order}`;
             // setStep(step + 1);
           }, 500);
         }

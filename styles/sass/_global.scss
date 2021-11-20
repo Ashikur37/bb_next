@@ -1289,3 +1289,6 @@ a.ais-Pagination-link.ais-Pagination-link--selected {
   }
 }
 //
+.btn.disabled{
+  pointer-events: none;
+}

@@ -5,7 +5,7 @@ const CustomerSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   first_name: { type: String, required: true },
   last_name: { type: String },
-  email: { type: String, required: true },
+  email: { type: String, required: true,lowercase: true },
   password: { type: String, required: true },
   api_token: { type: String },
   permissions: { type: Array },
