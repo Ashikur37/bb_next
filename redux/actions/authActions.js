@@ -74,9 +74,9 @@ export const logoutUser = (dispatch) => {
   let token = window.localStorage.getItem("auth_token");
 
   //   Remove Token from Local Stroge
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  axios
-    .get("auth/logout")
+  Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  Axios
+    .get("/api/logout")
     .then((res) => {
       if (res.data === "success") {
         window.localStorage.removeItem("auth_token");

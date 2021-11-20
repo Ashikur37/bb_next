@@ -358,7 +358,7 @@ function Menu({ lang, t }) {
             </li>
             <li className={styles.nav_main_li}>
               <Link href="/category/Skin-Care">
-                <a className={styles.nav_main_a} href="/category/Skin-Care" data-index={1} onMouseEnter={handleHover}> {t("Skin Care")}</a>
+                <a className={styles.nav_main_a} data-index={1} onMouseEnter={handleHover}> {t("Skin Care")}</a>
               </Link>
               <ul className={styles.sub_menu}>
                 {
