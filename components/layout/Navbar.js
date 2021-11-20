@@ -113,13 +113,15 @@ function Navbar({
     setShowResult(false);
   };
   const LanguageHandler = (value) => {
-    i18n.changeLanguage(value);
+    // i18n.changeLanguage(value);
     if (value == "en") {
+      i18n.changeLanguage("en");
       document.body.classList.remove("rtl");
       cookies.set("lang", "en", { path: "/", SameSite: "None; Secure", maxAge: 15 * 86400 });
       setLanguage("en");
       // window.location.pathname == "/" && window.location.reload();
     } else {
+      i18n.changeLanguage("ar_QA");
       document.body.classList.add("rtl");
       cookies.set("lang", "ar_QA", { path: "/", SameSite: "None; Secure", maxAge: 15 * 86400 });
       setLanguage("ar_QA");
