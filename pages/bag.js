@@ -22,6 +22,9 @@ import {
 import bag from "../styles/Bag.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
+import { GTMBeginCheckout } from "../components/utils/gtm";
+
 const Header = dynamic(() => import("../components/layout/partials/Header"));
 function MyBag(props) {
   const { t } = props;
@@ -323,6 +326,12 @@ function MyBag(props) {
     }
   }, [subTotal, gifts]);
 
+// gtmClick
+const gtmClick = () =>{
+  GTMBeginCheckout(props.cartItems);
+  // console.log("gtmClick");
+}
+
   return (
     <>
       <Head>
@@ -511,8 +520,8 @@ function MyBag(props) {
                         {oos ? (
                           <span>{t("cart_warning")}</span>
                         ) : (
-                          <Link href="/checkout">
-                            {t("PROCEED TO CHECKOUT")}
+                          <Link href="/checkout">                            
+                            <span onClick={gtmClick}>{t("PROCEED TO CHECKOUT")}</span>
                           </Link>
                         )}
                       </div>
