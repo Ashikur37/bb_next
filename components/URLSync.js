@@ -63,7 +63,6 @@ const searchStateToURL = (searchState, lang = "en") => {
       clicked = searchState.hierarchicalMenu["product.hierarchicalCategories.lvl0.en"].split(" > ");
     // }
     hlen = clicked.length;
-    console.log(searchState.hierarchicalMenu);
   }
   const routeState = {
     // query: searchState.query,
