@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Menu from "./Menu";
 import Navbar from "./Navbar";
+import Notice from "./Notice";
 import Divider from "./partials/Divider";
 
 function NavbarWrapper({ FontAwesomeIcon, lang, styles }) {
@@ -17,6 +18,9 @@ function NavbarWrapper({ FontAwesomeIcon, lang, styles }) {
   });
   return (
     <div className={`navbar_wrap ${isScroll ? "sticky fade_in_down" : ""}`}>
+      <Notice />
+      <Divider />
+      
       <Navbar FontAwesomeIcon={FontAwesomeIcon} lang={lang} styles={styles} />
       <Divider />
       <Menu lang={lang} />

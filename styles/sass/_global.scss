@@ -1,5 +1,18 @@
 @import "../../node_modules/swiper/swiper.scss";
 @import "../../node_modules/swiper/components/pagination/pagination.scss";
+
+.notice {
+  background: $theme1;
+  color: white;
+  padding: 5px 0;
+  font-size: 18px;
+  margin-bottom: 0;
+  width: 100%;
+  @include breakpoint (tablet){
+    font-size: 13px;
+  }
+
+}
 .devider {
   border-bottom: 1px solid #eeeeee;
 }
@@ -1289,6 +1302,6 @@ a.ais-Pagination-link.ais-Pagination-link--selected {
   }
 }
 //
-.btn.disabled{
+.btn.disabled {
   pointer-events: none;
 }
