@@ -732,6 +732,16 @@ server.post('/v2/GetPaymentStatus', async (req,res)=>{
           res.json({ message: "email not found" });
         });
     });
+// logout
+server.get("/api/logout", passport.authenticate("jwt", { session: false }), async (req, res) => {
+    
+  if (req.user) {
+    req.logout();
+    return res.send("success");
+  }
+  return res.status("422").send("failed");
+});
+
 
 
     server.get("/api/profile", passport.authenticate("jwt", { session: false }), async (req, res) => {
