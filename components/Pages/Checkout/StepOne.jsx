@@ -645,7 +645,7 @@ function StepOne(props) {
                 <div className="form-group">
                   <label className="input_label">Email address*</label>
                   <input
-                    // type="email"
+                    // type="email nai"
                     name="customer_email"
                     defaultValue={props.val.customer_email}
                     onChange={(e) => setEmail(e.currentTarget.value)}
@@ -654,21 +654,24 @@ function StepOne(props) {
                         ? "form-control is-invalid"
                         : "form-control"
                     }
+                    {...register("customer_email",{required:true,pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
                     // ref={register({
                     //   required: true,
                     //   pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                     // })}
                   />
                   {errors?.customer_email &&
-                    errors?.customer_email.type === "required" && (
-                      <div className="invalid-feedback">
-                        Email Address Required.
-                      </div>
-                    )}
-                  {errors?.customer_email &&
-                    errors?.customer_email.type === "pattern" && (
-                      <div className="invalid-feedback">Not a Valid Email.</div>
-                    )}
+                          errors?.customer_email.type === "required" && (
+                            <div className="invalid-feedback">
+                              Email Address Required.
+                            </div>
+                          )}
+                        {errors?.customer_email &&
+                          errors?.customer_email.type === "pattern" && (
+                            <div className="invalid-feedback">
+                              Not a Valid Email.
+                            </div>
+                          )}
                 </div>
                 <select
                   name="order_source"
