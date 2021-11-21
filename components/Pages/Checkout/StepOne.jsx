@@ -249,26 +249,23 @@ function StepOne(props) {
                       <div className="form-group">
                         <label className="input_label">Email address*</label>
                         <input
-                          // type="email"
+                          type="email"
+                          autoComplete="nope"
                           name="customer_email"
                           defaultValue={props.val.customer_email}
                           onChange={(e) => {
                             setEmail(e.currentTarget.value);
                           }}
-                          autoComplete="nope"
-                          className={
-                            errors?.customer_email
-                              ? "form-control  is-invalid"
-                              : "form-control "
-                          }
-                          {...register("customer_email",{required:true,pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
-                          // ref={register({
-                          //   required: true,
-                          //   pattern:
-                          //     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                          // })}
+                          className="form-control"
+                          required
+                          // className={
+                          //   errors?.customer_email
+                          //     ? "form-control is-invalid"
+                          //     : "form-control "
+                          // }
+                          // {...register("customer_email",{required:true,pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
                         />
-                        {errors?.customer_email &&
+                        {/* {errors?.customer_email &&
                           errors?.customer_email.type === "required" && (
                             <div className="invalid-feedback">
                               Email Address Required.
@@ -279,7 +276,7 @@ function StepOne(props) {
                             <div className="invalid-feedback">
                               Not a Valid Email.
                             </div>
-                          )}
+                          )} */}
                       </div>
                     )}
                   </div>
@@ -639,7 +636,7 @@ function StepOne(props) {
             </div>
           </div>
           <div className="col-md-4">
-            {customOrder ? (
+            {/* {customOrder ? (
               <div className="order_source">
                 <h5>Order Source</h5>
                 <div className="form-group">
@@ -718,7 +715,7 @@ function StepOne(props) {
               </div>
             ) : (
               ""
-            )}
+            )} */}
             <div className={styles.cart_list}>
               <div className={styles.item_title}>{t("Product Check")}</div>
               <div className={styles.cart_items}>
