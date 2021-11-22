@@ -636,22 +636,24 @@ function StepOne(props) {
             </div>
           </div>
           <div className="col-md-4">
-            {/* {customOrder ? (
+            {customOrder ? (
               <div className="order_source">
                 <h5>Order Source</h5>
                 <div className="form-group">
                   <label className="input_label">Email address*</label>
                   <input
-                    // type="email nai"
+                    type="email"
                     name="customer_email"
                     defaultValue={props.val.customer_email}
                     onChange={(e) => setEmail(e.currentTarget.value)}
-                    className={
-                      errors?.customer_email
-                        ? "form-control is-invalid"
-                        : "form-control"
-                    }
-                    {...register("customer_email",{required:true,pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
+                    required
+                    className="form-control"
+                    // className={
+                    //   errors?.customer_email
+                    //     ? "form-control is-invalid"
+                    //     : "form-control"
+                    // }
+                    // {...register("customer_email",{required:true,pattern:/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/})}
                     // ref={register({
                     //   required: true,
                     //   pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -715,7 +717,7 @@ function StepOne(props) {
               </div>
             ) : (
               ""
-            )} */}
+            )}
             <div className={styles.cart_list}>
               <div className={styles.item_title}>{t("Product Check")}</div>
               <div className={styles.cart_items}>
