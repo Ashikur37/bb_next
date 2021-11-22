@@ -242,8 +242,9 @@ function ProductPage(props) {
           return "select on option to see the stock amount";
         }
       } else {
-        return `Stock: ${product.single_bundle ? product.bundle_qty : product.qty
-          }`;
+        return `Stock: ${
+          product.single_bundle ? product.bundle_qty : product.qty
+        }`;
       }
     }
     return null;
@@ -414,8 +415,9 @@ function ProductPage(props) {
       if (from == dim) {
         from = `${number_suffix(from, dim2)} ${month}`;
       } else {
-        from = `${number_suffix(from - dim, dim2)} ${months[today.getMonth() + 1]
-          }`;
+        from = `${number_suffix(from - dim, dim2)} ${
+          months[today.getMonth() + 1]
+        }`;
       }
       to = `${number_suffix(to - dim, dim2)} ${months[today.getMonth() + 1]}`;
       console.log(today.getHours());
@@ -561,9 +563,9 @@ function ProductPage(props) {
           content={
             props.product.meta.meta_keywords
               ? props.product.meta.meta_keywords.join(", ") +
-              ", in qatar, qatar, beauty, beautybooth" +
-              ", " +
-              getBrandName(props.product.attributes)
+                ", in qatar, qatar, beauty, beautybooth" +
+                ", " +
+                getBrandName(props.product.attributes)
               : ", " + getBrandName(props.product.attributes)
           }
         />
@@ -780,205 +782,205 @@ function ProductPage(props) {
                       )}
                       {product.single_bundle
                         ? product.bundle_qty !== 0 && (
-                          <div className={styles.qnt_bag_fav}>
-                            <div className={styles.quantaty_container}>
-                              <span className={styles.qnt_btn_container}>
-                                <button
-                                  onClick={() => {
-                                    if (qnt > 1) {
-                                      setQnt(qnt - 1);
-                                    }
-                                  }}
-                                >
-                                  -
-                                </button>
-                                {/* <span>{qnt}</span> */}
-                                <input
-                                  type="number"
-                                  className={styles.numberInput}
-                                  name="quantity"
-                                  min="1"
-                                  value={qnt}
-                                  onChange={(e) => {
-                                    if (parseInt(e.target.value) > 0) {
-                                      numberHandler(parseInt(e.target.value));
-                                    }
-                                  }}
-                                ></input>
-                                <button
-                                  onClick={() => {
-                                    if (
-                                      product.options_count === 0 &&
-                                      product.bundle_qty > qnt
-                                    ) {
-                                      setQnt(qnt + 1);
-                                    }
-                                    if (
-                                      product.options_count === 1 &&
-                                      optionValue &&
-                                      product.options[0].values.filter(
-                                        (op) => op.label == optionValue.label
-                                      )[0].option_qty > qnt
-                                    ) {
-                                      setQnt(qnt + 1);
-                                    }
-                                  }}
-                                >
-                                  +
-                                </button>
-                              </span>
+                            <div className={styles.qnt_bag_fav}>
+                              <div className={styles.quantaty_container}>
+                                <span className={styles.qnt_btn_container}>
+                                  <button
+                                    onClick={() => {
+                                      if (qnt > 1) {
+                                        setQnt(qnt - 1);
+                                      }
+                                    }}
+                                  >
+                                    -
+                                  </button>
+                                  {/* <span>{qnt}</span> */}
+                                  <input
+                                    type="number"
+                                    className={styles.numberInput}
+                                    name="quantity"
+                                    min="1"
+                                    value={qnt}
+                                    onChange={(e) => {
+                                      if (parseInt(e.target.value) > 0) {
+                                        numberHandler(parseInt(e.target.value));
+                                      }
+                                    }}
+                                  ></input>
+                                  <button
+                                    onClick={() => {
+                                      if (
+                                        product.options_count === 0 &&
+                                        product.bundle_qty > qnt
+                                      ) {
+                                        setQnt(qnt + 1);
+                                      }
+                                      if (
+                                        product.options_count === 1 &&
+                                        optionValue &&
+                                        product.options[0].values.filter(
+                                          (op) => op.label == optionValue.label
+                                        )[0].option_qty > qnt
+                                      ) {
+                                        setQnt(qnt + 1);
+                                      }
+                                    }}
+                                  >
+                                    +
+                                  </button>
+                                </span>
+                              </div>
+                              <button
+                                onClick={addToBagClickHandler}
+                                className={styles.add_to_bag}
+                                disabled={disableStatus()}
+                              >
+                                {t("ADD TO BAG")}
+                              </button>
                             </div>
-                            <button
-                              onClick={addToBagClickHandler}
-                              className={styles.add_to_bag}
-                              disabled={disableStatus()}
-                            >
-                              {t("ADD TO BAG")}
-                            </button>
-                          </div>
-                        )
+                          )
                         : product.qty !== 0 && (
-                          <div className={styles.qnt_bag_fav}>
-                            <div className={styles.quantaty_container}>
-                              <span className={styles.qnt_btn_container}>
-                                <button
-                                  onClick={() => {
-                                    if (qnt > 1) {
-                                      setQnt(qnt - 1);
-                                    }
-                                  }}
-                                >
-                                  -
-                                </button>
-                                {/* <span>{qnt}</span> */}
-                                <input
-                                  type="number"
-                                  className={styles.numberInput}
-                                  name="quantity"
-                                  min="1"
-                                  value={qnt}
-                                  onChange={(e) => {
-                                    if (parseInt(e.target.value) > 0) {
-                                      numberHandler(parseInt(e.target.value));
-                                    }
-                                  }}
-                                ></input>
-                                <button
-                                  onClick={() => {
-                                    if (
-                                      product.options_count === 0 &&
-                                      product.qty > qnt
-                                    ) {
-                                      setQnt(qnt + 1);
-                                    }
-                                    if (
-                                      product.options_count === 1 &&
-                                      optionValue &&
-                                      product.options[0].values.filter(
-                                        (op) => op.label == optionValue.label
-                                      )[0].option_qty > qnt
-                                    ) {
-                                      setQnt(qnt + 1);
-                                    }
-                                  }}
-                                >
-                                  +
-                                </button>
-                              </span>
-                            </div>
-                            <button
-                              onClick={addToBagClickHandler}
-                              className={styles.add_to_bag}
-                              disabled={disableStatus()}
-                            >
-                              {t("ADD TO BAG")}
-                            </button>
+                            <div className={styles.qnt_bag_fav}>
+                              <div className={styles.quantaty_container}>
+                                <span className={styles.qnt_btn_container}>
+                                  <button
+                                    onClick={() => {
+                                      if (qnt > 1) {
+                                        setQnt(qnt - 1);
+                                      }
+                                    }}
+                                  >
+                                    -
+                                  </button>
+                                  {/* <span>{qnt}</span> */}
+                                  <input
+                                    type="number"
+                                    className={styles.numberInput}
+                                    name="quantity"
+                                    min="1"
+                                    value={qnt}
+                                    onChange={(e) => {
+                                      if (parseInt(e.target.value) > 0) {
+                                        numberHandler(parseInt(e.target.value));
+                                      }
+                                    }}
+                                  ></input>
+                                  <button
+                                    onClick={() => {
+                                      if (
+                                        product.options_count === 0 &&
+                                        product.qty > qnt
+                                      ) {
+                                        setQnt(qnt + 1);
+                                      }
+                                      if (
+                                        product.options_count === 1 &&
+                                        optionValue &&
+                                        product.options[0].values.filter(
+                                          (op) => op.label == optionValue.label
+                                        )[0].option_qty > qnt
+                                      ) {
+                                        setQnt(qnt + 1);
+                                      }
+                                    }}
+                                  >
+                                    +
+                                  </button>
+                                </span>
+                              </div>
+                              <button
+                                onClick={addToBagClickHandler}
+                                className={styles.add_to_bag}
+                                disabled={disableStatus()}
+                              >
+                                {t("ADD TO BAG")}
+                              </button>
 
-                            {/* <div className={styles.fav_container}>
+                              {/* <div className={styles.fav_container}>
                                 <span className={styles.fav}>{t("Love")}</span>
                                 <FontAwesomeIcon icon={faHeart} />
                               </div> */}
-                          </div>
-                        )}
+                            </div>
+                          )}
                       <ToastContainer />
                       {/* <WaitList /> */}
                       {product.single_bundle
                         ? product.bundle_qty == 0 && (
-                          <div className={styles.waiting_div}>
-                            <div className={styles.waiting_div_title}>
-                              IN STOCK SOON
-                            </div>
-                            {props.auth.isAuthenticated ? (
-                              <div>
-                                <button
-                                  type="button"
-                                  className="btn join_button btn-info"
-                                  onClick={() => addToWaitListHandlerAsUser()}
-                                >
-                                  JOIN THE WAITLIST
-                                </button>
+                            <div className={styles.waiting_div}>
+                              <div className={styles.waiting_div_title}>
+                                IN STOCK SOON
                               </div>
-                            ) : (
-                              <form
-                                className={styles.waiting_input}
-                                onSubmit={(e) => addToWaitListHandler(e)}
-                              >
-                                <input
-                                  name="email"
-                                  type="email"
-                                  required
-                                  placeholder="Your Email"
-                                  value={waitListEmail}
-                                  onChange={(e) =>
-                                    setWaitListEmail(e.currentTarget.value)
-                                  }
-                                  className="form-control"
-                                />
-                                <button className="btn" type="submit">
-                                  Get Notified
-                                </button>
-                              </form>
-                            )}
-                          </div>
-                        )
-                        : product.qty == 0 || !product.in_stock && (
-                          <div className={styles.waiting_div}>
-                            <div className={styles.waiting_div_title}>
-                              IN STOCK SOON
-                            </div>
-                            {props.auth.isAuthenticated ? (
-                              <div>
-                                <button
-                                  type="button"
-                                  className="btn join_button btn-info"
-                                  onClick={() => addToWaitListHandlerAsUser()}
+                              {props.auth.isAuthenticated ? (
+                                <div>
+                                  <button
+                                    type="button"
+                                    className="btn join_button btn-info"
+                                    onClick={() => addToWaitListHandlerAsUser()}
+                                  >
+                                    JOIN THE WAITLIST
+                                  </button>
+                                </div>
+                              ) : (
+                                <form
+                                  className={styles.waiting_input}
+                                  onSubmit={(e) => addToWaitListHandler(e)}
                                 >
-                                  JOIN THE WAITLIST
-                                </button>
+                                  <input
+                                    name="email"
+                                    type="email"
+                                    required
+                                    placeholder="Your Email"
+                                    value={waitListEmail}
+                                    onChange={(e) =>
+                                      setWaitListEmail(e.currentTarget.value)
+                                    }
+                                    className="form-control"
+                                  />
+                                  <button className="btn" type="submit">
+                                    Get Notified
+                                  </button>
+                                </form>
+                              )}
+                            </div>
+                          )
+                        : (product.qty === 0 || product.in_stock == false) && (
+                            <div className={styles.waiting_div}>
+                              <div className={styles.waiting_div_title}>
+                                IN STOCK SOON
                               </div>
-                            ) : (
-                              <form
-                                className={styles.waiting_input}
-                                onSubmit={(e) => addToWaitListHandler(e)}
-                              >
-                                <input
-                                  name="email"
-                                  type="email"
-                                  required
-                                  placeholder="Your Email"
-                                  value={waitListEmail}
-                                  onChange={(e) =>
-                                    setWaitListEmail(e.currentTarget.value)
-                                  }
-                                  className="form-control"
-                                />
-                                <button className="btn" type="submit">
-                                  Get Notified
-                                </button>
-                              </form>
-                            )}
-                          </div>
-                        )}
+                              {props.auth.isAuthenticated ? (
+                                <div>
+                                  <button
+                                    type="button"
+                                    className="btn join_button btn-info"
+                                    onClick={() => addToWaitListHandlerAsUser()}
+                                  >
+                                    JOIN THE WAITLIST
+                                  </button>
+                                </div>
+                              ) : (
+                                <form
+                                  className={styles.waiting_input}
+                                  onSubmit={(e) => addToWaitListHandler(e)}
+                                >
+                                  <input
+                                    name="email"
+                                    type="email"
+                                    required
+                                    placeholder="Your Email"
+                                    value={waitListEmail}
+                                    onChange={(e) =>
+                                      setWaitListEmail(e.currentTarget.value)
+                                    }
+                                    className="form-control"
+                                  />
+                                  <button className="btn" type="submit">
+                                    Get Notified
+                                  </button>
+                                </form>
+                              )}
+                            </div>
+                          )}
                       {product.product_offers.length > 0 && (
                         <div className={styles.bulk_buy_wrapper}>
                           {product.product_offers.map((offer) => (
@@ -1092,7 +1094,6 @@ export async function getServerSideProps(context) {
   let language = context.req.language || "en";
   // Fetch data from external API
   let slug = context.params.slug;
-
 
   try {
     let product = await axios
