@@ -116,8 +116,8 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
           MobileCountryCode: c_order.country_code,
           CustomerMobile: c_order.customer_phone,
           CustomerEmail: c_order.customer_email,
-          CallBackUrl: "https://beautybooth.shop/checkout/order-received/" + query.order,
-          ErrorUrl: "https://beautybooth.shop/checkout/order-received/" + query.order,
+          CallBackUrl: "https://beautyboothqa.com/checkout/order-received/" + query.order,
+          ErrorUrl: "https://beautyboothqa.com/checkout/order-received/" + query.order,
           Language: "en",
           CustomerReference: "noshipping-nosupplier",
           CustomerAddress: {
