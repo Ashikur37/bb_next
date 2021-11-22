@@ -225,15 +225,15 @@ function StepOne(props) {
                           value={phoneNumber}
                           onChange={phoneNumberHandler}
                           autoComplete="none"
-                          error={
-                            phoneNumber
-                              ? isValidPhoneNumber(phoneNumber)
-                                ? undefined
-                                : "Invalid phone number"
-                              : "Phone number required"
-                          }
+                          // error={
+                          //   phoneNumber
+                          //     ? isValidPhoneNumber(phoneNumber)
+                          //       ? undefined
+                          //       : "Invalid phone number"
+                          //     : "Phone number required"
+                          // }
                         />
-                        {isValidPhoneNumber(phoneNumber) ? null : (
+                        {phoneNumber && isValidPhoneNumber(phoneNumber) ? null : (
                           <div className="ml-4 text-danger">
                             Valid phone number required
                           </div>
