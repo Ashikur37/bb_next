@@ -1783,10 +1783,9 @@ export const faqs = [
         <br>•	Card on delivery / pay by card while taking the products
         <br>•	You may pay through credit card 
         <br>&emsp; o	Don’t worry as Beauty Booth is totally safe and secure!
-        <br>&emsp; o	Your credit card information is never stored in our servers. It is encrypted and transmitted through 128-bit Secure Socket Layer (SSL) straight to a top security electronic vault.
+        <br>&emsp; oYour credit card information is never stored in our servers. our payment method is multi-layer secured option enabled each transection you need to put OTP which will be provided by your bank .Please feel free to contact us if you encounter any problem.
         <br>•	You may pay via Bank Deposit at any branch of QNB Bank
-        <br>&emsp; o	A/c Name - Dream Tech Trading W.l.l
-        <br>&emsp; o	A/c No - 0252040311001
+        <br>&emsp; o	A/c Name- Ramnode & Beauty Booth Trading w.l.l A/c no - 0250075456001
         <br>•	We also accept online and mobile bank transfers:
         <br>&emsp; o	IBAN-QA97QNBA000000000252040311001
         <br>&emsp; o	Swift Code-QNBAQAQAXXX
