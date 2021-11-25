@@ -196,36 +196,36 @@ function ProductPage(props) {
     return <span className="product_price">QAR 00.00</span>;
   };
   const BrandName = (attribute) => {
-    // if (attribute.attribute.length > 0) {
-    //   let brand = attribute.attribute.filter((attr) => attr.attribute_id == 4);
-    //   if (brand.length > 0) {
-    //     brand = brand[0].values[0].attribute_value.value;
-    //     return brand ? (
-    //       <Link href={`/brand/${brand.split(" ").join("-")}`}>
-    //         <a>
-    //           <span className={`${styles.brand} mt-1 mb-1`}>by {brand}</span>
-    //         </a>
-    //       </Link>
-    //     ) : (
-    //       ""
-    //     );
-    //   } else {
-    //     return null;
-    //   }
-    // }
+    if (attribute.attribute.length > 0) {
+      let brand = attribute.attribute.filter((attr) => attr.attribute_id == 4);
+      if (brand.length > 0 && brand[0].values.length > 0) {
+        brand = brand[0].values[0].attribute_value.value;
+        return brand ? (
+          <Link href={`/brand/${brand.split(" ").join("-")}`}>
+            <a>
+              <span className={`${styles.brand} mt-1 mb-1`}>by {brand}</span>
+            </a>
+          </Link>
+        ) : (
+          ""
+        );
+      } else {
+        return null;
+      }
+    }
     return null;
   };
 
   const getBrandName = (attribute) => {
-    // if (attribute.length > 0) {
-    //   let brand = attribute.filter((attr) => attr.attribute_id == 4);
-    //   if (brand.length > 0) {
-    //     brand = brand[0].values[0].attribute_value.value;
-    //     return brand ? brand : "";
-    //   } else {
-    //     return null;
-    //   }
-    // }
+    if (attribute.length > 0) {
+      let brand = attribute.filter((attr) => attr.attribute_id == 4);
+      if (brand.length > 0 && brand[0].values.length > 0) {
+        brand = brand[0].values[0].attribute_value.value;
+        return brand ? brand : "";
+      } else {
+        return null;
+      }
+    }
     return null;
   };
 

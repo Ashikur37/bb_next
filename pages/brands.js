@@ -11,9 +11,9 @@ function Brands (props){
     const { t, lang } = props;
     useEffect(() => {
         window.scrollTo(0, 0);
-        if (props.allBrands.length === 0) {
-            props.getAllBrands();
-        }
+        // if (props.allBrands.length === 0) {
+        //     props.getAllBrands();
+        // }
     }, []);
     let Alphabate = [
         "0-9",
