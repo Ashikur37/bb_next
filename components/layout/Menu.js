@@ -74,7 +74,7 @@ function Menu({ lang, t }) {
           image: "foot.jpg",
           items: [],
           name: "Foot Mask",
-          url: "Body-Care?sub=Hand-%26-Foot-Care%2FFoot-Mask",
+          url: "Body-Care?sub=Hand-%26-Foot-Care&child=Foot-Mask",
         },
         {
           hasItems: false,
@@ -84,7 +84,7 @@ function Menu({ lang, t }) {
           image: "9.jpg",
           items: [],
           name: "Hand Cream",
-          url: "Body-Care?sub=Hand-%26-Foot-Care%2FHand-Cream",
+          url: "Body-Care?sub=Hand-%26-Foot-Care&child=Hand-Cream",
         },
         {
           hasItems: false,
@@ -94,7 +94,7 @@ function Menu({ lang, t }) {
           image: "8.jpg",
           items: [],
           name: "Hand Mask",
-          url: "Body-Care?sub=Hand-%26-Foot-Care%2FHand-Mask",
+          url: "Body-Care?sub=Hand-%26-Foot-Care&child=Hand-Mask",
         },
         {
           hasItems: false,
@@ -104,7 +104,7 @@ function Menu({ lang, t }) {
           image: "10.jpg",
           items: [],
           name: "Hand Sanitizer",
-          url: "Body-Care?sub=Hand-%26-Foot-Care%2FHand-Sanitizer",
+          url: "Body-Care?sub=Hand-%26-Foot-Care&child=Hand-Sanitizer",
         },
       ],
       name: "Hand & Foot Care",
