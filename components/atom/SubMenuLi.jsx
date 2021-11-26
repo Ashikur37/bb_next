@@ -18,7 +18,7 @@ function SubMenuLi({ lang, url, t = null, styles, name, img, Link, childs }) {
         <ul className={styles.childs} dir={lang == 'ar_QA' ? "rtl":"ltr"}>
           {childs.map((child, index) => (
             <li key={index}>
-              <Link href={child.url}>
+              <Link href={`/category/${child.url}`}>
                 <a>{t(child.name)}</a>
               </Link>
             </li>

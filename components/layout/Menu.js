@@ -490,11 +490,11 @@ function Menu({ lang, t }) {
                           childs={[
                             {
                               name: t("Lip Balm"),
-                              url: "/category/Skin-Care?sub=Lip-Care&child=Lip-Balm",
+                              url: "Skin-Care?sub=Lip-Care&child=Lip-Balm",
                             },
                             {
                               name: t("Lip Sleeping Mask"),
-                              url: "/category/Skin-Care?sub=Lip-Care&child=Lip-Sleeping-Mask",
+                              url: "Skin-Care?sub=Lip-Care&child=Lip-Sleeping-Mask",
                             },
                           ]}
                         />
@@ -514,35 +514,35 @@ function Menu({ lang, t }) {
                           childs={[
                             {
                               name: "Cleansing Balms",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Cleansing-Balms",
+                              url: "Skin-Care?sub=Cleansers&child=Cleansing-Balms",
                             },
                             {
                               name: "Cleansing Gels",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Cleansing-Gels",
+                              url: "Skin-Care?sub=Cleansers&child=Cleansing-Gels",
                             },
                             {
                               name: "Cleansing Oils",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Cleansing-Oils",
+                              url: "Skin-Care?sub=Cleansers&child=Cleansing-Oils",
                             },
                             {
                               name: "Cleansing Waters",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Cleansing-Waters",
+                              url: "Skin-Care?sub=Cleansers&child=Cleansing-Waters",
                             },
                             {
                               name: "Face Wipes",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Face-Wipes",
+                              url: "Skin-Care?sub=Cleansers&child=Face-Wipes",
                             },
                             {
                               name: "Facial Cleansing bars",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Facial-Cleansing-bars",
+                              url: "Skin-Care?sub=Cleansers&child=Facial-Cleansing-bars",
                             },
                             {
                               name: "Foaming Cleansers",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Foaming-Cleansers",
+                              url: "Skin-Care?sub=Cleansers&child=Foaming-Cleansers",
                             },
                             {
                               name: "Make Up Removers",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Make-Up-Removers",
+                              url: "Skin-Care?sub=Cleansers&child=Make-Up-Removers",
                             },
                           ]}
                         />
@@ -562,15 +562,15 @@ function Menu({ lang, t }) {
                           childs={[
                             {
                               name: "Eye Cream",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Eye-Cream",
+                              url: "Skin-Care?sub=Cleansers&child=Eye-Cream",
                             },
                             {
                               name: "Eye Patch",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Eye-Patch",
+                              url: "Skin-Care?sub=Cleansers&child=Eye-Patch",
                             },
                             {
                               name: "Eye Serum",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Eye-Serum",
+                              url: "Skin-Care?sub=Cleansers&child=Eye-Serum",
                             },
                           ]}
                         />
@@ -586,19 +586,19 @@ function Menu({ lang, t }) {
                           childs={[
                             {
                               name: "Exfoliators",
-                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Exfoliators",
+                              url: "Skin-Care?sub=Masks-&-Exfolators&child=Exfoliators",
                             },
                             {
                               name: "Mask Sheet",
-                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Mask-Sheet",
+                              url: "Skin-Care?sub=Masks-&-Exfolators&child=Mask-Sheet",
                             },
                             {
                               name: "Patchs",
-                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Patchs",
+                              url: "Skin-Care?sub=Masks-&-Exfolators&child=Patchs",
                             },
                             {
                               name: "Wash Off Mask",
-                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Wash-Off-Mask",
+                              url: "Skin-Care?sub=Masks-&-Exfolators&child=Wash-Off-Mask",
                             },
                           ]}
                         />
