@@ -434,7 +434,7 @@ export const menus = [
             image: "foot.jpg",
             items: [],
             name: "Foot Mask",
-            url: "Body-Care?sub=Hand-%26-Foot-Care%2FFoot-Mask",
+            url: "Body-Care?sub=Hand-%26-Foot-Care&child=Foot-Mask",
           },
           {
             hasItems: false,
@@ -444,7 +444,7 @@ export const menus = [
             image: "9.jpg",
             items: [],
             name: "Hand Cream",
-            url: "Body-Care?sub=Hand-%26-Foot-Care%2FHand-Cream",
+            url: "Body-Care?sub=Hand-%26-Foot-Care&child=Hand-Cream",
           },
           {
             hasItems: false,
@@ -454,7 +454,7 @@ export const menus = [
             image: "8.jpg",
             items: [],
             name: "Hand Mask",
-            url: "Body-Care?sub=Hand-%26-Foot-Care%2FHand-Mask",
+            url: "Body-Care?sub=Hand-%26-Foot-Care&child=Hand-Mask",
           },
           {
             hasItems: false,
@@ -464,7 +464,7 @@ export const menus = [
             image: "10.jpg",
             items: [],
             name: "Hand Sanitizer",
-            url: "Body-Care?sub=Hand-%26-Foot-Care%2FHand-Sanitizer",
+            url: "Body-Care?sub=Hand-%26-Foot-Care&child=Hand-Sanitizer",
           },
         ],
         name: "Hand & Foot Care",

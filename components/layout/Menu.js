@@ -576,19 +576,19 @@ function Menu({ lang, t }) {
                           childs={[
                             {
                               name: "Exfoliators",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Exfoliators",
+                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Exfoliators",
                             },
                             {
                               name: "Mask Sheet",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Mask-Sheet",
+                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Mask-Sheet",
                             },
                             {
                               name: "Patchs",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Patchs",
+                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Patchs",
                             },
                             {
                               name: "Wash Off Mask",
-                              url: "/category/Skin-Care?sub=Cleansers&child=Wash-Off-Mask",
+                              url: "/category/Skin-Care?sub=Masks-&-Exfolators&child=Wash-Off-Mask",
                             },
                           ]}
                         />
