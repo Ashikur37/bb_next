@@ -335,6 +335,16 @@ function Menu({ lang, t }) {
         slug: "womens-fashion-jewelry-accessories",
         items: [],
       },
+      {
+        hasItems: false,
+        isParent: false,
+        isCategory: true,
+        name: "Candles",
+        image:"accesso.jpg",
+        url: "Accessories?sub=Candles",
+        slug: "candles",
+        items: [],
+      }
     ]
   })
   const handleHover = (e) => {

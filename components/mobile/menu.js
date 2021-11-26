@@ -743,6 +743,15 @@ export const menus = [
         slug: "womens-fashion-jewelry-accessories",
         items: [],
       },
+      {
+        hasItems: false,
+        isParent: false,
+        isCategory: true,
+        name: "Candles",
+        url: "Accessories?sub=Candles",
+        slug: "candles",
+        items: [],
+      },
     ],
   },
   {
