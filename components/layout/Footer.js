@@ -5,7 +5,7 @@ import Link from "next/link";
 import axios from "../../redux/actions/axios";
 import styles from "../../styles/Footer.module.scss";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import Image from 'next/image'
+import Image from "next/image";
 import {
   faFacebookSquare,
   faInstagramSquare,
@@ -20,7 +20,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
   }, [lang]);
   const subscribeHandler = () => {
     axios
-      .post("/en/setdata/subscribe/store", { email,lang })
+      .post("/en/setdata/subscribe/store", { email, lang })
       .then((res) => {
         setEmail("");
         window.alert(res.data);
@@ -45,7 +45,8 @@ function Footer({ lang, FontAwesomeIcon, t }) {
             </div>
             <div className={styles.email}>
               <FontAwesomeIcon className="fa_icon" icon={faEnvelope} />
-              <span>info@beautyboothqa.com</span>
+              {/* <span>info@beautyboothqa.com</span> */}
+              <a className="ml-2" href="mailto:info@beautyboothqa.com">info@beautyboothqa.com</a>
             </div>
             <div className="mt-3">
               <a
@@ -62,12 +63,16 @@ function Footer({ lang, FontAwesomeIcon, t }) {
               </a>
             </div>
             <ul className={styles.payment_link}>
-              <li><Image src="/images/visa.jpg" width="60" height="40"  /></li>
-              <li><Image src="/images/card-visa_2.svg" width="60" height="40"  /></li>
-              <li><Image src="/images/np.png" width="60" height="40"  /></li>
-              
+              <li>
+                <Image src="/images/visa.jpg" width="60" height="40" />
+              </li>
+              <li>
+                <Image src="/images/card-visa_2.svg" width="60" height="40" />
+              </li>
+              <li>
+                <Image src="/images/np.png" width="60" height="40" />
+              </li>
             </ul>
-
           </div>
           <div className={styles.second}>
             <div className={styles.customer_service}>
