@@ -80,11 +80,36 @@ function Index(props) {
       </Head>
       {!notFound && categoryParams && (
         <div className="text-center">
-          <Header text={`${props.t("SALE ON")} ${categoryName}`} />
+          <Header
+            text={`${props.t("SALE ON")} ${categoryName}`}
+            textColor={"red"}
+          />
         </div>
       )}
       {notFound && <HeaderComponent text="No Data Found" />}
-      <div className="row">
+      {/* category list for mobile version */}
+      <div className={styles.mobile_menu_wrapper}>
+        <ul className={styles.mobile_menu}>
+          {offers &&
+            offers.map((offer, index) => (
+              <li className={styles.menu_li} key={index}>
+                <Link href={`/campaigns?id=${offer.id}`}>
+                  <a
+                    className={categoryParams == offer.id ? styles.active : ""}
+                  >
+                    {offer.name}
+                  </a>
+                </Link>
+              </li>
+            ))}
+          <li className={styles.menu_li}>
+            <Link href="/campaigns/other">
+              <a>{t("Others")}</a>
+            </Link>
+          </li>
+        </ul>
+      </div>
+      {/* <div className="row">
         <div className="col">
           <div className={styles.mbRefine}>
             <div className={`${styles.mbbuttonWrap} text-right mr-2 mb-3`}>
@@ -140,7 +165,7 @@ function Index(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="row">
         <div className="col-lg-3">
           <div className={styles.sidebar}>

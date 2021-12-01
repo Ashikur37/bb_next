@@ -6,20 +6,33 @@
  * @returns component
  */
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-export default function Header({ h: Tag = "h2", text, cssClass = "", lang="en", url = null, urlText = { en: "see all", ar_QA: "اظهار الكل" }, Link, FontAwesomeIcon }){
-    return (
-        <div className="header_component">
-            <Tag className={`${cssClass}`}>
-                {text}
-            </Tag>
-            {url && (
-                <Link href={url}>
-                    <a className="header_see_all">
-                        <span>{urlText[lang]}</span>{" "}
-                        <FontAwesomeIcon className="fa-xs" icon={faArrowRight}></FontAwesomeIcon>
-                    </a>
-                </Link>
-            )}
-        </div>
-    )
+export default function Header({
+  h: Tag = "h2",
+  text,
+  cssClass = "",
+  lang = "en",
+  url = null,
+  urlText = { en: "see all", ar_QA: "اظهار الكل" },
+  Link,
+  FontAwesomeIcon,
+  textColor,
+}) {
+  return (
+    <div className="header_component">
+      <Tag style={textColor ? { color: "red" } : {}} className={`${cssClass}`}>
+        {text}
+      </Tag>
+      {url && (
+        <Link href={url}>
+          <a className="header_see_all">
+            <span>{urlText[lang]}</span>{" "}
+            <FontAwesomeIcon
+              className="fa-xs"
+              icon={faArrowRight}
+            ></FontAwesomeIcon>
+          </a>
+        </Link>
+      )}
+    </div>
+  );
 }

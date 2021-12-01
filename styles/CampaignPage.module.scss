@@ -1,5 +1,52 @@
 @import "./sass/variables";
 @import "./sass/mixins";
+
+// mobile offer list
+// Mobile Menu
+.mobile_menu_wrapper {
+  display: none;
+  @include breakpoint(tablet) {
+    display: unset;
+  }
+  padding: 8px 0;
+  color: #9a9a9a;
+  font-size: 16px;
+  overflow: hidden;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .mobile_menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .mobile_menu {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .mobile_menu {
+    display: flex;
+    overflow: auto;
+    margin-bottom: 15px;
+  }
+  .menu_li a {
+    padding: 5px 12px;
+    display: inline;
+    white-space: nowrap;
+    font-size: 20px;
+    display: inline-block;
+    letter-spacing: 1px;
+    &.active{
+      color: $theme2;
+    }
+  }
+  .menu_li {
+    &:first-child {
+      a {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
 .campaign__tabs {
   background-color: #16213e;
   ul {
