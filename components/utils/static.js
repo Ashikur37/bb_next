@@ -1790,7 +1790,7 @@ export const faqs = [
         <br>&emsp; o	IBAN-QA97QNBA000000000252040311001
         <br>&emsp; o	Swift Code-QNBAQAQAXXX
         <br>&emsp; o	Account Type/Currency-CURRENT ACCOUNT / QAR
-        <br> &emsp; o	Account Holder Name-DREAM TECH TRADING W.L.L
+        <br> &emsp; o	A/c Name- Ramnode & Beauty Booth Trading w.l.l A/c no - 0250075456001
         <br>&emsp; o	QNB unit QATAR
         <br>Please kindly send a complete screenshot of the successful transaction to our email at info@beautyboothqa.com, or contact us directly through our website at www.beautyboothqa.com or whatsapp 77096563, or you may message us on Facebook at Beauty Booth Qatar and Instagram at @beautyboothqtr. Thank you!
         `
