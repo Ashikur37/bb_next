@@ -184,9 +184,9 @@ function ProductPage(props) {
     if (product) {
       if (product.has_offer || product.hasCampaign) {
         return (
-          <span className="product_price offer_price">
+          <span className={`${styles.product_price} ${styles.offer_price}`}>
             {product.selling_price.formatted}
-            <span className="old">{product.price.formatted}</span>
+            <span className={styles.old}>{product.price.formatted}</span>
           </span>
         );
       } else {
