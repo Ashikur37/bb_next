@@ -87,7 +87,7 @@ function StepFour({ c_order, t, paymentDetails, sessionDetails, query }) {
   }, [paymentDetails]);
 
   useEffect(() => {
-    if (paymentId) {
+    if (paymentId && (c_order.status == "Pending" || c_order.status == "Pending Payment")) {
       if (paymentDetails.Data?.InvoiceTransactions.length > 0) {
         axios.post('/en/checkout/save_payment_id', {
           order_id: parseInt(paymentDetails.Data.UserDefinedField),

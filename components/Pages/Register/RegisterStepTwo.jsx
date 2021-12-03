@@ -42,10 +42,26 @@ function RegisterStepTwo({ phone }) {
         window.location.href = "/login";
       })
       .catch((err) => {
-        setError(
-          err.response ? err.response.data.message : "Something went wrong"
-        );
-        window.alert(error);
+        if (err.response.data.errors) {
+          const { email, first_name, password, password_confirmation, privacy_policy } = err.response.data.errors;
+          if (email) {
+            window.alert(email);
+          } else if (first_name) {
+            window.alert(first_name);
+          } else if (password) {
+            window.alert(password);
+          } else if (password_confirmation) {
+            window.alert(password_confirmation);
+          } else if (privacy_policy) {
+            window.alert(privacy_policy);
+          }else {
+            window.alert("Something went wrong. Contact support with your email address");
+          }
+        } else {
+
+          window.alert("Something went wrong. Contact support with your email address");
+        }
+        setError("Something went wrong. Contact support with your email address");
       });
   };
   useEffect(() => {
