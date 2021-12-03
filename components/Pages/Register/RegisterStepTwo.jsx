@@ -58,8 +58,11 @@ function RegisterStepTwo({ phone }) {
             window.alert("Something went wrong. Contact support with your email address");
           }
         } else {
-
-          window.alert("Something went wrong. Contact support with your email address");
+          if(err.response.data.message){
+            window.alert(err.response.data.message);
+          }else{
+            window.alert("Something went wrong. Contact support with your email address");
+          }
         }
         setError("Something went wrong. Contact support with your email address");
       });
