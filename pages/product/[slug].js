@@ -757,8 +757,8 @@ function ProductPage(props) {
                                 href={`/product/${size.slug}`}
                                 key={size.id}
                               >
-                                <a className="size text-center">
-                                  <span className="size_title">
+                                <a className={`${styles.size} text-center`}>
+                                  <span className={styles.size_title}>
                                     {size.measurements || ""}&nbsp;
                                     {size.uom || ""}
                                   </span>

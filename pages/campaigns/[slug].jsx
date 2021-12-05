@@ -41,7 +41,7 @@ function CategoryOffer({ offerProducts, language, offer }) {
     <>
       <div className="container mt-4">
         <Head>
-          <title>Best selling | Beautyboothqa</title>
+          <title>Sale | Beautyboothqa</title>
         </Head>
         <div className="text-center">
           <Header text={`SALE ON ${offer.name}`} textColor={"red"} />
