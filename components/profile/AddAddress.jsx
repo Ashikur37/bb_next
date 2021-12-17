@@ -57,9 +57,8 @@ function AddAddress({ lang, auth }) {
       isDefault: dshipping,
     };
 
-    let host = `http://localhost:${process.env.PORT}`;
     axios
-      .post(host + "/api/account/address", { billing, shipping })
+      .post("/api/account/address", { billing, shipping })
       .then((res) => {
         if (res.data.ok == 1) {
           setPhoneNumber();
