@@ -1745,6 +1745,11 @@
   "resolved" "https://registry.npmjs.org/detect-touch-events/-/detect-touch-events-2.0.2.tgz"
   "version" "2.0.2"
 
+"dibsy-react@^1.0.1":
+  "integrity" "sha512-l3fdLPZ0ZgupqcqKC9uOFndzPJP3C+cEghQWrW1RzmL4RuxjJn77nZXOSE6QVKEjo/5QpC26ATQJBNCMWFq8pw=="
+  "resolved" "https://registry.npmjs.org/dibsy-react/-/dibsy-react-1.0.1.tgz"
+  "version" "1.0.1"
+
 "diffie-hellman@^5.0.0":
   "integrity" "sha512-kqag/Nl+f3GwyK25fhUMYj81BUOrZ9IuJsjIcDE5icNM9FJHAVm3VcUDxdLPoQtTuUylWm6ZIknYJwwaPxsUzg=="
   "resolved" "https://registry.npmjs.org/diffie-hellman/-/diffie-hellman-5.0.3.tgz"

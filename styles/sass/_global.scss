@@ -1,6 +1,18 @@
 @import "../../node_modules/swiper/swiper.scss";
 @import "../../node_modules/swiper/components/pagination/pagination.scss";
 
+button.submit-button {
+  cursor: pointer;
+  color: white;
+  background: $theme1;
+  padding: 8px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  display: block;
+  margin: 14px auto 15px;
+}
+
 .notice {
   background: $theme1;
   color: white;
@@ -8,10 +20,9 @@
   font-size: 18px;
   margin-bottom: 0;
   width: 100%;
-  @include breakpoint (tablet){
+  @include breakpoint(tablet) {
     font-size: 13px;
   }
-
 }
 .devider {
   border-bottom: 1px solid #eeeeee;
