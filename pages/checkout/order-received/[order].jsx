@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "dibsy-react/dist/index.css";
 function StepFour({ orderInfo, query, t }) {
+  console.log(orderInfo);
   const [canSubmit, setCanSubmit] = useState(false);
   const [complete, setComplete] = useState(false);
   const router = useRouter();
@@ -27,7 +28,8 @@ function StepFour({ orderInfo, query, t }) {
   function onSubmit(e, submitPayment) {
     e.preventDefault();
     // Initialize the payment and submit the payment token.
-    axios.post(`/en/checkout/payment/${order}`)
+    axios
+      .post(`/en/checkout/payment/${order}`)
       .then((res) => {
         console.log(res.data);
         if (res?.data?.data?.paymentToken) {
@@ -40,17 +42,26 @@ function StepFour({ orderInfo, query, t }) {
       .catch((error) => console.log(error));
   }
   function onPaymentComplete(success, payment) {
-    axios.post("/en/checkout/save_payment_id", {
-      payment_id: success.id,
-    })
-      .then((res) => {
-        setComplete(true);
-      })
-      .catch(() => {
-        window.alert(
-          "There are some problems with the payment id. please contact support"
-        );
-      });
+    if (success) {
+      axios
+        .post("/en/checkout/save_payment_id", {
+          order_id: orderInfo.id,
+        })
+        .then((res) => {
+          console.log("success");
+          setComplete(true);
+        })
+        .catch(() => {
+          window.alert(
+            "There are some problems with the payment id. please contact support"
+          );
+        });
+    } else {
+      window.alert(
+        "There are some problems with the payment id. please contact support"
+      );
+    }
+
     // console.log(success, payment);
     // console.log(success);
   }
@@ -77,45 +88,55 @@ function StepFour({ orderInfo, query, t }) {
           <Header text={t("CONFIRMATION")} />
         </div>
         <div className="row justify-content-center">
-          {!complete ? (
-            <div className="col-lg-8 mt-4 order-md-last">
-              <EmbedWrapper
-                publicKey={"pk_test_fPdtJaOKDGramz4bOZUKPfJ9H8RqFfhVjx1R"}
-                onCanSubmitChange={(value) => {
-                  setCanSubmit(value);
-                }}
-                onPaymentComplete={onPaymentComplete}
-              >
-                {({ submitPayment, isCheckoutSubmitted }) => (
-                  <div className={"card-container"}>
-                    <CardNumber />
-                    <div className="row">
-                      <div className="col">
-                        <ExpiryDate />
-                      </div>
-                      <div className="col">
-                        <CardCvc />
-                      </div>
-                    </div>
-                    <button
-                      className={"submit-button"}
-                      onClick={(e) => onSubmit(e, submitPayment)}
-                      disabled={!canSubmit || isCheckoutSubmitted}
-                      type="submit"
-                    >
-                      {!isCheckoutSubmitted
-                        ? "Submit Payment"
-                        : "Submitting ..."}
-                    </button>
-                  </div>
-                )}
-              </EmbedWrapper>
-            </div>
+          {orderInfo.transaction &&
+          orderInfo.transaction.invoice_status == "Paid" ? (
+            ""
           ) : (
-            <div className="col-lg-8 mt-4 order-md-last">
+            <>
               {" "}
-              <h2 className="text-center text-success">Payment Completed ! </h2>
-            </div>
+              {!complete ? (
+                <div className="col-lg-8 mt-4 order-md-last">
+                  <EmbedWrapper
+                    publicKey={"pk_test_fPdtJaOKDGramz4bOZUKPfJ9H8RqFfhVjx1R"}
+                    onCanSubmitChange={(value) => {
+                      setCanSubmit(value);
+                    }}
+                    onPaymentComplete={onPaymentComplete}
+                  >
+                    {({ submitPayment, isCheckoutSubmitted }) => (
+                      <div className={"card-container"}>
+                        <CardNumber />
+                        <div className="row">
+                          <div className="col">
+                            <ExpiryDate />
+                          </div>
+                          <div className="col">
+                            <CardCvc />
+                          </div>
+                        </div>
+                        <button
+                          className={"submit-button"}
+                          onClick={(e) => onSubmit(e, submitPayment)}
+                          disabled={!canSubmit || isCheckoutSubmitted}
+                          type="submit"
+                        >
+                          {!isCheckoutSubmitted
+                            ? "Submit Payment"
+                            : "Submitting ..."}
+                        </button>
+                      </div>
+                    )}
+                  </EmbedWrapper>
+                </div>
+              ) : (
+                <div className="col-lg-8 mt-4 order-md-last">
+                  {" "}
+                  <h2 className="text-center text-success">
+                    Payment Completed !{" "}
+                  </h2>
+                </div>
+              )}{" "}
+            </>
           )}
           <div className="col-lg-4">
             <div className={styles.circle}>
