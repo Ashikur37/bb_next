@@ -97,7 +97,7 @@ function StepFour({ orderInfo, query, t }) {
               {!complete ? (
                 <div className="col-lg-8 mt-4 order-md-last">
                   <EmbedWrapper
-                    publicKey={"pk_test_fPdtJaOKDGramz4bOZUKPfJ9H8RqFfhVjx1R"}
+                    publicKey={"pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"}
                     onCanSubmitChange={(value) => {
                       setCanSubmit(value);
                     }}
