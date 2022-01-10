@@ -35,10 +35,22 @@
     transform: translate(-50%, -50%);
   }
 }
-.payment_link_info{
+.payment_link_info {
   color: black;
   font-size: 16px;
   letter-spacing: 1px;
   border-bottom: 1px solid $theme2;
   margin-bottom: 1rem;
+}
+
+.payment_method_button {
+  padding: 8px 30px;
+  margin-right: 15px;
+  background-color: #7a7373;
+  color: white;
+  border: none;
+  margin-bottom: 10px;
+  &.active {
+    background-color: $theme2;
+  }
 }

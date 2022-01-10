@@ -18,10 +18,29 @@ import styles from "../../../styles/OrderRecived.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "dibsy-react/dist/index.css";
-function StepFour({ orderInfo, query, t }) {
+function StepFour({ orderInfo, query, t, success }) {
+  useEffect(() => {
+    if (success == "true") {
+      axios
+        .post("/en/checkout/save_payment_id", {
+          order_id: orderInfo.id,
+        })
+        .then((res) => {
+          console.log("success");
+          setComplete(true);
+        })
+        .catch(() => {
+          window.alert(
+            "There are some problems with the payment id. please contact support"
+          );
+        });
+    }
+  }, []);
+
   console.log(orderInfo);
   const [canSubmit, setCanSubmit] = useState(false);
   const [complete, setComplete] = useState(false);
+  const [method, setMethod] = useState("creditcard");
   const router = useRouter();
   const { order } = query;
 
@@ -29,7 +48,7 @@ function StepFour({ orderInfo, query, t }) {
     e.preventDefault();
     // Initialize the payment and submit the payment token.
     axios
-      .post(`/en/checkout/payment/${order}`)
+      .post(`/en/checkout/payment/${order}`, { method: method })
       .then((res) => {
         console.log(res.data);
         if (res?.data?.data?.paymentToken) {
@@ -66,6 +85,10 @@ function StepFour({ orderInfo, query, t }) {
     // console.log(success);
   }
 
+  const buttonHandler = (value) => {
+    setMethod(value);
+  };
+
   // useEffect(() => {
   //   if (paymentId /*&& (c_order.status == "Pending" || c_order.status == "Pending Payment")*/) {
   //     if (paymentDetails.Data?.InvoiceTransactions.length > 0) {
@@ -94,8 +117,28 @@ function StepFour({ orderInfo, query, t }) {
           ) : (
             <>
               {" "}
-              {!complete ? (
+              {!complete || success !== "true" ? (
                 <div className="col-lg-8 mt-4 order-md-last">
+                  <button
+                    onClick={() => buttonHandler("creditcard")}
+                    className={
+                      method == "creditcard"
+                        ? `${styles.payment_method_button} ${styles.active}`
+                        : `${styles.payment_method_button}`
+                    }
+                  >
+                    Credit Card
+                  </button>
+                  <button
+                    onClick={() => buttonHandler("debitcard")}
+                    className={
+                      method == "debitcard"
+                        ? `${styles.payment_method_button} ${styles.active}`
+                        : `${styles.payment_method_button}`
+                    }
+                  >
+                    Debit Card
+                  </button>
                   <EmbedWrapper
                     publicKey={"pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"}
                     onCanSubmitChange={(value) => {
@@ -166,11 +209,13 @@ function StepFour({ orderInfo, query, t }) {
 
 // This gets called on every request
 export async function getServerSideProps(ctx) {
+  const { success } = ctx.query;
+
   const orderInfo = await axios
     .get("/en/getdata/order_by_id/" + ctx.query.order)
     .then(({ data }) => data)
     .catch((error) => error.response);
 
-  return { props: { query: ctx.query, orderInfo } };
+  return { props: { query: ctx.query, orderInfo, success:success?success:"false" } };
 }
 export default withTranslation("common")(StepFour);
