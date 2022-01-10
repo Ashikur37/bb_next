@@ -116,62 +116,78 @@ function StepFour({ orderInfo, query, t, success }) {
             ""
           ) : (
             <>
-              {" "}
-              {!complete || success !== "true" ? (
-                <div className="col-lg-8 mt-4 order-md-last">
-                  <button
-                    onClick={() => buttonHandler("creditcard")}
-                    className={
-                      method == "creditcard"
-                        ? `${styles.payment_method_button} ${styles.active}`
-                        : `${styles.payment_method_button}`
-                    }
-                  >
-                    Credit Card
-                  </button>
-                  <button
-                    onClick={() => buttonHandler("debitcard")}
-                    className={
-                      method == "debitcard"
-                        ? `${styles.payment_method_button} ${styles.active}`
-                        : `${styles.payment_method_button}`
-                    }
-                  >
-                    Debit Card
-                  </button>
-                  <div className="mb-3"><span className="text-success">Selected Payment Method: <b>{method}</b></span></div>
-                  <EmbedWrapper
-                    publicKey={"pk_test_fPdtJaOKDGramz4bOZUKPfJ9H8RqFfhVjx1R"}
-                    onCanSubmitChange={(value) => {
-                      setCanSubmit(value);
-                    }}
-                    onPaymentComplete={onPaymentComplete}
-                  >
-                    {({ submitPayment, isCheckoutSubmitted }) => (
-                      <div className={"card-container"}>
-                        <CardNumber />
-                        <div className="row">
-                          <div className="col">
-                            <ExpiryDate />
-                          </div>
-                          <div className="col">
-                            <CardCvc />
-                          </div>
-                        </div>
-                        <button
-                          className={"submit-button"}
-                          onClick={(e) => onSubmit(e, submitPayment)}
-                          disabled={!canSubmit || isCheckoutSubmitted}
-                          type="submit"
-                        >
-                          {!isCheckoutSubmitted
-                            ? "Submit Payment"
-                            : "Submitting ..."}
-                        </button>
+              {success !== "true" ? (
+                <>
+                  {!complete ? (
+                    <div className="col-lg-8 mt-4 order-md-last">
+                      <button
+                        onClick={() => buttonHandler("creditcard")}
+                        className={
+                          method == "creditcard"
+                            ? `${styles.payment_method_button} ${styles.active}`
+                            : `${styles.payment_method_button}`
+                        }
+                      >
+                        Credit Card
+                      </button>
+                      <button
+                        onClick={() => buttonHandler("debitcard")}
+                        className={
+                          method == "debitcard"
+                            ? `${styles.payment_method_button} ${styles.active}`
+                            : `${styles.payment_method_button}`
+                        }
+                      >
+                        Debit Card
+                      </button>
+                      <div className="mb-3">
+                        <span className="text-success">
+                          Selected Payment Method: <b>{method}</b>
+                        </span>
                       </div>
-                    )}
-                  </EmbedWrapper>
-                </div>
+                      <EmbedWrapper
+                        publicKey={
+                          "pk_test_fPdtJaOKDGramz4bOZUKPfJ9H8RqFfhVjx1R"
+                        }
+                        onCanSubmitChange={(value) => {
+                          setCanSubmit(value);
+                        }}
+                        onPaymentComplete={onPaymentComplete}
+                      >
+                        {({ submitPayment, isCheckoutSubmitted }) => (
+                          <div className={"card-container"}>
+                            <CardNumber />
+                            <div className="row">
+                              <div className="col">
+                                <ExpiryDate />
+                              </div>
+                              <div className="col">
+                                <CardCvc />
+                              </div>
+                            </div>
+                            <button
+                              className={"submit-button"}
+                              onClick={(e) => onSubmit(e, submitPayment)}
+                              disabled={!canSubmit || isCheckoutSubmitted}
+                              type="submit"
+                            >
+                              {!isCheckoutSubmitted
+                                ? "Submit Payment"
+                                : "Submitting ..."}
+                            </button>
+                          </div>
+                        )}
+                      </EmbedWrapper>
+                    </div>
+                  ) : (
+                    <div className="col-lg-8 mt-4 order-md-last">
+                      {" "}
+                      <h2 className="text-center text-success">
+                        Payment Completed !{" "}
+                      </h2>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="col-lg-8 mt-4 order-md-last">
                   {" "}
@@ -179,7 +195,7 @@ function StepFour({ orderInfo, query, t, success }) {
                     Payment Completed !{" "}
                   </h2>
                 </div>
-              )}{" "}
+              )}
             </>
           )}
           <div className="col-lg-4">
@@ -217,6 +233,12 @@ export async function getServerSideProps(ctx) {
     .then(({ data }) => data)
     .catch((error) => console.log(error));
 
-  return { props: { query: ctx.query, orderInfo, success:success?success:"false" } };
+  return {
+    props: {
+      query: ctx.query,
+      orderInfo,
+      success: success ? success : "false",
+    },
+  };
 }
 export default withTranslation("common")(StepFour);
