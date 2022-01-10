@@ -141,7 +141,7 @@ function StepFour({ orderInfo, query, t, success }) {
                   </button>
                   <div className="mb-3"><span className="text-success">Selected Payment Method: <b>{method}</b></span></div>
                   <EmbedWrapper
-                    publicKey={"pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"}
+                    publicKey={"pk_test_fPdtJaOKDGramz4bOZUKPfJ9H8RqFfhVjx1R"}
                     onCanSubmitChange={(value) => {
                       setCanSubmit(value);
                     }}
