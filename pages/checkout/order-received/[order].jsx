@@ -139,6 +139,7 @@ function StepFour({ orderInfo, query, t, success }) {
                   >
                     Debit Card
                   </button>
+                  <div className="mb-3"><span className="text-success">Selected Payment Method: <b>{method}</b></span></div>
                   <EmbedWrapper
                     publicKey={"pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"}
                     onCanSubmitChange={(value) => {
@@ -214,7 +215,7 @@ export async function getServerSideProps(ctx) {
   const orderInfo = await axios
     .get("/en/getdata/order_by_id/" + ctx.query.order)
     .then(({ data }) => data)
-    .catch((error) => error.response);
+    .catch((error) => console.log(error));
 
   return { props: { query: ctx.query, orderInfo, success:success?success:"false" } };
 }
