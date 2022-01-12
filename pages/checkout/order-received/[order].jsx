@@ -97,14 +97,13 @@ function StepFour({ orderInfo, query, t, success }) {
     setMethod(value);
   };
 
-  const checkStatus = () =>{
-    if(orderInfo.status == "payment_pending"){
+  const checkStatus = () => {
+    if (orderInfo.status == "pending_payment") {
       return true;
+    } else {
+      return false;
     }
-
-    return false;
-  }
-
+  };
   // useEffect(() => {
   //   if (paymentId /*&& (c_order.status == "Pending" || c_order.status == "Pending Payment")*/) {
   //     if (paymentDetails.Data?.InvoiceTransactions.length > 0) {
@@ -216,11 +215,11 @@ function StepFour({ orderInfo, query, t, success }) {
           )} */}
 
           {/* new design */}
-          {checkStatus ? (
+          {checkStatus() && complete == false ? (
             <div className="col-lg-8 mt-4 order-md-last">
               <div className={styles.payment_input}>
                 <EmbedWrapper
-                  publicKey={"pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"}
+                  publicKey={"pk_test_fPdtJaOKDGramz4bOZUKPfJ9H8RqFfhVjx1R"}
                   onCanSubmitChange={(value) => {
                     setCanSubmit(value);
                   }}
@@ -238,7 +237,7 @@ function StepFour({ orderInfo, query, t, success }) {
                               name="option"
                               id="cr"
                               onChange={() => radioHandler("creditcard")}
-                              checked={method == "creditcard" ? true:false}
+                              checked={method == "creditcard" ? true : false}
                             />
                             <label htmlFor="cr">Credit Card</label>
                           </div>
@@ -264,7 +263,9 @@ function StepFour({ orderInfo, query, t, success }) {
                           )}
                         </div>
                       </div>
-                      <div className={`${styles.payment_row } ${styles.no_border}`}>
+                      <div
+                        className={`${styles.payment_row} ${styles.no_border}`}
+                      >
                         <div className={styles.heading}>
                           <div className={styles.left}>
                             <input
@@ -273,7 +274,7 @@ function StepFour({ orderInfo, query, t, success }) {
                               name="option"
                               id="db"
                               onChange={() => radioHandler("debitcard")}
-                              checked={method == "debitcard" ? true:false}
+                              checked={method == "debitcard" ? true : false}
                             />
                             <label htmlFor="db">Debit Card</label>
                           </div>
@@ -309,7 +310,14 @@ function StepFour({ orderInfo, query, t, success }) {
               </div>
             </div>
           ) : (
-            <div className="col-lg-8 mt-4 order-md-last"> Payment Complete</div>
+            <div className="col-lg-8 mt-4 order-md-last">
+              <div className="col-lg-8 mt-4 order-md-last">
+      
+                <h2 className="text-center text-success">
+                  Payment Completed !
+                </h2>
+              </div>
+            </div>
           )}
           {/* end new design */}
 
