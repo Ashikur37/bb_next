@@ -264,7 +264,7 @@ function StepFour({ orderInfo, query, t, success }) {
                           )}
                         </div>
                       </div>
-                      <div className={styles.payment_row}>
+                      <div className={`${styles.payment_row } ${styles.no_border}`}>
                         <div className={styles.heading}>
                           <div className={styles.left}>
                             <input

@@ -60,7 +60,6 @@
     border-bottom: 1px solid #e4e4e4;
     padding-bottom: 10px;
     &:last-child {
-      border-bottom: none;
       padding-top: 10px;
     }
     .heading {
@@ -98,4 +97,7 @@
       }
     }
   }
+}
+.no_border {
+  border: none !important;
 }
