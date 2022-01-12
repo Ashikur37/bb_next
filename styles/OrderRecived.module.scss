@@ -54,3 +54,48 @@
     background-color: $theme2;
   }
 }
+
+.payment_input {
+  .payment_row {
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 10px;
+    &:last-child {
+      border-bottom: none;
+      padding-top: 10px;
+    }
+    .heading {
+      &:last-child {
+        border-bottom: none;
+        padding-top: 10px;
+      }
+      display: flex;
+      justify-content: space-between;
+
+      align-items: center;
+
+      .left {
+        display: flex;
+
+        input[type="radio"] {
+          width: 20px;
+          height: 20px;
+          &:checked {
+            background-color: #93e026;
+          }
+        }
+        label {
+          margin-left: 10px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+      }
+      .right {
+        img {
+          height: 30px;
+          width: 50px;
+          margin: 5px 4px;
+        }
+      }
+    }
+  }
+}

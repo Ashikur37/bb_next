@@ -50,17 +50,22 @@ function StepFour({ orderInfo, query, t, success }) {
     axios
       .post(`/en/checkout/payment/${order}`, { method: method })
       .then((res) => {
-        console.log(res.data);
-        if (res?.data?.data?.paymentToken) {
-          // Submit the Payment
-          submitPayment(res.data.data.paymentToken);
+        console.log(res.data.data);
+        if (method == "debitcard") {
+          window.open(res.data.data._links.checkout.href);
         } else {
-          console.log("Error while initiating payment");
+          if (res?.data?.data?.paymentToken) {
+            // Submit the Payment
+            submitPayment(res.data.data.paymentToken);
+          } else {
+            console.log("Error while initiating payment");
+          }
         }
       })
       .catch((error) => console.log(error));
   }
   function onPaymentComplete(success, payment) {
+    console.log("on payment success");
     if (success) {
       axios
         .post("/en/checkout/save_payment_id", {
@@ -88,6 +93,17 @@ function StepFour({ orderInfo, query, t, success }) {
   const buttonHandler = (value) => {
     setMethod(value);
   };
+  const radioHandler = (value) => {
+    setMethod(value);
+  };
+
+  const checkStatus = () =>{
+    if(orderInfo.status == "payment_pending"){
+      return true;
+    }
+
+    return false;
+  }
 
   // useEffect(() => {
   //   if (paymentId /*&& (c_order.status == "Pending" || c_order.status == "Pending Payment")*/) {
@@ -111,7 +127,7 @@ function StepFour({ orderInfo, query, t, success }) {
           <Header text={t("CONFIRMATION")} />
         </div>
         <div className="row justify-content-center">
-          {orderInfo.transaction &&
+          {/* {orderInfo.transaction &&
           orderInfo.transaction.invoice_status == "Paid" ? (
             ""
           ) : (
@@ -197,7 +213,106 @@ function StepFour({ orderInfo, query, t, success }) {
                 </div>
               )}
             </>
+          )} */}
+
+          {/* new design */}
+          {checkStatus ? (
+            <div className="col-lg-8 mt-4 order-md-last">
+              <div className={styles.payment_input}>
+                <EmbedWrapper
+                  publicKey={"pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"}
+                  onCanSubmitChange={(value) => {
+                    setCanSubmit(value);
+                  }}
+                  onPaymentComplete={onPaymentComplete}
+                >
+                  {({ submitPayment, isCheckoutSubmitted }) => (
+                    <>
+                      {" "}
+                      <div className={styles.payment_row}>
+                        <div className={styles.heading}>
+                          <div className={styles.left}>
+                            <input
+                              type="radio"
+                              value="creditcard"
+                              name="option"
+                              id="cr"
+                              onChange={() => radioHandler("creditcard")}
+                              checked={method == "creditcard" ? true:false}
+                            />
+                            <label htmlFor="cr">Credit Card</label>
+                          </div>
+                          <div className={styles.right}>
+                            <img src="/payment/amex.svg" />
+                            <img src="/payment/mc.svg" />
+                            <img src="/payment/visa.svg" />
+                          </div>
+                        </div>
+                        <div className={styles.payment_body}>
+                          {method == "creditcard" && (
+                            <div className={"card-container"}>
+                              <CardNumber />
+                              <div className="row">
+                                <div className="col">
+                                  <ExpiryDate />
+                                </div>
+                                <div className="col">
+                                  <CardCvc />
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className={styles.payment_row}>
+                        <div className={styles.heading}>
+                          <div className={styles.left}>
+                            <input
+                              type="radio"
+                              value="debitcard"
+                              name="option"
+                              id="db"
+                              onChange={() => radioHandler("debitcard")}
+                              checked={method == "debitcard" ? true:false}
+                            />
+                            <label htmlFor="db">Debit Card</label>
+                          </div>
+                          <div className={styles.right}>
+                            {" "}
+                            <img src="/payment/naps.svg" />{" "}
+                          </div>
+                        </div>
+                      </div>
+                      {/* submit button */}
+                      {method == "creditcard" ? (
+                        <button
+                          className={"submit-button"}
+                          onClick={(e) => onSubmit(e, submitPayment)}
+                          disabled={!canSubmit || isCheckoutSubmitted}
+                          type="submit"
+                        >
+                          {!isCheckoutSubmitted
+                            ? "Submit Payment"
+                            : "Submitting ..."}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={(e) => onSubmit(e, submitPayment)}
+                          className={"submit-button"}
+                        >
+                          Submit Payment
+                        </button>
+                      )}
+                    </>
+                  )}
+                </EmbedWrapper>
+              </div>
+            </div>
+          ) : (
+            <div className="col-lg-8 mt-4 order-md-last"> Payment Complete</div>
           )}
+          {/* end new design */}
+
           <div className="col-lg-4">
             <div className={styles.circle}>
               <FontAwesomeIcon icon={faCheck} className="fa-2x text-success" />
