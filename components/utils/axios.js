@@ -7,7 +7,7 @@ const Axios = axios.create({
   responseType: "json",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("auth_token") || ""}`,
+    // Authorization: `Bearer ${localStorage.getItem("auth_token") || ""}`,
   },
 });
 module.exports = Axios;
