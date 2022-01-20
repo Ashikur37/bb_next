@@ -26,10 +26,10 @@ module.exports = {
       production:"https://api.myfatoorah.com/"
     }
   },
-  images: {
-    loader: 'imgix',
-    domains: ['admin.beautyboothqa.com','beautyboothqa.sgp1.digitaloceanspaces.com'],
-  },
+  // images: {
+  //   loader: 'imgix',
+  //   domains: ['admin.beautyboothqa.com','beautyboothqa.sgp1.digitaloceanspaces.com'],
+  // },
   distDir: "build",
   reactStrictMode: true,
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
