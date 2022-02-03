@@ -19,6 +19,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "dibsy-react/dist/index.css";
 function StepFour({ orderInfo, query, t, success }) {
+  console.log(orderInfo);
+  const [canSubmit, setCanSubmit] = useState(false);
+  const [complete, setComplete] = useState(false);
+  const [method, setMethod] = useState("creditcard");
+  const [paymentFailed, setPaymentFailed] = useState(false);
+  const router = useRouter();
+  const { order } = query;
+
   useEffect(() => {
     if (success == "true") {
       axios
@@ -26,8 +34,12 @@ function StepFour({ orderInfo, query, t, success }) {
           order_id: orderInfo.id,
         })
         .then((res) => {
-          console.log("success");
-          setComplete(true);
+          if (orderInfo.status == "canceled") {
+            setComplete(false);
+            setPaymentFailed(true);
+          } else {
+            setComplete(true);
+          }
         })
         .catch(() => {
           window.alert(
@@ -36,13 +48,6 @@ function StepFour({ orderInfo, query, t, success }) {
         });
     }
   }, []);
-
-  console.log(orderInfo);
-  const [canSubmit, setCanSubmit] = useState(false);
-  const [complete, setComplete] = useState(false);
-  const [method, setMethod] = useState("creditcard");
-  const router = useRouter();
-  const { order } = query;
 
   function onSubmit(e, submitPayment) {
     e.preventDefault();
@@ -100,6 +105,8 @@ function StepFour({ orderInfo, query, t, success }) {
   const checkStatus = () => {
     if (orderInfo.status == "pending_payment") {
       return true;
+    } else if (orderInfo.status == "canceled") {
+      return true;
     } else {
       return false;
     }
@@ -124,6 +131,12 @@ function StepFour({ orderInfo, query, t, success }) {
       <div className="container">
         <div className="text-center mt-3">
           <Header text={t("CONFIRMATION")} />
+
+          {paymentFailed && (
+            <h5 className="text-danger font-weight-bold">
+              Payment Failed! Please try again!
+            </h5>
+          )}
         </div>
         <div className="row justify-content-center">
           {/* {orderInfo.transaction &&
@@ -215,115 +228,120 @@ function StepFour({ orderInfo, query, t, success }) {
           )} */}
 
           {/* new design */}
-          {orderInfo.payment_method != "Cash On Delivery" && orderInfo.payment_method != "Card On Delivery"   && (
-            <>
-              {checkStatus() && complete == false ? (
-                <div className="col-lg-8 mt-4 order-md-last">
-                  <div className={styles.payment_input}>
-                    <EmbedWrapper
-                      publicKey={"pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"}
-                      onCanSubmitChange={(value) => {
-                        setCanSubmit(value);
-                      }}
-                      onPaymentComplete={onPaymentComplete}
-                    >
-                      {({ submitPayment, isCheckoutSubmitted }) => (
-                        <>
-                          {" "}
-                          <div className={styles.payment_row}>
-                            <div className={styles.heading}>
-                              <div className={styles.left}>
-                                <input
-                                  type="radio"
-                                  value="creditcard"
-                                  name="option"
-                                  id="cr"
-                                  onChange={() => radioHandler("creditcard")}
-                                  checked={
-                                    method == "creditcard" ? true : false
-                                  }
-                                />
-                                <label htmlFor="cr">Credit Card</label>
+          {orderInfo.payment_method != "Cash On Delivery" &&
+            orderInfo.payment_method != "Card On Delivery" && (
+              <>
+                {checkStatus() && complete == false ? (
+                  <div className="col-lg-8 mt-4 order-md-last">
+                    <div className={styles.payment_input}>
+                      <EmbedWrapper
+                        publicKey={
+                          "pk_live_sE77rz2BN1OQXWiInhILN3uglZogsRM44npB"
+                        }
+                        onCanSubmitChange={(value) => {
+                          setCanSubmit(value);
+                        }}
+                        onPaymentComplete={onPaymentComplete}
+                      >
+                        {({ submitPayment, isCheckoutSubmitted }) => (
+                          <>
+                            {" "}
+                            <div className={styles.payment_row}>
+                              <div className={styles.heading}>
+                                <div className={styles.left}>
+                                  <input
+                                    type="radio"
+                                    value="creditcard"
+                                    name="option"
+                                    id="cr"
+                                    onChange={() => radioHandler("creditcard")}
+                                    checked={
+                                      method == "creditcard" ? true : false
+                                    }
+                                  />
+                                  <label htmlFor="cr">Credit Card</label>
+                                </div>
+                                <div className={styles.right}>
+                                  <img src="/payment/amex.svg" />
+                                  <img src="/payment/mc.svg" />
+                                  <img src="/payment/visa.svg" />
+                                </div>
                               </div>
-                              <div className={styles.right}>
-                                <img src="/payment/amex.svg" />
-                                <img src="/payment/mc.svg" />
-                                <img src="/payment/visa.svg" />
-                              </div>
-                            </div>
-                            <div className={styles.payment_body}>
-                              {method == "creditcard" && (
-                                <div className={"card-container"}>
-                                  <CardNumber />
-                                  <div className="row">
-                                    <div className="col">
-                                      <ExpiryDate />
-                                    </div>
-                                    <div className="col">
-                                      <CardCvc />
+                              <div className={styles.payment_body}>
+                                {method == "creditcard" && (
+                                  <div className={"card-container"}>
+                                    <CardNumber />
+                                    <div className="row">
+                                      <div className="col">
+                                        <ExpiryDate />
+                                      </div>
+                                      <div className="col">
+                                        <CardCvc />
+                                      </div>
                                     </div>
                                   </div>
+                                )}
+                              </div>
+                            </div>
+                            <div
+                              className={`${styles.payment_row} ${styles.no_border}`}
+                            >
+                              <div className={styles.heading}>
+                                <div className={styles.left}>
+                                  <input
+                                    type="radio"
+                                    value="debitcard"
+                                    name="option"
+                                    id="db"
+                                    onChange={() => radioHandler("debitcard")}
+                                    checked={
+                                      method == "debitcard" ? true : false
+                                    }
+                                  />
+                                  <label htmlFor="db">Debit Card</label>
                                 </div>
-                              )}
-                            </div>
-                          </div>
-                          <div
-                            className={`${styles.payment_row} ${styles.no_border}`}
-                          >
-                            <div className={styles.heading}>
-                              <div className={styles.left}>
-                                <input
-                                  type="radio"
-                                  value="debitcard"
-                                  name="option"
-                                  id="db"
-                                  onChange={() => radioHandler("debitcard")}
-                                  checked={method == "debitcard" ? true : false}
-                                />
-                                <label htmlFor="db">Debit Card</label>
-                              </div>
-                              <div className={styles.right}>
-                                {" "}
-                                <img src="/payment/naps.svg" />{" "}
+                                <div className={styles.right}>
+                                  {" "}
+                                  <img src="/payment/naps.svg" />{" "}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          {/* submit button */}
-                          {method == "creditcard" ? (
-                            <button
-                              className={"submit-button"}
-                              onClick={(e) => onSubmit(e, submitPayment)}
-                              disabled={!canSubmit || isCheckoutSubmitted}
-                              type="submit"
-                            >
-                              {!isCheckoutSubmitted
-                                ? "Submit Payment"
-                                : "Submitting ..."}
-                            </button>
-                          ) : (
-                            <button
-                              onClick={(e) => onSubmit(e, submitPayment)}
-                              className={"submit-button"}
-                            >
-                              Submit Payment
-                            </button>
-                          )}
-                        </>
-                      )}
-                    </EmbedWrapper>
+                            {/* submit button */}
+                            {method == "creditcard" ? (
+                              <button
+                                className={"submit-button"}
+                                onClick={(e) => onSubmit(e, submitPayment)}
+                                disabled={!canSubmit || isCheckoutSubmitted}
+                                type="submit"
+                              >
+                                {!isCheckoutSubmitted
+                                  ? "Submit Payment"
+                                  : "Submitting ..."}
+                              </button>
+                            ) : (
+                              <button
+                                onClick={(e) => onSubmit(e, submitPayment)}
+                                className={"submit-button"}
+                              >
+                                Submit Payment
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </EmbedWrapper>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="col-lg-8 mt-4 order-md-last">
+                ) : (
                   <div className="col-lg-8 mt-4 order-md-last">
-                    <h2 className="text-center text-success">
-                      Payment Completed !
-                    </h2>
+                    <div className="col-lg-8 mt-4 order-md-last">
+                      <h2 className="text-center text-success">
+                        Payment Completed !
+                      </h2>
+                    </div>
                   </div>
-                </div>
-              )}
-            </>
-          )}
+                )}
+              </>
+            )}
           {/* end new design */}
 
           <div className="col-lg-4">
