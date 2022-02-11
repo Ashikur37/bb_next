@@ -162,7 +162,7 @@ function StepTwo(props) {
                     /></label>
                 </div>
               </div>
-              <div className={`${styles.payment_group} mt-4`}>
+              {/* <div className={`${styles.payment_group} mt-4`}>
                 <div className={styles.wrap}>
                   <label htmlFor="card_od">{t("CARD ON DELIVERY")}
                     <input
@@ -176,7 +176,7 @@ function StepTwo(props) {
                       id="card_od"
                     /></label>
                 </div>
-              </div>
+              </div> */}
               <div className={`${styles.payment_group} mt-4`}>
                 <div className={styles.wrap}>
                   <label htmlFor="op">{t("ONLINE PAYMENT")}
