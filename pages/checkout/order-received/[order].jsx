@@ -135,7 +135,7 @@ function StepFour({ orderInfo, query, t, success }) {
           {paymentFailed && (
             <h5 className="font-weight-bold">
               <p>
-                <span className="text-danger">Your Payment is Failed!</span>.{" "}
+                <span className="text-danger">Your Payment is Failed!</span>{" "}
                 <span className="text-success">
                   But your order is confirmed.
                 </span>{" "}
