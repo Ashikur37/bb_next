@@ -133,7 +133,7 @@ function StepFour({ orderInfo, query, t, success }) {
           <Header text={t("CONFIRMATION")} />
 
           {paymentFailed && (
-            <h5 className="font-weight-bold text-center" >
+            <h5 className="font-weight-bold text-center mb-3" >
               <p>
                 <span className="text-danger">Your Payment is Failed!</span>{" "}
                 <span className="text-success">
