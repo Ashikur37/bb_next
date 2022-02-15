@@ -133,8 +133,22 @@ function StepFour({ orderInfo, query, t, success }) {
           <Header text={t("CONFIRMATION")} />
 
           {paymentFailed && (
-            <h5 className="text-danger font-weight-bold">
-              Payment Failed! Please try again!
+            <h5 className="font-weight-bold">
+              <p>
+                <span className="text-danger">Your Payment is Failed!</span>.{" "}
+                <span className="text-success">
+                  But your order is confirmed.
+                </span>{" "}
+                Please check your email from the Beauty booth and click Pay now
+                it will be redirected to the payment link. For further
+                assistance please contact our customer support team by social
+                media channels / WhatsApp 77096563.
+                <span className="text-danger">
+                  N.B- Please do not place the same order again with cash on
+                  delivery. Even we do not receive any payment we will consider
+                  this cash on delivery and send it to you.
+                </span>
+              </p>
             </h5>
           )}
         </div>
