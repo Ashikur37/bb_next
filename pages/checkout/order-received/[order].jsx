@@ -347,15 +347,28 @@ function StepFour({ orderInfo, query, t, success }) {
                       </EmbedWrapper>
                     </div>
                   </div>
-                ) : (
-                  <div className="col-lg-8 mt-4 order-md-last">
+                ) :<> 
+                {
+                  orderInfo.is_paid == "Paid" &&  (
                     <div className="col-lg-8 mt-4 order-md-last">
-                      <h2 className="text-center text-success">
-                        Payment Completed !
-                      </h2>
+                      <div className="col-lg-8 mt-4 order-md-last">
+                        <h2 className="text-center text-success">
+                          Payment Completed!
+                        </h2>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                {
+                  orderInfo.is_paid == "failed" &&  (
+                    <div className="col-lg-8 mt-4 order-md-last">
+                      <div className="col-lg-8 mt-4 order-md-last">
+                        <h2 className="text-center text-warning">
+                          Payment Failed!
+                        </h2>
+                      </div>
+                    </div>
+                  )}
+                  </>}
               </>
             )}
           {/* end new design */}
