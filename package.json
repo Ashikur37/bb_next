@@ -28,6 +28,7 @@
     "express": "^4.17.1",
     "facebook-nodejs-business-sdk": "^11.0.0",
     "flag-icon-css": "^3.5.0",
+    "geoip-lite": "^1.4.5",
     "instantsearch-rheostat-range-slider-react": "^0.0.2",
     "moment": "^2.29.1",
     "mongoose": "^5.13.7",

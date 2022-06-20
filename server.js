@@ -46,7 +46,7 @@ const SpecialCoupon = require("./server/models/SpecialCoupon");
  
  const api = bizSdk.FacebookAdsApi.init(access_token);
  const api2 = bizSdk.FacebookAdsApi.init(access_token2);
- 
+ const { lookup } = require('geoip-lite');
 //passport config
 require("./server/middleware/passport")(passport);
 const token = process.env.NODE_ENV == "production" ? process.env.PGW_PROD : process.env.PGW_DEV;
@@ -64,6 +64,11 @@ const ssrCache = cacheableResponse({
   send: ({ data, res }) => res.send(data),
   compress: true,
 });
+const myLogger = function (req, res, next) {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log(lookup(ip)); // location of the user
+  next()
+}
 // app.use(express.static(path.join(__dirname, './public/')));
 let options = {
   "Access-Control-Allow-Origin": "*",
@@ -86,6 +91,7 @@ app
     server.use(passport.session());
     server.use(cookiesMiddleware());
     server.use(cors(options));
+    server.use(myLogger);
 /**
  * MyFatoorah BEGIN
  */
