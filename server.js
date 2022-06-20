@@ -67,7 +67,7 @@ const ssrCache = cacheableResponse({
 const myLogger = function (req, res, next) {
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   let country = lookup(ip).country// location of the user
-  if(country == "BD" || "QA" || "PH"){
+  if(country == "BD" ||  country == "QA" || country ==  "PH"){
     next()
   }
   
