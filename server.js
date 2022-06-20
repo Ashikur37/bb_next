@@ -66,7 +66,7 @@ const ssrCache = cacheableResponse({
 });
 const myLogger = function (req, res, next) {
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  console.log(lookup(ip)); // location of the user
+  console.log(lookup(ip).country); // location of the user
   next()
 }
 // app.use(express.static(path.join(__dirname, './public/')));
