@@ -1,6 +1,10 @@
 @import "../../node_modules/swiper/swiper.scss";
 @import "../../node_modules/swiper/components/pagination/pagination.scss";
 
+
+.hide{
+  display: none !important;
+}
 button.submit-button {
   cursor: pointer;
   color: white;

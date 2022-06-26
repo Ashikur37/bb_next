@@ -411,7 +411,7 @@ function Navbar({
                         ))}
                       </ul>
                     )}
-                  {searchResult.products && (
+                  {searchResult.products && auth && auth.isAuthenticated && (
                     <ul>
                       <li
                         style={{
@@ -776,7 +776,7 @@ function Navbar({
                         ))}
                       </ul>
                     )}
-                  {searchResult.products && (
+                  {searchResult.products && auth && auth.isAuthenticated &&  (
                     <ul>
                       <li
                         style={{

@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Link from "next/link";
+import { connect } from "react-redux";
+import { getBrandName, getBrandNameForAlgolia } from "../utils/helper";
 
-function SingleProduct({ product, locale }) {
+function SingleProduct({ product, locale,auth }) {
   const [innBag, setInBag] = useState(0);
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    console.log(product.attributes);
+    if (auth.isAuthenticated) {
+      setShow(true);
+    } else {
+      if (getBrandNameForAlgolia(product.attributes).toLowerCase() == "the ordinary") {
+        // console.log(false);
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+    }
+  }, [auth, product]);
   const RibbonNew = () => {
     if (product && product.is_new) {
       return (
@@ -65,7 +81,7 @@ function SingleProduct({ product, locale }) {
 
   return (
     // <Link href={`/product/${product.slug}`} replace>
-    <a href={`/product/${product.slug}`} className="product">
+    <a href={`/product/${product.slug}`} className={show ? `product`:`product hide`}>
       <RibbonNew />
       <RibbonOffer />
       <RibbonSoldOut />
@@ -115,5 +131,7 @@ function SingleProduct({ product, locale }) {
     // </Link>
   );
 }
-
-export default SingleProduct;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(SingleProduct);

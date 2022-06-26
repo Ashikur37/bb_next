@@ -4,10 +4,28 @@ import Swiper from "react-id-swiper";
 import { connect } from "react-redux";
 import { getBestSellingProducts } from "../../redux/actions/homePageActions";
 import dynamic from "next/dynamic";
+import { getBrandName } from "../utils/helper";
 
 const Product = dynamic(() => import("../atom/Product"));
 function TopSellers(props) {
-  const { t, Header, styles, FontAwesomeIcon, lang } = props;
+  const { t, Header, styles, FontAwesomeIcon, lang,auth } = props;
+  const [bestSellingProducts,setBestSellingProducts] = useState(props.bestSelling);
+
+  useEffect(() => {
+    if (auth.isAuthenticated == false) {
+      if (props.bestSelling) {
+        let prods = props.bestSelling.filter((product) => {
+          // console.log(getBrandName(product.attributes).toLowerCase());
+          if (getBrandName(product.attributes).toLowerCase() !== "the ordinary") {
+            return product;
+          }
+        });
+        setBestSellingProducts(prods);
+      }
+    }else{
+      setBestSellingProducts(props.bestSelling);
+    }
+  }, [props.bestSelling, auth]);
 
   useEffect(() => {
     if (props.bestSelling.length == 0 || props.localLang !== props.lang) {
@@ -55,7 +73,7 @@ function TopSellers(props) {
   return (
     <div className="container mt-4">
       {
-        props.bestSelling.length !== 0 && (
+        bestSellingProducts.length !== 0 && (
           <>
             <div className="row">
               <div className="col">
@@ -73,7 +91,7 @@ function TopSellers(props) {
             <div className="selling_swiper_wrapper">
               {props.lang == "en" ? (
                 <Swiper getSwiper={updateSwiper} {...params} shouldSwiperUpdate>
-                  {props.bestSelling.map((product, index) => (
+                  {bestSellingProducts.map((product, index) => (
                     <div key={index}>
                       <Product product={product} lazy={true} styles={styles} lang={lang} />
                     </div>
@@ -81,7 +99,7 @@ function TopSellers(props) {
                 </Swiper>
               ) : (
                 <Swiper getSwiper={updateSwiper} {...params2} shouldSwiperUpdate>
-                  {props.bestSelling.map((product, index) => (
+                  {bestSellingProducts.map((product, index) => (
                     <div key={index}>
                       <Product product={product} lazy={true} styles={styles} lang={lang} />
                     </div>
@@ -99,6 +117,7 @@ function TopSellers(props) {
 const mapStateToProps = (state) => ({
   bestSelling: state.homePage.bestSelling,
   localLang: state.homePage.localLang,
+  auth:state.auth,
 });
 const mapDispatchToProps = (dispatch, lang) => {
   return {

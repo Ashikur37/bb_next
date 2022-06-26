@@ -94,7 +94,7 @@ app
     server.use(passport.session());
     server.use(cookiesMiddleware());
     server.use(cors(options));
-    server.use(myLogger);
+    // server.use(myLogger);
 /**
  * MyFatoorah BEGIN
  */

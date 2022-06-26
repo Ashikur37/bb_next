@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import LazyLoad from "react-lazyload";
 import styles from "../../styles/ProductCard.module.scss";
-function Product({ product, lazy = false, lang = "en" }) {
+import { connect } from "react-redux";
+import { getBrandName } from "../utils/helper";
+function Product({ product, lazy = false, lang = "en", auth }) {
   const [innBag, setInBag] = useState(0);
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    console.log(product.attributes);
+    if (auth.isAuthenticated) {
+      setShow(true);
+    } else {
+      if (getBrandName(product.attributes).toLowerCase() == "the ordinary") {
+        // console.log(false);
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+    }
+  }, [auth, product]);
 
   const RibbonNew = () => {
     if (product && product.is_new) {
@@ -86,7 +102,7 @@ function Product({ product, lazy = false, lang = "en" }) {
 
   return (
     <Link href={product ? `/product/${product.slug}` : "/products/slug"}>
-      <a className={`${styles.product}`} dir={lang == "en" ? "ltr" : "rlt"}>
+      <a className={show ? `${styles.product}`:`${styles.product} hide`} dir={lang == "en" ? "ltr" : "rlt"}>
         <RibbonNew />
         <RibbonOffer />
         <RibbonSoldOut />
@@ -119,5 +135,7 @@ function Product({ product, lazy = false, lang = "en" }) {
     </Link>
   );
 }
-
-export default Product;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(Product);

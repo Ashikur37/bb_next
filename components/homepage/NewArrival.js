@@ -5,11 +5,30 @@ import { connect } from "react-redux";
 import { getNewArrivals } from "../../redux/actions/homePageActions";
 
 import dynamic from "next/dynamic";
+import { getBrandName } from "../utils/helper";
 
 const Product = dynamic(() => import("../atom/Product"));
 
 function NewArrival(props) {
-  const { t, Header, styles, FontAwesomeIcon } = props;
+  const { t, Header, styles, FontAwesomeIcon, newArrivals, auth } = props;
+  const [newArrivalsProducts, setNewArrivalProduct] = useState(newArrivals);
+
+  useEffect(() => {
+    if (auth.isAuthenticated == false) {
+      if (newArrivals) {
+        let prods = newArrivals.filter((product) => {
+          // console.log(getBrandName(product.attributes).toLowerCase());
+          if (getBrandName(product.attributes).toLowerCase() !== "the ordinary") {
+            return product;
+          }
+        });
+        setNewArrivalProduct(prods);
+      }
+    }else{
+      setNewArrivalProduct(newArrivals);
+    }
+  }, [newArrivals, auth]);
+
   useEffect(() => {
     if (!props.newArrivals || props.localLang !== props.lang) {
       props.getNewArrivals(props.lang);
@@ -17,7 +36,7 @@ function NewArrival(props) {
   }, [props.lang]);
   const [swiper, updateSwiper] = useState(null);
   const params = {
-    rtl:false,
+    rtl: false,
     loop: false,
     lazy: {
       loadPrevNext: true,
@@ -55,7 +74,7 @@ function NewArrival(props) {
   };
   return (
     <div className="container">
-      {props.newArrivals ? (
+      {newArrivalsProducts ? (
         <>
           <div className="row mt-3">
             <div className="col">
@@ -72,7 +91,7 @@ function NewArrival(props) {
           <div className="selling_swiper_wrapper">
             {props.lang == "en" ? (
               <Swiper getSwiper={updateSwiper} {...params} shouldSwiperUpdate>
-                {props.newArrivals.map((product, index) => (
+                {newArrivalsProducts.map((product, index) => (
                   <div key={index}>
                     <Product product={product} lazy={true} styles={styles} />
                   </div>
@@ -80,7 +99,7 @@ function NewArrival(props) {
               </Swiper>
             ) : (
               <Swiper getSwiper={updateSwiper} {...params2} shouldSwiperUpdate>
-                {props.newArrivals.map((product, index) => (
+                {newArrivalsProducts.map((product, index) => (
                   <div key={index}>
                     <Product product={product} lazy={true} styles={styles} />
                   </div>
@@ -95,6 +114,7 @@ function NewArrival(props) {
 }
 const mapStateToProps = (state) => ({
   newArrivals: state.homePage.newArrivals,
+  auth: state.auth,
 });
 const mapDispatchToProps = (dispatch, lang) => {
   return {
