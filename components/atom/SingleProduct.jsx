@@ -11,12 +11,18 @@ function SingleProduct({ product, locale,auth }) {
     if (auth.isAuthenticated) {
       setShow(true);
     } else {
-      if (getBrandNameForAlgolia(product.attributes).toLowerCase() == "the ordinary") {
-        // console.log(false);
-        setShow(false);
-      } else {
+      if(getBrandNameForAlgolia(product.attributes)){
+        if (getBrandNameForAlgolia(product.attributes).toLowerCase() == "the ordinary") {
+          // console.log(false);
+          setShow(false);
+        } else {
+          setShow(true);
+        }
+      }
+      else {
         setShow(true);
       }
+      
     }
   }, [auth, product]);
   const RibbonNew = () => {
