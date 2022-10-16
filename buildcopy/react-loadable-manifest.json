@@ -1,0 +1,310 @@
+{
+  "../components/MoreThisBrand.jsx -> ./atom/Product": {
+    "id": 40836,
+    "files": [
+      "static/chunks/1216-6f9babf4ba01a9544c30.js",
+      "static/css/5e3c734753fe6a81bfb6.css",
+      "static/chunks/836.e816e0e187eb53273682.js"
+    ]
+  },
+  "../components/Pages/Checkout/StepOne.jsx -> ../../../components/layout/partials/Header": {
+    "id": 65773,
+    "files": []
+  },
+  "../components/homepage/Blogs.js -> ../atom/Blog": {
+    "id": 17303,
+    "files": [
+      "static/chunks/7303.fb6a62303ef54b0880de.js"
+    ]
+  },
+  "../components/homepage/NewArrival.js -> ../atom/Product": {
+    "id": 40836,
+    "files": [
+      "static/css/5e3c734753fe6a81bfb6.css",
+      "static/chunks/3595.7644bc06a841e574f344.js"
+    ]
+  },
+  "../components/homepage/TopSellers.js -> ../atom/Product": {
+    "id": 40836,
+    "files": [
+      "static/css/5e3c734753fe6a81bfb6.css",
+      "static/chunks/3595.7644bc06a841e574f344.js"
+    ]
+  },
+  "../components/layout/Menu.js -> ../atom/SubMenuLi": {
+    "id": 82558,
+    "files": [
+      "static/chunks/5675-990f046edab210b27e9e.js",
+      "static/chunks/2558.e2b18ee61709db2d6f3b.js"
+    ]
+  },
+  "../components/profile/Layout.jsx -> ./SideBar": {
+    "id": 68473,
+    "files": [
+      "static/chunks/8473.5b5aa723e84d01ec34bc.js"
+    ]
+  },
+  "[page].js -> ../components/atom/Loader": {
+    "id": 13921,
+    "files": [
+      "static/chunks/3921.e0965f94c825c52c3be9.js"
+    ]
+  },
+  "[page].js -> ../components/layout/partials/Header": {
+    "id": 65773,
+    "files": [
+      "static/chunks/5773.9673fa3a913afadb2458.js"
+    ]
+  },
+  "_app.js -> ../components/layout/Footer": {
+    "id": 59853,
+    "files": [
+      "static/chunks/a9a7754c-fb508d3b3d1fc046f8bc.js",
+      "static/chunks/5675-990f046edab210b27e9e.js",
+      "static/css/47815cdfd80b56866e86.css",
+      "static/chunks/9853.121cd550e305a8cd27cb.js"
+    ]
+  },
+  "_app.js -> ../components/layout/Menu": {
+    "id": 49566,
+    "files": [
+      "static/chunks/9566.c5dcc64b3c5f282837e7.js",
+      "static/css/9ef5936054495fea9920.css"
+    ]
+  },
+  "_app.js -> ../components/layout/NavbarWrapper": {
+    "id": 66696,
+    "files": [
+      "static/chunks/15-3960a463e78850376f7c.js",
+      "static/css/fe21379176ae8ea23201.css",
+      "static/chunks/6244.4a4d764b88b8cd7fc16f.js",
+      "static/chunks/9566.c5dcc64b3c5f282837e7.js",
+      "static/css/9ef5936054495fea9920.css",
+      "static/chunks/5294.fe59310dd352a54a3486.js"
+    ]
+  },
+  "_app.js -> ../components/layout/partials/Divider": {
+    "id": 55651,
+    "files": [
+      "static/chunks/5651.fc50f22cc1c9d3938e88.js"
+    ]
+  },
+  "_app.js -> ../components/mobile/MobileFooterMenu": {
+    "id": 93634,
+    "files": [
+      "static/chunks/5675-990f046edab210b27e9e.js",
+      "static/css/7a69410d9da6c74a687f.css",
+      "static/chunks/3634.541bb95a96f46ff8f84b.js"
+    ]
+  },
+  "bag.js -> ../components/layout/partials/Header": {
+    "id": 65773,
+    "files": [
+      "static/chunks/5773.9673fa3a913afadb2458.js"
+    ]
+  },
+  "brand/[brand].jsx -> ../../components/atom/CustomRangeSlider": {
+    "id": 99717,
+    "files": [
+      "static/chunks/8825-928409d52375b9867bd3.js",
+      "static/chunks/9278.6a812bfb8f609870db0a.js"
+    ]
+  },
+  "brand/[brand].jsx -> ../../components/atom/Loader": {
+    "id": 13921,
+    "files": [
+      "static/chunks/3921.e0965f94c825c52c3be9.js"
+    ]
+  },
+  "brand/[brand].jsx -> ../../components/atom/SingleProduct": {
+    "id": 47043,
+    "files": [
+      "static/chunks/7043.76d2fa847cd4cc59f54d.js"
+    ]
+  },
+  "campaigns/other.js -> ../../components/campaign/DumpStockList": {
+    "id": 52673,
+    "files": [
+      "static/chunks/1216-6f9babf4ba01a9544c30.js",
+      "static/css/5e3c734753fe6a81bfb6.css",
+      "static/chunks/2673.353496baeb5368be8c5e.js"
+    ]
+  },
+  "campaigns/other.js -> ../../components/campaign/FreeGiftList": {
+    "id": 21398,
+    "files": [
+      "static/chunks/1398.7d4960cd66e7f9082cbb.js"
+    ]
+  },
+  "checkout/order-received/[order].jsx -> ../../../components/Pages/Checkout/PaymentStatus": {
+    "id": 47335,
+    "files": [
+      "static/chunks/75fc9c18.2a20c2e7f10e4bdea475.js",
+      "static/chunks/7335.506d01f714ddb1a7b874.js"
+    ]
+  },
+  "checkout/order-received/[order].jsx -> ../../../components/layout/partials/Header": {
+    "id": 65773,
+    "files": [
+      "static/chunks/5773.9673fa3a913afadb2458.js"
+    ]
+  },
+  "contact.js -> ../components/layout/partials/Header": {
+    "id": 65773,
+    "files": [
+      "static/chunks/5773.9673fa3a913afadb2458.js"
+    ]
+  },
+  "index.js -> ../components/atom/Loading": {
+    "id": 70917,
+    "files": [
+      "static/chunks/917.3d0036ab5eec32fac081.js"
+    ]
+  },
+  "index.js -> ../components/homepage/Blogs": {
+    "id": 23750,
+    "files": [
+      "static/chunks/3750.44cd781ecf3aac29dafc.js"
+    ]
+  },
+  "index.js -> ../components/homepage/Brands": {
+    "id": 24050,
+    "files": [
+      "static/chunks/a4c92b5b-c3a5d8846e87badf6fdc.js",
+      "static/chunks/2474-0646c4453f4c682cd6cb.js",
+      "static/chunks/4050.dc4077b105087e17c79c.js"
+    ]
+  },
+  "index.js -> ../components/homepage/Concern": {
+    "id": 71350,
+    "files": [
+      "static/chunks/a4c92b5b-c3a5d8846e87badf6fdc.js",
+      "static/chunks/2474-0646c4453f4c682cd6cb.js",
+      "static/chunks/3842-3cb6dc5d47a0d6944397.js",
+      "static/css/dd821844f01b21f26541.css",
+      "static/chunks/1350.b1790a47963e70f99fe0.js"
+    ]
+  },
+  "index.js -> ../components/homepage/NewArrival": {
+    "id": 34114,
+    "files": [
+      "static/chunks/a4c92b5b-c3a5d8846e87badf6fdc.js",
+      "static/chunks/2474-0646c4453f4c682cd6cb.js",
+      "static/chunks/4114.237d979e8897db32128e.js"
+    ]
+  },
+  "index.js -> ../components/homepage/Slider": {
+    "id": 43978,
+    "files": [
+      "static/chunks/a4c92b5b-c3a5d8846e87badf6fdc.js",
+      "static/chunks/2474-0646c4453f4c682cd6cb.js",
+      "static/chunks/9359-7717b1d36d7a988fd543.js",
+      "static/chunks/3978.fc0b705087ae2be34f7a.js"
+    ]
+  },
+  "index.js -> ../components/homepage/TopSellers": {
+    "id": 86439,
+    "files": [
+      "static/chunks/a4c92b5b-c3a5d8846e87badf6fdc.js",
+      "static/chunks/2474-0646c4453f4c682cd6cb.js",
+      "static/chunks/6439.16388cbcbbcc02fa54f7.js"
+    ]
+  },
+  "index.js -> ../components/homepage/Trending": {
+    "id": 39291,
+    "files": [
+      "static/chunks/a4c92b5b-c3a5d8846e87badf6fdc.js",
+      "static/chunks/2474-0646c4453f4c682cd6cb.js",
+      "static/chunks/3842-3cb6dc5d47a0d6944397.js",
+      "static/css/28dc6b7e6178381d05af.css",
+      "static/chunks/9291.17baf48e764c5ce5ab3c.js"
+    ]
+  },
+  "index.js -> ../components/layout/MobileMenu": {
+    "id": 34845,
+    "files": [
+      "static/chunks/9359-7717b1d36d7a988fd543.js",
+      "static/chunks/4845.46801d41b133fe8ee632.js"
+    ]
+  },
+  "index.js -> ../components/layout/partials/Header": {
+    "id": 65773,
+    "files": [
+      "static/chunks/5773.9673fa3a913afadb2458.js"
+    ]
+  },
+  "index.js -> ../components/layout/partials/Title": {
+    "id": 69087,
+    "files": [
+      "static/chunks/9087.5c69999402e4abc5d6ec.js"
+    ]
+  },
+  "new/index.js -> ../../components/atom/CustomRangeSlider": {
+    "id": 99717,
+    "files": [
+      "static/chunks/2770-ca3e927503c647c8aa06.js",
+      "static/chunks/8825-928409d52375b9867bd3.js",
+      "static/chunks/9717.267b91952c38f27583f4.js"
+    ]
+  },
+  "new/index.js -> ../../components/atom/SingleProduct": {
+    "id": 47043,
+    "files": [
+      "static/chunks/7043.76d2fa847cd4cc59f54d.js"
+    ]
+  },
+  "profile/address/edit/[id].jsx -> ../../../../components/profile/EditAddress": {
+    "id": 12693,
+    "files": [
+      "static/chunks/9663-29b12fa9c1b642e0b806.js",
+      "static/chunks/2693.735ed08f28e4503488fa.js"
+    ]
+  },
+  "profile/address/edit/[id].jsx -> ../../../../components/profile/Layout": {
+    "id": 17094,
+    "files": [
+      "static/css/2f427810be26dd4a23bf.css",
+      "static/chunks/7094.3498b03739914580197a.js"
+    ]
+  },
+  "profile/addressbook.jsx -> ../../components/profile/AddressBook": {
+    "id": 28370,
+    "files": [
+      "static/chunks/8370.d96ccc91f9583cc09bd3.js"
+    ]
+  },
+  "profile/index.jsx -> ../../components/profile/Dashboard": {
+    "id": 64801,
+    "files": [
+      "static/chunks/4801.a6fb51b7cce1d77bfd7b.js"
+    ]
+  },
+  "profile/orders.jsx -> ../../components/profile/Orders": {
+    "id": 9797,
+    "files": [
+      "static/chunks/9359-7717b1d36d7a988fd543.js",
+      "static/css/dec28a519829c281d74e.css",
+      "static/chunks/9797.59c8f4d87951cf6da0dd.js"
+    ]
+  },
+  "profile/waitlist.jsx -> ../../components/profile/WaitList": {
+    "id": 19848,
+    "files": [
+      "static/chunks/9848.2fbd5f6c4122a0fd7c6b.js"
+    ]
+  },
+  "register/index.jsx -> ../../components/Pages/Register/RegisterStepOne": {
+    "id": 25744,
+    "files": [
+      "static/chunks/9663-29b12fa9c1b642e0b806.js",
+      "static/chunks/1655-643ffb1f2941175b309c.js",
+      "static/chunks/5744.5221bf282f434bc01ac5.js"
+    ]
+  },
+  "register/index.jsx -> ../../components/Pages/Register/RegisterStepTwo": {
+    "id": 69044,
+    "files": [
+      "static/chunks/9044.5418d9175ef07de937b6.js"
+    ]
+  }
+}

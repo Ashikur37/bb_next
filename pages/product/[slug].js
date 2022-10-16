@@ -569,7 +569,17 @@ function ProductPage(props) {
               : ", " + getBrandName(props.product.attributes)
           }
         />
-      </Head>
+         <meta property="product:brand" content={getBrandName(props.product.attributes)}/>
+        <meta property="product:availability" content={!props.product.qty ||
+                          props.product.qty === 0 ||
+                          !props.product.in_stock ?"out of stock":"in stock"}/>
+        <meta property="product:condition" content="new"/>
+        <meta property="product:price:amount" content={props.product.selling_price?props.product.selling_price.amount:props.product.price.amount}/>
+        <meta property="product:price:currency" content="QAR"/>
+        <meta property="product:retailer_item_id" content={props.product.id}/>
+        <meta property="og:id" content={props.product.id}/>
+        {/* <meta property="product:item_group_id" content="fb_tshirts"/> */}
+        </Head>
       {product != null ? (
         <div className="productView mt-4">
           <div className="container">

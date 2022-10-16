@@ -336,7 +336,9 @@ function Navbar({
             <div className={styles.logo_content}>
               <h1>
                 <Link href="/">
-                  <a>Beauty Booth</a>
+                  <a>
+                  <img src="https://admin.beautyboothqa.com/storage/media/l9btfTHlIZ9bgvEH2YbmKvITY5r48WRBeFmSh87B.svg"/>
+                  </a>
                 </Link>
               </h1>
             </div>

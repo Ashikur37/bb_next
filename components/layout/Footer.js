@@ -34,7 +34,7 @@ function Footer({ lang, FontAwesomeIcon, t }) {
       <div className=" container mt-4">
         <div className={`row ${styles.footer_wrap}`}>
           <div className={styles.first}>
-            <h2 className={styles.footer_logo}>Beauty Booth.</h2>
+          <img src="https://admin.beautyboothqa.com/storage/media/l9btfTHlIZ9bgvEH2YbmKvITY5r48WRBeFmSh87B.svg"/>
             <div className={styles.phone}>
               <FontAwesomeIcon
                 className="fa_icon fa-rotate-90"

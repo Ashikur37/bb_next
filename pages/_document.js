@@ -19,7 +19,7 @@ class MyDocument extends Document {
             content="width=device-width, initial-scale=1.0"
           ></meta>
           <meta property="og:type" content="website"></meta>
-          <link rel="icon" href="/fav1.ico"></link>
+          <link rel="icon" href="/fav.png"></link>
         </Head>
 
         <body>
