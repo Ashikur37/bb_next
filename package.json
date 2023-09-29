@@ -71,7 +71,7 @@
     "redux-thunk": "^2.3.0",
     "rheostat": "^4.1.1",
     "sass": "^1.38.0",
-    "sharp": "^0.29.0",
+    "sharp": "^0.32.6",
     "simple-react-lightbox": "^3.6.9-0",
     "swiper": "^5.4.3",
     "universal-cookie": "^4.0.4",
